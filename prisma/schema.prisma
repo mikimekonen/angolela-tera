@@ -1,0 +1,586 @@
+// =============================================================
+// ANGOLELA TERA WOREDA ADMINISTRATION — DATABASE SCHEMA
+// =============================================================
+// ORM: Prisma v5+
+// Database: PostgreSQL 15+
+// 
+// Design principles:
+//  • Multilingual fields: every user-visible string has _en, _am, _om variants
+//  • All CMS content goes through a workflow: DRAFT → REVIEW → APPROVED → PUBLISHED
+//  • Soft-delete via deletedAt (never hard-delete published government records)
+//  • Full audit trail on every mutation (AuditLog model)
+//  • Role-based access: SUPER_ADMIN > ADMIN > OFFICE_EDITOR > REVIEWER > VIEWER
+// =============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// =============================================================
+// ENUMERATIONS
+// =============================================================
+
+enum UserRole {
+  SUPER_ADMIN    // Full system access, can manage users and system config
+  ADMIN          // Full content access across all offices
+  OFFICE_EDITOR  // Can create/edit content for their assigned office only
+  REVIEWER       // Can approve/reject content, cannot publish
+  VIEWER         // Read-only access to admin panel
+}
+
+enum ContentStatus {
+  DRAFT      // Being written, not visible to approvers
+  REVIEW     // Submitted for approval
+  APPROVED   // Approved, ready to publish
+  PUBLISHED  // Live on public site
+  ARCHIVED   // No longer active but preserved
+  REJECTED   // Returned to editor with notes
+}
+
+enum Locale {
+  en  // English (default)
+  am  // Amharic (አማርኛ)
+  om  // Afaan Oromo
+}
+
+enum MediaType {
+  IMAGE
+  DOCUMENT_PDF
+  DOCUMENT_WORD
+  DOCUMENT_EXCEL
+  VIDEO
+  OTHER
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  PUBLISH
+  ARCHIVE
+  APPROVE
+  REJECT
+  LOGIN
+  LOGOUT
+  PASSWORD_CHANGE
+  ROLE_CHANGE
+}
+
+// =============================================================
+// AUTHENTICATION & USERS
+// =============================================================
+
+model User {
+  id              String    @id @default(cuid())
+  email           String    @unique
+  name            String
+  passwordHash    String
+  role            UserRole  @default(VIEWER)
+  officeId        String?   // Only for OFFICE_EDITOR — restricts their scope
+  isActive        Boolean   @default(true)
+  lastLoginAt     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+
+  // Relations
+  office          Office?   @relation("OfficeEditors", fields: [officeId], references: [id])
+  sessions        Session[]
+  auditLogs       AuditLog[]
+  createdNews     News[]    @relation("NewsAuthor")
+  createdAnnouncements Announcement[] @relation("AnnouncementAuthor")
+  createdServices Service[] @relation("ServiceAuthor")
+  createdDocuments Document[] @relation("DocumentAuthor")
+  createdProjects Project[] @relation("ProjectAuthor")
+  createdPages    Page[]    @relation("PageAuthor")
+  mediaUploads    Media[]   @relation("MediaUploader")
+
+  @@map("users")
+}
+
+model Session {
+  id          String   @id @default(cuid())
+  userId      String
+  token       String   @unique
+  expiresAt   DateTime
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+// =============================================================
+// AUDIT LOG
+// =============================================================
+
+model AuditLog {
+  id          String      @id @default(cuid())
+  userId      String
+  action      AuditAction
+  entityType  String      // "News", "Office", "User", etc.
+  entityId    String?     // The affected record's ID
+  oldData     Json?       // Previous state (JSON snapshot)
+  newData     Json?       // New state (JSON snapshot)
+  ipAddress   String?
+  userAgent   String?
+  notes       String?
+  createdAt   DateTime    @default(now())
+
+  user        User        @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([entityType, entityId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+// =============================================================
+// MEDIA LIBRARY
+// =============================================================
+
+model Media {
+  id          String    @id @default(cuid())
+  filename    String    // original filename
+  storedName  String    // UUID-based name on disk/S3
+  mimeType    String
+  mediaType   MediaType
+  sizeBytes   Int
+  width       Int?      // for images
+  height      Int?      // for images
+  altText_en  String?
+  altText_am  String?
+  altText_om  String?
+  url         String    // public URL or relative path
+  uploadedBy  String
+  createdAt   DateTime  @default(now())
+  deletedAt   DateTime?
+
+  uploader    User      @relation("MediaUploader", fields: [uploadedBy], references: [id])
+
+  // Relations where this media is used
+  officeImages    Office[]   @relation("OfficeFeaturedImage")
+  newsCoverImages News[]     @relation("NewsCoverImage")
+  leadershipPhotos Leadership[] @relation("LeadershipPhoto")
+  heroImages      HeroSlide[] @relation("HeroSlideImage")
+  tourismImages   TourismSite[] @relation("TourismImage")
+  projectImages   Project[]  @relation("ProjectImage")
+  documents       Document[] @relation("DocumentFile")
+
+  @@map("media")
+}
+
+// =============================================================
+// SITE SETTINGS & STATISTICS
+// =============================================================
+
+model SiteSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique  // e.g., "contact_phone", "contact_email"
+  value       String
+  label       String   // human-readable label for admin UI
+  group       String   @default("general") // "contact", "social", "appearance"
+  updatedAt   DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
+model Statistic {
+  id          String   @id @default(cuid())
+  key         String   @unique  // e.g., "population", "area_sqkm", "kebeles"
+  value       String   // stored as string to handle "~42,000" format
+  label_en    String
+  label_am    String?
+  label_om    String?
+  unit_en     String?  // "residents", "km²", etc.
+  unit_am     String?
+  unit_om     String?
+  icon        String?  // icon name (lucide/heroicons)
+  displayOrder Int     @default(0)
+  isVerified  Boolean  @default(false)  // only show on public site if true
+  updatedAt   DateTime @updatedAt
+
+  @@map("statistics")
+}
+
+// =============================================================
+// GOVERNMENT OFFICES
+// =============================================================
+
+model Office {
+  id              String        @id @default(cuid())
+  slug            String        @unique
+  name_en         String
+  name_am         String?
+  name_om         String?
+  about_en        String?       @db.Text
+  about_am        String?       @db.Text
+  about_om        String?       @db.Text
+  vision_en       String?       @db.Text
+  vision_am       String?       @db.Text
+  vision_om       String?       @db.Text
+  mission_en      String?       @db.Text
+  mission_am      String?       @db.Text
+  mission_om      String?       @db.Text
+  phone           String?
+  email           String?
+  fax             String?
+  address         String?
+  featuredImageId String?
+  displayOrder    Int           @default(0)
+  status          ContentStatus @default(DRAFT)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  deletedAt       DateTime?
+
+  // Relations
+  featuredImage   Media?        @relation("OfficeFeaturedImage", fields: [featuredImageId], references: [id])
+  editors         User[]        @relation("OfficeEditors")
+  leadership      Leadership[]
+  responsibilities OfficeResponsibility[]
+  services        Service[]
+  documents       Document[]    @relation("OfficeDocuments")
+
+  @@map("offices")
+}
+
+model OfficeResponsibility {
+  id        String  @id @default(cuid())
+  officeId  String
+  text_en   String  @db.Text
+  text_am   String? @db.Text
+  text_om   String? @db.Text
+  order     Int     @default(0)
+
+  office    Office  @relation(fields: [officeId], references: [id], onDelete: Cascade)
+
+  @@map("office_responsibilities")
+}
+
+// =============================================================
+// LEADERSHIP
+// =============================================================
+
+model Leadership {
+  id          String        @id @default(cuid())
+  name        String
+  title_en    String
+  title_am    String?
+  title_om    String?
+  bio_en      String?       @db.Text
+  bio_am      String?       @db.Text
+  bio_om      String?       @db.Text
+  message_en  String?       @db.Text  // for Administrator's message section
+  message_am  String?       @db.Text
+  message_om  String?       @db.Text
+  photoId     String?
+  officeId    String?       // null = Woreda Administrator (top-level)
+  isAdministrator Boolean   @default(false)
+  displayOrder Int          @default(0)
+  status      ContentStatus @default(DRAFT)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  deletedAt   DateTime?
+
+  photo       Media?        @relation("LeadershipPhoto", fields: [photoId], references: [id])
+  office      Office?       @relation(fields: [officeId], references: [id])
+
+  @@map("leadership")
+}
+
+// =============================================================
+// SERVICES
+// =============================================================
+
+model Service {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  name_en       String
+  name_am       String?
+  name_om       String?
+  description_en String?      @db.Text
+  description_am String?      @db.Text
+  description_om String?      @db.Text
+  requirements_en String?     @db.Text
+  requirements_am String?     @db.Text
+  requirements_om String?     @db.Text
+  steps_en      String?       @db.Text  // JSON array of step strings
+  steps_am      String?       @db.Text
+  steps_om      String?       @db.Text
+  officeId      String?
+  icon          String?       // lucide icon name
+  externalUrl   String?       // e.g., link to e-service portal
+  displayOrder  Int           @default(0)
+  status        ContentStatus @default(DRAFT)
+  authorId      String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  deletedAt     DateTime?
+
+  office        Office?       @relation(fields: [officeId], references: [id])
+  author        User          @relation("ServiceAuthor", fields: [authorId], references: [id])
+
+  @@map("services")
+}
+
+// =============================================================
+// NEWS & ANNOUNCEMENTS
+// =============================================================
+
+model NewsCategory {
+  id        String  @id @default(cuid())
+  slug      String  @unique
+  name_en   String
+  name_am   String?
+  name_om   String?
+  color     String? // CSS color for category badge
+
+  news      News[]
+
+  @@map("news_categories")
+}
+
+model News {
+  id              String        @id @default(cuid())
+  slug            String        @unique
+  title_en        String
+  title_am        String?
+  title_om        String?
+  excerpt_en      String?       @db.Text
+  excerpt_am      String?       @db.Text
+  excerpt_om      String?       @db.Text
+  body_en         String?       @db.Text  // Rich text / Markdown
+  body_am         String?       @db.Text
+  body_om         String?       @db.Text
+  coverImageId    String?
+  categoryId      String?
+  authorId        String
+  status          ContentStatus @default(DRAFT)
+  isFeatured      Boolean       @default(false)
+  publishedAt     DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  deletedAt       DateTime?
+
+  // SEO
+  metaTitle_en    String?
+  metaDesc_en     String?
+
+  coverImage      Media?        @relation("NewsCoverImage", fields: [coverImageId], references: [id])
+  category        NewsCategory? @relation(fields: [categoryId], references: [id])
+  author          User          @relation("NewsAuthor", fields: [authorId], references: [id])
+
+  @@index([status, publishedAt])
+  @@map("news")
+}
+
+model Announcement {
+  id          String        @id @default(cuid())
+  title_en    String
+  title_am    String?
+  title_om    String?
+  body_en     String?       @db.Text
+  body_am     String?       @db.Text
+  body_om     String?       @db.Text
+  type        String        @default("general") // "bid", "event", "vacancy", "general"
+  authorId    String
+  status      ContentStatus @default(DRAFT)
+  startsAt    DateTime?
+  expiresAt   DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  deletedAt   DateTime?
+
+  author      User          @relation("AnnouncementAuthor", fields: [authorId], references: [id])
+
+  @@map("announcements")
+}
+
+// =============================================================
+// DOCUMENTS / RESOURCES
+// =============================================================
+
+model Document {
+  id          String        @id @default(cuid())
+  title_en    String
+  title_am    String?
+  title_om    String?
+  description_en String?   @db.Text
+  description_am String?   @db.Text
+  description_om String?   @db.Text
+  fileId      String        // references Media.id
+  officeId    String?
+  category    String        @default("general") // "report", "plan", "form", "policy"
+  authorId    String
+  status      ContentStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  deletedAt   DateTime?
+
+  file        Media         @relation("DocumentFile", fields: [fileId], references: [id])
+  office      Office?       @relation("OfficeDocuments", fields: [officeId], references: [id])
+  author      User          @relation("DocumentAuthor", fields: [authorId], references: [id])
+
+  @@map("documents")
+}
+
+// =============================================================
+// DEVELOPMENT PROJECTS
+// =============================================================
+
+model Project {
+  id              String        @id @default(cuid())
+  slug            String        @unique
+  name_en         String
+  name_am         String?
+  name_om         String?
+  description_en  String?       @db.Text
+  description_am  String?       @db.Text
+  description_om  String?       @db.Text
+  category        String        @default("infrastructure") // "agriculture","health","education","infrastructure","environment"
+  budget          Decimal?      @db.Decimal(15, 2)
+  currency        String        @default("ETB")
+  startDate       DateTime?
+  expectedEndDate DateTime?
+  completionPct   Int?          // 0-100
+  status          ContentStatus @default(DRAFT)
+  projectStatus   String        @default("planned") // "planned","active","completed","suspended"
+  imageId         String?
+  authorId        String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  deletedAt       DateTime?
+
+  image           Media?        @relation("ProjectImage", fields: [imageId], references: [id])
+  author          User          @relation("ProjectAuthor", fields: [authorId], references: [id])
+
+  @@map("projects")
+}
+
+// =============================================================
+// TOURISM & CULTURE
+// =============================================================
+
+model TourismSite {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  name_en       String
+  name_am       String?
+  name_om       String?
+  description_en String?      @db.Text
+  description_am String?      @db.Text
+  description_om String?      @db.Text
+  category      String        @default("natural") // "natural","historical","cultural","religious"
+  location      String?
+  latitude      Float?
+  longitude     Float?
+  imageId       String?
+  status        ContentStatus @default(DRAFT)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  deletedAt     DateTime?
+
+  image         Media?        @relation("TourismImage", fields: [imageId], references: [id])
+
+  @@map("tourism_sites")
+}
+
+// =============================================================
+// HERO SLIDES (Homepage carousel)
+// =============================================================
+
+model HeroSlide {
+  id            String        @id @default(cuid())
+  imageId       String
+  title_en      String?
+  title_am      String?
+  title_om      String?
+  subtitle_en   String?       @db.Text
+  subtitle_am   String?       @db.Text
+  subtitle_om   String?       @db.Text
+  ctaPrimary_en String?       // "Public Services"
+  ctaPrimaryUrl String?
+  ctaSecondary_en String?     // "About Angolela Tera"
+  ctaSecondaryUrl String?
+  displayOrder  Int           @default(0)
+  isActive      Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  image         Media         @relation("HeroSlideImage", fields: [imageId], references: [id])
+
+  @@map("hero_slides")
+}
+
+// =============================================================
+// STATIC PAGES (About Us, etc.)
+// =============================================================
+
+model Page {
+  id          String        @id @default(cuid())
+  slug        String        @unique  // "about", "contact", etc.
+  title_en    String
+  title_am    String?
+  title_om    String?
+  body_en     String?       @db.Text
+  body_am     String?       @db.Text
+  body_om     String?       @db.Text
+  metaTitle_en   String?
+  metaDesc_en    String?
+  authorId    String
+  status      ContentStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  deletedAt   DateTime?
+
+  author      User          @relation("PageAuthor", fields: [authorId], references: [id])
+
+  @@map("pages")
+}
+
+// =============================================================
+// CONTACT SUBMISSIONS (public contact form)
+// =============================================================
+
+model ContactSubmission {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  subject     String
+  message     String   @db.Text
+  status      String   @default("unread") // "unread","read","replied","archived"
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+
+  @@index([status, createdAt])
+  @@map("contact_submissions")
+}
+
+// =============================================================
+// SEARCH INDEX (denormalized for full-text search)
+// =============================================================
+
+model SearchIndex {
+  id          String   @id @default(cuid())
+  entityType  String   // "news", "service", "office", "document", "project"
+  entityId    String
+  locale      Locale   @default(en)
+  title       String
+  body        String?  @db.Text
+  url         String
+  updatedAt   DateTime @updatedAt
+
+  @@unique([entityType, entityId, locale])
+  @@index([title])
+  @@map("search_index")
+}

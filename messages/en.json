@@ -1,0 +1,204 @@
+{
+  "en": {
+    "meta": {
+      "siteName": "Angolela Tera Woreda Administration",
+      "siteTagline": "Serving our communities through transparent governance, accessible public services and sustainable development.",
+      "defaultDescription": "Official website of Angolela Tera Woreda Administration, Amhara Region, Ethiopia."
+    },
+    "topStrip": {
+      "officialLabel": "Official Website of Angolela Tera Woreda Administration",
+      "languages": {
+        "om": "Afaan Oromo",
+        "am": "አማርኛ",
+        "en": "English"
+      }
+    },
+    "header": {
+      "search": "Search",
+      "contact": "Contact",
+      "language": "Language",
+      "logoAlt": "Angolela Tera Woreda Administration Official Logo"
+    },
+    "nav": {
+      "home": "Home",
+      "about": "About Us",
+      "government": "Government",
+      "services": "Services",
+      "development": "Development",
+      "investment": "Investment",
+      "tourism": "Tourism",
+      "news": "News",
+      "resources": "Resources",
+      "contact": "Contact",
+      "dropdowns": {
+        "about": {
+          "aboutWoreda": "About the Woreda",
+          "administration": "Administration",
+          "history": "History",
+          "geography": "Geography & Climate"
+        },
+        "government": {
+          "administrator": "Woreda Administrator",
+          "offices": "Government Offices",
+          "leadership": "Leadership",
+          "council": "Woreda Council"
+        },
+        "services": {
+          "allServices": "All Services",
+          "agriculture": "Agricultural Services",
+          "health": "Health Services",
+          "education": "Educational Services",
+          "land": "Land Services",
+          "trade": "Trade & Business"
+        },
+        "development": {
+          "projects": "Development Projects",
+          "infrastructure": "Infrastructure",
+          "plans": "Development Plans"
+        },
+        "investment": {
+          "opportunities": "Investment Opportunities",
+          "procedures": "Investment Procedures",
+          "contacts": "Investor Contact"
+        },
+        "tourism": {
+          "sites": "Tourist Sites",
+          "culture": "Culture & Heritage",
+          "calendar": "Events Calendar"
+        },
+        "news": {
+          "latest": "Latest News",
+          "announcements": "Announcements",
+          "bids": "Bids & Tenders",
+          "vacancies": "Vacancies",
+          "events": "Events"
+        },
+        "resources": {
+          "documents": "Documents & Reports",
+          "forms": "Forms & Applications",
+          "laws": "Laws & Regulations",
+          "gallery": "Photo Gallery"
+        }
+      }
+    },
+    "hero": {
+      "title": "Welcome to Angolela Tera Woreda Administration",
+      "subtitle": "Serving our communities through transparent governance, accessible public services and sustainable development.",
+      "ctaPrimary": "Public Services",
+      "ctaSecondary": "About Angolela Tera"
+    },
+    "atAGlance": {
+      "sectionTitle": "Angolela Tera at a Glance",
+      "population": "Population",
+      "area": "Total Area",
+      "kebeles": "Kebeles",
+      "urbanCenters": "Urban Centers",
+      "governmentOffices": "Government Offices",
+      "devProjects": "Development Projects",
+      "verifiedNote": "All figures are official verified data"
+    },
+    "leadership": {
+      "sectionTitle": "Leadership",
+      "messageFrom": "Message from the Woreda Administrator",
+      "readMore": "Read More →",
+      "administrator": "Woreda Administrator"
+    },
+    "services": {
+      "sectionTitle": "Our Services",
+      "sectionSubtitle": "Accessible public services for all residents of Angolela Tera Woreda",
+      "viewAll": "View All Services →",
+      "learnMore": "Learn More"
+    },
+    "offices": {
+      "sectionTitle": "Government Offices",
+      "sectionSubtitle": "Departments and offices of the Angolela Tera Woreda Administration",
+      "viewOffice": "View Office →",
+      "viewAll": "View All Offices"
+    },
+    "news": {
+      "sectionTitle": "Latest News",
+      "sectionSubtitle": "News, announcements, and updates from the Woreda Administration",
+      "readMore": "Read More →",
+      "viewAll": "View All News →",
+      "publishedOn": "Published on"
+    },
+    "development": {
+      "sectionTitle": "Development & Investment",
+      "sectionSubtitle": "Ongoing and planned development projects transforming Angolela Tera Woreda",
+      "viewProjects": "View All Projects"
+    },
+    "tourism": {
+      "sectionTitle": "Tourism & Culture",
+      "sectionSubtitle": "Discover the natural beauty, history, and cultural heritage of Angolela Tera",
+      "explore": "Explore"
+    },
+    "contact": {
+      "sectionTitle": "Contact Us",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "officeHours": "Office Hours",
+      "sendMessage": "Send a Message",
+      "form": {
+        "name": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number (optional)",
+        "subject": "Subject",
+        "message": "Your Message",
+        "submit": "Send Message",
+        "sending": "Sending...",
+        "successTitle": "Message Sent",
+        "successBody": "Thank you for contacting us. We will respond within 2-3 working days.",
+        "errorTitle": "Submission Failed",
+        "errorBody": "There was a problem sending your message. Please try again or contact us by phone."
+      }
+    },
+    "footer": {
+      "aboutTitle": "About the Woreda",
+      "aboutText": "Angolela Tera Woreda Administration is the local government body responsible for administering Angolela Tera Woreda, Amhara Region, Ethiopia.",
+      "quickLinks": "Quick Links",
+      "contactInfo": "Contact Information",
+      "followUs": "Follow Us",
+      "copyright": "© {year} Angolela Tera Woreda Administration. All rights reserved.",
+      "officialWebsite": "Official Government Website",
+      "links": {
+        "home": "Home",
+        "about": "About Us",
+        "services": "Services",
+        "offices": "Government Offices",
+        "news": "News",
+        "contact": "Contact"
+      }
+    },
+    "officeDetail": {
+      "back": "← All Offices",
+      "about": "About the Office",
+      "vision": "Vision",
+      "mission": "Mission",
+      "responsibilities": "Responsibilities",
+      "services": "Services",
+      "leadership": "Leadership",
+      "officeHead": "Office Head",
+      "contact": "Contact",
+      "documents": "Documents",
+      "download": "Download"
+    },
+    "common": {
+      "loading": "Loading...",
+      "error": "An error occurred. Please try again.",
+      "notFound": "Page not found.",
+      "backToHome": "Back to Home",
+      "viewAll": "View All",
+      "learnMore": "Learn More",
+      "readMore": "Read More",
+      "close": "Close",
+      "open": "Open",
+      "search": "Search",
+      "searchPlaceholder": "Search for services, news, offices...",
+      "noResults": "No results found.",
+      "published": "Published",
+      "updated": "Updated",
+      "category": "Category"
+    }
+  }
+}

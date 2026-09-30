@@ -1,0 +1,146 @@
+{
+  "om": {
+    "meta": {
+      "siteName": "Bulchiinsa Aanaa Angolela Tera",
+      "siteTagline": "Bulchiinsa ifaa, tajaajila hawaasa bira ga'u fi guddinaan hawaasa keenya tajaajiluu.",
+      "defaultDescription": "Marsariitii Rasmaa Bulchiinsa Aanaa Angolela Tera, Naannoo Amaaraa, Itoophiyaa."
+    },
+    "topStrip": {
+      "officialLabel": "Marsariitii Rasmaa Bulchiinsa Aanaa Angolela Tera",
+      "languages": {
+        "om": "Afaan Oromo",
+        "am": "አማርኛ",
+        "en": "English"
+      }
+    },
+    "header": {
+      "search": "Barbaadi",
+      "contact": "Nu Quunnamaa",
+      "language": "Afaan",
+      "logoAlt": "Mallattoo Rasmaa Bulchiinsa Aanaa Angolela Tera"
+    },
+    "nav": {
+      "home": "Mana",
+      "about": "Waa'ee Keenya",
+      "government": "Mootummaa",
+      "services": "Tajaajilaalee",
+      "development": "Guddinaa",
+      "investment": "Invastimantii",
+      "tourism": "Turistii",
+      "news": "Oduu",
+      "resources": "Qabeenya",
+      "contact": "Nu Quunnamaa"
+    },
+    "hero": {
+      "title": "Baga Bulchiinsa Aanaa Angolela Tera Dhuftan",
+      "subtitle": "Bulchiinsa ifaa, tajaajila hawaasa bira ga'u fi guddinaan hawaasa keenya tajaajiluu.",
+      "ctaPrimary": "Tajaajilaalee Ummataa",
+      "ctaSecondary": "Waa'ee Angolela Tera"
+    },
+    "atAGlance": {
+      "sectionTitle": "Angolela Tera — Gabaabumatti",
+      "population": "Baay'ina Ummata",
+      "area": "Bal'ina Waliigalaa",
+      "kebeles": "Qeebeeleelee",
+      "urbanCenters": "Magaalaalee",
+      "governmentOffices": "Biiroolee Mootummaa",
+      "devProjects": "Pirojektiilee Guddinaa",
+      "verifiedNote": "Lakkoofsi hundi ragaa mirkana'aa dha"
+    },
+    "leadership": {
+      "sectionTitle": "Hoogganummaa",
+      "messageFrom": "Ergaa Bulchaa Aanaa irraa",
+      "readMore": "Dabalataan Dubbisi →",
+      "administrator": "Bulchaa Aanaa"
+    },
+    "services": {
+      "sectionTitle": "Tajaajilaalee Keenya",
+      "sectionSubtitle": "Tajaajilaalee uummataa hundaaf kan aanaa kana keessa jiraataniif",
+      "viewAll": "Tajaajilaalee Hunda Ilaali →",
+      "learnMore": "Dabalataan Baradhu"
+    },
+    "offices": {
+      "sectionTitle": "Biiroolee Mootummaa",
+      "sectionSubtitle": "Biiroolee fi Kutaalee Bulchiinsa Aanaa Angolela Tera",
+      "viewOffice": "Biirroo Ilaali →",
+      "viewAll": "Biiroolee Hunda Ilaali"
+    },
+    "news": {
+      "sectionTitle": "Oduu Haaraa",
+      "sectionSubtitle": "Oduu, beeksisaalee fi haaromsa Bulchiinsa Aanaa",
+      "readMore": "Dabalataan Dubbisi →",
+      "viewAll": "Oduu Hunda Ilaali →",
+      "publishedOn": "Maxxanfame"
+    },
+    "development": {
+      "sectionTitle": "Guddinaa fi Invastimantii",
+      "sectionSubtitle": "Pirojektiilee guddinaa aanaa kana jijjiiruuf",
+      "viewProjects": "Pirojektiilee Hunda Ilaali"
+    },
+    "tourism": {
+      "sectionTitle": "Turistii fi Aadaa",
+      "sectionSubtitle": "Uumama miidhagaa, seenaa fi misooma aadaa Angolela Tera qoradhu",
+      "explore": "Qori"
+    },
+    "contact": {
+      "sectionTitle": "Nu Quunnamaa",
+      "address": "Teessoo",
+      "phone": "Bilbila",
+      "email": "Imeelii",
+      "officeHours": "Yeroo Hojii Biiroo",
+      "sendMessage": "Ergaa Ergi",
+      "form": {
+        "name": "Maqaa Guutuu",
+        "email": "Teessoo Imeelii",
+        "phone": "Lakkoofsa Bilbilaa (Dirqama miti)",
+        "subject": "Mata-duree",
+        "message": "Ergaa Kee",
+        "submit": "Ergaa Ergi",
+        "sending": "Ergamaa jira...",
+        "successTitle": "Ergaan Ergame",
+        "successBody": "Nu quunnamuuf galatoomi. Guyyaa hojii 2-3 keessatti deebii siif kennina.",
+        "errorTitle": "Erguun Hin Milkoofne",
+        "errorBody": "Ergaa ergachuu keessatti rakkoo uumame. Irra deebi'ii yaali yookaan bilbilaatiin nu quunnamaa."
+      }
+    },
+    "footer": {
+      "aboutTitle": "Waa'ee Aanaa",
+      "aboutText": "Bulchiinsa Aanaa Angolela Tera dhaabbata mootummaa aanaa bulchuuf itti gaafatamaa dha.",
+      "quickLinks": "Hidhannoolee Ariifataa",
+      "contactInfo": "Odeeffannoo Quunnamtii",
+      "followUs": "Nu Hordofi",
+      "copyright": "© {year} Bulchiinsa Aanaa Angolela Tera. Mirgi hundi eegameera.",
+      "officialWebsite": "Marsariitii Rasmaa Mootummaa"
+    },
+    "officeDetail": {
+      "back": "← Biiroolee Hunda",
+      "about": "Waa'ee Biiroo",
+      "vision": "Mul'ata",
+      "mission": "Hojii",
+      "responsibilities": "Itti Gaafatamummaalee",
+      "services": "Tajaajilaalee",
+      "leadership": "Hoogganummaa",
+      "officeHead": "Hogganaa Biiroo",
+      "contact": "Quunnamtii",
+      "documents": "Galmeelee",
+      "download": "Buufadhu"
+    },
+    "common": {
+      "loading": "Fe'aa jira...",
+      "error": "Dogoggorri uumame. Irra deebi'ii yaali.",
+      "notFound": "Fuulli hin argamne.",
+      "backToHome": "Gara Fuula Jalqabaatti Deebi'i",
+      "viewAll": "Hunda Ilaali",
+      "learnMore": "Dabalataan Baradhu",
+      "readMore": "Dabalataan Dubbisi",
+      "close": "Cufii",
+      "open": "Bani",
+      "search": "Barbaadi",
+      "searchPlaceholder": "Tajaajilaalee, oduu, biiroolee barbaadi...",
+      "noResults": "Bu'aan argame hin jiru.",
+      "published": "Maxxanfame",
+      "updated": "Haaromfame",
+      "category": "Gosa"
+    }
+  }
+}

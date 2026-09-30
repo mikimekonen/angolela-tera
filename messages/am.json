@@ -1,0 +1,146 @@
+{
+  "am": {
+    "meta": {
+      "siteName": "አንጎሌላ ተራ ወረዳ አስተዳደር",
+      "siteTagline": "በግልጽ አስተዳደር፣ ተደራሽ አገልግሎትና ዘላቂ ልማት ማህበረሰባችንን እናገለግላለን።",
+      "defaultDescription": "የአንጎሌላ ተራ ወረዳ አስተዳደር ይፋዊ ድህረ ገጽ፣ አማራ ክልል፣ ኢትዮጵያ።"
+    },
+    "topStrip": {
+      "officialLabel": "የአንጎሌላ ተራ ወረዳ አስተዳደር ይፋዊ ድህረ ገጽ",
+      "languages": {
+        "om": "Afaan Oromo",
+        "am": "አማርኛ",
+        "en": "English"
+      }
+    },
+    "header": {
+      "search": "ፈልግ",
+      "contact": "ያግኙን",
+      "language": "ቋንቋ",
+      "logoAlt": "የአንጎሌላ ተራ ወረዳ አስተዳደር ይፋዊ አርማ"
+    },
+    "nav": {
+      "home": "መነሻ",
+      "about": "ስለ እኛ",
+      "government": "መንግሥት",
+      "services": "አገልግሎቶች",
+      "development": "ልማት",
+      "investment": "ኢንቨስትሜንት",
+      "tourism": "ቱሪዝም",
+      "news": "ዜና",
+      "resources": "ሀብቶች",
+      "contact": "ያግኙን"
+    },
+    "hero": {
+      "title": "እንኳን ወደ አንጎሌላ ተራ ወረዳ አስተዳደር ደህና መጡ",
+      "subtitle": "በግልጽ አስተዳደር፣ ተደራሽ አገልግሎትና ዘላቂ ልማት ማህበረሰባችንን እናገለግላለን።",
+      "ctaPrimary": "የህዝብ አገልግሎቶች",
+      "ctaSecondary": "ስለ አንጎሌላ ተራ"
+    },
+    "atAGlance": {
+      "sectionTitle": "አንጎሌላ ተራ በአጭሩ",
+      "population": "ህዝብ ብዛት",
+      "area": "ጠቅላላ ስፋት",
+      "kebeles": "ቀበሌዎች",
+      "urbanCenters": "ከተሞች",
+      "governmentOffices": "የመንግሥት ቢሮዎች",
+      "devProjects": "የልማት ፕሮጀክቶች",
+      "verifiedNote": "ሁሉም መረጃዎች ይፋዊ የተረጋገጡ ናቸው"
+    },
+    "leadership": {
+      "sectionTitle": "አመራር",
+      "messageFrom": "ከወረዳ አስተዳዳሪ መልዕክት",
+      "readMore": "ተጨማሪ ያንብቡ →",
+      "administrator": "ወረዳ አስተዳዳሪ"
+    },
+    "services": {
+      "sectionTitle": "አገልግሎቶቻችን",
+      "sectionSubtitle": "ለሁሉም የወረዳው ነዋሪዎች ተደራሽ አገልግሎቶች",
+      "viewAll": "ሁሉንም አገልግሎቶች ይመልከቱ →",
+      "learnMore": "ተጨማሪ ይወቁ"
+    },
+    "offices": {
+      "sectionTitle": "የመንግሥት ቢሮዎች",
+      "sectionSubtitle": "የአንጎሌላ ተራ ወረዳ አስተዳደር ቡሮዎችና ዲፓርትሜንቶች",
+      "viewOffice": "ቢሮውን ይመልከቱ →",
+      "viewAll": "ሁሉንም ቢሮዎች ይመልከቱ"
+    },
+    "news": {
+      "sectionTitle": "የቅርብ ጊዜ ዜናዎች",
+      "sectionSubtitle": "ዜናዎች፣ ማስታወቂያዎችና ዝማኔዎች",
+      "readMore": "ተጨማሪ ያንብቡ →",
+      "viewAll": "ሁሉንም ዜናዎች ይመልከቱ →",
+      "publishedOn": "የታተመበት ቀን"
+    },
+    "development": {
+      "sectionTitle": "ልማትና ኢንቨስትሜንት",
+      "sectionSubtitle": "ወረዳውን የሚቀይሩ ቀጥታዊ እና የታቀዱ ፕሮጀክቶች",
+      "viewProjects": "ሁሉንም ፕሮጀክቶች ይመልከቱ"
+    },
+    "tourism": {
+      "sectionTitle": "ቱሪዝምና ባህል",
+      "sectionSubtitle": "የአንጎሌላ ተራን ተፈጥሮ፣ ታሪክና ባህላዊ ቅርስ ያስሱ",
+      "explore": "ያስሱ"
+    },
+    "contact": {
+      "sectionTitle": "ያግኙን",
+      "address": "አድራሻ",
+      "phone": "ስልክ",
+      "email": "ኢሜይል",
+      "officeHours": "የቢሮ ሰዓት",
+      "sendMessage": "መልዕክት ይላኩ",
+      "form": {
+        "name": "ሙሉ ስም",
+        "email": "የኢሜይል አድራሻ",
+        "phone": "ስልክ ቁጥር (ፈቃደኛ ከሆኑ)",
+        "subject": "ርዕሰ ጉዳይ",
+        "message": "መልዕክትዎ",
+        "submit": "መልዕክት ላክ",
+        "sending": "እየተላከ ነው...",
+        "successTitle": "መልዕክቱ ተልኳል",
+        "successBody": "ስለ ተወዳደሩን እናመሰግናለን። ከ2-3 የሥራ ቀናት ውስጥ ምላሽ እንሰጣለን።",
+        "errorTitle": "መላኩ አልተሳካም",
+        "errorBody": "መልዕክቱ ሲላክ ችግር ተፈጠረ። እባክዎ እንደገና ይሞክሩ ወይም በስልክ ያገኙን።"
+      }
+    },
+    "footer": {
+      "aboutTitle": "ስለ ወረዳው",
+      "aboutText": "አንጎሌላ ተራ ወረዳ አስተዳደር የአማራ ክልልን አንጎሌላ ተራ ወረዳ የሚያስተዳድር የአካባቢ መስተዳደር አካል ነው።",
+      "quickLinks": "ፈጣን አገናኞች",
+      "contactInfo": "የ連絡 መረጃ",
+      "followUs": "ይከተሉን",
+      "copyright": "© {year} አንጎሌላ ተራ ወረዳ አስተዳደር። ሁሉም መብቶች የተጠበቁ ናቸው።",
+      "officialWebsite": "ይፋዊ የመንግሥት ድህረ ገጽ"
+    },
+    "officeDetail": {
+      "back": "← ወደ ሁሉም ቢሮዎች",
+      "about": "ስለ ቢሮው",
+      "vision": "ራዕይ",
+      "mission": "ተልዕኮ",
+      "responsibilities": "ኃላፊነቶች",
+      "services": "አገልግሎቶች",
+      "leadership": "አመራር",
+      "officeHead": "የቢሮ ኃላፊ",
+      "contact": "ያግኙን",
+      "documents": "ሰነዶች",
+      "download": "አውርድ"
+    },
+    "common": {
+      "loading": "እየጫነ ነው...",
+      "error": "ስህተት ተፈጠረ። እንደገና ይሞክሩ።",
+      "notFound": "ገጹ አልተገኘም።",
+      "backToHome": "ወደ መነሻ ገጽ ተመለሱ",
+      "viewAll": "ሁሉንም ይመልከቱ",
+      "learnMore": "ተጨማሪ ይወቁ",
+      "readMore": "ተጨማሪ ያንብቡ",
+      "close": "ዝጋ",
+      "open": "ክፈት",
+      "search": "ፈልግ",
+      "searchPlaceholder": "አገልግሎቶችን፣ ዜናዎችን፣ ቢሮዎችን ፈልጉ...",
+      "noResults": "ምንም ውጤት አልተገኘም።",
+      "published": "የታተመ",
+      "updated": "የተዘመነ",
+      "category": "ምድብ"
+    }
+  }
+}
