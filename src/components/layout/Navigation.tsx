@@ -41,11 +41,10 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
       {
         id: 'government',
         label: 'Government',
-        href: `/${locale}/offices`,
+        href: `/${locale}/kebeles`,
         children: [
           { title: 'Woreda Council', href: `/${locale}/government/council`, description: 'Legislative body and representative assemblies' },
-          { title: 'Executive Offices', href: `/${locale}/offices`, description: 'Sector administrative offices and bureaus' },
-          { title: 'Kebele Administrations', href: `/${locale}/government/kebeles`, description: 'Grassroots administrative divisions' },
+          { title: 'Kebele Administrations', href: `/${locale}/kebeles`, description: 'Grassroots administrative divisions — all 19 kebeles' },
           { title: 'Organizational Structure', href: `/${locale}/government/structure`, description: 'Governance and accountability chart' },
         ],
       },
@@ -55,10 +54,10 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         href: `/${locale}/services`,
         children: [
           { title: 'Civil Registration', href: `/${locale}/services/civil-registration`, description: 'Birth, marriage, and death certificates' },
-          { title: 'Land Administration & Holding', href: `/${locale}/services/land`, description: 'Cadastral certificates and land tenure' },
+          { title: 'Land Administration & Holding', href: `/${locale}/services/land-certificate`, description: 'Cadastral certificates and land tenure' },
           { title: 'Agriculture Extension & Inputs', href: `/${locale}/services/agriculture`, description: 'Farmer training, seeds, fertilizers' },
-          { title: 'Trade, Business & Tax', href: `/${locale}/services/business-permits`, description: 'Trade licensing, inspections, tax services' },
-          { title: 'Education & Health Services', href: `/${locale}/services/social`, description: 'Schools, clinics, health posts network' },
+          { title: 'Trade, Business & Tax', href: `/${locale}/services/business-license`, description: 'Trade licensing, inspections, tax services' },
+          { title: 'Education & Health Services', href: `/${locale}/services/health-insurance`, description: 'Community health insurance and care network' },
         ],
       },
       {
@@ -100,6 +99,7 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         children: [
           { title: 'Latest News', href: `/${locale}/news`, description: 'Official press releases and woreda updates' },
           { title: 'Official Announcements', href: `/${locale}/news/announcements`, description: 'Public tenders, notices, recruitment' },
+          { title: 'Tenders & Procurement', href: `/${locale}/tenders`, description: 'Open bids, ITTs and procurement notices' },
           { title: 'Photo & Video Gallery', href: `/${locale}/news/gallery`, description: 'Documentary coverage of community events' },
         ],
       },
@@ -131,11 +131,10 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
       {
         id: 'government',
         label: 'መንግሥት',
-        href: `/${locale}/offices`,
+        href: `/${locale}/kebeles`,
         children: [
           { title: 'የወረዳው ምክር ቤት', href: `/${locale}/government/council`, description: 'የህዝብ ተወካዮች ምክር ቤት' },
-          { title: 'የሴክተር መስሪያ ቤቶች', href: `/${locale}/offices`, description: 'የወረዳው አስፈጻሚ መምሪያዎች' },
-          { title: 'የቀበሌ አስተዳደሮች', href: `/${locale}/government/kebeles`, description: 'የቀበሌዎች መዋቅርና መረጃ' },
+          { title: 'የቀበሌ አስተዳደሮች', href: `/${locale}/kebeles`, description: 'ሁሉም 19 ቀበሌዎች ና ከተሞች' },
         ],
       },
       {
@@ -144,9 +143,9 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         href: `/${locale}/services`,
         children: [
           { title: 'የወሳኝ ኩነት ምዝገባ', href: `/${locale}/services/civil-registration`, description: 'የልደት፣ ጋብቻና የሞት ምስክር ወረቀት' },
-          { title: 'የመሬት አስተዳደር', href: `/${locale}/services/land`, description: 'የገጠርና የከተማ መሬት ይዞታ ማረጋገጫ' },
+          { title: 'የመሬት አስተዳደር', href: `/${locale}/services/land-certificate`, description: 'የገጠርና የከተማ መሬት ይዞታ ማረጋገጫ' },
           { title: 'የግብርና ኤክስቴንሽን', href: `/${locale}/services/agriculture`, description: 'የአርሶ አደር ስልጠናና የግብአት አቅርቦት' },
-          { title: 'ንግድና ገቢዎች', href: `/${locale}/services/business-permits`, description: 'የንግድ ፈቃድና የግብር አገልግሎቶች' },
+          { title: 'ንግድና ገቢዎች', href: `/${locale}/services/business-license`, description: 'የንግድ ፈቃድና የግብር አገልግሎቶች' },
         ],
       },
       {
@@ -186,6 +185,7 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         children: [
           { title: 'ወቅታዊ ዜናዎች', href: `/${locale}/news`, description: 'ይፋዊ መግለጫዎችና ዜናዎች' },
           { title: 'ማስታወቂያዎች', href: `/${locale}/news/announcements`, description: 'የጨረታና የስራ ቅጥር ማስታወቂያዎች' },
+          { title: 'ጨረታዎችና ግዥ', href: `/${locale}/tenders`, description: 'ክፍት ጨረታዎች እና የግዥ ማስታወቂያዎች' },
         ],
       },
       {
@@ -213,10 +213,10 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
       {
         id: 'government',
         label: 'Mootummaa',
-        href: `/${locale}/offices`,
+        href: `/${locale}/kebeles`,
         children: [
           { title: 'Manni Maree Aanaa', href: `/${locale}/government/council`, description: 'Miseensota mana maree' },
-          { title: 'Waajjiroota Sektera', href: `/${locale}/offices`, description: 'Waajjiroota adda addaa' },
+          { title: 'Gandoolee Aanaa', href: `/${locale}/kebeles`, description: 'Gandoolee 19' },
         ],
       },
       {
@@ -225,13 +225,24 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         href: `/${locale}/services`,
         children: [
           { title: 'Galmee Ragaalee Murtii', href: `/${locale}/services/civil-registration`, description: 'Dhaloota, gaa\'ela fi du\'a' },
-          { title: 'Bulchiinsa Lafaa', href: `/${locale}/services/land`, description: 'Ragaa abbaa qabiyyummaa' },
+          { title: 'Bulchiinsa Lafaa', href: `/${locale}/services/land-certificate`, description: 'Ragaa abbaa qabiyyummaa' },
+          { title: 'Galtee Qonnaa', href: `/${locale}/services/agriculture`, description: 'Sanyii filatamaa fi xaa\'oo' },
+          { title: 'Hayaama Daldalaa', href: `/${locale}/services/business-license`, description: 'Gibiraa fi daldala' },
         ],
       },
       { id: 'development', label: 'Misooma', href: `/${locale}/development` },
       { id: 'investment', label: 'Invastimantii', href: `/${locale}/investment` },
       { id: 'tourism', label: 'Tuuriizimii', href: `/${locale}/tourism` },
-      { id: 'news', label: 'Oduu', href: `/${locale}/news` },
+      {
+        id: 'news',
+        label: 'Oduu',
+        href: `/${locale}/news`,
+        children: [
+          { title: 'Oduu Haaraa', href: `/${locale}/news`, description: 'Ibsa mootummaa fi oduu aanaa' },
+          { title: 'Beeksisa Bittaa', href: `/${locale}/tenders`, description: 'Bittaa banaa fi beeksisa dhiyeessii' },
+          { title: 'Kebele Hundeessaa', href: `/${locale}/kebeles`, description: 'Odeeffannoo kebele 19 fi magaalota' },
+        ],
+      },
       { id: 'resources', label: 'Qabeenya', href: `/${locale}/resources` },
       { id: 'contact', label: 'Qunnamtii', href: `/${locale}/contact` },
     ],

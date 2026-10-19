@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { setRequestLocale } from 'next-intl/server'
 import { locales, type Locale } from '@/i18n/config'
 import { notFound } from 'next/navigation'
+import { getDevelopmentProjects } from '@/lib/dataStore'
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -17,6 +18,11 @@ export default async function DevelopmentPage({
   if (!locales.includes(locale as Locale)) notFound()
   setRequestLocale(locale)
 
+  const isAm = locale === 'am'
+  const isOm = locale === 'om'
+
+  const liveProjects = getDevelopmentProjects().filter((p: any) => p.status !== 'ARCHIVED')
+
   const content = {
     en: {
       tag: 'Public Works & Capital Investment',
@@ -24,36 +30,11 @@ export default async function DevelopmentPage({
       subtitle: 'Tracking ongoing public investments across clean drinking water schemes, rural connectivity roads, school expansions, and rural electrification in Angolela Tera.',
       statusOngoing: 'Ongoing / In Progress',
       statusCompleted: 'Commissioned / Operational',
-      projects: [
-        {
-          title: 'Chacha Multi-Kebele Deep Groundwater Supply Scheme',
-          sector: 'Potable Water & Sanitation',
-          budget: '48.5 Million ETB',
-          status: 'Ongoing (82% Complete)',
-          desc: 'Drilling 4 high-capacity deep boreholes, construction of a 500m³ reinforced concrete reservoir, and 18 km distribution pipeline supplying clean drinking water to over 34,000 residents across Chacha town and 4 surrounding rural kebeles.',
-        },
-        {
-          title: 'Universal Rural Road Access Program (URRAP) – Phase IV',
-          sector: 'Transportation & Road Access',
-          budget: '32.0 Million ETB',
-          status: 'Ongoing (65% Complete)',
-          desc: 'Construction and gravel-surfacing of 42 km of all-weather feeder roads linking agrarian villages in the eastern highland kebeles directly to the main asphalt highway.',
-        },
-        {
-          title: 'Highland River Diversion & Micro-Irrigation Weir',
-          sector: 'Irrigation & Food Security',
-          budget: '18.2 Million ETB',
-          status: 'Completed & Operational',
-          desc: 'Concrete diversion weir on the Chacha River tributary commanding 240 hectares of dry-season irrigated farming for high-value seed multiplication and horticultural crops.',
-        },
-        {
-          title: 'Angolela Secondary School Digital Science & Computer Lab',
-          sector: 'Education & ICT',
-          budget: '9.4 Million ETB',
-          status: 'Completed & Operational',
-          desc: 'Equipping modern computer laboratories with 60 thin-client workstations, offline digital educational servers, and solar power backup systems.',
-        },
-      ],
+      budgetLabel: 'Project Budget',
+      contractorLabel: 'Contractor / Agency',
+      fundingLabel: 'Funding Source',
+      completionLabel: 'Target Completion',
+      progressLabel: 'Progress',
       ctaOffices: 'Connect with Infrastructure Bureau',
       ctaContact: 'Submit Infrastructure Feedback',
     },
@@ -63,73 +44,25 @@ export default async function DevelopmentPage({
       subtitle: 'በአንጎሌላ ተራ ወረዳ በንጹህ መጠጥ ውሃ፣ በገጠር መንገዶች፣ በትምህርት ቤቶችና በመብራት ሀይል መስፋፋት ላይ የሚሰሩ የልማት ፕሮጀክቶች ክትትል።',
       statusOngoing: 'በሂደት ላይ ያለ',
       statusCompleted: 'ተጠናቆ አገልግሎት የጀመረ',
-      projects: [
-        {
-          title: 'የጫቻና አካባቢዋ የጥልቅ ውሃ ጉድጓድ ፕሮጀክት',
-          sector: 'ንጹህ መጠጥ ውሃ',
-          budget: '48.5 ሚሊዮን ብር',
-          status: 'በሂደት ላይ (82% የተጠናቀቀ)',
-          desc: '4 ጥልቅ የውሃ ጉድጓዶችን መቆፈር፣ 500 ኪዩቢክ ሜትር የውሃ ማጠራቀሚያ ገንዳ መገንባትና የ18 ኪ.ሜ የቧንቧ መስመር በመዘርጋት ከ34 ሺህ በላይ ለሚሆኑ የጫቻና የአካባቢው ቀበሌዎች ነዋሪዎች ንጹህ ውሃ ማዳረስ።',
-        },
-        {
-          title: 'የገጠር ተደራሽነት መንገድ ግንባታ (URRAP) - ምዕራፍ 4',
-          sector: 'መንገድና ትራንስፖርት',
-          budget: '32.0 ሚሊዮን ብር',
-          status: 'በሂደት ላይ (65% የተጠናቀቀ)',
-          desc: 'የምስራቃዊ ደጋማ ቀበሌዎችን ከአውራ ጎዳና ጋር የሚያገናኝ የ42 ኪሎ ሜትር የጠጠር መንገድ ግንባታ።',
-        },
-        {
-          title: 'የጫቻ ወንዝ አነስተኛ መስኖና ተፋሰስ ልማት',
-          sector: 'መስኖና የምግብ ዋስትና',
-          budget: '18.2 ሚሊዮን ብር',
-          status: 'ተጠናቆ አገልግሎት የጀመረ',
-          desc: 'በጫቻ ወንዝ ገባር ላይ የተሰራ የኮንክሪት መስኖ ግድብ ሲሆን 240 ሄክታር መሬትን በደረቅ ወቅት በመስኖ በማልማት ለአርሶ አደሮች ገቢ ማስገኛ ሆነ።',
-        },
-        {
-          title: 'የአንጎሌላ አጠቃላይ 2ኛ ደረጃ ት/ቤት ዲጂታል ሳይንስና ኮምፒውተር ላብ',
-          sector: 'ትምህርትና አይሲቲ',
-          budget: '9.4 ሚሊዮን ብር',
-          status: 'ተጠናቆ አገልግሎት የጀመረ',
-          desc: '60 ዘመናዊ ኮምፒውተሮችና የሶላር ሀይል ማመንጫ የተገጠመለት የሳይንስና ቴክኖሎጂ ላቦራቶሪ።',
-        },
-      ],
+      budgetLabel: 'የፕሮጀክት በጀት',
+      contractorLabel: 'ስራ ተቋራጭ',
+      fundingLabel: 'የገንዘብ ምንጭ',
+      completionLabel: 'የሚጠናቀቅበት ጊዜ',
+      progressLabel: 'የአፈጻጸም ደረጃ',
+      ctaOffices: 'የመሰረተ ልማት ቢሮን ያነጋግሩ',
+      ctaContact: 'የመሰረተ ልማት አስተያየት ይስጡ',
     },
     om: {
-      tag: 'Hojiiwwan Misoomaa',
-      title: 'Pirojektoota Misoomaa fi Bu\'uuraalee',
-      subtitle: 'Pirojektoota bishaan qulqulluu, daandii fi manneen barumsaa aanaa keenyaa.',
-      statusOngoing: 'Hojiirra kan jiru',
-      statusCompleted: 'Kan xumurame',
-      projects: [
-        {
-          title: 'Misooma Bishaan Qulqulluu Magaalaa Caaccetti',
-          sector: 'Bishaan Qulqulluu',
-          budget: 'Miliyoona 48.5 ETB',
-          status: 'Hojiirra kan jiru (82%)',
-          desc: 'Boolla bishaanii gadi fagoowwan 4 fi sarara bishaanii km 18 diriirsuun uummata 34,000 fayyadamaa taasisuu.',
-        },
-        {
-          title: 'Ijaarsa Daandii Baadiyyaa (URRAP) – Marsaa 4ffaa',
-          sector: 'Daandii fi Geejjiba',
-          budget: 'Miliyoona 32.0 ETB',
-          status: 'Hojiirra kan jiru (65%)',
-          desc: 'Daandii baadiyyaa km 42 ijaaruu fi cirracha afuun daandii guddaatti hidhuu.',
-        },
-        {
-          title: 'Misooma Jallisii Laga Caaccetti',
-          sector: 'Jallisii fi Qonna',
-          budget: 'Miliyoona 18.2 ETB',
-          status: 'Kan Xumurame',
-          desc: 'Lafa hektaara 240 jallisiidhaan oomishuuf kan oolu.',
-        },
-        {
-          title: 'Mana Yaalii Kompiitaraa Mana Barumsaa Angolallaa',
-          sector: 'Barnootaa fi Teeknooloojii',
-          budget: 'Miliyoona 9.4 ETB',
-          status: 'Kan Xumurame',
-          desc: 'Kompiitaroota 60 fi humna aduutiin kan hojjetu.',
-        },
-      ],
+      tag: 'Ijaarsaa fi Misooma',
+      title: 'Piroojektiiwwan Misoomaa fi Bu\'uuraalee',
+      subtitle: 'Piroojektiiwwan bishaan dhugaatii, daandii baadiyyaa, manneen barumsaa fi ibsaa aanaa Angolallaa Xaraa keessatti gaggeeffamaa jiran.',
+      statusOngoing: 'Adeemsa Irra Kan Jiru',
+      statusCompleted: 'Kan Xumurame',
+      budgetLabel: 'Baajata Piroojektii',
+      contractorLabel: 'Ijaaraa',
+      fundingLabel: 'Madda Maallaqaa',
+      completionLabel: 'Yeroo Xumuramu',
+      progressLabel: 'Sadarkaa Raawwii',
       ctaOffices: 'Waajjira Ijaarsaa Qunnamaa',
       ctaContact: 'Yaada Misoomaa Galchaa',
     },
@@ -153,42 +86,106 @@ export default async function DevelopmentPage({
           </div>
         </div>
 
-        {/* Projects List */}
+        {/* Dynamic Projects List from dataStore */}
         <div className="space-y-6 mb-12">
-          {content.projects.map((proj, idx) => (
-            <div
-              key={idx}
-              className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 shadow-xs hover:border-[#1a4f8b] transition-all flex flex-col md:flex-row md:items-center justify-between gap-6"
-            >
-              <div className="max-w-3xl">
-                <div className="flex flex-wrap items-center gap-2 mb-2">
-                  <span className="text-xs font-bold text-[#1a4f8b] bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-100">
-                    {proj.sector}
-                  </span>
-                  <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                    {proj.status}
-                  </span>
+          {liveProjects.map((proj: any) => {
+            const title = isAm ? (proj.title_am || proj.title_en) : isOm ? (proj.title_om || proj.title_en) : proj.title_en
+            const desc = isAm ? (proj.description_am || proj.description_en) : isOm ? (proj.description_om || proj.description_en) : proj.description_en
+            const budgetFormatted = proj.budget_etb
+              ? `${(proj.budget_etb / 1000000).toFixed(1)} Million ETB`
+              : (proj.budget || 'Allocated')
+
+            const progress = proj.progressPercent !== undefined ? proj.progressPercent : (proj.status === 'COMPLETED' ? 100 : 50)
+
+            return (
+              <div
+                key={proj.id}
+                className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 shadow-xs hover:border-[#1a4f8b] transition-all flex flex-col lg:flex-row lg:items-center justify-between gap-6"
+              >
+                <div className="max-w-3xl flex-1">
+                  <div className="flex flex-wrap items-center gap-2 mb-3">
+                    <span className="text-xs font-bold text-[#1a4f8b] bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-100">
+                      {proj.sector}
+                    </span>
+                    <span
+                      className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${
+                        proj.status === 'COMPLETED'
+                          ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                          : 'bg-blue-50 text-blue-800 border-blue-200'
+                      }`}
+                    >
+                      {proj.status === 'COMPLETED' ? content.statusCompleted : `${progress}% ${content.statusOngoing}`}
+                    </span>
+                    {proj.location_en && (
+                      <span className="text-xs text-gray-500 font-medium">
+                        📍 {proj.location_en}
+                      </span>
+                    )}
+                  </div>
+
+                  <h2 className="text-lg sm:text-xl font-bold text-[#0d2340] leading-snug">
+                    {title}
+                  </h2>
+
+                  <p className="text-xs sm:text-sm text-gray-600 mt-2 leading-relaxed">
+                    {desc}
+                  </p>
+
+                  {/* Progress Indicator */}
+                  <div className="mt-4 pt-3 border-t border-gray-100 max-w-xl">
+                    <div className="flex items-center justify-between text-xs text-gray-500 mb-1.5">
+                      <span className="font-medium">{content.progressLabel}</span>
+                      <span className="font-bold text-[#1a4f8b]">{progress}%</span>
+                    </div>
+                    <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full rounded-full transition-all duration-500 ${
+                          progress >= 100
+                            ? 'bg-emerald-500'
+                            : progress >= 60
+                            ? 'bg-blue-600'
+                            : 'bg-amber-500'
+                        }`}
+                        style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Meta badges */}
+                  <div className="mt-4 flex flex-wrap gap-4 text-xs text-gray-500">
+                    {proj.contractor && (
+                      <div>
+                        <span className="font-semibold text-gray-700">{content.contractorLabel}: </span>
+                        <span>{proj.contractor}</span>
+                      </div>
+                    )}
+                    {proj.fundingSource && (
+                      <div>
+                        <span className="font-semibold text-gray-700">{content.fundingLabel}: </span>
+                        <span>{proj.fundingSource}</span>
+                      </div>
+                    )}
+                    {proj.expectedCompletion && (
+                      <div>
+                        <span className="font-semibold text-gray-700">{content.completionLabel}: </span>
+                        <span>{proj.expectedCompletion}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
-                <h2 className="text-lg sm:text-xl font-bold text-[#0d2340] leading-snug">
-                  {proj.title}
-                </h2>
-
-                <p className="text-xs sm:text-sm text-gray-600 mt-2 leading-relaxed">
-                  {proj.desc}
-                </p>
+                {/* Budget Column */}
+                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 shrink-0 text-left lg:text-right lg:min-w-[200px]">
+                  <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
+                    {content.budgetLabel}
+                  </span>
+                  <span className="text-base sm:text-lg font-extrabold text-[#1a4f8b] block mt-1 font-mono">
+                    {budgetFormatted}
+                  </span>
+                </div>
               </div>
-
-              <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 shrink-0 text-right md:min-w-[180px]">
-                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
-                  Project Budget
-                </span>
-                <span className="text-base sm:text-lg font-extrabold text-[#1a4f8b] block mt-0.5">
-                  {proj.budget}
-                </span>
-              </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         {/* Action Link Footer */}
@@ -198,7 +195,7 @@ export default async function DevelopmentPage({
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
-              href={`/${locale}/offices/infrastructure`}
+              href={`/${locale}/contact`}
               className="bg-[#1a4f8b] hover:bg-[#133a6b] text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-xs transition-colors"
             >
               {content.ctaOffices}

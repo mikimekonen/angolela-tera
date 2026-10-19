@@ -98,6 +98,23 @@ export async function POST(req: NextRequest) {
       // Prisma DB query fallback
     }
 
+    // Check persistent dataStore users first
+    if (!matchedUser) {
+      try {
+        const { getUsers } = await import('@/lib/dataStore')
+        const storeUsers = getUsers()
+        const storeMatch = storeUsers.find((u) => u.email.toLowerCase() === email.toLowerCase())
+        if (storeMatch) {
+          matchedUser = {
+            ...storeMatch,
+            officeId: storeMatch.officeId ?? null,
+          }
+        }
+      } catch (err) {
+        console.error('Error loading store users for login:', err)
+      }
+    }
+
     // Check fallback user dictionary
     if (!matchedUser) {
       const fallback = FALLBACK_USERS.find(

@@ -1,14 +1,30 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import type { Locale } from '@/i18n/config'
 
 interface HeroSectionProps {
   locale: Locale
+  sliders?: any[]
 }
 
-export function HeroSection({ locale }: HeroSectionProps) {
+export function HeroSection({ locale, sliders = [] }: HeroSectionProps) {
+  const [activeSlideIdx, setActiveSlideIdx] = useState(0)
+  const isAm = locale === 'am'
+  const isOm = locale === 'om'
+
+  // Filter active slides
+  const activeSliders = sliders.filter((s) => s.isActive !== false)
+
+  useEffect(() => {
+    if (activeSliders.length <= 1) return
+    const timer = setInterval(() => {
+      setActiveSlideIdx((prev) => (prev + 1) % activeSliders.length)
+    }, 7000)
+    return () => clearInterval(timer)
+  }, [activeSliders.length])
+
   const content = {
     en: {
       badge: 'Official Portal • North Shewa Zone',
@@ -16,13 +32,12 @@ export function HeroSection({ locale }: HeroSectionProps) {
       subtitle: 'Building a prosperous, transparent, and resilient community through modernized public services, agricultural innovation, and sustainable investment.',
       ctaServices: 'Explore Public Services',
       ctaInvestment: 'Investment Opportunities',
-      ctaOffices: 'Sector Offices Directory',
       quickTitle: 'Citizen Quick Access',
       quickPills: [
         { label: 'Civil Registration', href: `/${locale}/services/civil-registration`, icon: '📜' },
-        { label: 'Land Holding Certificate', href: `/${locale}/services/land`, icon: '🗺️' },
+        { label: 'Land Holding Certificate', href: `/${locale}/services/land-certificate`, icon: '🗺️' },
         { label: 'Agricultural Inputs', href: `/${locale}/services/agriculture`, icon: '🌾' },
-        { label: 'Business Permits & Tax', href: `/${locale}/services/business-permits`, icon: '💼' },
+        { label: 'Business Permits & Tax', href: `/${locale}/services/business-license`, icon: '💼' },
         { label: 'Citizen Grievance Desk', href: `/${locale}/contact`, icon: '⚖️' },
       ],
       highlights: [
@@ -38,13 +53,12 @@ export function HeroSection({ locale }: HeroSectionProps) {
       subtitle: 'በዘመናዊ የህዝብ አገልግሎት፣ በግብርና ልማትና በኢንቨስትመንት መስፋፋት የበለጸገ፣ ፍትሃዊና ጠንካራ ማህበረሰብ እየገነባን ነው።',
       ctaServices: 'የህዝብ አገልግሎቶች',
       ctaInvestment: 'የኢንቨስትመንት አማራጮች',
-      ctaOffices: 'የመስሪያ ቤቶች ማውጫ',
       quickTitle: 'ፈጣን የአገልግሎት መስኮት',
       quickPills: [
         { label: 'የወሳኝ ኩነት ምዝገባ', href: `/${locale}/services/civil-registration`, icon: '📜' },
-        { label: 'የመሬት ይዞታ ምስክር', href: `/${locale}/services/land`, icon: '🗺️' },
+        { label: 'የመሬት ይዞታ ምስክር', href: `/${locale}/services/land-certificate`, icon: '🗺️' },
         { label: 'የግብርና ግብአቶች', href: `/${locale}/services/agriculture`, icon: '🌾' },
-        { label: 'ንግድ ፈቃድና ታክስ', href: `/${locale}/services/business-permits`, icon: '💼' },
+        { label: 'ንግድ ፈቃድና ታክስ', href: `/${locale}/services/business-license`, icon: '💼' },
         { label: 'የቅሬታ ማስተናገጃ', href: `/${locale}/contact`, icon: '⚖️' },
       ],
       highlights: [
@@ -60,13 +74,12 @@ export function HeroSection({ locale }: HeroSectionProps) {
       subtitle: 'Tajaajila uummataa ammayyaa, misooma qonnaa fi carraa invastimantiitiin hawaasa badhaadhe ijaaraa jirra.',
       ctaServices: 'Tajaajiloota Uummataa',
       ctaInvestment: 'Carraawwan Invastimantii',
-      ctaOffices: 'Waajjiroota Sektera',
       quickTitle: 'Tajaajila Saffisaa',
       quickPills: [
         { label: 'Galmee Murtii', href: `/${locale}/services/civil-registration`, icon: '📜' },
-        { label: 'Ragaa Qabiyyee Lafaa', href: `/${locale}/services/land`, icon: '🗺️' },
+        { label: 'Ragaa Qabiyyee Lafaa', href: `/${locale}/services/land-certificate`, icon: '🗺️' },
         { label: 'Galtee Qonnaa', href: `/${locale}/services/agriculture`, icon: '🌾' },
-        { label: 'Hayaama Daldalaa', href: `/${locale}/services/business-permits`, icon: '💼' },
+        { label: 'Hayaama Daldalaa', href: `/${locale}/services/business-license`, icon: '💼' },
         { label: 'Komiin Dhaggeeffachuu', href: `/${locale}/contact`, icon: '⚖️' },
       ],
       highlights: [
@@ -77,6 +90,24 @@ export function HeroSection({ locale }: HeroSectionProps) {
       ],
     },
   }[locale]
+
+  const currentSlider = activeSliders[activeSlideIdx]
+
+  const headline = currentSlider
+    ? (isAm ? (currentSlider.title_am || currentSlider.title_en) : currentSlider.title_en)
+    : content.title
+
+  const subline = currentSlider
+    ? (isAm ? (currentSlider.subtitle_am || currentSlider.subtitle_en) : currentSlider.subtitle_en)
+    : content.subtitle
+
+  const ctaBtnText = currentSlider
+    ? (isAm ? (currentSlider.buttonText_am || currentSlider.buttonText_en) : currentSlider.buttonText_en)
+    : content.ctaServices
+
+  const ctaBtnUrl = currentSlider?.buttonUrl
+    ? (currentSlider.buttonUrl.startsWith('http') ? currentSlider.buttonUrl : `/${locale}${currentSlider.buttonUrl.startsWith('/') ? currentSlider.buttonUrl : '/' + currentSlider.buttonUrl}`)
+    : `/${locale}/services`
 
   return (
     <section className="relative bg-gradient-to-b from-[#0a192f] via-[#0d2340] to-[#133a6b] text-white pt-12 pb-16 lg:pt-16 lg:pb-24 overflow-hidden">
@@ -95,33 +126,33 @@ export function HeroSection({ locale }: HeroSectionProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 mb-10">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl min-h-[300px] flex flex-col justify-center">
             {/* Institutional Status Badge */}
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-xs border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#FED100] mb-6 shadow-xs">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-xs border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#FED100] mb-6 shadow-xs w-fit">
               <span className="h-2 w-2 rounded-full bg-[#009A44] animate-ping" />
               <span>{content.badge}</span>
             </div>
 
-            {/* Main Title */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight sm:leading-tight mb-4 drop-shadow-md">
-              {content.title}
+            {/* Main Title (Animated Transition) */}
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight sm:leading-tight mb-4 drop-shadow-md transition-all duration-500">
+              {headline}
             </h1>
 
             {/* Subtitle / Mission Statement */}
-            <p className="text-sm sm:text-base lg:text-lg text-gray-200 font-normal leading-relaxed mb-8 max-w-2xl drop-shadow-xs">
-              {content.subtitle}
+            <p className="text-sm sm:text-base lg:text-lg text-gray-200 font-normal leading-relaxed mb-8 max-w-2xl drop-shadow-xs transition-all duration-500">
+              {subline}
             </p>
 
             {/* Action CTAs */}
             <div className="flex flex-wrap items-center gap-3 sm:gap-4">
               <Link
-                href={`/${locale}/services`}
+                href={ctaBtnUrl}
                 className="inline-flex items-center gap-2 bg-[#c8931a] hover:bg-[#b08015] text-[#0d2340] font-bold text-xs sm:text-sm px-5 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
               >
                 <svg className="w-4 h-4 text-[#0d2340]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
-                <span>{content.ctaServices}</span>
+                <span>{ctaBtnText}</span>
               </Link>
 
               <Link
@@ -133,15 +164,23 @@ export function HeroSection({ locale }: HeroSectionProps) {
                 </svg>
                 <span>{content.ctaInvestment}</span>
               </Link>
-
-              <Link
-                href={`/${locale}/offices`}
-                className="inline-flex items-center gap-2 text-gray-300 hover:text-white font-medium text-xs sm:text-sm px-4 py-3 transition-colors"
-              >
-                <span>{content.ctaOffices}</span>
-                <span>→</span>
-              </Link>
             </div>
+
+            {/* Slider Dots if multiple slides */}
+            {activeSliders.length > 1 && (
+              <div className="flex items-center gap-2 mt-6">
+                {activeSliders.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveSlideIdx(idx)}
+                    className={`h-2 rounded-full transition-all cursor-pointer ${
+                      idx === activeSlideIdx ? 'w-8 bg-[#FED100]' : 'w-2 bg-white/30 hover:bg-white/60'
+                    }`}
+                    aria-label={`Slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Official Seal Feature */}

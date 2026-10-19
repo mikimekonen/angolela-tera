@@ -3,10 +3,19 @@ import Link from 'next/link'
 import { setRequestLocale } from 'next-intl/server'
 import { locales, type Locale } from '@/i18n/config'
 import { notFound } from 'next/navigation'
-import { NEWS_ARTICLES } from '@/data/mockData'
+import { getNews } from '@/lib/dataStore'
+import type { Metadata } from 'next'
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return {
+    title: locale === 'am' ? 'ዜናና ማስታወቂያዎች — አንጎሌላ ተራ ወረዳ' : 'News & Announcements — Angolela Tera Woreda',
+    description: 'Official news, press releases and public announcements from Angolela Tera Woreda Administration.',
+  }
 }
 
 export default async function NewsPage({
@@ -45,8 +54,9 @@ export default async function NewsPage({
     },
   }[locale as Locale]
 
-  const featured = NEWS_ARTICLES.find((n) => n.isFeatured) || NEWS_ARTICLES[0]
-  const otherNews = NEWS_ARTICLES.filter((n) => n.slug !== featured.slug)
+  const allNews = getNews().filter((n: any) => n.status === 'PUBLISHED' || !n.status)
+  const featured = allNews.find((n: any) => n.isFeatured) || allNews[0]
+  const otherNews = featured ? allNews.filter((n: any) => n.slug !== featured.slug) : allNews
 
   return (
     <div className="bg-[#f0f4f8] min-h-screen py-10 sm:py-16">

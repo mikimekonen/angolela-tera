@@ -1,0 +1,1593 @@
+{
+  "offices": [
+    {
+      "slug": "agriculture",
+      "name_en": "Agriculture & Rural Development Office",
+      "name_am": "የግብርናና ገጠር ልማት ጽህፈት ቤት",
+      "name_om": "Waajjira Qonnaa fi Misooma Baadiyyaa",
+      "head_en": "Ato Tsegaye Belay",
+      "head_am": "አቶ ፀጋዬ በላይ",
+      "head_om": "Obbo Tsaggaayee Balaay",
+      "headTitle_en": "Head of Agriculture Office",
+      "headTitle_am": "የግብርና ጽ/ቤት ኃላፊ",
+      "headTitle_om": "Itti Gaafatamaa Waajjira Qonnaa",
+      "phone": "+251 (0) 58 661 0201",
+      "email": "agriculture@angolela-tera.gov.et",
+      "location_en": "Main Administrative Compound, Block B, 1st Floor, Chacha",
+      "location_am": "ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ለ፣ 1ኛ ፎቅ፣ ጫቻ",
+      "location_om": "Gamoo Bulchiinsa Guddaa, Kutaa B, Magaalaa Caccetti",
+      "about_en": "The Agriculture and Rural Development Office spearheads food security, crop yield maximization, natural resource conservation, and modern livestock breeding across the 19 rural kebeles of Angolela Tera.",
+      "about_am": "የአንጎሌላ ተራ ወረዳ ግብርናና ገጠር ልማት ጽ/ቤት በ19ኙም የገጠር ቀበሌዎች የምግብ ዋስትናን ለማረጋገጥ፣ የሰብል ምርታማነትን ለማሳደግ፣ የተፈጥሮ ሀብት ጥበቃና ዘመናዊ የእንስሳት እርባታን ለማስፋፋት በግንባር ቀደምትነት ይሰራል፡",
+      "about_om": "Waajjirri kun gandoolee baadiyyaa 19 keessatti wabii nyaataa mirkaneessuu, oomishtummaa qamadii fi garbuu dabaluu fi qabeenya uumamaa kunuunsuuf hojjeta.",
+      "responsibilities_en": [
+        "Facilitating seasonal distribution of certified rust-resistant wheat and barley seeds",
+        "Implementing watershed development and soil erosion containment across highland slopes",
+        "Providing veterinary diagnostic services, vaccine campaigns, and artificial insemination",
+        "Overseeing kebele-level agricultural development agents (DAs) and farmer training centers (FTCs)"
+      ],
+      "responsibilities_am": [
+        "በሽታን የሚቋቋሙ ምርጥ የስንዴና ገብስ ዘሮችንና ማዳበሪያን በወቅቱ ለአርሶ አደሮች ማሰራጨት",
+        "በደጋማ የተፋሰስ አካባቢዎች የአፈርና ውሃ ጥበቃ ስራዎችን ማስተባበርና የተራቆቱ መሬቶችን ማልማት",
+        "የእንስሳት ጤና ክትትል፣ ክትባት እና የዝርያ ማሻሻያ (ሰው ሰራሽ ማዳቀል) አገልግሎት መስጠት",
+        "በየቀበሌው ያሉትን የግብርና ባለሙያዎችና የገበሬ ማሰልጠኛ ማዕከላትን (FTC) በበላይነት መምራት"
+      ],
+      "responsibilities_om": [
+        "Sanyii filatamaa fi xaa'oo yeroon qonnaan bultootaaf raabsuu",
+        "Biyyee fi bishaan kunuunsuu fi misooma sululaa gaggeessuu",
+        "Tajaajila yaala beeyladootaa fi talaallii kennuu",
+        "Wiirtuulee leenjii qonnaan bultootaa (FTC) to'achuu"
+      ],
+      "servicesProvided_en": [
+        "Agricultural input allocation & voucher issuance",
+        "Livestock vaccination & artificial insemination certificates",
+        "Tree seedlings and agroforestry distribution",
+        "Smallholder irrigation permit verification"
+      ],
+      "servicesProvided_am": [
+        "የግብርና ግብአት ድልድልና የቫውቸር አሰጣጥ",
+        "የእንስሳት ክትባትና የዝርያ ማሻሻያ አገልግሎት",
+        "የችግኝ ማፍላትና የደን ልማት ድጋፍ",
+        "የአነስተኛ መስኖ ተጠቃሚዎች ፍቃድ ማረጋገጥ"
+      ],
+      "servicesProvided_om": [
+        "Galtee qonnaa fi raabsa waraqaa ragaa",
+        "Talaallii beeyladootaa",
+        "Biqiltuu dhaabuu fi eegumsa bosonaa",
+        "Hayyama misooma jallisiif ragaa kennuu"
+      ]
+    },
+    {
+      "slug": "land-administration",
+      "name_en": "Land Administration & Environmental Protection Office",
+      "name_am": "የመሬት አስተዳደርና አካባቢ ጥበቃ ጽህፈት ቤት",
+      "name_om": "Waajjira Bulchiinsa Lafaa fi Eegumsa Naannoo",
+      "head_en": "Ato Daniel Bekele",
+      "head_am": "አቶ ዳንኤል በቀለ",
+      "head_om": "Obbo Daan'eel Baqqalaa",
+      "headTitle_en": "Head of Land Administration",
+      "headTitle_am": "የመሬት አስተዳደር ጽ/ቤት ኃላፊ",
+      "headTitle_om": "Itti Gaafatamaa Bulchiinsa Lafaa",
+      "phone": "+251 (0) 58 661 0202",
+      "email": "land@angolela-tera.gov.et",
+      "location_en": "Main Administrative Compound, Block A, Ground Floor, Chacha",
+      "location_am": "ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ሀ፣ ምድር ቤት፣ ጫቻ",
+      "location_om": "Gamoo Bulchiinsa Guddaa, Kutaa A, Magaalaa Caccetti",
+      "about_en": "Responsible for rural cadastral survey, primary and second-level landholding book issuance (Green Book), land use zoning, dispute demarcation, and environmental compliance monitoring.",
+      "about_am": "የገጠር መሬት ይዞታ ምዝገባ፣ የሁለተኛ ደረጃ ደብተር (አረንጓዴ ደብተር) አሰጣጥ፣ የመሬት አጠቃቀም ፕላን፣ የይዞታ ወሰን ማካለልና የአካባቢ ተፅዕኖ ግምገማ ያከናውናል።",
+      "about_om": "Waraqaa ragaa qabiyyee lafa baadiyyaa kennuu, karoora fayyadama lafaa fi eegumsa naannoo to'achuuf itti gaafatamummaa qaba.",
+      "responsibilities_en": [
+        "Issuing Second-Level Landholding Certificates (SLLC)",
+        "Resolving communal and boundary disputes across rural kebeles",
+        "Maintaining the Woreda Cadastral Geographic Information System (GIS)",
+        "Conducting Environmental Impact Assessments (EIA) for commercial investment projects"
+      ],
+      "responsibilities_am": [
+        "የሁለተኛ ደረጃ የመሬት ይዞታ ማረጋገጫ ደብተር (SLLC) ማዘጋጀትና መስጠት",
+        "በቀበሌዎች መካከልና በግለሰብ ይዞታዎች የሚነሱ የወሰን አለመግባባቶችን በህግ ማስተካከል",
+        "የወረዳውን የመሬት መረጃ ቋት (GIS) በዘመናዊ ቴክኖሎጂ ማደራጀትና ማዘመን",
+        "ለኢንቨስትመንት ፕሮጀክቶች የአካባቢ ተፅዕኖ ግምገማ (EIA) ፍተሻ ማካሄድ"
+      ],
+      "responsibilities_om": [
+        "Waraqaa ragaa qabiyyee lafaa sadarkaa 2ffaa kennuu",
+        "Wal-dhabdee daangaa lafaa seeraan furuu",
+        "Ragaa lafaa teeknooloojii GIS tiin gurmeessuu",
+        "Madaallii dhiibbaa naannoo pirojektootaaf gaggeessuu"
+      ],
+      "servicesProvided_en": [
+        "Primary & secondary land book registration",
+        "Landholding inheritance & transfer endorsement",
+        "Boundary verification and GPS demarcation",
+        "Investment plot certification"
+      ],
+      "servicesProvided_am": [
+        "የመሬት ይዞታ ምዝገባና የደብተር አሰጣጥ",
+        "የይዞታ ስሪት ዝውውርና የውርስ ማረጋገጫ",
+        "የወሰን ማረጋገጥና የጂፒኤስ ልኬት አገልግሎት",
+        "ለኢንቨስትመንት የተዘጋጁ ይዞታዎች ማረጋገጫ"
+      ],
+      "servicesProvided_om": [
+        "Galmee qabiyyee lafaa fi kenniinsa kitaabaa",
+        "Dhaala fi daddabarsa lafaa mirkaneessuu",
+        "Safartuu GPS fi mirkaneessa daangaa",
+        "Lafa invastimantiif qophaa'e mirkaneessuu"
+      ]
+    },
+    {
+      "slug": "trade-investment",
+      "name_en": "Trade, Industry & Market Development Office",
+      "name_am": "የንግድ፣ ኢንዱስትሪና ገበያ ልማት ጽህፈት ቤት",
+      "name_om": "Waajjira Daldalaa, Industirii fi Gabaa",
+      "head_en": "Ato Girma Kebede",
+      "head_am": "አቶ ግርማ ከበደ",
+      "head_om": "Obbo Girmaa Kabbadaa",
+      "headTitle_en": "Head of Trade & Industry",
+      "headTitle_am": "የንግድና ኢንዱስትሪ ጽ/ቤት ኃላፊ",
+      "headTitle_om": "Itti Gaafatamaa Daldalaa fi Industirii",
+      "phone": "+251 (0) 58 661 0203",
+      "email": "trade@angolela-tera.gov.et",
+      "location_en": "Commerce Building, Main Highway Junction, Chacha",
+      "location_am": "የንግድ ህንጻ፣ አውራ ጎዳና መገንጠያ፣ ጫቻ",
+      "location_om": "Gamoo Daldalaa, Daandii Guddaa, Magaalaa Caccetti",
+      "about_en": "Oversees domestic trade regulation, commercial licensing, consumer rights protection, cooperative union market linkages, and one-stop investor facilitation along the A2 highway corridor.",
+      "about_am": "የንግድ ምዝገባና ፈቃድ አሰጣጥ፣ የገበያ መረጋጋት፣ የሸማቾች መብት ጥበቃ፣ የህብረት ስራ ማህበራት የገበያ ትስስር እና የኢንቨስትመንት ድጋፍ የሚሰጥ ጽህፈት ቤት ነው።",
+      "about_om": "Hayaama daldalaa kennuu, gabaa tasgabeessuu, mirga maamiltootaa eeguu fi invastimantii daandii Finfinnee-Dabra Birhaan jiru deggeruuf hojjeta.",
+      "responsibilities_en": [
+        "Commercial business registration and annual license renewals",
+        "Market price stabilization and regular consumer weight & measure inspections",
+        "Promoting market linkages for grain, sheep, and dairy cooperatives",
+        "Managing the Chacha Agro-Processing Investor One-Stop Service Desk"
+      ],
+      "responsibilities_am": [
+        "የንግድ ምዝገባ፣ የንግድ ፈቃድ መስጠትና አመታዊ እድሳት ማካሄድ",
+        "የገበያ ዋጋ ክትትልና የንግድ ሚዛን ትክክለኛነት ፍተሻ ማድረግ",
+        "ለአርሶ አደር የህብረት ስራ ማህበራት የሰብልና የእንስሳት ገበያ ትስስር መፍጠር",
+        "በጫቻ ከተማ ለሚገነቡ አግሮ-ፕሮሰሲንግ ፕሮጀክቶች የአንድ መስኮት ድጋፍ መስጠት"
+      ],
+      "responsibilities_om": [
+        "Galmee daldalaa fi haaromsa hayaamaa",
+        "Madaallii gabaa fi safartuu to'achuu",
+        "Waldaalee qonnaatiif gabaa mijeessuu",
+        "Tajaajila gamoo tokkoo invastimantiif kennuu"
+      ],
+      "servicesProvided_en": [
+        "New trade license issuance & amendment",
+        "Commercial competency verification",
+        "Investor intake & incentive guidance",
+        "Grain export & transport permits"
+      ],
+      "servicesProvided_am": [
+        "አዲስ የንግድ ፈቃድ ማውጣትና ማሻሻል",
+        "የንግድ ብቃት ማረጋገጫ ምስክር ወረቀት",
+        "የኢንቨስትመንት ፈቃድ ማስተናገድና መመሪያ መስጠት",
+        "የእህል ንግድና ትራንስፖርት ፍቃድ ማረጋገጥ"
+      ],
+      "servicesProvided_om": [
+        "Hayaama daldalaa haaraa fi jijjiirraa",
+        "Mirkaneessa ga'umsa daldalaa",
+        "Qajeelfama invastimantii kennuu",
+        "Hayyama geejjibaa midhaanii"
+      ]
+    },
+    {
+      "slug": "health",
+      "name_en": "Health Office",
+      "name_am": "የጤና ጥበቃ ጽህፈት ቤት",
+      "name_om": "Waajjira Eegumsa Fayyaa",
+      "head_en": "Dr. Selamawit Alemu",
+      "head_am": "ዶ/ር ሰላማዊት አለሙ",
+      "head_om": "Dkt. Salaamaawit Alamuu",
+      "headTitle_en": "Head of Health Office",
+      "headTitle_am": "የጤና ጽ/ቤት ኃላፊ",
+      "headTitle_om": "Itti Gaafatamaa Eegumsa Fayyaa",
+      "phone": "+251 (0) 58 661 0204",
+      "email": "health@angolela-tera.gov.et",
+      "location_en": "Chacha Primary Hospital Compound, Health Administration Wing",
+      "location_am": "የጫቻ የመጀመሪያ ደረጃ ሆስፒታል ቅጥር ጊቢ፣ የጤና አስተዳደር ህንጻ",
+      "location_om": "Gamooma Hospitaala Sadarkaa 1ffaa Caaccetti",
+      "about_en": "Directs the public healthcare delivery network across 1 Primary Hospital, 5 Health Centers, and 19 Kebele Health Posts. Administers Community-Based Health Insurance (CBHI) covering over 85% of woreda households.",
+      "about_am": "በ1 የመጀመሪያ ደረጃ ሆስፒታል፣ በ5 ጤና ጣቢያዎችና በ19 የቀበሌ ጤና ኬላዎች የሚሰጠውን የህክምና አገልግሎት ይመራል፡ ከ85% በላይ የሚሆነውን ነዋሪ በማህበረሰብ አቀፍ ጤና መድህን (CBHI) አቅፏል።",
+      "about_om": "Hospitaala 1, buufataalee fayyaa 5 fi keellaa fayyaa 19 to'ata. Inshuraansii fayyaa hawaasaa (CBHI) abbootii warraa dhibbeentaa 85 ol fayyadamoo taasiseera.",
+      "responsibilities_en": [
+        "Overseeing primary and maternal-child health services across all health facilities",
+        "Epidemic prevention, immunization campaigns, and clean water sanitation monitoring",
+        "Administering the Community-Based Health Insurance (CBHI) program",
+        "Ensuring pharmaceutical supply chain continuity and medical quality control"
+      ],
+      "responsibilities_am": [
+        "የእናቶችና ህጻናት ጤና ክብካቤን ጨምሮ መሰረታዊ የጤና አገልግሎቶችን ማስተባበር",
+        "የወረርሽኝ መከላከል፣ የህጻናት ክትባት ዘመቻዎችን እና የአካባቢ ንጽህናን መከታተል",
+        "የማህበረሰብ አቀፍ ጤና መድህን (CBHI) ምዝገባና ካርድ እድሳትን በበላይነት መምራት",
+        "የመድሃኒትና የህክምና መገልገያዎች አቅርቦትን ማረጋገጥና የጥራት ቁጥጥር ማድረግ"
+      ],
+      "responsibilities_om": [
+        "Fayyaa haadholii fi daa'immanii to'achuu",
+        "Ittisa dhibee fi talaallii daa'immanii gaggeessuu",
+        "Inshuraansii fayyaa hawaasaa (CBHI) bulchuu",
+        "Dhiheessa qorichaa fi to'annoo qulqullinaa"
+      ],
+      "servicesProvided_en": [
+        "CBHI registration & renewal card issuance",
+        "Outpatient & emergency medical referrals",
+        "Child immunization & nutrition monitoring",
+        "Private clinic & pharmacy regulatory inspection"
+      ],
+      "servicesProvided_am": [
+        "የጤና መድህን (CBHI) አባልነት ምዝገባና ካርድ እድሳት",
+        "የሪፈራል ህክምና ድጋፍና ማስተባበር",
+        "የህጻናት ክትባትና የስነ-ምግብ ክትትል",
+        "የግል ህክምና ተቋማትና የመድሃኒት ቤቶች ፍተሻ"
+      ],
+      "servicesProvided_om": [
+        "Galmee fi haaromsa kaardii CBHI",
+        "Waraqaa riiferaala yaalaa",
+        "Talaallii daa'immanii",
+        "To'annoo kilinika dhuunfaa fi faarmaasii"
+      ]
+    },
+    {
+      "slug": "education",
+      "name_en": "Education Office",
+      "name_am": "የትምህርት ጽህፈት ቤት",
+      "name_om": "Waajjira Barnootaa",
+      "head_en": "W/ro Almaz Tesfaye",
+      "head_am": "ወ/ሮ አልማዝ ተስፋዬ",
+      "head_om": "Adde Almaaz Tasfaayee",
+      "headTitle_en": "Head of Education Office",
+      "headTitle_am": "የትምህርት ጽ/ቤት ኃላፊ",
+      "headTitle_om": "Itti Gaafatamaa Barnootaa",
+      "phone": "+251 (0) 58 661 0205",
+      "email": "education@angolela-tera.gov.et",
+      "location_en": "Education Bureau Building, High School Road, Chacha",
+      "location_am": "የትምህርት መምሪያ ህንጻ፣ አጠቃላይ 2ኛ ደረጃ ት/ቤት መንገድ፣ ጫቻ",
+      "location_om": "Gamoo Barnootaa, Daandii Mana Barumsaa Sad. 2ffaa, Caccetti",
+      "about_en": "Administers 38 Primary Schools, 4 Secondary Schools, and 2 Vocational Training clusters across Angolela Tera, ensuring equitable access to quality education, teacher development, and digital learning.",
+      "about_am": "በወረዳው የሚገኙ 38 የአንደኛ ደረጃ ት/ቤቶችን፣ 4 የሁለተኛ ደረጃ ት/ቤቶችንና የቴክኒክና ሙያ ማዕከላትን ይመራል፡ የትምህርት ጥራትና ፍትሃዊ ተደራሽነትን ያረጋግጣል።",
+      "about_om": "Manneen barumsaa sadarkaa 1ffaa 38 fi sadarkaa 2ffaa 4 to'ata. Qulqullina barnootaa fi dhiheenya barumsaa mirkaneessa.",
+      "responsibilities_en": [
+        "School curriculum implementation, supervision, and annual regional exam coordination",
+        "School infrastructure development, classroom construction, and digital computer lab rollouts",
+        "Continuous teacher training, deployment, and performance assessment",
+        "Student feeding initiatives and girl-child educational retention programs"
+      ],
+      "responsibilities_am": [
+        "የስርአተ-ትምህርት አፈጻጸም ክትትልና የክልል ፈተናዎች አስተዳደር",
+        "የትምህርት ቤት መሰረተ ልማት ግንባታ፣ ተጨማሪ የመማሪያ ክፍሎችና የዲጂታል ላብ ማስፋፊያ",
+        "የመምህራን ስልጠና፣ ምደባ እና የስራ አፈጻጸም ግምገማ",
+        "የተማሪዎች ምገባ ድጋፍና የሴት ተማሪዎች ትምህርት ማበረታቻ ስራዎች"
+      ],
+      "responsibilities_om": [
+        "Hojiirra oolmaa sirna barnootaa fi qormaata naannoo",
+        "Ijaarsa manneen barumsaa fi mana yaalii (lab)",
+        "Leenjii fi ramaddii barsiisotaa",
+        "Dhiheessa sagantaa soorata barattootaa"
+      ],
+      "servicesProvided_en": [
+        "Student transcript & educational credential authentication",
+        "Inter-school student transfer clearances",
+        "Private kindergarten & school licensing",
+        "Teacher recruitment and certification"
+      ],
+      "servicesProvided_am": [
+        "የትምህርት ማስረጃዎችና ትራንስክሪፕት ትክክለኛነት ማረጋገጥ",
+        "የተማሪዎች የትምህርት ቤት ዝውውር ፈቃድ",
+        "የግል ቅድመ-መደበኛና የመጀመሪያ ደረጃ ት/ቤቶች ፈቃድ አሰጣጥ",
+        "የመምህራን ቅጥርና የምስክር ወረቀት አሰጣጥ"
+      ],
+      "servicesProvided_om": [
+        "Ragaa barumsaa fi waraqaa ragaa mirkaneessuu",
+        "Jijjiirraa barattootaa manneen barumsaa gidduutti",
+        "Hayaama manneen barumsaa dhuunfaa",
+        "Qaxarrii fi mirkaneessa barsiisotaa"
+      ]
+    },
+    {
+      "slug": "finance",
+      "name_en": "Finance & Economic Development Office",
+      "name_am": "የፋይናንስና ኢኮኖሚ ልማት ጽህፈት ቤት",
+      "name_om": "Waajjira Faayinaansii fi Misooma Diinagdee",
+      "head_en": "Ato Solomon Mekonnen",
+      "head_am": "አቶ ሰለሞን መኮንን",
+      "head_om": "Obbo Solomoon Makonnin",
+      "headTitle_en": "Head of Finance Office",
+      "headTitle_am": "የፋይናንስ ጽ/ቤት ኃላፊ",
+      "headTitle_om": "Itti Gaafatamaa Faayinaansii",
+      "phone": "+251 (0) 58 661 0206",
+      "email": "finance@angolela-tera.gov.et",
+      "location_en": "Main Administrative Compound, Block A, 1st Floor, Chacha",
+      "location_am": "ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ሀ፣ 1ኛ ፎቅ፣ ጫቻ",
+      "location_om": "Gamoo Bulchiinsa Guddaa, Kutaa A, Magaalaa Caccetti",
+      "about_en": "Prepares the annual woreda capital and recurrent budget, enforces public expenditure accountability, manages local revenue collection, and coordinates socio-economic planning.",
+      "about_am": "የወረዳውን ዓመታዊ የካፒታልና የመደበኛ በጀት ያዘጋጃል፣ የፋይናንስ ህግጋትና ኦዲት አፈጻጸምን ይቆጣጠራል፣ የውስጥ ገቢ አሰባሰብንና የልማት እቅድን ይመራል።",
+      "about_om": "Baajata aanaa qopheessuu, kaffaltii fi herrega qulqulleessuu fi galii aanaa sassaabuuf itti gaafatamummaa qaba.",
+      "responsibilities_en": [
+        "Comprehensive medium-term expenditure framework (MTEF) budget planning",
+        "Internal audit oversight across all woreda sector offices and schools",
+        "Tax revenue assessment, property tax collection, and business tax billing",
+        "Public procurement management and public financial management (PFM) compliance"
+      ],
+      "responsibilities_am": [
+        "የወረዳውን መካከለኛ ዘመን የልማት በጀት ማቀድና ለምክር ቤት ማቅረብ",
+        "በሁሉም የወረዳው መስሪያ ቤቶችና ት/ቤቶች ላይ የውስጥ ኦዲት ምርመራ ማካሄድ",
+        "የገቢ ግብርና የአገልግሎት ክፍያዎችን በህጉ መሰረት መሰብሰብ",
+        "የመንግስት ግዥና ንብረት አስተዳደር ግልጽነትን ማረጋገጥ"
+      ],
+      "responsibilities_om": [
+        "Karoora baajata aanaa qopheessuu",
+        "Hojii odiitii keessaa to'achuu",
+        "Gibira fi kaffaltii tajaajilaa sassaabuu",
+        "Bittaa mootummaa iftoomina qabu gaggeessuu"
+      ],
+      "servicesProvided_en": [
+        "Tax clearance certificates for businesses & contractors",
+        "Government vendor procurement registration",
+        "Revenue receipt reconciliation",
+        "Annual financial audit summaries"
+      ],
+      "servicesProvided_am": [
+        "ከግብር ነጻ መሆንን የሚያረጋግጥ ማስረጃ (Tax Clearance)",
+        "የመንግስት ግዥ አቅራቢዎች ምዝገባ",
+        "የገቢ ደረሰኞች ትክክለኛነት ማረጋገጫ",
+        "አመታዊ የፋይናንስ ኦዲት ሪፖርቶች"
+      ],
+      "servicesProvided_om": [
+        "Waraqaa qulqullina gibiraa",
+        "Galmee dhiheessitoota bittaa mootummaa",
+        "Nagahee galii mirkaneessuu",
+        "Gabaasa odiitii faayinaansii"
+      ]
+    }
+  ],
+  "leadership": [
+    {
+      "id": "leader-1",
+      "name_en": "Ato Derese Dememe",
+      "name_am": "አቶ ደረሰ ደመመ",
+      "name_om": "Obbo Darrasaa Dammaqqaa",
+      "title_en": "Chief Administrator",
+      "title_am": "ዋና አስተዳዳሪ",
+      "title_om": "Bulchaa Ol'aanaa Aanaa",
+      "bio_en": "The highest executive official of the Woreda's government body. He oversees the implementation of public policies, local security, budget management, and regional development programs across the district.",
+      "bio_am": "የወረዳው የመንግስት አስፈጻሚ አካል የበላይ መሪ ናቸው። በወረዳው ውስጥ የልማት ፕሮግራሞችን፣ የበጀት አስተዳደርን፣ የህዝብ ፖሊሲዎችን እና የሰላምና ጸጥታ ስራዎችን በበላይነት ይመራሉ።",
+      "bio_om": "Hoogganaa ol'aanaa qaama raawwachiisaa mootummaa aanaati. Hojiiwwan misoomaa, bulchiinsa baajataa, imaammata uummataa fi nageenya aanaa olaantummaan qindeessu.",
+      "photo": "/images/leadership/derese-dememe.jpg",
+      "displayOrder": 1,
+      "status": "PUBLISHED"
+    },
+    {
+      "id": "leader-2",
+      "name_en": "Ato Negus Kasaye",
+      "name_am": "አቶ ንጉስ ካሳዬ",
+      "name_om": "Obbo Niguus Kaasaayee",
+      "title_en": "Head of the Prosperity Party Office",
+      "title_am": "የብልፅግና ፓርቲ ፅ/ቤት ሃላፊ",
+      "title_om": "Hoogganaa Waajjira Paartii Badhaadhinaa",
+      "bio_en": "The top ruling party leader in the Woreda. He guides political strategy, party institutional builds, ideological dissemination, and acts as the liaison coordinating party policies with district governance objectives.",
+      "bio_am": "በወረዳው የገዥው ፓርቲ የበላይ መሪ ናቸው። የፖለቲካ ስትራቴጂዎችን፣ የፓርቲ መዋቅር ግንባታዎችን እና ርዕዮተ-ዓለም ስርጭቶችን የሚመሩ ሲሆን የፓርቲውን ፖሊሲዎች ከመንግስት የልማት ግቦች ጋር ያቀናጃሉ።",
+      "bio_om": "Hoogganaa ol'aanaa paartii biyya bulchuuti. Tarsiimoo siyaasaa, ijaarsa dhaabbilee paartii qindeessuun imaammata paartichaa galmaalee misooma mootummaa waliin walsimsiisu.",
+      "photo": "/images/leadership/negus-kasaye.jpg",
+      "displayOrder": 2,
+      "status": "PUBLISHED"
+    },
+    {
+      "id": "leader-3",
+      "name_en": "Ato Gossay Mamo",
+      "name_am": "አቶ ጎሳዬ ማሞ",
+      "name_om": "Obbo Goossaayee Maammoo",
+      "title_en": "Head of the Political Sector (Prosperity Party)",
+      "title_am": "የፖለቲካ ዘርፍ ኃላፊ (ብልፅግና ፓርቲ)",
+      "title_om": "Hoogganaa Damee Siyaasaa (Paartii Badhaadhinaa)",
+      "bio_en": "Operates under the Party Office, directly driving local political mobilization, community alignment forums, leadership capacity building, and structural public evaluation sessions within the woreda's kebeles.",
+      "bio_am": "በፓርቲው ጽህፈት ቤት ስር በመሆን በአካባቢው የፖለቲካ ንቅናቄዎችን፣ ህዝባዊ የውይይት መድረኮችን፣ የአመራር አቅም ግንባታዎችን እና የወረዳውን ቀበሌዎች መዋቅራዊ ግምገማዎችን በኃላፊነት ያከናውናሉ።",
+      "bio_om": "Waajjira paartii jalatti soochii siyaasaa naannoo, waltajjii marii uummataa, dandeettii hoggana ijaaruu fi gamaggama gandoolee aanaa qindeessuun hojjeta.",
+      "photo": "/images/leadership/gossay-mamo.jpg",
+      "displayOrder": 3,
+      "status": "PUBLISHED"
+    },
+    {
+      "id": "leader-4",
+      "name_en": "Ato Yordanos Tekeste",
+      "name_am": "አቶ ዬርዳኖስ ተከስተ",
+      "name_om": "Obbo Yordaanos Takastee",
+      "title_en": "Deputy Administrator & Revenues Office Head",
+      "title_am": "ምክትል አስተዳዳሪ እና የገቢዎች ጽ/ቤት ሃላፊ",
+      "title_om": "Itti Aanaa Bulchaa fi Hoogganaa Waajjira Galiiwwanii",
+      "bio_en": "Serves as the second-in-command for public administration while specifically directing the district's finance and revenue-collection frameworks to self-sustain local development budgets.",
+      "bio_am": "የወረዳው ሁለተኛ የመንግስት መሪ በመሆን የሚያገለግሉ ሲሆን በተለይም የአካባቢውን የልማት በጀት በራስ ለመደገፍ የገቢ አሰባሰብ እና የፋይናንስ መዋቅሮችን በበላይነት ይመራሉ::",
+      "bio_om": "Itti aanaa bulchaa aanaa ta'uun tajaajilu, keessumaa baajata misooma aanaa of danda'uuf sassaabbii galii fi maallaqaa olaantummaan hoogganu.",
+      "photo": "/images/leadership/yordanos-tekeste.jpg",
+      "displayOrder": 4,
+      "status": "PUBLISHED"
+    }
+  ],
+  "services": [
+    {
+      "slug": "civil-registration",
+      "title_en": "Vital Events & Civil Status Registration",
+      "title_am": "የወሳኝ ኩነት ምዝገባ (ልደት፣ ጋብቻ፣ ፍቺ፣ ሞት)",
+      "title_om": "Galmee Murtii (Dhaloota, Gaa'ela, Du'a)",
+      "category_en": "Civil Status & Identification",
+      "category_am": "የዜጎች ህጋዊ ማረጋገጫ",
+      "category_om": "Eenyummaa Lammiilee",
+      "officeSlug": "women-social-affairs",
+      "officeName_en": "Vital Events Registration Desk",
+      "officeName_am": "የወሳኝ ኩነት ምዝገባ ጽ/ቤት",
+      "officeName_om": "Kutaa Galmee Murtii",
+      "processingTime_en": "1–2 Working Days",
+      "processingTime_am": "1–2 የስራ ቀናት",
+      "processingTime_om": "Guyyoota Hojii 1–2",
+      "cost_en": "50 ETB (Government stamp fee; free within 90 days of birth)",
+      "cost_am": "50 ብር (የቴምብር ክፍያ፤ በ90 ቀናት ውስጥ ለተወለዱ ነጻ)",
+      "cost_om": "Qarshii 50 (Guyyoota 90 keessatti bilisa)",
+      "description_en": "Legal registration and issuance of official authenticated certificates for births, marriages, divorces, and deaths for residents of Angolela Tera Woreda, in accordance with federal vital event proclamation laws.",
+      "description_am": "በአንጎሌላ ተራ ወረዳ ነዋሪ ለሆኑ ዜጎች በኢትዮጵያ የፌዴራል ወሳኝ ኩነት ምዝገባ ህግ መሰረት የልደት፣ ጋብቻ፣ ፍቺ እና የሞት ይፋዊ ህጋዊ የምስክር ወረቀት ምዝገባና አሰጣጥ።",
+      "description_om": "Akkaataa seera galmee murtii Itoophiyaatti waraqaa ragaa dhalootaa, gaa'elaa fi du'aa lammiilee aanaatiif kennuu.",
+      "requirements_en": [
+        "Official Kebele Resident ID card of parents or applicant",
+        "Hospital/Health Center Birth Notification (for births)",
+        "Two witnesses with valid government IDs (for marriages/delayed registrations)",
+        "Official Medical Death Certificate or Kebele Confirmation (for deaths)"
+      ],
+      "requirements_am": [
+        "የወላጆች ወይም የአመልካች የቀበሌ የታደሰ መታወቂያ ካርድ",
+        "የህክምና ተቋም የልደት ማስታወቂያ ሰነድ (ለልደት ምዝገባ)",
+        "ሁለት ህጋዊ መታወቂያ ያላቸው ምስክሮች (ለጋብቻና ለዘገዩ ምዝገባዎች)",
+        "የህክምና ተቋም የሞት ማረጋገጫ ወይም የቀበሌ አስተዳደር ማረጋገጫ (ለሞት ምዝገባ)"
+      ],
+      "requirements_om": [
+        "Waraqaa eenyummaa gandaa haarome",
+        "Waraqaa buufata fayyaa dhalootaaf",
+        "Ragaalee lama waraqaa eenyummaa qaban",
+        "Ragaa yaalaa du'aaf"
+      ],
+      "steps_en": [
+        "Step 1: Obtain a referral endorsement from your respective Kebele Administration",
+        "Step 2: Submit the completed vital event form with supporting documents at the Central Desk in Chacha",
+        "Step 3: Verification of records in the National Civil Registry Database",
+        "Step 4: Receive laminated official certificate bearing official seal and QR security verification"
+      ],
+      "steps_am": [
+        "ደረጃ 1፡ በነዋሪነት ከሚገኙበት ቀበሌ አስተዳደር የማረጋገጫ ደብዳቤ መያዝ",
+        "ደረጃ 2፡ የተሞላውን ማመልከቻ ሰነድ በጫቻ ማዕከላዊ የወሳኝ ኩነት መስኮት ማቅረብ",
+        "ደረጃ 3፡ በብሔራዊ የወሳኝ ኩነት መረጃ ቋት ላይ ትክክለኛነቱ ሲረጋገጥ ማጽደቅ",
+        "ደረጃ 4፡ ማህተም የተደረገበትንና የQR ኮድ ጥበቃ ያለውን ይፋዊ የምስክር ወረቀት መረከብ"
+      ],
+      "steps_om": [
+        "Tarkaanfii 1: Ganda irraa waraqaa deeggarsaa fiduu",
+        "Tarkaanfii 2: Waajjira Caaccetti argamuutti iyyannoo galchuu",
+        "Tarkaanfii 3: Ragaa sirna kompiitaraa irratti mirkaneessuu",
+        "Tarkaanfii 4: Waraqaa ragaa asxaa mootummaa qabu fudhachuu"
+      ]
+    },
+    {
+      "slug": "land-certificate",
+      "title_en": "Rural Land Holding Registration & Transfer",
+      "title_am": "የገጠር መሬት ይዞታ ምዝገባ፣ ደብተርና ዝውውር",
+      "title_om": "Galmee Qabiyyee Lafaa fi Daddabarsa",
+      "category_en": "Land & Property Rights",
+      "category_am": "የመሬትና ንብረት መብት",
+      "category_om": "Mirga Qabeenya Lafaa",
+      "officeSlug": "land-administration",
+      "officeName_en": "Land Administration & Environmental Protection Office",
+      "officeName_am": "የመሬት አስተዳደርና አካባቢ ጥበቃ ጽ/ቤት",
+      "officeName_om": "Waajjira Bulchiinsa Lafaa",
+      "processingTime_en": "3–5 Working Days",
+      "processingTime_am": "3–5 የስራ ቀናት",
+      "processingTime_om": "Guyyoota Hojii 3–5",
+      "cost_en": "100 ETB (Certificate book printing & cadastral map fee)",
+      "cost_am": "100 ብር (የደብተር ህትመትና የካርታ ክፍያ)",
+      "cost_om": "Qarshii 100 (Kaffaltii maxxansa kitaabaa)",
+      "description_en": "Issuance and official updating of the Second-Level Rural Landholding Certificate (Green Book) including plot boundary coordinates, family member rights, inheritance, and legal rental agreements.",
+      "description_am": "የአርሶ አደር ይዞታን የሚያረጋግጥ የሁለተኛ ደረጃ የይዞታ ማረጋገጫ ደብተር (አረንጓዴ ደብተር) አሰጣጥ፣ የወሰን ቅየሳ፣ የውርስና የስሪት ዝውውር ምዝገባ።",
+      "description_om": "Waraqaa ragaa qabiyyee lafaa sadarkaa 2ffaa (kitaaba magariisa) kennuu fi daddabarsa dhaalaa mirkaneessuu.",
+      "requirements_en": [
+        "Original primary land certificate or parcel demarcation map",
+        "Kebele Land Administration Committee (KLAC) resolution minute",
+        "Consent agreement signed by all legal spouses and registered household members",
+        "Court decree or inheritance arbitration ruling (for estate divisions)"
+      ],
+      "requirements_am": [
+        "ዋናው የቀድሞ ይዞታ ደብተር ወይም የመሬት ልኬት ካርታ",
+        "የቀበሌ የመሬት አስተዳደርና አጠቃቀም ኮሚቴ (KLAC) የውሳኔ ቃለ-ጉባዔ",
+        "የባለቤቶች (የትዳር አጋሮች) እና የቤተሰብ አባላት የጋራ ስምምነት ፊርማ",
+        "የፍርድ ቤት ውሳኔ ወይም የውርስ አጣሪ ሰነድ (ለውርስ ጉዳዮች)"
+      ],
+      "requirements_om": [
+        "Kitaaba lafaa duraanii",
+        "Murtii koree lafaa gandaa (KLAC)",
+        "Mallattoo waliigaltee abbaa warraa fi haadha warraa",
+        "Murtii mana murtii dhaalaaf"
+      ],
+      "steps_en": [
+        "Step 1: Application submission to the Kebele Land Administration Committee",
+        "Step 2: Field surveyor boundary verification using handheld GPS equipment",
+        "Step 3: 30-day public notice for boundary objection clearance at the Kebele office",
+        "Step 4: Formal issuance of laminated Green Certificate at the Woreda Land Bureau in Chacha"
+      ],
+      "steps_am": [
+        "ደረጃ 1፡ በቀበሌው የመሬት አስተዳደር ኮሚቴ ማመልከቻ ማቅረብ",
+        "ደረጃ 2፡ የባለሙያ የመስክ ልኬት በጂፒኤስ (GPS) መከናወንና የወሰን ማረጋገጥ",
+        "ደረጃ 3፡ የይገባኛል ጥያቄ አለመኖሩን ለማረጋገጥ ለ30 ቀናት የሚቆይ ይፋዊ ማስታወቂያ",
+        "ደረጃ 4፡ በጫቻ የወረዳው መሬት አስተዳደር ጽ/ቤት አረንጓዴውን የይዞታ ደብተር መረከብ"
+      ],
+      "steps_om": [
+        "Tarkaanfii 1: Koree lafaa gandaatti iyyannoo galchuu",
+        "Tarkaanfii 2: Ogeessi GPS dhaan lafa safaruu",
+        "Tarkaanfii 3: Beeksisa guyyoota 30 ganda irratti maxxansuu",
+        "Tarkaanfii 4: Waajjira aanaatti kitaaba fudhachuu"
+      ]
+    },
+    {
+      "slug": "business-license",
+      "title_en": "Commercial Business Registration & Trade Licensing",
+      "title_am": "የንግድ ምዝገባ፣ የንግድ ፈቃድና አመታዊ እድሳት",
+      "title_om": "Galmee Daldalaa fi Kenniinsa Hayaamaa",
+      "category_en": "Trade & Commerce",
+      "category_am": "ንግድና ኢንቨስትመንት",
+      "category_om": "Daldala fi Industirii",
+      "officeSlug": "trade-investment",
+      "officeName_en": "Trade, Industry & Market Development Office",
+      "officeName_am": "የንግድ፣ ኢንዱስትሪና ገበያ ልማት ጽ/ቤት",
+      "officeName_om": "Waajjira Daldalaa fi Industirii",
+      "processingTime_en": "1 Working Day",
+      "processingTime_am": "1 የስራ ቀን",
+      "processingTime_om": "Guyyaa Hojii 1",
+      "cost_en": "Varies by sector (120 ETB – 500 ETB fixed statutory registration fee)",
+      "cost_am": "እንደ ንግድ ዘርፉ ይለያያል (ከ120 ብር እስከ 500 ብር ህጋዊ ክፍያ)",
+      "cost_om": "Akka gosa daldalaatti (Qarshii 120 - 500)",
+      "description_en": "Full-service commercial licensing for sole proprietorships, partnerships, and private limited companies operating in retail, grain trade, transport, manufacturing, and hospitality within Angolela Tera.",
+      "description_am": "በአንጎሌላ ተራ ወረዳ ለሚሰሩ የችርቻሮ፣ የእህል ንግድ፣ የአግሮ-ፕሮሰሲንግ፣ የትራንስፖርትና የእንግዳ ተቀባይነት ንግዶች ፈቃድ መስጠትና ማደስ።",
+      "description_om": "Daldala dhuunfaa, waldaalee fi industiriif hayaama daldalaa haaraa kennuu fi haaromsuu.",
+      "requirements_en": [
+        "Valid Tax Identification Number (TIN) certificate",
+        "Two passport-sized photographs of applicant / general manager",
+        "Commercial lease agreement or proof of property ownership in Chacha/woreda",
+        "Sectoral Competency Certificate (for pharmaceuticals, fuel stations, clinics)"
+      ],
+      "requirements_am": [
+        "የታክስ ከፋይ መለያ ቁጥር (TIN) ሰነድ",
+        "የአመልካቹ ሁለት የቅርብ ጊዜ የፓስፖርት መጠን ፎቶግራፍ",
+        "የንግድ ቦታ የኪራይ ውል ወይም የይዞታ ማረጋገጫ",
+        "የሙያ ብቃት ማረጋገጫ ምስክር ወረቀት (እንደ ስራው ባህሪ)"
+      ],
+      "requirements_om": [
+        "Waraqaa lakkoofsa kaffalaa gibiraa (TIN)",
+        "Suuraa lama",
+        "Waliigaltee kireeffannaa bakka daldalaa",
+        "Waraqaa ga'umsa ogummaa"
+      ],
+      "steps_en": [
+        "Step 1: Verify proposed trade name availability at the licensing counter",
+        "Step 2: Submit application and sector compliance verification documentation",
+        "Step 3: Complete payment at Commercial Bank of Ethiopia (CBE) government revenue account",
+        "Step 4: Receive laminated Commercial Registration and Business License certificate"
+      ],
+      "steps_am": [
+        "ደረጃ 1፡ በንግድ ስም መዝገብ ላይ የስም ተይዞ አለመኖርን ማረጋገጥ",
+        "ደረጃ 2፡ ማመልከቻውንና የብቃት ማረጋገጫ ሰነዶችን ለፈቃድ ኦፊሰሩ ማቅረብ",
+        "ደረጃ 3፡ ህጋዊ የአገልግሎት ክፍያ በኢትዮጵያ ንግድ ባንክ የወረዳው ገቢ ሂሳብ መክፈል",
+        "ደረጃ 4፡ የንግድ ምዝገባና የንግድ ፈቃድ ምስክር ወረቀቱን በዕለቱ መረከብ"
+      ],
+      "steps_om": [
+        "Tarkaanfii 1: Maqaa daldalaa mirkaneeffachuu",
+        "Tarkaanfii 2: Galmee iyyannoo dhiheessuu",
+        "Tarkaanfii 3: Kaffaltii baankii daldalaa Itoophiyaatti kaffaluu",
+        "Tarkaanfii 4: Waraqaa hayaama daldalaa fudhachuu"
+      ]
+    },
+    {
+      "slug": "health-insurance",
+      "title_en": "Community-Based Health Insurance (CBHI) Registration",
+      "title_am": "የማህበረሰብ አቀፍ ጤና መድህን (CBHI) ምዝገባና እድሳት",
+      "title_om": "Galmee Inshuraansii Fayyaa Hawaasaa (CBHI)",
+      "category_en": "Public Health & Social Safety",
+      "category_am": "የህዝብ ጤናና ማህበራዊ ጥበቃ",
+      "category_om": "Fayyaa fi Nageenya Hawaasaa",
+      "officeSlug": "health",
+      "officeName_en": "Woreda Health Office & Kebele Health Posts",
+      "officeName_am": "የወረዳው ጤና ጥበቃ ጽ/ቤትና የቀበሌ ጤና ኬላዎች",
+      "officeName_om": "Waajjira Eegumsa Fayyaa fi Keellaa Fayyaa",
+      "processingTime_en": "Same Day / Immediate",
+      "processingTime_am": "በዕለቱ / ወዲያውኑ",
+      "processingTime_om": "Battalumatti",
+      "cost_en": "600 ETB / household / year (Indigent households 100% subsidized by woreda)",
+      "cost_am": "600 ብር ለአንድ አባወራ በዓመት (አቅመ ደካሞች በወረዳው በነጻ ይሸፈናሉ)",
+      "cost_om": "Qarshii 600 waggaatti maatii tokkoof (Harka qalleeyyiif bilisa)",
+      "description_en": "Enrollment in the regional solidarity health insurance fund ensuring family members receive free medical treatment, diagnostics, and essential pharmaceuticals across all government hospitals and health centers.",
+      "description_am": "መላው የቤተሰብ አባላት በወረዳው ባሉ ጤና ጣቢያዎችና በጫቻ ሆስፒታል ነጻ የህክምና፣ የላቦራቶሪና የመድሃኒት አገልግሎት የሚያገኙበት የማህበረሰብ አቀፍ የጤና መድህን ምዝገባ።",
+      "description_om": "Maatiin hundi buufata fayyaa fi hospitaala keessatti yaala bilisaa akka argatan galmee inshuraansii fayyaa hawaasaa gaggeessuu.",
+      "requirements_en": [
+        "Kebele Resident Family Roster booklet",
+        "One photograph of household head and list of eligible dependents under 18",
+        "Annual premium contribution receipt or Kebele indigent subsidy exemption slip"
+      ],
+      "requirements_am": [
+        "የቀበሌ የቤተሰብ አባላት መመዝገቢያ ሰነድ",
+        "የአባወራው/እማወራዋ ፎቶግራፍና እድሜያቸው ከ18 ዓመት በታች የሆኑ ልጆች ዝርዝር",
+        "አመታዊ የአባልነት ክፍያ ደረሰኝ ወይም የአቅመ-ደካማነት ማረጋገጫ ደብዳቤ"
+      ],
+      "requirements_om": [
+        "Waraqaa galmee maatii gandaa",
+        "Suuraa abbaa warraa fi maqaa ijoollee",
+        "Nagahee kaffaltii waggaa"
+      ],
+      "steps_en": [
+        "Step 1: Register during annual renewal season with your Kebele CBHI representative",
+        "Step 2: Verify registered family members and verify medical facility linkage",
+        "Step 3: Receive stamped official CBHI family health booklet"
+      ],
+      "steps_am": [
+        "ደረጃ 1፡ በየቀበሌው በሚገኘው የጤና መድህን አስተባባሪ ዘንድ መመዝገብ",
+        "ደረጃ 2፡ የቤተሰብ አባላትን መረጃና የአገልግሎት ማዕከል ሆስፒታልን መምረጥ",
+        "ደረጃ 3፡ ማህተም የተደረገበትን የጤና መድህን ደብተር መረከብና አገልግሎት መጀመር"
+      ],
+      "steps_om": [
+        "Tarkaanfii 1: Bakka bu'aa CBHI gandaatti galmaa'uu",
+        "Tarkaanfii 2: Ragaa maatii mirkaneessuu",
+        "Tarkaanfii 3: Kitaaba maatii fayyaa fudhachuu"
+      ]
+    },
+    {
+      "slug": "agriculture",
+      "title_en": "Agricultural Inputs, Certified Seed & Fertilizer Distribution",
+      "title_am": "የግብርና ግብአቶች፣ ምርጥ ዘርና ማዳበሪያ አቅርቦት",
+      "title_om": "Galtee Qonnaa, Sanyii Filatamaa fi Xaa'oo",
+      "category_en": "Agriculture & Extension",
+      "category_am": "ግብርናና ገጠር ልማት",
+      "category_om": "Misooma Qonnaa",
+      "officeSlug": "agriculture",
+      "officeName_en": "Agriculture & Rural Development Office & Kebele Cooperative Unions",
+      "officeName_am": "የግብርናና ገጠር ልማት ጽ/ቤት እና የቀበሌ ገበሬዎች ሁለገብ ህብረት ስራ ማህበራት",
+      "officeName_om": "Waajjira Qonnaa fi Waldaalee Hojii Gamtaa Gandaa",
+      "processingTime_en": "1–2 Working Days",
+      "processingTime_am": "1–2 የስራ ቀናት",
+      "processingTime_om": "Guyyoota Hojii 1–2",
+      "cost_en": "Government subsidized cooperative tariff per quintal",
+      "cost_am": "በመንግስት የድጎማ ተመን መሰረት በኩንታል",
+      "cost_om": "Gatii mootummaan deeggarame kuintaalaan",
+      "description_en": "Official distribution of certified rust-resistant highland wheat seeds, malt barley, balanced NPS-B and Urea chemical fertilizers, agrochemicals, and improved poultry breeds across all 19 rural kebeles through primary multipurpose agricultural cooperative depots.",
+      "description_am": "በአንጎሌላ ተራ ወረዳ በሁሉም 19ኙ የገጠር ቀበሌዎች ለሚገኙ አርሶ አደሮች በየቀበሌው ባሉ ሁለገብ የገበሬዎች ህብረት ስራ ማህበራት መጋዘኖች በኩል ምርጥ የስንዴና የገብስ ዘር፣ ኤን.ፒ.ኤስ-ቦሮን እና ዩሪያ ማዳበሪያ፣ የጸረ-ተባይ ኬሚካሎችና የተሻሻሉ የዶሮ ዝርያዎችን የማቅረብና የማሰራጨት ይፋዊ አገልግሎት።",
+      "description_om": "Aanaa Angolallaa Xaraa keessatti gandoolee 19 maraaf sanyii qamadii filatamaa, xaa'oo NPS fi Yuuriyaa, qorichoota aramaa fi lukkuuwwan fooyya'an waldaalee hojii gamtaatiin qonnaan bultootaaf dhiyeessuu.",
+      "requirements_en": [
+        "Official Kebele Resident ID card",
+        "Valid Rural Landholding Certificate (Green Book) confirming cultivated acreage",
+        "Kebele Agriculture Development Agent (DA) input quota recommendation voucher",
+        "Bank deposit receipt or union payment confirmation"
+      ],
+      "requirements_am": [
+        "የቀበሌ የታደሰ የነዋሪነት መታወቂያ ካርድ",
+        "የአርሶ አደር ይዞታ ማረጋገጫ ደብተር (አረንጓዴ ደብተር)",
+        "የቀበሌው የግብርና ልማት ጣቢያ ባለሙያ (DA) የግብአት ፍላጎት ማረጋገጫ ኩፖን",
+        "የባንክ ወይም የህብረት ስራ ማህበሩ ህጋዊ የክፍያ ደረሰኝ"
+      ],
+      "requirements_om": [
+        "Waraqaa eenyummaa gandaa haarome",
+        "Waraqaa ragaa qabiyyee lafaa (Kitaaba Magariisa)",
+        "Waraqaa deeggarsa ogeessa qonnaa gandaa (DA)",
+        "Nagahee kaffaltii baankii ykn waldaa"
+      ],
+      "steps_en": [
+        "Step 1: Register planned seasonal crop acreage and input requirements with your Kebele Development Agent (DA)",
+        "Step 2: Verification and approval of subsidized quota based on registered farm size",
+        "Step 3: Complete payment at Commercial Bank of Ethiopia (CBE) woreda revenue account or primary cooperative desk",
+        "Step 4: Present bank voucher to collect certified seeds and fertilizer bags at your Kebele union depot"
+      ],
+      "steps_am": [
+        "ደረጃ 1፡ በቀበሌው የግብርና ኤክስቴንሽን ባለሙያ (DA) ዘንድ የሰብል ልማት ስፋትንና የግብአት ፍላጎትን ማስመዝገብ",
+        "ደረጃ 2፡ እንደ መሬት ስፋቱ የተፈቀደውን የግብአት ኮታ ማረጋገጫ ወረቀት መውሰድ",
+        "ደረጃ 3፡ በኢትዮጵያ ንግድ ባንክ ወይም በህብረት ስራ ማህበሩ መስኮት ህጋዊ ክፍያ መፈጸም",
+        "ደረጃ 4፡ ደረሰኝ በማሳየት ምርጥ ዘርና ማዳበሪያውን በቀበሌው መጋዘን መረከብ"
+      ],
+      "steps_om": [
+        "Tarkaanfii 1: Ogeessa qonnaa gandaa biratti bal'ina lafaa fi galtee barbaachisu galmeessuu",
+        "Tarkaanfii 2: Ragaa kootaa eyyamame fudhachuu",
+        "Tarkaanfii 3: Baankii daldalaa Itoophiyaa ykn waldaatti kaffaltii raawwachuu",
+        "Tarkaanfii 4: Kuusaa gandaa irraa sanyii fi xaa'oo fudhachuu"
+      ]
+    },
+    {
+      "slug": "building-permits",
+      "title_en": "Construction Compliance & Building Permits",
+      "title_am": "የኮንስትራክሽንና ግንባታ ፈቃድ አገልግሎት",
+      "title_om": "Hayaama Ijaarsaa fi To'annoo Gamoo",
+      "category_en": "Urban Development & Construction",
+      "category_am": "ከተማ ልማትና ኮንስትራክሽን",
+      "category_om": "Misooma Magaalaa fi Ijaarsa",
+      "officeSlug": "urban-development",
+      "officeName_en": "Urban Development & Construction Bureau",
+      "officeName_am": "የከተማ ልማትና ኮንስትራክሽን ጽ/ቤት",
+      "officeName_om": "Waajjira Misooma Magaalaa fi Ijaarsaa",
+      "processingTime_en": "5–7 Working Days",
+      "processingTime_am": "5–7 የስራ ቀናት",
+      "processingTime_om": "Guyyoota Hojii 5–7",
+      "cost_en": "Statutory architectural review and site inspection fee based on building category",
+      "cost_am": "እንደ ህንጻው ደረጃ የሚወሰን ህጋዊ የፕላን ምርመራና የመስክ ቁጥጥር ክፍያ",
+      "cost_om": "Gosa ijaarsa irratti hundaa'ee",
+      "description_en": "Formal review, site inspection, and approval of architectural site plans, structural engineering drawings, and zoning clearances for residential, commercial, and industrial construction projects within Angolela Tera.",
+      "description_am": "በአንጎሌላ ተራ ወረዳ ለሚከናወኑ የመኖሪያ፣ የንግድና የኢንዱስትሪ ግንባታዎች የሳይት ፕላን ምርመራ፣ መዋቅራዊ ኢንጂነሪንግ ማረጋገጫና ህጋዊ የግንባታ ፈቃድ አሰጣጥ።",
+      "description_om": "Magaalaa fi baadiyyaa keessatti ijaarsa mana jireenyaa, daldalaa fi industiriif qorannoo pilaanii fi waraqaa hayaama ijaarsaa kennuu.",
+      "requirements_en": [
+        "Proof of legal land ownership or long-term lease contract",
+        "Four copies of complete architectural and structural design plans signed by licensed engineers",
+        "Site environmental clearance certificate (for commercial/industrial projects)",
+        "Kebele construction clearance endorsement"
+      ],
+      "requirements_am": [
+        "ህጋዊ የመሬት ይዞታ ማረጋገጫ ካርታ ወይም የሊዝ ውል ሰነድ",
+        "ፈቃድ ባላቸው መሃንዲሶች የተፈረመ 4 ቅጂ የስነ-ህንጻና የመዋቅር ዲዛይን ፕላን",
+        "የአካባቢ ተጽእኖ ግምገማ ማረጋገጫ (ለንግድና ኢንዱስትሪ ፕሮጀክቶች)",
+        "የቀበሌ አስተዳደር የግንባታ ፈቃድ ማረጋገጫ ደብዳቤ"
+      ],
+      "requirements_om": [
+        "Ragaa abbaa qabiyyummaa lafaa",
+        "Koppii 4 pilaanii gamoo ogeessaan mirkanaa'e",
+        "Waraqaa eegumsa naannoo",
+        "Waraqaa deeggarsa gandaa"
+      ],
+      "steps_en": [
+        "Step 1: Submit architectural design drawings and ownership documents at the municipal engineering counter",
+        "Step 2: Technical review committee conducts site inspection and structural compliance check",
+        "Step 3: Remit government permit fee at the revenue desk",
+        "Step 4: Receive authorized construction permit certificate and approved stamped bluebook"
+      ],
+      "steps_am": [
+        "ደረጃ 1፡ የህንጻውን ዲዛይን ፕላንና የይዞታ ሰነድ ለማዘጋጃ ቤት ምህንድስና መስኮት ማቅረብ",
+        "ደረጃ 2፡ የቴክኒክ ኮሚቴው የመስክ ቅኝትና የዲዛይን ተገቢነት ማረጋገጥ",
+        "ደረጃ 3፡ ህጋዊ የአገልግሎት ክፍያ በገቢዎች ጽ/ቤት መፈጸም",
+        "ደረጃ 4፡ ማህተም የተደረገበትን ይፋዊ የግንባታ ፈቃድ የምስክር ወረቀት መረከብ"
+      ],
+      "steps_om": [
+        "Tarkaanfii 1: Pilaanii fi ragaa lafaa dhiheessuu",
+        "Tarkaanfii 2: Koreen teeknikaa iddoo ijaarsaa qorachuu",
+        "Tarkaanfii 3: Kaffaltii mootummaa raawwachuu",
+        "Tarkaanfii 4: Waraqaa hayaama ijaarsaa fudhachuu"
+      ]
+    }
+  ],
+  "news": [
+    {
+      "slug": "budget-2026",
+      "title_en": "Angolela Tera Woreda Council Concludes Ordinary Session; Approves Annual Capital Budget",
+      "title_am": "የአንጎሌላ ተራ ወረዳ ምክር ቤት መደበኛ ጉባዔውን አጠናቀቀ፤ የዓመቱን የካፒታል በጀት አጸደቀ",
+      "title_om": "Manni Maree Aanaa Angolallaa Xaraa Yaa'ii Idilee Isaatiin Baajata Misoomaa Mirkaneesse",
+      "category_en": "Council Resolution",
+      "category_am": "የምክር ቤት ውሳኔ",
+      "category_om": "Murtee Mana Maree",
+      "date_en": "September 24, 2026",
+      "date_am": "መስከረም 14/2019",
+      "date_om": "Fulbaana 14, 2026",
+      "author_en": "Communication Affairs Office",
+      "author_am": "የመንግሥት ኮሙኒኬሽን ጉዳዮች ጽ/ቤት",
+      "author_om": "Waajjira Kominikeeshinii Mootummaa",
+      "isFeatured": true,
+      "summary_en": "The Woreda Council convened for its ordinary session in Chacha, formally ratifying the annual public expenditure plan prioritizing rural water schemes, primary road graveling, and agricultural cooperative subsidies.",
+      "summary_am": "የአንጎሌላ ተራ ወረዳ ምክር ቤት በጫቻ ከተማ ባካሄደው መደበኛ ጉባዔ ለንጹህ መጠጥ ውሃ መስፋፋት፣ ለገጠር መንገዶች ጠጠር ማልበስ እና ለአርሶ አደር ማህበራት ድጋፍ ቅድሚያ የሰጠውን በጀት አጸደቀ።",
+      "summary_om": "Manni maree aanaa baajata ijaarsa daandii, bishaan qulqulluu fi deeggarsa qonnaan bultootaaf oolu guutummaatti mirkaneessee jira.",
+      "content_en": [
+        "The 6th Angolela Tera Woreda Council has concluded its high-level ordinary session following two days of constructive deliberations in the administrative hall at Chacha town.",
+        "The approved budget prioritizes three major socioeconomic pillars: the expansion of deep water borehole schemes across 6 moisture-stressed kebeles, the upgrade of 45 kilometers of community feeder roads connecting farming villages to the main A2 highway, and modernization subsidies for local agricultural cooperatives.",
+        "Chief Administrator of the Woreda, in his address to council members, underscored that fiscal transparency, timely project completion, and strict monitoring of public expenditure will remain the uncompromising standards of the executive cabinet."
+      ],
+      "content_am": [
+        "6ኛው የአንጎሌላ ተራ ወረዳ ምክር ቤት በጫቻ ከተማ በሚገኘው የአስተዳደር አዳራሽ ለሁለት ቀናት ያካሄደውን መደበኛ ጉባዔ በተሳካ ሁኔታ አጠናቋል።",
+        "የጸደቀው በጀት ለሶስት ዋና ዋና የልማት መስኮች ትኩረት የሰጠ ሲሆን፡ በ6 ደረቃማ አካባቢዎች የጥልቅ ውሃ ጉድጓድ ቁፋሮ፣ 45 ኪሎ ሜትር የገጠር መንገዶችን ጠጠር የማልበስ እና የአርሶ አደሩን የህብረት ስራ ማህበራት የማጠናከር ስራዎችን ያካትታል።",
+        "የወረዳው ዋና አስተዳዳሪ ለምክር ቤቱ አባላት ባደረጉት ንግግር የፋይናንስ ግልጽነትን ማስፈን፣ የልማት ፕሮጀክቶችን በወቅቱ ማጠናቀቅ እና የህዝብ ሀብትን በቁጠባ መጠቀም የአስፈጻሚው አካል የማይታጠፍ አቋም መሆኑን አሳስበዋል።"
+      ],
+      "content_om": [
+        "Manni maree aanaa Angolallaa Xaraa yaa'ii isaa magaalaa Caaccetti xumureera.",
+        "Baajanni ragga'e kun hojii bishaan qulqulluu, ijaarsa daandii fi deeggarsa qonnaatiif kan oolu ta'a.",
+        "Bulchaan aanaa hojiin misoomaa hundi qulqullinaa fi yeroo qabameen akka xumuramu ibsaniiru."
+      ]
+    },
+    {
+      "slug": "wheat-distribution",
+      "title_en": "Distribution of Highland Wheat Seeds and Inputs Commences Across 19 Kebeles",
+      "title_am": "በ19ኙም የገጠር ቀበሌዎች የደጋ ስንዴ ምርጥ ዘርና ማዳበሪያ ስርጭት ተጀመረ",
+      "title_om": "Sanyiin Qamadii Filatamaa Gandoolee 19tti Raabsamuu Jalqabe",
+      "category_en": "Agriculture",
+      "category_am": "ግብርና ልማት",
+      "category_om": "Qonna",
+      "date_en": "September 18, 2026",
+      "date_am": "መስከረም 8/2019",
+      "date_om": "Fulbaana 8, 2026",
+      "author_en": "Agriculture & Rural Development Bureau",
+      "author_am": "የግብርናና ገጠር ልማት ጽ/ቤት",
+      "author_om": "Waajjira Qonnaa fi Misooma Baadiyyaa",
+      "isFeatured": false,
+      "summary_en": "Over 14,000 quintals of certified rust-resistant wheat seed and balanced NPS-B fertilizer are being distributed to smallholder farmers ahead of the meher harvest season.",
+      "summary_am": "ከ14 ሺህ ኩንታል በላይ በሽታን የሚቋቋም ምርጥ የስንዴ ዘር እና ኤን.ፒ.ኤስ-ቦሮን (NPS-B) ማዳበሪያ ለመኸር ወቅት ስራ ለአርሶ አደሮች በመሰራጨት ላይ ይገኛል።",
+      "summary_om": "Qamadiin filatamaa kuintaalli 14,000 ol fi xaa'oon qonnaan bultootaaf kennamaa jira.",
+      "content_en": [
+        "The Angolela Tera Woreda Agriculture and Rural Development Office has officially launched the mass distribution of certified agricultural inputs across all kebele multipurpose union service stations.",
+        "The input package focuses on the highly productive, stripe rust-resistant bread wheat varieties suitable for highland elevations above 2,600 meters, ensuring optimal grain yields even during fluctuating seasonal rain patterns.",
+        "Field development agents (DAs) are actively providing localized technical demonstrations on cluster farming, balanced fertilizer application, and mechanized sowing techniques to ensure farmers achieve maximum productivity."
+      ],
+      "content_am": [
+        "የአንጎሌላ ተራ ወረዳ ግብርናና ገጠር ልማት ጽ/ቤት በሁሉም የቀበሌ ሁለገብ የህብረት ስራ ማህበራት መጋዘኖች በኩል የግብርና ግብአቶችን ለአርሶ አደሮች የማሰራጨት ስራን ጀምሯል።",
+        "ስርጭቱ ከ2,600 ሜትር በላይ ባሉ ደጋማ አካባቢዎች ከፍተኛ ምርት በሚሰጡና ቢጫ ዋግ የተባለውን የስንዴ በሽታ በሚቋቋሙ ዝርያዎች ላይ ያተኮረ ነው።",
+        "በየቀበሌው ያሉ የግብርና ባለሙያዎች አርሶ አደሩ በመስመር እንዲዘራ፣ የተመጣጠነ ማዳበሪያ እንዲጠቀምና በኩታ-ገጠም አስተራረስ ምርቱን እንዲያሳድግ የተግባር ድጋፍ በመስጠት ላይ ይገኛሉ።"
+      ],
+      "content_om": [
+        "Waajjirri qonnaa aanaa galtee qonnaa gandoolee mara keessatti raabsaa jira.",
+        "Sanyiin kun dhibee kan danda'u fi oomishtummaa ol'aanaa kan qabuudha.",
+        "Ogeessonni qonnaa gandaa qonnaan bultootaaf leenjii hojiirraa kennaa jiru."
+      ]
+    },
+    {
+      "slug": "chacha-industrial-park",
+      "title_en": "Chacha Agro-Processing Corridor Invites Private Investment Proposals",
+      "title_am": "የጫቻ አግሮ-ፕሮሰሲንግ ኮሪደር ለግል ባለሀብቶች የኢንቨስትመንት ጥሪ አቀረበ",
+      "title_om": "Koriidariin Industirii Magaalaa Caaccetti Invastimantiif Waamicha Dhiheesse",
+      "category_en": "Investment",
+      "category_am": "ኢንቨስትመንት",
+      "category_om": "Invastimantii",
+      "date_en": "September 12, 2026",
+      "date_am": "መስከረም 2/2019",
+      "date_om": "Fulbaana 2, 2026",
+      "author_en": "Trade & Investment Office",
+      "author_am": "የንግድና ኢንቨስትመንት ጽ/ቤት",
+      "author_om": "Waajjira Daldalaa fi Invastimantii",
+      "isFeatured": false,
+      "summary_en": "The Woreda Administration has demarcated over 120 hectares of serviced industrial land adjacent to the Addis Ababa–Dessie expressway for investors in malt barley processing, dairy plants, and potato value-addition.",
+      "summary_am": "የወረዳው አስተዳደር በአዲስ አበባ-ደሴ ዋና አውራ ጎዳና ዳርቻ 120 ሄክታር ምቹ የኢንቨስትመንት መሬት ለብቅል ገብስ ፋብሪካዎች፣ ለወተት ማቀነባበሪያና ለድንች እሴት ጭማሪ አልሚዎች አዘጋጅቷል።",
+      "summary_om": "Lafni hektaara 120 ta'u industirii qonnaatiif qophaa'ee jira.",
+      "content_en": [
+        "Angolela Tera Woreda is rapidly positioning itself as the premier agro-industrial processing destination in the North Shewa Zone of the Amhara Region.",
+        "Benefiting from direct access to the paved A2 trunk road, proximity to Debre Birhan and Addis Ababa, abundant electricity from the national grid, and plentiful high-quality spring water, the Chacha corridor offers unmatched logistical advantages.",
+        "Qualified investors will enjoy expedited one-stop clearances, competitive 70-year lease terms, local raw material supply guarantees, and dedicated administrative support."
+      ],
+      "content_am": [
+        "የአንጎሌላ ተራ ወረዳ በሰሜን ሸዋ ዞን ዋነኛ የአግሮ-ኢንዱስትሪ ማዕከል ለመሆን ሰፊ ዝግጅት እያደረገ ይገኛል።",
+        "በአዲስ አበባ-ደብረ ብርሃን አስፋልት መንገድ ላይ መገኘቱ፣ የተረጋጋ የኤሌክትሪክ ሀይል፣ አስተማማኝ የተፈጥሮ ምንጭ ውሃ እና በቂ የሰው ሀይል መኖሩ ለኢንቨስትመንት ተመራጭ አድርጎታል።",
+        "ወረዳው በአንድ መስኮት አገልግሎት ፈቃድ ለመስጠት፣ የ70 ዓመት የሊዝ ይዞታ ዋስትና ለመስጠት እና ከአርሶ አደሮች ጋር የጥሬ እቃ ትስስር ለመፍጠር ቁርጠኛ ነው።"
+      ],
+      "content_om": [
+        "Aanaan Angolallaa Xaraa wiirtuu industirii qonnaa ta'uuf qophaa'eera.",
+        "Daandii asfaaltii, humna elektiriikii fi bishaan gahaa qaba.",
+        "Abbootiin qabeenyaa carraa kanatti akka fayyadaman waamichi ta'eeraaf."
+      ]
+    }
+  ],
+  "kebeles": [
+    {
+      "id": "keb-chacha",
+      "slug": "chacha-town-01",
+      "name_en": "Chacha Central Town (Kebele 01)",
+      "name_am": "ጫቻ ማዕከላዊ ከተማ (ቀበሌ 01)",
+      "name_om": "Magaalaa Caccetti Giddugaleessaa (Ganda 01)",
+      "type": "URBAN_TOWN",
+      "population": 18450,
+      "distanceFromCapitalKm": 0,
+      "mainAgroEcology": "Weyna Dega",
+      "economicActivities_en": "Commercial commerce, agro-processing hub, trade services, municipal administrative facilities.",
+      "economicActivities_am": "ንግድና አገልግሎት፣ አግሮ-ፕሮሰሲንግ፣ ማዘጋጃ ቤታዊ አገልግሎቶች።",
+      "economicActivities_om": "Daldala, qophii oomisha qonnaa, tajaajiloota bulchiinsaa.",
+      "administratorName": "Ato Solomon Gizaw",
+      "contactPhone": "+251 58 661 0210",
+      "displayOrder": 1,
+      "status": "PUBLISHED",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "keb-cheki",
+      "slug": "cheki-rural-kebele",
+      "name_en": "Cheki Kebele",
+      "name_am": "ጨቂ ቀበሌ",
+      "name_om": "Ganda Cakkii",
+      "type": "RURAL_KEBELE",
+      "population": 8200,
+      "distanceFromCapitalKm": 14,
+      "mainAgroEcology": "Dega (Highland)",
+      "economicActivities_en": "Highland barley cultivation, certified seed multiplication, sheep rearing, potato farming.",
+      "economicActivities_am": "የገብስና ስንዴ ምርት፣ የድንች ልማት፣ የደጋ በግ እርባታ።",
+      "economicActivities_om": "Oomisha garbuu fi qamadii, oomisha dhangalaasoo, horsiisa hoolaa.",
+      "administratorName": "W/ro Genet Abebe",
+      "contactPhone": "+251 58 661 0214",
+      "displayOrder": 2,
+      "status": "PUBLISHED",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "keb-geyet",
+      "slug": "geyet-kebele",
+      "name_en": "Geyet Kebele",
+      "name_am": "ገየት ቀበሌ",
+      "name_om": "Ganda Gayat",
+      "type": "RURAL_KEBELE",
+      "population": 7100,
+      "distanceFromCapitalKm": 18,
+      "mainAgroEcology": "Dega (Highland)",
+      "economicActivities_en": "Dairy cattle production, pulse farming, watershed soil conservation cooperative programs.",
+      "economicActivities_am": "የወተት ላም እርባታ፣ የጥራጥሬ ሰብሎች፣ የተፋሰስ ልማት ጥበቃ።",
+      "economicActivities_om": "Horsiisa aannanii, oomisha midhaanii, eegumsa biyyoofi bishaanii.",
+      "administratorName": "Ato Tadesse Worku",
+      "contactPhone": "+251 58 661 0218",
+      "displayOrder": 3,
+      "status": "PUBLISHED",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "keb-kotu",
+      "slug": "kotu-kebele",
+      "name_en": "Kotu Kebele",
+      "name_am": "ኮቱ ቀበሌ",
+      "name_om": "Ganda Kootuu",
+      "type": "RURAL_KEBELE",
+      "population": 9400,
+      "distanceFromCapitalKm": 9,
+      "mainAgroEcology": "Weyna Dega",
+      "economicActivities_en": "Cereal production (teff and wheat), poultry farms, rural smallholder irrigation along the Chacha basin.",
+      "economicActivities_am": "የጤፍና ስንዴ ምርት፣ የዶሮ እርባታ፣ በጫቻ ወንዝ ተፋሰስ መስኖ ልማት።",
+      "economicActivities_om": "Oomisha xaafii fi qamadii, horsiisa lukkuu, misooma jallisii.",
+      "administratorName": "Ato Melaku Kebede",
+      "contactPhone": "+251 58 661 0222",
+      "displayOrder": 4,
+      "status": "PUBLISHED",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    }
+  ],
+  "companies": [
+    {
+      "id": "biz-jerr",
+      "name_en": "JERR PLC (Integrated Food & Agro-Processing Complex)",
+      "name_am": "ጄር ኃ.የተ.የ.ማ (የተቀናጀ የምግብና አግሮ-ኢንዱስትሪ ማዕከል)",
+      "name_om": "JERR PLC (Wiirtuu Oomisha Nyaataa fi Qonnaa)",
+      "description_en": "A premier industrial conglomerate operating a multi-billion Birr integrated agro-industrial park in the Chacha corridor. Features high-capacity edible oil refining (fortified soya cooking oil), commercial animal feed processing, corn soy blend (CSB++) manufacturing for nutrition programs, and bulk agricultural commodity processing.",
+      "description_am": "በጫቻ ኢንዱስትሪ ኮሪደር ውስጥ የሚገኝ ግዙፍ የተቀናጀ የምግብ እና አግሮ-ፕሮሰሲንግ ማዕከል ያለው ድርጅት። ዘመናዊ የምግብ ዘይት ማጣሪያ ፋብሪካ፣ የተመጣጠነ የእንስሳት መኖ ማቀነባበሪያ፣ የCSB++ አልሚ ምግብ ምርት እና የጥራጥሬ ምርቶችን በከፍተኛ ደረጃ በማቀነባበር በመላው ሀገሪቱ ያሰራጫል።",
+      "description_om": "Dhaabbata guddaa warshaa qophii nyaataa fi qonnaa naannoo Caccetti qabu. Zayitii nyaataa, nyaata beeyladaa qulqulluu fi oomishaalee nyaata madaalawaa oomishuun beekama.",
+      "sector": "AGRO_PROCESSING",
+      "address": "Chacha Agro-Industrial Corridor, Angolela Tera Woreda",
+      "phone": "+251 (0) 11 667 4000",
+      "email": "info@jerrplc.com",
+      "website": "https://www.jerrplc.com",
+      "established": "2006",
+      "employeeCount": "350+",
+      "displayOrder": 1,
+      "status": "PUBLISHED",
+      "createdAt": "2024-01-10T00:00:00.000Z",
+      "updatedAt": "2026-10-16T00:00:00.000Z"
+    },
+    {
+      "id": "biz-komari",
+      "name_en": "Komari Beverage PLC",
+      "name_am": "ኮማሪ ቤቨሬጅ ኃ.የተ.የ.ማ",
+      "name_om": "Dhaabbata Dhugaatii Komaarii PLC",
+      "description_en": "A state-of-the-art modern beverage manufacturing plant located in Cheki Kebele, Angolela Tera Woreda. Komari is the pioneer producer of \"Arada\", Ethiopia's first hard seltzer brand (ready-to-drink sparkling fruit and botanical flavored beverage), operating advanced European brewing and distillation lines.",
+      "description_am": "በአንጎሌላ ተራ ወረዳ በጨቂ ቀበሌ ውስጥ የተገነባ እጅግ ዘመናዊ የመጠጥ ማምረቻ ፋብሪካ። በኢትዮጵያ የመጀመሪያውን \"አራዳ\" (Arada) የተሰኘ ሃርድ ሴልትዘር (ቀለል ያለ የተፈጥሮ ፍራፍሬ ጣዕም ያለው የአልኮል መጠጥ) በዓለም አቀፍ ደረጃ በታገዘ ዘመናዊ ቴክኖሎጂ አምርቶ በማቅረብ ይታወቃል።",
+      "description_om": "Warshaa dhugaatii ammayyaa Ganda Ceqii, Aanaa Angolallaa Xaraatti argamu. Oomisha \"Arada\" jedhamu kan dhugaatii qabbanaawaa fi mi'aawaa oomishuudhaan kan beekamuudha.",
+      "sector": "MANUFACTURING",
+      "address": "Cheki Kebele, Addis Ababa–Dessie Highway (Km 96), Angolela Tera Woreda",
+      "phone": "+251 (0) 11 667 8500",
+      "email": "info@komaribeverage.com",
+      "website": "https://www.komari.com",
+      "established": "2017",
+      "employeeCount": "250+",
+      "displayOrder": 2,
+      "status": "PUBLISHED",
+      "createdAt": "2024-02-15T00:00:00.000Z",
+      "updatedAt": "2026-10-16T00:00:00.000Z",
+      "photo": {
+        "id": "media-komari-logo",
+        "filename": "komari-logo.png",
+        "storedName": "komari-logo.png",
+        "mimeType": "image/png",
+        "mediaType": "IMAGE",
+        "sizeBytes": 26981,
+        "url": "/images/companies/komari-logo.png",
+        "createdAt": "2024-02-15T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "biz-mamokacha",
+      "name_en": "Mamo Kacha PLC (Highland Dairy & Agro-Industry)",
+      "name_am": "ማሞ ካቻ ኃ.የተ.የ.ማ (የደጋ ወተትና አግሮ-ኢንዱስትሪ)",
+      "name_om": "Mamo Kaachaa PLC (Warshaa Aannanii fi Qonnaa)",
+      "description_en": "Honoring the legacy of visionary entrepreneur Mamo Yenberberu (\"Mamo Kacha\"), the enterprise operates large-scale highland dairy farming, modern cold-chain logistics, and automated processing facilities in the Chacha milk corridor. Produces premium pasteurized milk, provolone and gouda cheeses, and table butter while sourcing from hundreds of local smallholder cattle cooperatives.",
+      "description_am": "በታዋቂው ኢትዮጵያዊ የፈጠራ ሰው አቶ ማሞ ይንበርበሩ (ማሞ ካቻ) ስም የተሰየመ ድርጅት ሲሆን፣ በጫቻ የወተት ተፋሰስ ዘመናዊ የወተት ላም እርባታና ማቀነባበሪያ ፋብሪካ ያካሂዳል። ጥራት ያለው ፓስቸራይዝድ ወተት፣ አይብ፣ ቅቤ በማምረት ከአካባቢው አርሶ አደሮች ጋር በቅርበት ይሰራል::",
+      "description_om": "Dhaabbata abbaa qabeenyaa beekamaa Mamo Yamberberuu (Mamo Kaachaa) jedhamuun moggaafame. Warshaa qophii aannanii ammayyaa, itittuufi dhadhaa dhiyeessu ta'ee, qonnaan bultoota naannoo aannaniin wajjin qindoominaan hojjeta.",
+      "sector": "AGRO_PROCESSING",
+      "address": "Chacha–Sheno Agricultural Corridor, Angolela Tera Woreda",
+      "phone": "+251 (0) 11 551 2233",
+      "email": "info@mamokachaplc.com",
+      "website": "https://www.mamokachaplc.com",
+      "established": "2012",
+      "employeeCount": "180+",
+      "displayOrder": 3,
+      "status": "PUBLISHED",
+      "createdAt": "2024-03-01T00:00:00.000Z",
+      "updatedAt": "2026-10-16T00:00:00.000Z",
+      "photo": {
+        "id": "media-mamokacha-logo",
+        "filename": "mamokacha-logo.png",
+        "storedName": "mamokacha-logo.png",
+        "mimeType": "image/png",
+        "mediaType": "IMAGE",
+        "sizeBytes": 285167,
+        "url": "/images/companies/mamokacha-logo.png",
+        "createdAt": "2024-03-01T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "biz-viv",
+      "name_en": "VIV Beverages Manufacturing S.C.",
+      "name_am": "ቪአይቪ ቤቨሬጅስ ማኑፋክቸሪንግ አ.ማ",
+      "name_om": "VIV Beverages Manufacturing S.C.",
+      "description_en": "An ISO-certified (ISO 9001/14001/22000) high-technology industrial distillery and beverage manufacturing share company located at Km 73 in Angolela Tera Woreda. Produces Extra Neutral Alcohol (ENA) and renowned spirit brands including Champion Dry Gin, Champion Vodka, Champion Coffee Liqueur, Cognac, Whisky, and KAT traditional grain spirit.",
+      "description_am": "በአንጎሌላ ተራ ወረዳ 73ኛ ኪ.ሜ ላይ የሚገኝ ከፍተኛ ቴክኖሎጂ የታጠቀ የአልኮል ዳይስቲለሪ እና መጠጥ ማምረቻ አክሲዮን ማህበር። በአይኤስኦ (ISO 9001/14001/22000) ደረጃ የተመሰከረለት ሲሆን፣ ኤክስትራ ኒውትራል አልኮል (ENA)፣ ሻምፒዮን ጂን፣ ቮድካ፣ ዊስኪ እና \"ካት\" የተሰኘውን የባህል ጥራት አልኮል ያመርታል።",
+      "description_om": "Warshaa dhugaatii alkoolii ammayyaa Aanaa Angolallaa Xaraa (Kiiloo 73) irratti argamu. Isiriipii adda addaa kanneen akka Champion Gin, Champion Vodka fi Kat jedhamaniif warshaa qulqullina ISO qabuudha.",
+      "sector": "MANUFACTURING",
+      "address": "Km 73 Trunk Highway, Angolela Tera Woreda",
+      "phone": "+251 (0) 11 668 7272",
+      "email": "info@vivbeverageseth.com",
+      "website": "https://www.vivbeverageseth.com",
+      "established": "2019",
+      "employeeCount": "220+",
+      "displayOrder": 4,
+      "status": "PUBLISHED",
+      "createdAt": "2024-03-20T00:00:00.000Z",
+      "updatedAt": "2026-10-16T00:00:00.000Z",
+      "photo": {
+        "id": "media-viv-logo",
+        "filename": "viv-logo.png",
+        "storedName": "viv-logo.png",
+        "mimeType": "image/png",
+        "mediaType": "IMAGE",
+        "sizeBytes": 126171,
+        "url": "/images/companies/viv-logo.png",
+        "createdAt": "2024-03-20T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "biz-rorank",
+      "name_en": "Rorank Business S.C. (Chacha Distillery & Bottling Plant)",
+      "name_am": "ሮራንክ ቢዝነስ አ.ማ (የጫቻ ዳይስቲለሪ እና ቦትሊንግ ፋብሪካ)",
+      "name_om": "Rorank Business S.C. (Warshaa Caccetti)",
+      "description_en": "One of Ethiopia's foremost industrial beverage manufacturers operating a multi-hectare distillery complex in the Chacha industrial sector. Renowned for market-leading brands including Super Eagle Dry Gin, Crystal Vodka, and Sofi aperitifs, generating substantial manufacturing employment and local raw material linkages.",
+      "description_am": "በጫቻ ከተማ ሰፊ ግቢ ያለውና በሀገሪቱ ቀዳሚ ከሚባሉት የአልኮል ማጣሪያና መጠጥ ማምረቻ ድርጅቶች አንዱ። እንደ ሱፐር ኢግል (Super Eagle)፣ ክሪስታል ቮድካ (Crystal) እና ሶፊ ያሉ ታዋቂ ምርቶችን በማምረት ለበርካታ የአካባቢ ወጣቶች ቋሚ የስራ እድል ፈጥሯል።",
+      "description_om": "Warshaa dhugaatii guddaa naannoo Caccetti argamu. Oomishaalee akka Super Eagle Gin fi Crystal Vodka dhiyeessuun beekama.",
+      "sector": "MANUFACTURING",
+      "address": "Chacha Industrial Zone, Angolela Tera Woreda",
+      "phone": "+251 (0) 11 663 8811",
+      "email": "info@rorank.com",
+      "website": "https://www.rorank.com",
+      "established": "2013",
+      "employeeCount": "300+",
+      "displayOrder": 5,
+      "status": "PUBLISHED",
+      "createdAt": "2024-04-05T00:00:00.000Z",
+      "updatedAt": "2026-10-16T00:00:00.000Z",
+      "photo": {
+        "id": "media-rorank-logo",
+        "filename": "rorank-logo.png",
+        "storedName": "rorank-logo.png",
+        "mimeType": "image/png",
+        "mediaType": "IMAGE",
+        "sizeBytes": 175704,
+        "url": "/images/companies/rorank-logo.png",
+        "createdAt": "2024-04-05T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "biz-pharo",
+      "name_en": "Pharo Integrated Agriculture & Manufacturing PLC (PIAM)",
+      "name_am": "ፋሮ የተቀናጀ ግብርና እና ማኑፋክቸሪንግ ኃ.የተ.የ.ማ",
+      "name_om": "Pharo Integrated Agriculture & Manufacturing PLC",
+      "description_en": "State-of-the-art commercial edible oil processing and refining facility located in the Kotu corridor of Angolela Tera Woreda. PIAM partners with regional smallholders to source locally cultivated niger seed (nug), sesame, and sunflower, driving import substitution with clean, unadulterated edible oils.",
+      "description_am": "በአንጎሌላ ተራ ወረዳ ኮቱ አካባቢ የሚገኝ ዘመናዊ የምግብ ዘይት ማምረቻ ፋብሪካ። ከአካባቢው አርሶ አደሮች ኑግ፣ ሰሊጥና የሱፍ ፍሬ በመረከብ ጥራት ያለው የምግብ ዘይት በማምረት የሀገር ውስጥ ገበያን ያሟላል።",
+      "description_om": "Warshaa zayitii nyaataa ammayyaa naannoo Ganda Kootuu, Aanaa Angolallaa Xaraatti argamu. Qonnaan bultoota naannootti fayyadamuun zayitii qulqulluu oomisha.",
+      "sector": "AGRO_PROCESSING",
+      "address": "Kotu Industrial Belt, Chacha, Angolela Tera Woreda",
+      "phone": "+251 (0) 11 662 4455",
+      "email": "contact@pharo-iam.com",
+      "established": "2020",
+      "employeeCount": "140+",
+      "displayOrder": 6,
+      "status": "PUBLISHED",
+      "createdAt": "2024-04-18T00:00:00.000Z",
+      "updatedAt": "2026-10-16T00:00:00.000Z",
+      "photo": {
+        "id": "media-pharo-logo",
+        "filename": "pharo-logo.png",
+        "storedName": "pharo-logo.png",
+        "mimeType": "image/png",
+        "mediaType": "IMAGE",
+        "sizeBytes": 54138,
+        "url": "/images/companies/pharo-logo.png",
+        "createdAt": "2024-04-18T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "biz-ruth-hirut",
+      "name_en": "Rut & Hirut Dairy Production & Processing PLC",
+      "name_am": "ሩት እና ሂሩት የወተት ላም እርባታና ማቀነባበሪያ ኃ.የተ.የ.ማ",
+      "name_om": "Rut & Hirut Horsiisa Sa'aa fi Warshaa Aannanii PLC",
+      "description_en": "A pioneer commercial dairy processing and cattle breeding enterprise in Chacha. Operates modern milk chilling centers, automated pasteurization, and packing lines supplying fresh milk, yogurt, and specialty highland cheeses across regional and Addis Ababa retail chains.",
+      "description_am": "በጫቻ ከተማ የተመሰረተ ቀዳሚ የወተት ላም እርባታና የወተት ምርቶች ማቀነባበሪያ ድርጅት። ዘመናዊ ማቀዝቀዣ፣ ፓስቸራይዜሽን እና ማሸጊያ ያለው ሲሆን ትኩስ ወተት፣ እርጎ እና የተለያዩ አይቦችን ለገበያ ያቀርባል።",
+      "description_om": "Dhaabbata qophii aannanii fi horsiisa sa'a ammayyaa Caccetti argamu. Aannan qulqulluu, itittuufi ayibii gabaaf dhiyeessa.",
+      "sector": "AGRO_PROCESSING",
+      "address": "Chacha Town, Kebele 02, Angolela Tera Woreda",
+      "phone": "+251 (0) 58 661 0420",
+      "email": "ruthirut.dairy@gmail.com",
+      "established": "2011",
+      "employeeCount": "95+",
+      "displayOrder": 7,
+      "status": "PUBLISHED",
+      "createdAt": "2024-05-02T00:00:00.000Z",
+      "updatedAt": "2026-10-16T00:00:00.000Z"
+    },
+    {
+      "id": "biz-nosa",
+      "name_en": "NOSA Manufacturing PLC",
+      "name_am": "ኖሳ ማኑፋክቸሪንግ ኃ.የተ.የ.ማ",
+      "name_om": "NOSA Manufacturing PLC",
+      "description_en": "Specialized beverage distillation and industrial alcohol processing plant situated in Chacha, producing quality spirits including Double Dutch Vodka and food-grade industrial alcohol derivatives.",
+      "description_am": "በጫቻ ኢንዱስትሪ ዞን የሚገኝ የአልኮል ማጣሪያና መጠጥ ማምረቻ ድርጅት። ዳብል ደች ቮድካ (Double Dutch Vodka) እና ሌሎች ጥራት ያላቸው መጠጦችን በማምረት ይታወቃል።",
+      "description_om": "Warshaa dhugaatii alkoolii qulqulluu fi oomisha Double Dutch Vodka naannoo Caccetti oomishuudha.",
+      "sector": "MANUFACTURING",
+      "address": "Chacha Industrial Zone, Angolela Tera Woreda",
+      "phone": "+251 (0) 11 661 9922",
+      "email": "info@nosa-manufacturing.com",
+      "established": "2018",
+      "employeeCount": "110+",
+      "displayOrder": 8,
+      "status": "PUBLISHED",
+      "createdAt": "2024-05-15T00:00:00.000Z",
+      "updatedAt": "2026-10-16T00:00:00.000Z",
+      "photo": {
+        "id": "media-nosa-logo",
+        "filename": "nosa-logo.png",
+        "storedName": "nosa-logo.png",
+        "mimeType": "image/png",
+        "mediaType": "IMAGE",
+        "sizeBytes": 23099,
+        "url": "/images/companies/nosa-logo.png",
+        "createdAt": "2024-05-15T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "biz-4",
+      "name_en": "Chacha Honey & Bee Products Enterprise",
+      "name_am": "ጫቻ ማር እና የንብ ምርቶች ድርጅት",
+      "name_om": "Dhaabbata Damma fi Bu'aa Haroo Caccetti",
+      "description_en": "A traditional and organic honey producer tapping into the rich highland flora of Angolela Tera. The enterprise exports bulk and packaged Ethiopian highland honey to Addis Ababa and has recently entered international market channels.",
+      "description_am": "ወደ አዲስ አበባ ጅምላ እና ፓኬጅ ያደረገ ኢትዮጵያዊ ደጋ ማር ይልካል። ወደ ዓለም አቀፍ ገበያ ለመግባት ዝግጅቱን አጠናቋል።",
+      "description_om": "Dammaa uumamaa Angolallaa Xaraa Finfinnee fi gabaa biyyolessaa dhiheessa.",
+      "sector": "AGRO_PROCESSING",
+      "address": "Kebele 04, Angolela Tera Woreda",
+      "phone": "+251 (0) 94 450 0034",
+      "email": "honey@chacha-et.com",
+      "established": "2016",
+      "employeeCount": "30",
+      "displayOrder": 9,
+      "status": "PUBLISHED",
+      "createdAt": "2024-04-20T00:00:00.000Z",
+      "updatedAt": "2025-05-30T00:00:00.000Z"
+    }
+  ],
+  "partners": [
+    {
+      "id": "partner-jerr",
+      "name_en": "JERR PLC",
+      "name_am": "ጄር ኃ.የተ.የ.ማ",
+      "name_om": "JERR PLC",
+      "description_en": "A premier industrial conglomerate and key development partner operating an integrated agro-industrial park in the Chacha corridor. Partners with the Woreda on local farmer grain aggregation, fortified vegetable oil distribution, commercial animal feed processing, and large-scale youth employment generation.",
+      "description_am": "በጫቻ የኢንዱስትሪ ኮሪደር ውስጥ ግዙፍ የተቀናጀ የምግብና አግሮ-ኢንዱስትሪ ማዕከል ያለው ቁልፍ የልማት አጋር ድርጅት። ከወረዳው ጋር በአርሶ አደሮች የሰብል ገበያ ትስስር፣ በምግብ ዘይት አቅርቦት፣ በእንስሳት መኖና በስራ እድል ፈጠራ በስትራቴጂካዊ አጋርነት ይሰራል::",
+      "description_om": "Dhaabbata guddaa warshaa qophii nyaataa fi qonnaa naannoo Caccetti qabu. Aanaa waliin gabaa qonnaan bultootaa, dhiyeessii zayitii fi nyaata beeyladaa akkasumas carraa hojii uumuu irratti qindoominaan hojjeta.",
+      "partnerType": "PRIVATE_SECTOR",
+      "country": "Ethiopia",
+      "website": "https://www.jerrplc.com",
+      "phone": "+251 (0) 11 667 4000",
+      "email": "info@jerrplc.com",
+      "partnerSince": "2018",
+      "displayOrder": 1,
+      "status": "PUBLISHED",
+      "createdAt": "2024-01-10T00:00:00.000Z",
+      "updatedAt": "2026-10-16T00:00:00.000Z"
+    },
+    {
+      "id": "partner-komari",
+      "name_en": "Komari Beverage PLC",
+      "name_am": "ኮማሪ ቤቨሬጅ ኃ.የተ.የ.ማ",
+      "name_om": "Dhaabbata Dhugaatii Komaarii PLC",
+      "description_en": "State-of-the-art beverage manufacturer in Cheki Kebele producing \"Arada\". Serves as a vital private sector development partner contributing to regional economic expansion, technical skills development for local youth, and community water and environmental stewardship programs in Angolela Tera.",
+      "description_am": "በጨቂ ቀበሌ ውስጥ ዘመናዊ \"አራዳ\" የተሰኘ የመጠጥ ማምረቻ ፋብሪካ ያለው ግንባር ቀደም አጋር ድርጅት። ለወረዳው የገቢ ማሳደግ፣ የወጣቶች የክህሎት ስልጠና፣ የአካባቢ ጥበቃና ማህበረሰባዊ የውሃ አቅርቦት ድጋፍ በማድረግ ቁልፍ የልማት አጋር በመሆን ይሰራል::",
+      "description_om": "Warshaa dhugaatii ammayyaa Ganda Ceqii keessatti argamu. Misooma aanaa keessatti leenjii dargaggootaa, eegumsa qabeenya bishaanii fi nageenya naannoo irratti aanaa waliin qindoominaan hojjeta.",
+      "partnerType": "PRIVATE_SECTOR",
+      "country": "Ethiopia",
+      "website": "https://www.komari.com",
+      "phone": "+251 (0) 11 667 8500",
+      "email": "info@komaribeverage.com",
+      "partnerSince": "2021",
+      "displayOrder": 2,
+      "status": "PUBLISHED",
+      "createdAt": "2024-02-15T00:00:00.000Z",
+      "updatedAt": "2026-10-16T00:00:00.000Z",
+      "logo": {
+        "id": "media-komari-partner-logo",
+        "url": "/images/companies/komari-logo.png",
+        "filename": "komari-logo.png",
+        "sizeBytes": 26981,
+        "mimeType": "image/png",
+        "mediaType": "IMAGE",
+        "storedName": "komari-logo.png",
+        "createdAt": "2024-02-15T00:00:00.000Z"
+      }
+    }
+  ],
+  "investments": [
+    {
+      "id": "inv-dairy-plant",
+      "slug": "modern-commercial-dairy-processing",
+      "title_en": "Highland Commercial Dairy & Cheese Processing Facility",
+      "title_am": "ዘመናዊ የደጋ ወተት እና አይብ ማቀነባበሪያ ፋብሪካ",
+      "title_om": "Warshaa Qophii Aannanii fi Dhadhaa Gaaraa",
+      "sector": "Agro-processing",
+      "summary_en": "Prime investment opportunity leveraging high milk yield in Angolela Tera highlands with dedicated municipal land allocation.",
+      "summary_am": "በአንጎሌላ ተራ ደጋማ ስነ-ምህዳር ያለውን የተትረፈረፈ የወተት አቅርቦት ወደ ውድ እሴት ለመቀየር የተመደበ የኢንቨስትመንት መሬት።",
+      "summary_om": "Carraa invastimantii aannanii qophii aannanii fi bu'aawwan aannanii irratti xiyyeeffate.",
+      "description_en": "The Woreda produces over 45,000 liters of milk daily from local smallholder cooperatives. An investor is sought to establish an integrated pasteurization, packaging, and cheese processing facility in the Chacha Industrial Corridor with direct highway access to Addis Ababa (110 km).",
+      "description_am": "ወረዳው በቀን ከ45 ሺህ ሊትር በላይ ወተት የሚያመነጭ ሲሆን ባለሀብቶች በጫቻ የኢንዱስትሪ ኮሪደር ውስጥ ዘመናዊ የወተት ማጣሪያ እና ማሸጊያ እንዲያቋቁሙ አስፈላጊው ድጋፍ ይደረጋል።",
+      "availableLandHa": 4.5,
+      "incentives_en": "5-year income tax exemption, duty-free machinery import, pre-serviced water connection, 20-day expedited land lease certificate.",
+      "incentives_am": "የ5 ዓመት የገቢ ግብር ነፃ መብት፣ ከቀረጥ ነፃ የፋብሪካ ማሽነሪ ማስገባት፣ የውሃ መስመር ዝርጋታ ድጋፍ።",
+      "procedures_en": "1. Submit formal project proposal to Woreda Investment Desk\n2. Feasibility verification within 5 working days\n3. Land lease execution and environmental license issuance.",
+      "procedures_am": "1. የፕሮጀክት ሀሳብ ለወረዳው ኢንቨስትመንት ጽ/ቤት ማቅረብ\n2. በ5 የሥራ ቀናት ውስጥ የአዋጭነት ማረጋገጫ\n3. የመሬት ይዞታ ውል መፈረምና የፈቃድ አሰጣጥ።",
+      "contactPerson": "Director of Trade & Investment Office",
+      "contactPhone": "+251 58 661 0180",
+      "contactEmail": "",
+      "displayOrder": 1,
+      "status": "PUBLISHED",
+      "createdAt": "2024-03-01T00:00:00.000Z",
+      "updatedAt": "2025-02-15T00:00:00.000Z"
+    },
+    {
+      "id": "inv-grain-storage",
+      "slug": "chilled-grain-silos-agro-logistics",
+      "title_en": "Modern Grain Silos & Cold Storage Logistics Park",
+      "title_am": "ዘመናዊ የእህል ማከማቻ ጎተራዎች እና የቀዝቃዛ ሎጂስቲክስ ፓርክ",
+      "title_om": "Kuusaa Midhaanii fi Paarkii Loojistiksii",
+      "sector": "Agro-processing & Logistics",
+      "summary_en": "Strategic storage complex along the Addis Ababa - Dessie national economic corridor to reduce post-harvest grain losses.",
+      "summary_am": "ከአዲስ አበባ ደሴ በሚወስደው ዋና አውራ ጎዳና ዳር የእህል ብክነትን ለመቀነስ የሚገነባ የጎተራና ሎጂስቲክስ ፓርክ።",
+      "availableLandHa": 8,
+      "incentives_en": "Subsidized land rental rate, power grid substation access, regional tax investment credits.",
+      "incentives_am": "የተመቻቸ የመሬት ኪራይ ተመን፣ የኤሌክትሪክ መስመር ዝርጋታ ድጋፍ፣ የክልል የታክስ ማበረታቻዎች።",
+      "procedures_en": "Application handled through One-Stop Woreda Investment Service Center in Chacha.",
+      "contactPerson": "Head of Economic Affairs Cabinet",
+      "contactPhone": "+251 58 661 0182",
+      "contactEmail": "economy@angolela-tera.gov.et",
+      "displayOrder": 2,
+      "status": "PUBLISHED",
+      "createdAt": "2024-03-01T00:00:00.000Z",
+      "updatedAt": "2025-02-15T00:00:00.000Z"
+    }
+  ],
+  "homepageSections": [
+    {
+      "id": "sec-hero",
+      "sectionKey": "hero",
+      "title_en": "Hero Slider",
+      "isEnabled": true,
+      "displayOrder": 1,
+      "updatedAt": "2026-10-05T20:33:22.400Z"
+    },
+    {
+      "id": "sec-finder",
+      "sectionKey": "action_finder",
+      "title_en": "Citizen Action Finder",
+      "isEnabled": true,
+      "displayOrder": 2,
+      "updatedAt": "2026-10-05T20:33:22.400Z"
+    },
+    {
+      "id": "sec-stats",
+      "sectionKey": "at_a_glance",
+      "title_en": "Key Profile & Stats",
+      "isEnabled": true,
+      "displayOrder": 3,
+      "updatedAt": "2026-10-05T20:33:22.400Z"
+    },
+    {
+      "id": "sec-services",
+      "sectionKey": "services",
+      "title_en": "Public Services",
+      "isEnabled": true,
+      "displayOrder": 4,
+      "updatedAt": "2026-10-05T20:33:22.400Z"
+    },
+    {
+      "id": "sec-companies",
+      "sectionKey": "companies",
+      "title_en": "Private Enterprises",
+      "isEnabled": true,
+      "displayOrder": 5,
+      "updatedAt": "2026-10-05T20:33:22.400Z"
+    },
+    {
+      "id": "sec-partners",
+      "sectionKey": "partners",
+      "title_en": "Strategic Partners",
+      "isEnabled": true,
+      "displayOrder": 6,
+      "updatedAt": "2026-10-05T20:33:22.400Z"
+    },
+    {
+      "id": "sec-leadership",
+      "sectionKey": "leadership",
+      "title_en": "Executive Leadership",
+      "isEnabled": true,
+      "displayOrder": 7,
+      "updatedAt": "2026-10-05T20:33:22.400Z"
+    },
+    {
+      "id": "sec-investment",
+      "sectionKey": "investment",
+      "title_en": "Investment Corridor",
+      "isEnabled": true,
+      "displayOrder": 8,
+      "updatedAt": "2026-10-05T20:33:22.400Z"
+    },
+    {
+      "id": "sec-news",
+      "sectionKey": "news",
+      "title_en": "News & Announcements",
+      "isEnabled": true,
+      "displayOrder": 9,
+      "updatedAt": "2026-10-05T20:33:22.400Z"
+    }
+  ],
+  "navigation": [
+    {
+      "id": "nav-home",
+      "label_en": "Home",
+      "label_am": "ዋና ገጽ",
+      "label_om": "Fuula Dura",
+      "url": "/",
+      "displayOrder": 1,
+      "isActive": true,
+      "isExternal": false
+    },
+    {
+      "id": "nav-about",
+      "label_en": "About Woreda",
+      "label_am": "ስለ ወረዳው",
+      "label_om": "Waa'ee Aanaa",
+      "url": "/about",
+      "displayOrder": 2,
+      "isActive": true,
+      "isExternal": false
+    },
+    {
+      "id": "nav-kebeles",
+      "label_en": "Kebele Administrations",
+      "label_am": "የቀበሌ አስተዳደሮች",
+      "label_om": "Bulchiinsa Gandoolee",
+      "url": "/kebeles",
+      "displayOrder": 3,
+      "isActive": true,
+      "isExternal": false
+    },
+    {
+      "id": "nav-services",
+      "label_en": "Citizen Services",
+      "label_am": "የህዝብ አገልግሎቶች",
+      "label_om": "Tajaajila Uummataa",
+      "url": "/services",
+      "displayOrder": 4,
+      "isActive": true,
+      "isExternal": false
+    },
+    {
+      "id": "nav-investment",
+      "label_en": "Investment",
+      "label_am": "ኢንቨስትመንት",
+      "label_om": "Invastimantii",
+      "url": "/investment",
+      "displayOrder": 5,
+      "isActive": true,
+      "isExternal": false
+    },
+    {
+      "id": "nav-companies",
+      "label_en": "Industry & Plants",
+      "label_am": "ኢንዱስትሪና ንግድ",
+      "label_om": "Indaastirii",
+      "url": "/companies",
+      "displayOrder": 6,
+      "isActive": true,
+      "isExternal": false
+    },
+    {
+      "id": "nav-partners",
+      "label_en": "Partners",
+      "label_am": "አጋር ድርጅቶች",
+      "label_om": "Michuuwwan",
+      "url": "/partners",
+      "displayOrder": 7,
+      "isActive": true,
+      "isExternal": false
+    },
+    {
+      "id": "nav-news",
+      "label_en": "News & Press",
+      "label_am": "ዜናና መግለጫዎች",
+      "label_om": "Oduu fi Ibsa",
+      "url": "/news",
+      "displayOrder": 8,
+      "isActive": true,
+      "isExternal": false
+    },
+    {
+      "id": "nav-contact",
+      "label_en": "Contact & Grievances",
+      "label_am": "አድራሻና ቅሬታ",
+      "label_om": "Quunnamtii",
+      "url": "/contact",
+      "displayOrder": 9,
+      "isActive": true,
+      "isExternal": false
+    }
+  ],
+  "users": [
+    {
+      "id": "user-superadmin",
+      "name": "Chief Government Administrator",
+      "email": "admin@angolela-tera.gov.et",
+      "passwordHash": "$2b$10$w0B7q/4VnfejU7JgE48p5uqQn871Qp83xW7G/n2WjN1qTz1hO7Bqy",
+      "role": "SUPER_ADMIN",
+      "officeId": null,
+      "isActive": true,
+      "createdAt": "2026-10-05T18:54:05.554Z"
+    },
+    {
+      "id": "user-education-editor",
+      "name": "Ato Daniel Kebede (Education Bureau)",
+      "email": "education.editor@angolela-tera.gov.et",
+      "passwordHash": "$2b$10$w0B7q/4VnfejU7JgE48p5uqQn871Qp83xW7G/n2WjN1qTz1hO7Bqy",
+      "role": "OFFICE_EDITOR",
+      "officeId": "education-office",
+      "isActive": true,
+      "createdAt": "2026-10-05T18:54:05.554Z"
+    }
+  ],
+  "permissions": [
+    {
+      "id": "p-1",
+      "userId": "user-education-editor",
+      "resource": "NEWS",
+      "canView": true,
+      "canCreate": true,
+      "canEdit": true,
+      "canDelete": false,
+      "canPublish": false,
+      "officeScopeId": "education-office"
+    },
+    {
+      "id": "p-2",
+      "userId": "user-education-editor",
+      "resource": "SERVICES",
+      "canView": true,
+      "canCreate": true,
+      "canEdit": true,
+      "canDelete": false,
+      "canPublish": false,
+      "officeScopeId": "education-office"
+    },
+    {
+      "id": "p-3",
+      "userId": "user-education-editor",
+      "resource": "DOCUMENTS",
+      "canView": true,
+      "canCreate": true,
+      "canEdit": true,
+      "canDelete": false,
+      "canPublish": false,
+      "officeScopeId": "education-office"
+    }
+  ],
+  "tenders": [
+    {
+      "id": "tnd-01",
+      "bidNumber": "ATW/OF/01/2018",
+      "title_en": "Construction of Grade-1 Rural Health Post in Cheki Kebele",
+      "title_am": "በጨቂ ቀበሌ ደረጃ-1 የጤና ኬላ ግንባታ ግልጽ ጨረታ",
+      "title_om": "Ijaarsa Buufata Fayyaa Ganda Cakkii",
+      "procuringEntity": "Woreda Office of Health",
+      "bidBondAmount": "50,000 ETB (CPO)",
+      "documentPrice": "200 ETB Non-refundable",
+      "publishedAt": "2025-02-01T00:00:00.000Z",
+      "closingDate": "2025-04-15T10:00:00.000Z",
+      "openingDate": "2025-04-15T10:30:00.000Z",
+      "documentUrl": "/uploads/tenders/tender-01-specifications.pdf",
+      "tenderStatus": "ACTIVE",
+      "status": "PUBLISHED",
+      "createdAt": "2025-02-01T00:00:00.000Z",
+      "updatedAt": "2025-02-01T00:00:00.000Z"
+    },
+    {
+      "id": "tnd-02",
+      "bidNumber": "ATW/OF/02/2018",
+      "title_en": "Supply of High-Yield Certified Wheat & Barley Seeds for Belg Season",
+      "title_am": "ለበልግ አዝመራ የሚውሉ የተመረጡ የስንዴ እና የገብስ ዘሮች ግዥ ጨረታ",
+      "title_om": "Bittaa Sanyii Qamadii fi Garbuu Filatamaa",
+      "procuringEntity": "Woreda Office of Agriculture & Natural Resources",
+      "bidBondAmount": "80,000 ETB (CPO)",
+      "documentPrice": "300 ETB Non-refundable",
+      "publishedAt": "2025-02-10T00:00:00.000Z",
+      "closingDate": "2025-04-20T14:00:00.000Z",
+      "openingDate": "2025-04-20T14:30:00.000Z",
+      "tenderStatus": "ACTIVE",
+      "status": "PUBLISHED",
+      "createdAt": "2025-02-10T00:00:00.000Z",
+      "updatedAt": "2025-02-10T00:00:00.000Z"
+    }
+  ],
+  "inquiries": [
+    {
+      "id": "inq-1",
+      "trackingCode": "AT-GR-2026-0042",
+      "name": "Ato Girma Wolde",
+      "email": "girma.w@example.com",
+      "phone": "+251 91 123 4567",
+      "subject": "Delay in Rural Land Holding Certificate Issuance",
+      "message": "I applied for land certificate subdivision 3 weeks ago in Kotu Kebele, but processing has exceeded the citizen charter 7-day limit.",
+      "category": "grievance",
+      "status": "UNDER_REVIEW",
+      "responseNotes": "Forwarded to Rural Land Administration Desk for immediate verification and fast-track inspection.",
+      "assignedOfficeId": "land-administration-office",
+      "createdAt": "2025-03-01T00:00:00.000Z",
+      "updatedAt": "2025-03-02T00:00:00.000Z"
+    }
+  ],
+  "siteSettings": {
+    "government_name_en": "Angolela Tera Woreda Administration",
+    "government_name_am": "የአንጎሌላ ተራ ወረዳ አስተዳደር",
+    "government_name_om": "Bulchiinsa Aanaa Angolallaa Xaraa",
+    "capital_city_en": "Chacha",
+    "capital_city_am": "ጫቻ",
+    "zone_name_en": "North Shewa Zone, Amhara Region, Ethiopia",
+    "zone_name_am": "ሰሜን ሸዋ ዞን፣ አማራ ክልል፣ ኢትዮጵያ",
+    "contact_phone": "+251 (0) 58 661 0100",
+    "contact_email": "info@angolela-tera.gov.et",
+    "emergency_police": "991 / +251 58 661 0110",
+    "emergency_health": "907 / +251 58 661 0112",
+    "working_hours_en": "Monday – Friday: 8:30 AM – 5:30 PM (Closed 12:30 – 1:30 PM)",
+    "working_hours_am": "ከሰኞ – አርብ፡ ከጠዋቱ 2:30 – 11:30 (የምሳ እረፍት 6:30 – 7:30)"
+  },
+  "auditLogs": [
+    {
+      "id": "log-1791232402400-217",
+      "userId": "Miki Mekonen (Head Administrator)",
+      "userName": "Miki Mekonen (Head Administrator)",
+      "action": "UPDATE",
+      "entityType": "HomepageSection",
+      "entityId": "reorder",
+      "notes": "Reordered homepage sections sequence",
+      "createdAt": "2026-10-05T20:33:22.400Z"
+    },
+    {
+      "id": "log-1791232394898-753",
+      "userId": "Miki Mekonen (Head Administrator)",
+      "userName": "Miki Mekonen (Head Administrator)",
+      "action": "UPDATE",
+      "entityType": "HomepageSection",
+      "entityId": "reorder",
+      "notes": "Reordered homepage sections sequence",
+      "createdAt": "2026-10-05T20:33:14.898Z"
+    },
+    {
+      "id": "log-seed",
+      "userId": "user-superadmin",
+      "userName": "Chief Government Administrator",
+      "action": "SYSTEM_INITIALIZATION",
+      "entityType": "System",
+      "entityId": "root",
+      "notes": "Angolela Tera Government Digital Portal initialized successfully.",
+      "ipAddress": "127.0.0.1",
+      "createdAt": "2026-10-05T18:54:05.555Z"
+    }
+  ]
+}

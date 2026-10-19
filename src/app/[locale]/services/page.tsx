@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { setRequestLocale } from 'next-intl/server'
 import { locales, type Locale } from '@/i18n/config'
 import { notFound } from 'next/navigation'
-import { CITIZEN_SERVICES } from '@/data/mockData'
+import { getServices } from '@/lib/dataStore'
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -74,13 +74,13 @@ export default async function ServicesPage({
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {CITIZEN_SERVICES.map((srv) => {
+          {getServices().filter((s: any) => s.status !== 'ARCHIVED').map((srv: any) => {
             const title = srv[`title_${locale as Locale}`] || srv.title_en
-            const category = srv[`category_${locale as Locale}`] || srv.category_en
-            const officeName = srv[`officeName_${locale as Locale}`] || srv.officeName_en
-            const time = srv[`processingTime_${locale as Locale}`] || srv.processingTime_en
-            const cost = srv[`cost_${locale as Locale}`] || srv.cost_en
-            const desc = srv[`description_${locale as Locale}`] || srv.description_en
+            const category = srv[`category_${locale as Locale}`] || srv.category_en || srv.category
+            const officeName = srv[`officeName_${locale as Locale}`] || srv.officeName_en || srv.officeName
+            const time = srv[`processingTime_${locale as Locale}`] || srv.processingTime_en || srv.processingTime
+            const cost = srv[`cost_${locale as Locale}`] || srv.cost_en || srv.cost
+            const desc = srv[`description_${locale as Locale}`] || srv.description_en || srv.description
 
             return (
               <div

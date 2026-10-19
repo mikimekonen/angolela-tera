@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { setRequestLocale } from 'next-intl/server'
 import { locales, type Locale } from '@/i18n/config'
 import { notFound } from 'next/navigation'
+import { getInvestments } from '@/lib/dataStore'
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -16,6 +17,8 @@ export default async function InvestmentPage({
   const { locale } = await params
   if (!locales.includes(locale as Locale)) notFound()
   setRequestLocale(locale)
+
+  const dynamicInvestments = getInvestments()
 
   const content = {
     en: {
@@ -57,7 +60,6 @@ export default async function InvestmentPage({
       ],
       ctaDesk: 'Contact Investment Desk',
       ctaServices: 'Apply for Commercial Permits',
-      deskContact: 'Investment Desk: +251 (0) 58 661 0444 | investment@angolela-tera.gov.et',
     },
     am: {
       tag: 'የኢኮኖሚ ልማትና የኢንዱስትሪ ኮሪደር',
@@ -98,7 +100,6 @@ export default async function InvestmentPage({
       ],
       ctaDesk: 'የኢንቨስትመንት ዴስኩን ያነጋግሩ',
       ctaServices: 'የንግድ ፈቃድ ያመልክቱ',
-      deskContact: 'የኢንቨስትመንት ዴስክ፡ +251 (0) 58 661 0444 | investment@angolela-tera.gov.et',
     },
     om: {
       tag: 'Misooma Diinagdee fi Industirii',
@@ -122,7 +123,6 @@ export default async function InvestmentPage({
       ],
       ctaDesk: 'Kutaa Invastimantii Qunnamaa',
       ctaServices: 'Hayaama Daldalaa Galchaa',
-      deskContact: 'Bilbila: +251 (0) 58 661 0444 | investment@angolela-tera.gov.et',
     },
   }[locale as Locale]
 
@@ -149,7 +149,7 @@ export default async function InvestmentPage({
                 {content.ctaDesk}
               </Link>
               <Link
-                href={`/${locale}/services/business-permits`}
+                href={`/${locale}/services/business-license`}
                 className="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-lg transition-all"
               >
                 {content.ctaServices}
@@ -157,6 +157,82 @@ export default async function InvestmentPage({
             </div>
           </div>
         </div>
+
+        {/* Live Registered Investment Opportunities */}
+        {dynamicInvestments.length > 0 && (
+          <div className="mb-12">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <span className="text-xs font-bold text-[#1a4f8b] uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+                  Active Woreda Land Allocations
+                </span>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-[#0d2340] mt-2">
+                  {locale === 'am' ? 'ይፋ የተደረጉ የኢንቨስትመንት አማራጮች' : 'Available Commercial Land Parcels & Projects'}
+                </h2>
+              </div>
+              <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-200">
+                {dynamicInvestments.length} Active Offers
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {dynamicInvestments.map((inv) => {
+                const title = locale === 'am' ? inv.title_am || inv.title_en : inv.title_en
+                const summary = locale === 'am' ? inv.summary_am || inv.summary_en : inv.summary_en
+                const incentives = locale === 'am' ? inv.incentives_am || inv.incentives_en : inv.incentives_en
+
+                return (
+                  <div
+                    key={inv.slug}
+                    className="bg-white border-2 border-blue-100 rounded-2xl p-6 shadow-xs hover:border-[#1a4f8b] transition-all flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <span className="text-xs font-bold text-[#1a4f8b] bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200 uppercase">
+                          {inv.sector}
+                        </span>
+                        {inv.availableLandHa && (
+                          <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
+                            {inv.availableLandHa} Ha Allocated
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 className="text-base font-bold text-[#0d2340] mb-2">
+                        {title}
+                      </h3>
+
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-4">
+                        {summary}
+                      </p>
+
+                      {incentives && (
+                        <div className="bg-amber-50/70 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 mb-4">
+                          <strong className="block text-[10px] uppercase tracking-wider text-amber-800">
+                            {locale === 'am' ? 'የመንግስት ማበረታቻዎች' : 'Incentives & Tax Relief'}:
+                          </strong>
+                          {incentives}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-xs">
+                      <span className="text-gray-500 font-mono">
+                        {inv.contactPhone || '+251 58 661 0180'}
+                      </span>
+                      <Link
+                        href={`/${locale}/contact`}
+                        className="text-xs font-bold text-[#1a4f8b] hover:underline"
+                      >
+                        {locale === 'am' ? 'ማመልከቻ አስገባ →' : 'Inquire & Apply →'}
+                      </Link>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Priority Sectors */}
         <div className="mb-12">
@@ -230,15 +306,12 @@ export default async function InvestmentPage({
             ))}
           </ul>
 
-          <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-            <span className="font-mono text-gray-600">
-              {content.deskContact}
-            </span>
+          <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-end text-xs">
             <Link
               href={`/${locale}/contact`}
-              className="bg-[#1a4f8b] hover:bg-[#133a6b] text-white font-bold px-5 py-2.5 rounded-lg shadow-xs transition-colors shrink-0"
+              className="bg-[#1a4f8b] hover:bg-[#133a6b] text-white font-bold px-6 py-3 rounded-lg shadow-xs transition-colors shrink-0"
             >
-              {content.ctaDesk}
+              {content.ctaDesk} →
             </Link>
           </div>
         </div>

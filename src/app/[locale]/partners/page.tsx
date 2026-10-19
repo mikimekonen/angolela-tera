@@ -2,7 +2,7 @@ import React from 'react'
 import { setRequestLocale } from 'next-intl/server'
 import { locales, type Locale } from '@/i18n/config'
 import { notFound } from 'next/navigation'
-import { MOCK_PARTNERS } from '@/data/entityData'
+import { getPartners } from '@/lib/dataStore'
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -73,8 +73,8 @@ export default async function PartnersDirectoryPage({
         </div>
 
         {/* Partners Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {MOCK_PARTNERS.map((p) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {getPartners().filter((p: any) => p.status !== 'ARCHIVED').map((p: any) => {
             const name =
               locale === 'am' ? p.name_am || p.name_en :
               locale === 'om' ? p.name_om || p.name_en :
@@ -85,44 +85,64 @@ export default async function PartnersDirectoryPage({
               locale === 'om' ? p.description_om || p.description_en :
               p.description_en
 
+            const hasLogo = Boolean(p.logo?.url)
+
             return (
               <div
                 key={p.id}
-                className="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs hover:border-[#1a4f8b] hover:shadow-md transition-all flex flex-col justify-between"
+                className="bg-white border-2 border-gray-200/90 hover:border-[#1a4f8b] rounded-3xl p-7 sm:p-8 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-xs font-bold text-[#1a4f8b] uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
-                      {p.partnerType.replace('_', ' ')}
-                    </span>
-                    <span className="text-xs text-gray-500 font-medium">
-                      {t.since} {p.partnerSince}
-                    </span>
+                  <div className="flex items-start justify-between gap-4 mb-5">
+                    <div className="w-20 h-20 rounded-2xl bg-white border border-gray-200 p-2 shadow-xs flex items-center justify-center shrink-0">
+                      {hasLogo && p.logo?.url ? (
+                        <img
+                          src={p.logo.url}
+                          alt={name}
+                          className="w-full h-full object-contain p-1"
+                        />
+                      ) : (
+                        <div className="w-full h-full rounded-xl bg-gradient-to-br from-[#0d2340] to-[#1a4f8b] flex flex-col items-center justify-center text-white text-center p-1">
+                          <span className="text-xs font-black tracking-wider text-white">JERR</span>
+                          <span className="text-[8px] font-bold text-blue-200 uppercase tracking-widest">PLC</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex flex-col items-end gap-1.5 text-right">
+                      <span className="text-xs font-bold text-[#1a4f8b] uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+                        {p.partnerType.replace('_', ' ')}
+                      </span>
+                      <span className="text-xs text-gray-500 font-semibold bg-gray-50 border border-gray-200/80 px-2.5 py-1 rounded-lg">
+                        {p.country} 🇪🇹
+                      </span>
+                    </div>
                   </div>
 
-                  <h2 className="text-lg font-extrabold text-[#0d2340]">
+                  <h2 className="text-xl font-extrabold text-[#0d2340] leading-snug">
                     {name}
                   </h2>
 
-                  <p className="text-xs text-gray-600 mt-3 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-gray-600 mt-3 leading-relaxed">
                     {desc}
                   </p>
+                </div>
 
-                  <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
-                    <span>
-                      <strong className="text-gray-700">{t.hq}:</strong> {p.country}
-                    </span>
-                    {p.website && (
-                      <a
-                        href={p.website}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-bold text-[#1a4f8b] hover:underline"
-                      >
-                        {t.visit}
-                      </a>
-                    )}
+                <div className="mt-6 pt-5 border-t border-gray-100 flex flex-wrap items-center justify-between gap-3 text-xs text-gray-600">
+                  <div className="flex items-center gap-3">
+                    {p.phone && <span className="font-semibold text-gray-700">📞 {p.phone}</span>}
+                    {p.email && <span className="text-gray-500 hidden sm:inline">✉️ {p.email}</span>}
                   </div>
+                  {p.website && (
+                    <a
+                      href={p.website}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-bold text-[#1a4f8b] hover:text-[#0d2340] bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors"
+                    >
+                      {t.visit}
+                    </a>
+                  )}
                 </div>
               </div>
             )

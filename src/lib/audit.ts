@@ -14,6 +14,7 @@ export type AuditAction =
   | 'LOGIN'
   | 'LOGOUT'
   | 'PASSWORD_RESET'
+  | 'UPLOAD_MEDIA'
 
 interface AuditOptions {
   userId:     string

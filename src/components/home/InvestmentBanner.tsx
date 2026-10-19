@@ -13,7 +13,6 @@ export function InvestmentBanner({ locale }: InvestmentBannerProps) {
       title: 'Invest in Angolela Tera: The Highland Gateway',
       desc: 'With immediate proximity to the Addis Ababa–Debre Birhan economic highway, dependable highland water basins, and fertile agricultural land, Angolela Tera offers prime investment potential in agro-processing, dairy farming, poultry, and cold-chain logistics.',
       cta: 'Explore Investment Guide & Land Bank',
-      hotline: 'Investment Desk: +251 (0) 58 661 0444',
       advantages: [
         'Dedicated 1-Stop Licensing Desk',
         'Direct Paved Highway Access',
@@ -26,7 +25,6 @@ export function InvestmentBanner({ locale }: InvestmentBannerProps) {
       title: 'በአንጎሌላ ተራ ኢንቨስት ያድርጉ፡ የደጋማው ቀጠና በር',
       desc: 'ከአዲስ አበባ-ደብረ ብርሃን የኢኮኖሚ መስመር አጠገብ የምትገኘው አንጎሌላ ተራ ወረዳ፣ ለአግሮ-ፕሮሰሲንግ፣ ለወተትና ከብት እርባታ፣ ለዶሮ እርባታ እና ለቅዝቃዜ ማከማቻ ኢንዱስትሪዎች ተመራጭ መዳረሻ ናት።',
       cta: 'የኢንቨስትመንት መመሪያና የመሬት ባንክ',
-      hotline: 'የኢንቨስትመንት ዴስክ፡ +251 (0) 58 661 0444',
       advantages: [
         'የአንድ መስኮት የፈቃድ አሰጣጥ',
         'ቀጥታ የአስፋልት መንገድ ትስስር',
@@ -39,7 +37,6 @@ export function InvestmentBanner({ locale }: InvestmentBannerProps) {
       title: 'Angolallaa Xaraatti Invast Godhaa',
       desc: 'Daandii guddaa Finfinnee-Dabra Birhaan irratti kan argamtu ta\'uu isheetiin, qonnaa fi industiriif bakka filatamaadha.',
       cta: 'Qajeelfama Invastimantii fi Lafa',
-      hotline: 'Kutaa Invastimantii: +251 (0) 58 661 0444',
       advantages: [
         'Tajaajila Gamoo Tokkoo',
         'Daandii Asfaaltii Dhihoo',
@@ -90,10 +87,6 @@ export function InvestmentBanner({ locale }: InvestmentBannerProps) {
               </svg>
               <span>{content.cta}</span>
             </Link>
-
-            <span className="text-xs text-gray-300 font-mono bg-white/10 px-3.5 py-3 rounded-lg border border-white/10">
-              📞 {content.hotline}
-            </span>
           </div>
         </div>
       </div>

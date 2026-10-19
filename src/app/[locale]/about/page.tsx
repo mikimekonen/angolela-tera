@@ -195,10 +195,10 @@ export default async function AboutPage({
 
               <div className="pt-4 border-t border-gray-100 space-y-2">
                 <Link
-                  href={`/${locale}/offices`}
+                  href={`/${locale}/about/leadership`}
                   className="w-full text-center block bg-[#1a4f8b] hover:bg-[#133a6b] text-white text-xs font-semibold py-2.5 rounded-lg shadow-xs transition-colors"
                 >
-                  {content.ctaOffices}
+                  {content.ctaLeadership}
                 </Link>
                 <Link
                   href={`/${locale}/services`}

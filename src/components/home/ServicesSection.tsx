@@ -27,7 +27,7 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
           desc: 'Primary & secondary landholding certificates, boundary demarcation, and legal transfers.',
           time: '3–5 Working Days',
           office: 'Land Administration & Use Bureau',
-          href: `/${locale}/services/land`,
+          href: `/${locale}/services/land-certificate`,
           icon: '🗺️',
         },
         {
@@ -43,7 +43,7 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
           desc: 'New business license issuance, renewals, tax assessments, and commercial permits.',
           time: '1 Working Day',
           office: 'Trade & Industry Office',
-          href: `/${locale}/services/business-permits`,
+          href: `/${locale}/services/business-license`,
           icon: '🏪',
         },
         {
@@ -83,7 +83,7 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
           desc: 'የአርሶ አደር ይዞታ ምስክር ወረቀት፣ የወሰን ማካለል እና የይዞታ ዝውውር አገልግሎቶች።',
           time: '3–5 የስራ ቀናት',
           office: 'የመሬት አስተዳደርና አጠቃቀም ጽ/ቤት',
-          href: `/${locale}/services/land`,
+          href: `/${locale}/services/land-certificate`,
           icon: '🗺️',
         },
         {
@@ -99,7 +99,7 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
           desc: 'አዳዲስ የንግድ ፈቃድ ማውጣት፣ ማደስ፣ የግብር ግምገማ እና የህጋዊነት ማረጋገጫ።',
           time: '1 የስራ ቀን',
           office: 'የንግድና ኢንዱስትሪ ጽ/ቤት',
-          href: `/${locale}/services/business-permits`,
+          href: `/${locale}/services/business-license`,
           icon: '🏪',
         },
         {
@@ -139,7 +139,7 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
           desc: 'Ragaa qabiyyee lafaa fi kenniinsa waraqaa ragaa.',
           time: 'Guyyoota Hojii 3–5',
           office: 'Waajjira Bulchiinsa Lafaa',
-          href: `/${locale}/services/land`,
+          href: `/${locale}/services/land-certificate`,
           icon: '🗺️',
         },
         {
@@ -155,7 +155,7 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
           desc: 'Hayaama daldalaa haaraa fi haaromsuu.',
           time: 'Guyyaa Hojii 1',
           office: 'Waajjira Daldalaa fi Industirii',
-          href: `/${locale}/services/business-permits`,
+          href: `/${locale}/services/business-license`,
           icon: '🏪',
         },
         {

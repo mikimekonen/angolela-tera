@@ -99,6 +99,7 @@ model User {
   createdProjects Project[] @relation("ProjectAuthor")
   createdPages    Page[]    @relation("PageAuthor")
   mediaUploads    Media[]   @relation("MediaUploader")
+  permissions     AdminPermission[]
 
   @@map("users")
 }
@@ -173,6 +174,11 @@ model Media {
   tourismImages   TourismSite[] @relation("TourismImage")
   projectImages   Project[]  @relation("ProjectImage")
   documents       Document[] @relation("DocumentFile")
+  kebeleImages    Kebele[]   @relation("KebeleFeaturedImage")
+  companyLogos    Company[]  @relation("CompanyLogo")
+  companyCovers   Company[]  @relation("CompanyCover")
+  partnerLogos    Partner[]  @relation("PartnerLogo")
+  investmentImages InvestmentOpportunity[] @relation("InvestmentImage")
 
   @@map("media")
 }
@@ -584,3 +590,254 @@ model SearchIndex {
   @@index([title])
   @@map("search_index")
 }
+
+// =============================================================
+// KEBELE & MUNICIPAL TOWNS (Prompt #16)
+// =============================================================
+
+enum KebeleType {
+  RURAL_KEBELE
+  URBAN_TOWN
+}
+
+model Kebele {
+  id                    String        @id @default(cuid())
+  slug                  String        @unique
+  name_en               String
+  name_am               String?
+  name_om               String?
+  type                  KebeleType    @default(RURAL_KEBELE)
+  population            Int?
+  distanceFromCapitalKm Float?
+  mainAgroEcology       String?       // "Dega (Highland)", "Weyna Dega"
+  economicActivities_en String?       @db.Text
+  economicActivities_am String?       @db.Text
+  economicActivities_om String?       @db.Text
+  administratorName     String?
+  contactPhone          String?
+  featuredImageId       String?
+  displayOrder          Int           @default(0)
+  status                ContentStatus @default(PUBLISHED)
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  deletedAt             DateTime?
+
+  featuredImage         Media?        @relation("KebeleFeaturedImage", fields: [featuredImageId], references: [id])
+
+  @@map("kebeles")
+}
+
+// =============================================================
+// PRIVATE SECTOR & INDUSTRY (Prompt #7)
+// =============================================================
+
+model Company {
+  id                    String        @id @default(cuid())
+  slug                  String        @unique
+  name_en               String
+  name_am               String?
+  name_om               String?
+  category              String        // "Agro-processing", "Manufacturing", "Beverage", "Construction", "Tourism", "Mining"
+  description_en        String?       @db.Text
+  description_am        String?       @db.Text
+  description_om        String?       @db.Text
+  productsServices_en   String?       @db.Text
+  productsServices_am   String?       @db.Text
+  productsServices_om   String?       @db.Text
+  location_en           String?
+  location_am           String?
+  location_om           String?
+  establishedYear       Int?
+  employeeCount         Int?
+  investmentCapital     Decimal?      @db.Decimal(15, 2)
+  contactPhone          String?
+  contactEmail          String?
+  websiteUrl            String?
+  logoId                String?
+  coverImageId          String?
+  displayOrder          Int           @default(0)
+  status                ContentStatus @default(PUBLISHED)
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  deletedAt             DateTime?
+
+  logo                  Media?        @relation("CompanyLogo", fields: [logoId], references: [id])
+  coverImage            Media?        @relation("CompanyCover", fields: [coverImageId], references: [id])
+
+  @@map("companies")
+}
+
+// =============================================================
+// PARTNERSHIP & DEVELOPMENT PARTNERS (Prompt #8)
+// =============================================================
+
+enum PartnerType {
+  GOVERNMENT
+  NGO
+  BILATERAL
+  ACADEMIC
+  COMMUNITY
+  PRIVATE
+}
+
+model Partner {
+  id             String        @id @default(cuid())
+  slug           String        @unique
+  name_en        String
+  name_am        String?
+  name_om        String?
+  partnerType    PartnerType   @default(NGO)
+  description_en String?       @db.Text
+  description_am String?       @db.Text
+  description_om String?       @db.Text
+  focusAreas_en  String?       @db.Text
+  focusAreas_am  String?       @db.Text
+  focusAreas_om  String?       @db.Text
+  websiteUrl     String?
+  contactEmail   String?
+  contactPhone   String?
+  logoId         String?
+  displayOrder   Int           @default(0)
+  status         ContentStatus @default(PUBLISHED)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  deletedAt      DateTime?
+
+  logo           Media?        @relation("PartnerLogo", fields: [logoId], references: [id])
+
+  @@map("partners")
+}
+
+// =============================================================
+// INVESTMENT PORTAL & OPPORTUNITIES (Prompt #9)
+// =============================================================
+
+model InvestmentOpportunity {
+  id                    String        @id @default(cuid())
+  slug                  String        @unique
+  title_en              String
+  title_am              String?
+  title_om              String?
+  sector                String        // "Agriculture", "Agro-processing", "Renewable Energy", "Manufacturing", "Tourism"
+  summary_en            String?       @db.Text
+  summary_am            String?       @db.Text
+  summary_om            String?       @db.Text
+  description_en        String?       @db.Text
+  description_am        String?       @db.Text
+  description_om        String?       @db.Text
+  availableLandHa       Decimal?      @db.Decimal(10, 2)
+  incentives_en         String?       @db.Text
+  incentives_am         String?       @db.Text
+  incentives_om         String?       @db.Text
+  procedures_en         String?       @db.Text
+  procedures_am         String?       @db.Text
+  procedures_om         String?       @db.Text
+  contactPerson         String?
+  contactPhone          String?
+  contactEmail          String?
+  featuredImageId       String?
+  displayOrder          Int           @default(0)
+  status                ContentStatus @default(PUBLISHED)
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  deletedAt             DateTime?
+
+  featuredImage         Media?        @relation("InvestmentImage", fields: [featuredImageId], references: [id])
+
+  @@map("investment_opportunities")
+}
+
+// =============================================================
+// HOMEPAGE SECTION MANAGEMENT (Prompt #28)
+// =============================================================
+
+model HomepageSectionConfig {
+  id           String   @id @default(cuid())
+  sectionKey   String   @unique // "hero", "action_finder", "at_a_glance", "services", "companies", "partners", "leadership", "investment", "news", "gallery"
+  title_en     String?
+  title_am     String?
+  title_om     String?
+  isEnabled    Boolean  @default(true)
+  displayOrder Int      @default(0)
+  updatedAt    DateTime @updatedAt
+
+  @@map("homepage_section_configs")
+}
+
+// =============================================================
+// SITE NAVIGATION & MENUS (Prompt #29)
+// =============================================================
+
+model NavigationItem {
+  id           String           @id @default(cuid())
+  label_en     String
+  label_am     String?
+  label_om     String?
+  url          String
+  parentId     String?
+  displayOrder Int              @default(0)
+  isActive     Boolean          @default(true)
+  isExternal   Boolean          @default(false)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  parent       NavigationItem?  @relation("MenuHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children     NavigationItem[] @relation("MenuHierarchy")
+
+  @@map("navigation_items")
+}
+
+// =============================================================
+// GRANULAR ADMIN PERMISSIONS & OFFICE SCOPE (Prompt #20-23)
+// =============================================================
+
+model AdminPermission {
+  id            String   @id @default(cuid())
+  userId        String
+  resource      String   // "NEWS", "OFFICES", "SERVICES", "DOCUMENTS", "PROJECTS", "COMPANIES", "PARTNERS", "INVESTMENTS", "KEBELES", "LEADERSHIP", "SETTINGS", "USERS"
+  canView       Boolean  @default(true)
+  canCreate     Boolean  @default(false)
+  canEdit       Boolean  @default(false)
+  canDelete     Boolean  @default(false)
+  canPublish    Boolean  @default(false)
+  officeScopeId String?  // Optional office ID restriction (e.g., Education Office only)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, resource])
+  @@index([userId])
+  @@map("admin_permissions")
+}
+
+// =============================================================
+// PUBLIC PROCUREMENT TENDERS (Civic Transparency Module)
+// =============================================================
+
+model Tender {
+  id              String        @id @default(cuid())
+  bidNumber       String        @unique // e.g. "ATW/OF/01/2018"
+  title_en        String
+  title_am        String?
+  title_om        String?
+  description_en  String?       @db.Text
+  description_am  String?       @db.Text
+  description_om  String?       @db.Text
+  procuringEntity String        // e.g. "Office of Agriculture and Natural Resources"
+  bidBondAmount   String?       // e.g. "50,000 ETB (CPO)"
+  documentPrice   String?       // e.g. "200 ETB Non-refundable"
+  publishedAt     DateTime      @default(now())
+  closingDate     DateTime
+  openingDate     DateTime?
+  documentUrl     String?
+  tenderStatus    String        @default("ACTIVE") // "ACTIVE", "EVALUATING", "AWARDED", "CANCELLED"
+  status          ContentStatus @default(PUBLISHED)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  deletedAt       DateTime?
+
+  @@index([tenderStatus, closingDate])
+  @@map("tenders")
+}
+

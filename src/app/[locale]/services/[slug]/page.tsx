@@ -3,13 +3,36 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { setRequestLocale } from 'next-intl/server'
 import { locales, type Locale } from '@/i18n/config'
-import { CITIZEN_SERVICES, SECTOR_OFFICES } from '@/data/mockData'
+import { getServices, getServiceBySlug, getOffices } from '@/lib/dataStore'
+
+const SLUG_ALIASES: Record<string, string> = {
+  'land': 'land-certificate',
+  'business-permits': 'business-license',
+  'business': 'business-license',
+  'tax': 'business-license',
+  'agricultural-inputs': 'agriculture',
+  'social': 'health-insurance',
+}
 
 export function generateStaticParams() {
   const params: { locale: string; slug: string }[] = []
+  const services = getServices()
+  const slugSet = new Set<string>()
+
+  for (const service of services) {
+    if (service.slug) {
+      slugSet.add(service.slug)
+    }
+  }
+
+  // Include aliases so Next.js static generation pre-renders alias URLs cleanly
+  for (const alias of Object.keys(SLUG_ALIASES)) {
+    slugSet.add(alias)
+  }
+
   for (const locale of locales) {
-    for (const service of CITIZEN_SERVICES) {
-      params.push({ locale, slug: service.slug })
+    for (const slug of slugSet) {
+      params.push({ locale, slug })
     }
   }
   return params
@@ -24,10 +47,12 @@ export default async function ServiceDetailPage({
   if (!locales.includes(locale as Locale)) notFound()
   setRequestLocale(locale)
 
-  const service = CITIZEN_SERVICES.find((s) => s.slug === slug)
+  const resolvedSlug = SLUG_ALIASES[slug] || slug
+  const service = (getServiceBySlug(resolvedSlug) || getServices().find((s: any) => s.slug === resolvedSlug || s.id === resolvedSlug)) as any
   if (!service) notFound()
 
-  const linkedOffice = SECTOR_OFFICES.find((o) => o.slug === service.officeSlug)
+  const offices = getOffices()
+  const linkedOffice = offices.find((o: any) => o.slug === service.officeSlug || o.id === service.officeId)
 
   const title = service[`title_${locale as Locale}`] || service.title_en
   const category = service[`category_${locale as Locale}`] || service.category_en
@@ -35,8 +60,8 @@ export default async function ServiceDetailPage({
   const time = service[`processingTime_${locale as Locale}`] || service.processingTime_en
   const cost = service[`cost_${locale as Locale}`] || service.cost_en
   const desc = service[`description_${locale as Locale}`] || service.description_en
-  const requirements = service[`requirements_${locale as Locale}`] || service.requirements_en
-  const steps = service[`steps_${locale as Locale}`] || service.steps_en
+  const requirements: string[] = (service[`requirements_${locale as Locale}`] || service.requirements_en || [])
+  const steps: string[] = (service[`steps_${locale as Locale}`] || service.steps_en || [])
 
   const content = {
     en: {
@@ -141,7 +166,7 @@ export default async function ServiceDetailPage({
               </h2>
 
               <div className="space-y-4">
-                {steps.map((step, idx) => (
+                {steps.map((step: string, idx: number) => (
                   <div key={idx} className="flex items-start gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
                     <span className="h-7 w-7 rounded-full bg-[#1a4f8b] text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 shadow-xs">
                       {idx + 1}
@@ -161,7 +186,7 @@ export default async function ServiceDetailPage({
               </h2>
 
               <ul className="space-y-3">
-                {requirements.map((req, idx) => (
+                {requirements.map((req: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-3 text-sm text-gray-700">
                     <span className="h-5 w-5 rounded-md bg-amber-50 text-[#c8931a] flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 border border-amber-200">
                       📄
@@ -221,7 +246,7 @@ export default async function ServiceDetailPage({
               {linkedOffice && (
                 <div className="pt-3 border-t border-gray-100">
                   <Link
-                    href={`/${locale}/offices/${linkedOffice.slug}`}
+                    href={`/${locale}/contact`}
                     className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1a4f8b] hover:text-[#c8931a] transition-colors"
                   >
                     <span>{content.viewBureau}</span>

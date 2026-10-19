@@ -20,7 +20,7 @@ export function Footer({ locale }: FooterProps) {
       health: 'Chacha Primary Hospital: +251 (0) 58 661 0222',
       fire: 'Disaster Prevention: +251 (0) 58 661 0333',
       quickLinks: 'Public Services',
-      officesTitle: 'Key Sector Offices',
+      officesTitle: 'Economy & Enterprise Hub',
       workingHours: 'Working Hours',
       hoursDetail: 'Monday – Friday: 8:30 AM – 5:30 PM (Lunch break: 12:30 PM – 1:30 PM)',
       rights: 'All rights reserved. Official Portal of Angolela Tera Woreda.',
@@ -37,7 +37,7 @@ export function Footer({ locale }: FooterProps) {
       health: 'የጫቻ የመጀመሪያ ደረጃ ሆስፒታል፡ +251 (0) 58 661 0222',
       fire: 'የአደጋ መከላከልና ዝግጁነት፡ +251 (0) 58 661 0333',
       quickLinks: 'የህዝብ አገልግሎቶች',
-      officesTitle: 'ዋና ዋና ሴክተር መስሪያ ቤቶች',
+      officesTitle: 'ኢኮኖሚና የግል ድርጅቶች',
       workingHours: 'የስራ ሰዓት',
       hoursDetail: 'ከሰኞ – አርብ፡ ከጠዋቱ 2:30 – 11:30 (የምሳ እረፍት ከ 6:30 – 7:30)',
       rights: 'መብቱ በህግ የተጠበቀ ነው። የአንጎሌላ ተራ ወረዳ ይፋዊ ፖርታል።',
@@ -54,7 +54,7 @@ export function Footer({ locale }: FooterProps) {
       health: 'Hospitaala Sad. 1ffaa Caaccetti: +251 (0) 58 661 0222',
       fire: 'Ittisa Balaa: +251 (0) 58 661 0333',
       quickLinks: 'Tajaajiloota Uummataa',
-      officesTitle: 'Waajjiroota Ijoo',
+      officesTitle: 'Dinagdee fi Dhaabbilee',
       workingHours: 'Sa\'aatii Hojii',
       hoursDetail: 'Wiixata – Jimmata: Ganama 2:30 – 11:30 (Boqonnaa Guyyaa 6:30 – 7:30)',
       rights: 'Mirgi qopheessaa seeraan eeggamaadha. Fuula Aanaa Angolallaa Xaraa.',
@@ -103,7 +103,7 @@ export function Footer({ locale }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/services/land`} className="hover:text-[#FED100] transition-colors flex items-center gap-1.5">
+                <Link href={`/${locale}/services/land-certificate`} className="hover:text-[#FED100] transition-colors flex items-center gap-1.5">
                   <span className="text-[#c8931a]">›</span> Rural Land Holding Registration
                 </Link>
               </li>
@@ -113,7 +113,7 @@ export function Footer({ locale }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/services/business-permits`} className="hover:text-[#FED100] transition-colors flex items-center gap-1.5">
+                <Link href={`/${locale}/services/business-license`} className="hover:text-[#FED100] transition-colors flex items-center gap-1.5">
                   <span className="text-[#c8931a]">›</span> Trade Licensing & Tax Advisory
                 </Link>
               </li>
@@ -130,40 +130,40 @@ export function Footer({ locale }: FooterProps) {
             </ul>
           </div>
 
-          {/* Column 3: Key Sector Offices */}
+          {/* Column 3: Economy & Enterprise Hub */}
           <div className="space-y-3">
             <h3 className="text-white font-semibold text-sm uppercase tracking-wider border-b border-white/10 pb-2">
               {content.officesTitle}
             </h3>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link href={`/${locale}/offices`} className="hover:text-[#FED100] transition-colors">
-                  Office of the Chief Administrator
+                <Link href={`/${locale}/companies`} className="hover:text-[#FED100] transition-colors">
+                  {locale === 'am' ? 'የግል ድርጅቶችና ፋብሪካዎች' : locale === 'om' ? 'Warshaalee fi Dhaabbilee' : 'Private Industries & Enterprises'}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/offices`} className="hover:text-[#FED100] transition-colors">
-                  Agriculture & Rural Development Office
+                <Link href={`/${locale}/investment`} className="hover:text-[#FED100] transition-colors">
+                  {locale === 'am' ? 'የኢንቨስትመንት መመሪያ' : locale === 'om' ? 'Qajeelfama Invastimantii' : 'Industrial Investment Guide'}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/offices`} className="hover:text-[#FED100] transition-colors">
-                  Trade, Industry & Market Development
+                <Link href={`/${locale}/kebeles`} className="hover:text-[#FED100] transition-colors">
+                  {locale === 'am' ? '19ቱ የገጠርና ከተማ ቀበሌዎች' : locale === 'om' ? 'Gandoolee 19 Bulchiinsaa' : '19 Kebele Administrations'}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/offices`} className="hover:text-[#FED100] transition-colors">
-                  Land Administration & Environmental Protection
+                <Link href={`/${locale}/about/leadership`} className="hover:text-[#FED100] transition-colors">
+                  {locale === 'am' ? 'የወረዳው ካቢኔ አመራር' : locale === 'om' ? 'Hoggansa Ol\'aanaa Aanaa' : 'Woreda Cabinet Leadership'}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/offices`} className="hover:text-[#FED100] transition-colors">
-                  Education & Vocational Bureau
+                <Link href={`/${locale}/development`} className="hover:text-[#FED100] transition-colors">
+                  {locale === 'am' ? 'የልማት ፕሮጀክቶች' : locale === 'om' ? 'Piroojektii Misoomaa' : 'Capital Development Projects'}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/offices`} className="hover:text-[#FED100] transition-colors">
-                  Health & Disease Prevention Office
+                <Link href={`/${locale}/partners`} className="hover:text-[#FED100] transition-colors">
+                  {locale === 'am' ? 'አጋር ድርጅቶች' : locale === 'om' ? 'Dhaabbilee Deeggartootaa' : 'Development Partners'}
                 </Link>
               </li>
             </ul>

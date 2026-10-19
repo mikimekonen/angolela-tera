@@ -1,9 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { setRequestLocale } from 'next-intl/server'
 import { locales, type Locale } from '@/i18n/config'
 import { notFound } from 'next/navigation'
-import { SECTOR_OFFICES } from '@/data/mockData'
+import { OFFICIAL_LEADERS } from '@/data/leadershipData'
+import { ExternalLink, ShieldCheck, Award } from 'lucide-react'
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -20,37 +22,31 @@ export default async function LeadershipPage({
 
   const content = {
     en: {
-      tag: 'Executive Governance & Cabinet',
+      tag: 'Executive Governance & Party Secretariat',
       title: 'Woreda Leadership & Administration Cabinet',
-      subtitle: 'The executive committee and bureau leadership driving public service delivery, good governance, and economic growth in Angolela Tera.',
-      chiefTitle: 'Chief Administrator of Angolela Tera Woreda',
-      chiefName: 'Ato Tadesse Mengesha (Chief Administrator)',
-      chiefBio:
-        'Overseeing all executive bureaus, kebele administrative councils, and security coordination across the woreda. Leading strategic reforms in digital governance, agricultural investment, and public resource transparency.',
-      cabinetTitle: 'Sector Cabinet Members & Bureau Directors',
+      subtitle:
+        'The highest executive committee and ruling party leadership directing public policies, peace and security, budget management, and regional development programs across Angolela Tera Woreda.',
+      topSectionTitle: 'Executive Leadership & Secretariat Roster',
       viewOffice: 'View Office Profile',
+      verifiedSource: 'Verified Official Post',
     },
     am: {
-      tag: 'አስፈጻሚ አመራርና ካቢኔ',
+      tag: 'አስፈጻሚ አመራርና የፓርቲ ጽህፈት ቤት',
       title: 'የወረዳው አመራርና አስፈጻሚ ካቢኔ',
-      subtitle: 'በአንጎሌላ ተራ ወረዳ የህዝብ አገልግሎትን፣ መልካም አስተዳደርንና የልማት ስራዎችን የሚመሩ የካቢኔ አባላትና የቢሮ ኃላፊዎች።',
-      chiefTitle: 'የአንጎሌላ ተራ ወረዳ ዋና አስተዳዳሪ',
-      chiefName: 'አቶ ታደሰ መንገሻ (ዋና አስተዳዳሪ)',
-      chiefBio:
-        'ሁሉንም ሴክተር መስሪያ ቤቶች፣ የቀበሌ አስተዳደር ምክር ቤቶችንና የጸጥታ መዋቅሩን በበላይነት ይመራሉ። በዲጂታል አገልግሎት፣ በግብርና ልማትና በህዝብ ሀብት አጠቃቀም ግልጽነት ላይ ያተኮሩ ማሻሻያዎችን በመምራት ላይ ይገኛሉ።',
-      cabinetTitle: 'የካቢኔ አባላትና የሴክተር መምሪያ ኃላፊዎች',
+      subtitle:
+        'በአንጎሌላ ተራ ወረዳ የህዝብ አገልግሎትን፣ ሰላምና ጸጥታን፣ የበጀት አስተዳደርንና የልማት ፕሮግራሞችን በበላይነት የሚመሩ የወረዳው ከፍተኛ የመንግስትና የፓርቲ አመራሮች።',
+      topSectionTitle: 'የወረዳው ከፍተኛ አመራሮች ዝርዝር',
       viewOffice: 'የቢሮውን ሙሉ መረጃ ይመልከቱ',
+      verifiedSource: 'የተረጋገጠ ይፋዊ መረጃ',
     },
     om: {
       tag: 'Hoggansa fi Kaabinee',
       title: 'Hoggantoota Aanaa fi Kaabinee',
-      subtitle: 'Hoggantoota tajaajila uummataa fi misooma aanaa gaggeessan.',
-      chiefTitle: 'Bulchaa Ol\'aanaa Aanaa',
-      chiefName: 'Obbo Taaddasaa Mangashaa (Bulchaa Ol\'aanaa)',
-      chiefBio:
-        'Waajjiroota hundumaa fi gandoolee 19 bulcha. Misooma qonnaa fi tajaajila iftoomina qabuuf hojjeta.',
-      cabinetTitle: 'Miseensota Kaabinee fi Itti Gaafatamtoota',
+      subtitle:
+        'Hoggantoota tajaajila uummataa, nageenya, bulchiinsa baajataa fi misooma aanaa gaggeessan.',
+      topSectionTitle: 'Hoggantoota Ol\'aanaa Aanaa',
       viewOffice: 'Odeeffannoo Waajjiraa Ilaali',
+      verifiedSource: 'Odeeffannoo Mirkanaa\'aa',
     },
   }[locale as Locale]
 
@@ -72,71 +68,143 @@ export default async function LeadershipPage({
           </div>
         </div>
 
-        {/* Chief Administrator Card */}
-        <div className="bg-gradient-to-r from-[#0d2340] via-[#1a4f8b] to-[#0d2340] text-white rounded-2xl p-6 sm:p-10 mb-12 shadow-md">
-          <div className="max-w-3xl">
-            <span className="text-xs font-bold text-[#FED100] uppercase tracking-wider bg-white/10 px-3 py-1 rounded-full border border-white/20">
-              Executive Leadership
-            </span>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight mt-3">
-              {content.chiefName}
+        {/* Section 1: The 4 Top Executive Leaders */}
+        <div className="mb-14">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#0d2340]">
+              {content.topSectionTitle}
             </h2>
-            <p className="text-xs sm:text-sm text-[#FED100] font-semibold mt-1">
-              {content.chiefTitle}
-            </p>
-            <p className="text-xs sm:text-sm text-gray-200 mt-4 leading-relaxed">
-              {content.chiefBio}
-            </p>
+            <span className="text-xs font-semibold text-[#1a4f8b] bg-blue-50 border border-blue-100 px-3 py-1 rounded-full">
+              4 Official Executive Leaders
+            </span>
           </div>
-        </div>
 
-        {/* Cabinet Members Grid */}
-        <div>
-          <h2 className="text-xl sm:text-2xl font-extrabold text-[#0d2340] mb-6">
-            {content.cabinetTitle}
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SECTOR_OFFICES.map((office) => {
-              const name = office[`name_${locale as Locale}`] || office.name_en
-              const head = office[`head_${locale as Locale}`] || office.head_en
-              const headTitle = office[`headTitle_${locale as Locale}`] || office.headTitle_en
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {OFFICIAL_LEADERS.map((leader, idx) => {
+              const name =
+                locale === 'am' ? leader.name_am : locale === 'om' ? leader.name_om : leader.name_en
+              const secondaryName = locale === 'am' ? leader.name_en : leader.name_am
+              const title =
+                locale === 'am' ? leader.title_am : locale === 'om' ? leader.title_om : leader.title_en
+              const category =
+                locale === 'am' ? leader.category_am : locale === 'om' ? leader.category_om : leader.category_en
+              const bio =
+                locale === 'am' ? leader.bio_am : locale === 'om' ? leader.bio_om : leader.bio_en
+              const office =
+                locale === 'am' ? leader.office_am : locale === 'om' ? leader.office_om : leader.office_en
+              const portfolios =
+                locale === 'am' ? leader.portfolios_am : locale === 'om' ? leader.portfolios_om : leader.portfolios_en
 
               return (
                 <div
-                  key={office.slug}
-                  className="bg-white border border-gray-200 rounded-xl p-6 shadow-xs hover:border-[#1a4f8b] transition-all flex flex-col justify-between"
+                  key={leader.id}
+                  className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-md hover:border-[#1a4f8b]/40 transition-all flex flex-col justify-between"
                 >
                   <div>
-                    <span className="h-10 w-10 rounded-full bg-blue-50 text-[#1a4f8b] flex items-center justify-center text-lg font-bold mb-3">
-                      👤
-                    </span>
-                    <h3 className="text-base font-bold text-[#0d2340]">
-                      {head}
-                    </h3>
-                    <p className="text-xs text-[#c8931a] font-semibold mt-0.5">
-                      {headTitle}
+                    {/* Header: Photo + Name + Role */}
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="relative w-20 h-20 rounded-2xl overflow-hidden border-2 border-[#c8931a]/60 shadow-md shrink-0 bg-[#0d2340]">
+                        <Image
+                          src={leader.photo}
+                          alt={leader.name_en}
+                          fill
+                          sizes="80px"
+                          className="object-cover object-top"
+                        />
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-[#1a4f8b] border border-blue-100">
+                            #{idx + 1}
+                          </span>
+                          <span className="text-[11px] font-semibold text-gray-500 truncate">
+                            {category}
+                          </span>
+                        </div>
+                        <h3 className="text-lg font-bold text-[#0d2340] leading-tight">
+                          {name}
+                        </h3>
+                        <p className="text-xs text-gray-500 font-medium">
+                          {secondaryName}
+                        </p>
+                        <p className="text-xs font-bold text-[#c8931a] mt-1">
+                          {title}
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-gray-400 font-medium mb-3">
+                      {office}
                     </p>
-                    <p className="text-xs text-gray-600 mt-2 font-medium">
-                      {name}
+
+                    {/* Bio */}
+                    <p className="text-xs sm:text-sm text-gray-700 leading-relaxed italic bg-gray-50 border-l-2 border-[#c8931a] p-3 rounded-r-lg mb-4">
+                      &ldquo;{bio}&rdquo;
                     </p>
+
+                    {/* Responsibilities */}
+                    <div className="space-y-1.5 mb-4">
+                      {portfolios.map((p, pIdx) => (
+                        <div key={pIdx} className="flex items-center gap-2 text-xs text-gray-600">
+                          <span className="text-emerald-600 text-sm">✓</span>
+                          <span>{p}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-xs">
-                    <span className="text-gray-400 font-mono">
-                      {office.phone}
-                    </span>
-                    <Link
-                      href={`/${locale}/offices/${office.slug}`}
-                      className="font-bold text-[#1a4f8b] hover:text-[#c8931a] transition-colors"
-                    >
-                      {content.viewOffice} →
-                    </Link>
-                  </div>
+                  {/* Official Verification & Authority badge */}
+                  {leader.sourceUrl && (
+                    <div className="pt-3.5 border-t border-gray-100 flex items-center justify-between text-xs">
+                      <span className="text-[11px] font-medium text-gray-500">
+                        Angolela Tera Woreda
+                      </span>
+                      <a
+                        href={leader.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#1a4f8b] hover:text-[#c8931a] hover:underline"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>{content.verifiedSource}</span>
+                      </a>
+                    </div>
+                  )}
                 </div>
               )
             })}
           </div>
+        </div>
+
+        {/* Leadership Contact & Citizen Petitions Desk */}
+        <div className="mt-12 bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xs">
+          <div className="space-y-1 text-center sm:text-left">
+            <h3 className="text-base sm:text-lg font-bold text-[#0d2340]">
+              {locale === 'am'
+                ? 'ከወረዳው ከፍተኛ አመራር ጋር መገናኘት ይፈልጋሉ?'
+                : locale === 'om'
+                ? 'Hoggantoota aanaa waliin wal-qunnamuu barbaadduu?'
+                : 'Need to contact or petition the Woreda Executive Leadership?'}
+            </h3>
+            <p className="text-xs text-gray-500">
+              {locale === 'am'
+                ? 'የቀጠሮ ጥያቄዎችን፣ አቤቱታዎችን ወይም ይፋዊ መልዕክቶችን በወረዳው ቅሬታና ህዝብ ግንኙነት መስኮት ማቅረብ ይችላሉ።'
+                : locale === 'om'
+                ? 'Iyyannoo ykn beellama hoggansaatiif kutaa komii fi qunnamtii uummataa fayyadamaa.'
+                : 'Submit formal petitions, appointment requests, or citizen grievances directly to the Executive Secretariat Desk.'}
+            </p>
+          </div>
+          <Link
+            href={`/${locale}/contact`}
+            className="bg-[#1a4f8b] hover:bg-[#133a6b] text-white text-xs font-bold px-5 py-3 rounded-xl transition-all shadow-xs shrink-0"
+          >
+            {locale === 'am'
+              ? 'የህዝብ ቅሬታና ግንኙነት መስኮት →'
+              : locale === 'om'
+              ? 'Kutaa Qunnamtii Uummataa →'
+              : 'Citizen Grievance & Secretariat Desk →'}
+          </Link>
         </div>
       </div>
     </div>

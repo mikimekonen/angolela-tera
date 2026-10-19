@@ -471,3 +471,156 @@ export interface AnnouncementItem {
   expiresAt?: Date
   createdAt: Date
 }
+
+// ------------------------------------------------------------------
+// KEBELES & MUNICIPAL TOWNS
+// ------------------------------------------------------------------
+
+export type KebeleType = 'RURAL_KEBELE' | 'URBAN_TOWN'
+
+export interface KebeleItem {
+  id: string
+  slug: string
+  name_en: string
+  name_am?: string
+  name_om?: string
+  type: KebeleType
+  population?: number
+  distanceFromCapitalKm?: number
+  mainAgroEcology?: string
+  economicActivities_en?: string
+  economicActivities_am?: string
+  economicActivities_om?: string
+  administratorName?: string
+  contactPhone?: string
+  featuredImageId?: string
+  displayOrder: number
+  status: ContentStatus
+  createdAt: Date
+  updatedAt: Date
+}
+
+// ------------------------------------------------------------------
+// INVESTMENT OPPORTUNITIES
+// ------------------------------------------------------------------
+
+export interface InvestmentOpportunityItem {
+  id: string
+  slug: string
+  title_en: string
+  title_am?: string
+  title_om?: string
+  sector: string
+  summary_en?: string
+  summary_am?: string
+  summary_om?: string
+  description_en?: string
+  description_am?: string
+  description_om?: string
+  availableLandHa?: number
+  incentives_en?: string
+  incentives_am?: string
+  incentives_om?: string
+  procedures_en?: string
+  procedures_am?: string
+  procedures_om?: string
+  contactPerson?: string
+  contactPhone?: string
+  contactEmail?: string
+  featuredImageId?: string
+  displayOrder: number
+  status: ContentStatus
+  createdAt: Date
+  updatedAt: Date
+}
+
+// ------------------------------------------------------------------
+// HOMEPAGE SECTIONS CONFIGURATION
+// ------------------------------------------------------------------
+
+export interface HomepageSectionConfigItem {
+  id: string
+  sectionKey: string
+  title_en?: string
+  title_am?: string
+  title_om?: string
+  isEnabled: boolean
+  displayOrder: number
+  updatedAt: Date
+}
+
+// ------------------------------------------------------------------
+// NAVIGATION MENU ITEMS
+// ------------------------------------------------------------------
+
+export interface NavigationMenuItem {
+  id: string
+  label_en: string
+  label_am?: string
+  label_om?: string
+  url: string
+  parentId?: string | null
+  displayOrder: number
+  isActive: boolean
+  isExternal: boolean
+  children?: NavigationMenuItem[]
+}
+
+// ------------------------------------------------------------------
+// GRANULAR ADMIN PERMISSIONS
+// ------------------------------------------------------------------
+
+export type AdminResource =
+  | 'NEWS'
+  | 'OFFICES'
+  | 'SERVICES'
+  | 'DOCUMENTS'
+  | 'PROJECTS'
+  | 'COMPANIES'
+  | 'PARTNERS'
+  | 'INVESTMENTS'
+  | 'KEBELES'
+  | 'LEADERSHIP'
+  | 'SETTINGS'
+  | 'USERS'
+  | 'HOMEPAGE'
+  | 'MENUS'
+
+export interface AdminPermissionItem {
+  id: string
+  userId: string
+  resource: AdminResource
+  canView: boolean
+  canCreate: boolean
+  canEdit: boolean
+  canDelete: boolean
+  canPublish: boolean
+  officeScopeId?: string | null
+}
+
+// ------------------------------------------------------------------
+// TENDERS & PROCUREMENT
+// ------------------------------------------------------------------
+
+export interface TenderItem {
+  id: string
+  bidNumber: string
+  title_en: string
+  title_am?: string
+  title_om?: string
+  description_en?: string
+  description_am?: string
+  description_om?: string
+  procuringEntity: string
+  bidBondAmount?: string
+  documentPrice?: string
+  publishedAt: Date
+  closingDate: Date
+  openingDate?: Date
+  documentUrl?: string
+  tenderStatus: 'ACTIVE' | 'EVALUATING' | 'AWARDED' | 'CANCELLED'
+  status: ContentStatus
+  createdAt: Date
+  updatedAt: Date
+}
+
