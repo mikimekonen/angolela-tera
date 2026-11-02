@@ -25,7 +25,6 @@ export default function AdminPartnersPage() {
   // Form states
   const [nameEn, setNameEn] = useState('')
   const [nameAm, setNameAm] = useState('')
-  const [nameOm, setNameOm] = useState('')
   const [partnerType, setPartnerType] = useState<PartnerType>('DEVELOPMENT_PARTNER')
   const [country, setCountry] = useState('Ethiopia')
   const [website, setWebsite] = useState('')
@@ -34,7 +33,6 @@ export default function AdminPartnersPage() {
   const [partnerSince, setPartnerSince] = useState('')
   const [descriptionEn, setDescriptionEn] = useState('')
   const [descriptionAm, setDescriptionAm] = useState('')
-  const [descriptionOm, setDescriptionOm] = useState('')
   const [logoUrl, setLogoUrl] = useState('')
 
   const fetchPartners = async () => {
@@ -60,7 +58,6 @@ export default function AdminPartnersPage() {
     setEditingPartner(null)
     setNameEn('')
     setNameAm('')
-    setNameOm('')
     setPartnerType('DEVELOPMENT_PARTNER')
     setCountry('Ethiopia')
     setWebsite('')
@@ -69,7 +66,6 @@ export default function AdminPartnersPage() {
     setPartnerSince('')
     setDescriptionEn('')
     setDescriptionAm('')
-    setDescriptionOm('')
     setLogoUrl('')
   }
 
@@ -82,7 +78,6 @@ export default function AdminPartnersPage() {
     setEditingPartner(p)
     setNameEn(p.name_en)
     setNameAm(p.name_am || '')
-    setNameOm(p.name_om || '')
     setPartnerType(p.partnerType)
     setCountry(p.country || 'Ethiopia')
     setWebsite(p.website || '')
@@ -91,7 +86,6 @@ export default function AdminPartnersPage() {
     setPartnerSince(p.partnerSince || '')
     setDescriptionEn(p.description_en || '')
     setDescriptionAm(p.description_am || '')
-    setDescriptionOm(p.description_om || '')
     setLogoUrl(p.logo?.url || '')
     setShowModal(true)
   }
@@ -105,7 +99,6 @@ export default function AdminPartnersPage() {
       const payload: any = {
         name_en: nameEn.trim(),
         name_am: nameAm.trim() || undefined,
-        name_om: nameOm.trim() || undefined,
         partnerType,
         country: country.trim() || undefined,
         website: website.trim() || undefined,
@@ -114,7 +107,6 @@ export default function AdminPartnersPage() {
         partnerSince: partnerSince.trim() || undefined,
         description_en: descriptionEn.trim() || undefined,
         description_am: descriptionAm.trim() || undefined,
-        description_om: descriptionOm.trim() || undefined,
       }
 
       if (editingPartner) {
@@ -347,7 +339,7 @@ export default function AdminPartnersPage() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="sm:col-span-2">
+                <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
                     Partner Organization Name (English) *
                   </label>
@@ -370,19 +362,6 @@ export default function AdminPartnersPage() {
                     value={nameAm}
                     onChange={(e) => setNameAm(e.target.value)}
                     placeholder="ለምሳሌ: ደብረ ብርሃን ዩኒቨርሲቲ — የምርምር አጋርነት"
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">
-                    Maqaa Dhaabbata Hiriyyummaa (Afaan Oromoo)
-                  </label>
-                  <input
-                    type="text"
-                    value={nameOm}
-                    onChange={(e) => setNameOm(e.target.value)}
-                    placeholder="fkn: Yuniversiitii Dabra Birhan"
                     className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
                   />
                 </div>
@@ -474,32 +453,17 @@ export default function AdminPartnersPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">
-                    የትብብር ዘርፍና ዝርዝር (Amharic)
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={descriptionAm}
-                    onChange={(e) => setDescriptionAm(e.target.value)}
-                    placeholder="ከትብብሩ የሚገኙ ጥቅሞችና የጋራ ስራዎች..."
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">
-                    Balbalina Qindoominaa (Afaan Oromoo)
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={descriptionOm}
-                    onChange={(e) => setDescriptionOm(e.target.value)}
-                    placeholder="Ibsa qindoominaa..."
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
-                  />
-                </div>
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1">
+                  የትብብር ዘርፍና ዝርዝር (Amharic)
+                </label>
+                <textarea
+                  rows={2}
+                  value={descriptionAm}
+                  onChange={(e) => setDescriptionAm(e.target.value)}
+                  placeholder="ከትብብሩ የሚገኙ ጥቅሞችና የጋራ ስራዎች..."
+                  className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
+                />
               </div>
 
               <div className="pt-3 border-t border-gray-100 flex items-center justify-end gap-3">

@@ -107,7 +107,7 @@ export default function AdminSettingsPage() {
               1. Institutional Identity & Government Naming
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1">
                   Official Entity Name (English)
@@ -128,18 +128,6 @@ export default function AdminSettingsPage() {
                   type="text"
                   value={settings.government_name_am || ''}
                   onChange={(e) => handleChange('government_name_am', e.target.value)}
-                  className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">
-                  Maqaa Seeraa (Afaan Oromo)
-                </label>
-                <input
-                  type="text"
-                  value={settings.government_name_om || ''}
-                  onChange={(e) => handleChange('government_name_om', e.target.value)}
                   className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
                 />
               </div>

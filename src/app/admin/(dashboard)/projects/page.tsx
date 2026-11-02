@@ -7,7 +7,6 @@ interface DevelopmentProject {
   slug: string
   title_en: string
   title_am?: string
-  title_om?: string
   sector: string
   description_en?: string
   description_am?: string

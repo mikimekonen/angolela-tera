@@ -98,7 +98,7 @@
    * TYPOGRAPHY — FONT FAMILIES
    * English: Inter (modern, clean sans-serif — government-appropriate)
    * Ethiopic: Noto Sans Ethiopic (Unicode-complete, supports Amharic
-   *           and Afaan Oromo scripts) with Abyssinica SIL as fallback
+   *           script) with Abyssinica SIL as fallback
    * ------------------------------------------------------------------ */
   --font-latin:    'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
   --font-ethiopic: 'Noto Sans Ethiopic', 'Abyssinica SIL', 'Nyala',

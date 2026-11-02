@@ -101,29 +101,6 @@ export default async function InvestmentPage({
       ctaDesk: 'የኢንቨስትመንት ዴስኩን ያነጋግሩ',
       ctaServices: 'የንግድ ፈቃድ ያመልክቱ',
     },
-    om: {
-      tag: 'Misooma Diinagdee fi Industirii',
-      title: 'Angolallaa Xaraatti Invast Godhaa',
-      subtitle: 'Dhiheenya Finfinnee fi Dabra Birhaan, qabeenya qonnaa fi carraawwan invastimantii gurguddoo.',
-      sectorsTitle: 'Carraawwan Invastimantii Ijoo',
-      sectors: [
-        { title: 'Industirii Qonnaa fi Qamadii', desc: 'Oomisha qamadii fi garbuu qindeessuuf mijataadha.', icon: '🌾' },
-        { title: 'Misooma Aannanii', desc: 'Qilleensa baddaa keessatti loowwan aannanii horsiisuuf gaariidha.', icon: '🥛' },
-        { title: 'Misooma Dinnichaa', desc: 'Sanyii dinnichaa baay\'isuu fi kuusaa qabbaneessaa ijaaruuf.', icon: '🥔' },
-        { title: 'Horsiisa Hoolotaa fi Lukkuu', desc: 'Gabaa biyya alaa fi Finfinneetiif oomishuuf.', icon: '🥩' },
-      ],
-      landTitle: 'Lafa Industirii Magaalaa Caaccetti',
-      landDesc: 'Lafni hektaara 120 ta\'u daandii guddaa Finfinnee-Dabra Birhaan irratti qophaa\'eera.',
-      incentivesTitle: 'Kanneen Mootummaan Kennu',
-      incentives: [
-        'Gibira irraa bilisa ta\'uu waggaa 5 hanga',
-        'Meeshaalee industirii kaffaltii gumruukaa malee galchuu',
-        'Waliigaltee liizii waggaa 70',
-        'Tajaajila gamoo tokkoo sa\'aatii 48 keessatti',
-      ],
-      ctaDesk: 'Kutaa Invastimantii Qunnamaa',
-      ctaServices: 'Hayaama Daldalaa Galchaa',
-    },
   }[locale as Locale]
 
   return (

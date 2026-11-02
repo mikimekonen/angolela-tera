@@ -4,6 +4,7 @@ import createNextIntlPlugin from 'next-intl/plugin'
 const withNextIntl = createNextIntlPlugin('./src/i18n/config.ts')
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
 
   // ------------------------------------------------------------------
   // Image domains — add official image hosting domains here
@@ -37,6 +38,7 @@ const nextConfig: NextConfig = {
           { key: 'X-Content-Type-Options',    value: 'nosniff' },
           { key: 'Referrer-Policy',           value: 'strict-origin-when-cross-origin' },
           { key: 'X-XSS-Protection',          value: '1; mode=block' },
+          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
           {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=(self), interest-cohort=()',
@@ -48,7 +50,7 @@ const nextConfig: NextConfig = {
               "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://fonts.googleapis.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "img-src 'self' data: blob: http://localhost:3000",
+              "img-src 'self' data: blob: https: http://localhost:3000",
               "connect-src 'self'",
               "frame-ancestors 'none'",
             ].join('; '),

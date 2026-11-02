@@ -4,9 +4,10 @@ import type { Locale } from '@/i18n/config'
 
 interface ServicesSectionProps {
   locale: Locale
+  services?: any[]
 }
 
-export function ServicesSection({ locale }: ServicesSectionProps) {
+export function ServicesSection({ locale, services }: ServicesSectionProps) {
   const content = {
     en: {
       tag: 'Public Service Delivery',
@@ -120,63 +121,23 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
         },
       ],
     },
-    om: {
-      tag: 'Tajaajila Uummataa',
-      title: 'Tajaajila Lammiilee fi Daldalaa',
-      desc: 'Tajaajiloota aanaa keenyaa, ulaagaalee fi waajjiroota dhimmi ilaallatu argadhaa.',
-      viewAll: 'Tajaajiloota Hundumaa Ilaali',
-      services: [
-        {
-          title: 'Galmee Ragaalee Murtii',
-          desc: 'Waraqaa ragaa dhalootaa, gaa\'elaa fi du\'aa.',
-          time: 'Guyyoota Hojii 1–2',
-          office: 'Kutaa Galmee Murtii',
-          href: `/${locale}/services/civil-registration`,
-          icon: '📋',
-        },
-        {
-          title: 'Bulchiinsa Lafaa',
-          desc: 'Ragaa qabiyyee lafaa fi kenniinsa waraqaa ragaa.',
-          time: 'Guyyoota Hojii 3–5',
-          office: 'Waajjira Bulchiinsa Lafaa',
-          href: `/${locale}/services/land-certificate`,
-          icon: '🗺️',
-        },
-        {
-          title: 'Galtee Qonnaa',
-          desc: 'Sanyii filatamaa, xaa\'oo fi tajaajila beeyladootaa.',
-          time: 'Battalumatti',
-          office: 'Waajjira Qonnaa fi Misooma Baadiyyaa',
-          href: `/${locale}/services/agriculture`,
-          icon: '🌾',
-        },
-        {
-          title: 'Hayaama Daldalaa',
-          desc: 'Hayaama daldalaa haaraa fi haaromsuu.',
-          time: 'Guyyaa Hojii 1',
-          office: 'Waajjira Daldalaa fi Industirii',
-          href: `/${locale}/services/business-license`,
-          icon: '🏪',
-        },
-        {
-          title: 'Hayaama Ijaarsaa',
-          desc: 'Karoora ijaarsaa mirkaneessuu fi to\'annoo.',
-          time: 'Guyyoota Hojii 5–7',
-          office: 'Waajjira Ijaarsaa',
-          href: `/${locale}/services/building-permits`,
-          icon: '🏗️',
-        },
-        {
-          title: 'Tajaajila Hawaasummaa',
-          desc: 'Dhimma hawaasummaa fi komii uummataa.',
-          time: 'Battalumatti',
-          office: 'Waajjira Dhimma Hawaasummaa',
-          href: `/${locale}/contact`,
-          icon: '⚖️',
-        },
-      ],
-    },
   }[locale]
+
+  // Dynamic services mapped from CMS/Database with fallback to content.services
+  const displayedServices =
+    services && services.length > 0
+      ? services
+          .filter((s: any) => s.status !== 'ARCHIVED')
+          .slice(0, 6)
+          .map((s: any) => ({
+            title: s[`title_${locale}`] || s[`name_${locale}`] || s.title_en || s.name_en || s.title || s.name,
+            desc: s[`description_${locale}`] || s.description_en || s.description || s.summary_en || '',
+            time: s.processingTime || s.time || '1–3 Working Days',
+            office: s[`officeName_${locale}`] || s.officeName_en || s.officeName || 'Woreda Bureau',
+            href: `/${locale}/services/${s.slug}`,
+            icon: s.icon || '📋',
+          }))
+      : content.services
 
   return (
     <section className="py-16 bg-white border-b border-gray-200">
@@ -204,7 +165,7 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {content.services.map((item, idx) => (
+          {displayedServices.map((item, idx) => (
             <div
               key={idx}
               className="border border-gray-200 rounded-xl p-6 hover:border-[#1a4f8b] hover:shadow-md transition-all duration-200 flex flex-col justify-between group bg-gradient-to-b from-white to-gray-50/50"

@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState, useEffect, useRef, useCallback } from 'react'
-import Image from 'next/image'
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Locale } from '@/i18n/config'
 import {
   ChevronLeft,
@@ -27,17 +27,46 @@ export { OFFICIAL_LEADERS }
 
 interface LeadershipSliderProps {
   locale: Locale
+  leaders?: any[]
 }
 
-export function LeadershipSlider({ locale }: LeadershipSliderProps) {
+export function LeadershipSlider({ locale, leaders: propLeaders }: LeadershipSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(true)
   const [showLanguageAlt, setShowLanguageAlt] = useState(false)
   const [touchStartX, setTouchStartX] = useState<number | null>(null)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
 
-  const leaders = OFFICIAL_LEADERS
-  const currentLeader = leaders[currentIndex]
+  // Merge propLeaders with OFFICIAL_LEADERS to guarantee all rich fields (portfolios, offices) exist
+  const leaders: LeaderData[] = useMemo(() => {
+    if (!propLeaders || propLeaders.length === 0) {
+      return OFFICIAL_LEADERS
+    }
+    return propLeaders.map((pl, idx) => {
+      const match = OFFICIAL_LEADERS.find((ol) => ol.id === pl.id) || OFFICIAL_LEADERS[idx] || OFFICIAL_LEADERS[0]
+      return {
+        ...match,
+        ...pl,
+        id: pl.id || match.id,
+        name_en: pl.name_en || match.name_en,
+        name_am: pl.name_am || match.name_am,
+        title_en: pl.title_en || match.title_en,
+        title_am: pl.title_am || match.title_am,
+        bio_en: pl.bio_en || match.bio_en,
+        bio_am: pl.bio_am || match.bio_am,
+        office_en: pl.office_en || match.office_en,
+        office_am: pl.office_am || match.office_am,
+        category_en: pl.category_en || match.category_en,
+        category_am: pl.category_am || match.category_am,
+        portfolios_en: (Array.isArray(pl.portfolios_en) && pl.portfolios_en.length > 0) ? pl.portfolios_en : (match.portfolios_en || []),
+        portfolios_am: (Array.isArray(pl.portfolios_am) && pl.portfolios_am.length > 0) ? pl.portfolios_am : (match.portfolios_am || []),
+        photo: pl.photo || match.photo,
+        icon: pl.icon || match.icon || '🏛️',
+      }
+    })
+  }, [propLeaders])
+
+  const currentLeader = leaders[currentIndex] || leaders[0] || OFFICIAL_LEADERS[0]
 
   // Slide navigation
   const nextSlide = useCallback(() => {
@@ -116,64 +145,65 @@ export function LeadershipSlider({ locale }: LeadershipSliderProps) {
       viewOriginalLang: 'ወደ አማርኛ መልስ',
       allDirectory: 'ሁሉንም የካቢኔ ቢሮዎች ይመልከቱ →',
       kebeleCount: '19 የገጠርና ከተማ ቀበሌዎችን የሚያስተባብር'
-    },
-    om: {
-      badge: 'Hoggansa Ol\'aanaa Aanaa fi Paartii',
-      heading: 'Hoggantoota Ol\'aanaa Aanaa Angolallaa Xaraa',
-      subheading:
-        'Hoggantoota misooma aanaa, nageenya, tajaajila uummataa fi badhaadhina mirkaneessuuf kutannootti hojjetan.',
-      slideOf: 'Hoggansa',
-      portfoliosTitle: 'Itti Gaafatamummaa fi Hojiiwwan Tarsiimoo',
-      contactTitle: 'Teessoo fi Quunnamtii',
-      verifiedSource: 'Odeeffannoo Mirkanaa\'aa',
-      pause: 'Dhaabi',
-      play: 'Jalqabi',
-      viewOtherLang: 'Afaan Ingiliffaatti Jijjiiri',
-      viewOriginalLang: 'Afaan Oromootti Deebisi',
-      allDirectory: 'Hoggantoota Mara Ilaali →',
-      kebeleCount: 'Gandoolee 19 Bulcha'
     }
   }[locale]
 
   // Localized getters
-  const getName = (l: LeaderData) => {
+  const getName = (l?: LeaderData) => {
+    if (!l) return ''
     if (showLanguageAlt) {
-      return locale === 'en' ? l.name_am : l.name_en
+      return locale === 'en' ? (l.name_am || l.name_en || '') : (l.name_en || l.name_am || '')
     }
-    return locale === 'am' ? l.name_am : locale === 'om' ? l.name_om : l.name_en
+    return locale === 'am' ? (l.name_am || l.name_en || '') : (l.name_en || l.name_am || '')
   }
 
-  const getSecondaryName = (l: LeaderData) => {
-    return locale === 'am' ? l.name_en : l.name_am
+  const getSecondaryName = (l?: LeaderData) => {
+    if (!l) return ''
+    return locale === 'am' ? (l.name_en || l.name_am || '') : (l.name_am || l.name_en || '')
   }
 
-  const getTitle = (l: LeaderData) => {
+  const getTitle = (l?: LeaderData) => {
+    if (!l) return ''
     if (showLanguageAlt) {
-      return locale === 'en' ? l.title_am : l.title_en
+      return locale === 'en' ? (l.title_am || l.title_en || '') : (l.title_en || l.title_am || '')
     }
-    return locale === 'am' ? l.title_am : locale === 'om' ? l.title_om : l.title_en
+    return locale === 'am' ? (l.title_am || l.title_en || '') : (l.title_en || l.title_am || '')
   }
 
-  const getCategory = (l: LeaderData) => {
-    return locale === 'am' ? l.category_am : locale === 'om' ? l.category_om : l.category_en
+  const getCategory = (l?: LeaderData) => {
+    if (!l) return ''
+    return locale === 'am' ? (l.category_am || l.category_en || '') : (l.category_en || l.category_am || '')
   }
 
-  const getOffice = (l: LeaderData) => {
-    return locale === 'am' ? l.office_am : locale === 'om' ? l.office_om : l.office_en
+  const getOffice = (l?: LeaderData) => {
+    if (!l) return ''
+    return locale === 'am' ? (l.office_am || l.office_en || '') : (l.office_en || l.office_am || '')
   }
 
-  const getBio = (l: LeaderData) => {
+  const getBio = (l?: LeaderData) => {
+    if (!l) return ''
     if (showLanguageAlt) {
-      return locale === 'en' ? l.bio_am : l.bio_en
+      return locale === 'en' ? (l.bio_am || l.bio_en || '') : (l.bio_en || l.bio_am || '')
     }
-    return locale === 'am' ? l.bio_am : locale === 'om' ? l.bio_om : l.bio_en
+    return locale === 'am' ? (l.bio_am || l.bio_en || '') : (l.bio_en || l.bio_am || '')
   }
 
-  const getPortfolios = (l: LeaderData) => {
+  const getPortfolios = (l?: LeaderData): string[] => {
+    if (!l) return []
+    const fallbackList = ['Administrative Governance & Strategy', 'Public Service Delivery', 'Institutional Coordination', 'Community Development']
+    const amFallbackList = ['የአስተዳደር አመራርና ስትራቴጂ', 'የህዝብ አገልግሎት አሰጣጥ', 'የተቋማት ቅንጅትና ክትትል', 'የማህበረሰብ ልማትና እድገት']
+
+    let list: string[] | undefined
     if (showLanguageAlt) {
-      return locale === 'en' ? l.portfolios_am : l.portfolios_en
+      list = locale === 'en' ? l.portfolios_am : l.portfolios_en
+    } else {
+      list = locale === 'am' ? l.portfolios_am : l.portfolios_en
     }
-    return locale === 'am' ? l.portfolios_am : locale === 'om' ? l.portfolios_om : l.portfolios_en
+
+    if (Array.isArray(list) && list.length > 0) return list
+    if (Array.isArray(l.portfolios_en) && l.portfolios_en.length > 0) return l.portfolios_en
+    if (Array.isArray(l.portfolios_am) && l.portfolios_am.length > 0) return l.portfolios_am
+    return locale === 'am' ? amFallbackList : fallbackList
   }
 
   return (
@@ -242,7 +272,7 @@ export function LeadershipSlider({ locale }: LeadershipSliderProps) {
 
         {/* Thumbnail Selector Pills (Tab Carousel Nav) */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          {leaders.map((leader, idx) => {
+          {leaders.slice(0, 4).map((leader, idx) => {
             const isActive = idx === currentIndex
             return (
               <button
@@ -259,22 +289,15 @@ export function LeadershipSlider({ locale }: LeadershipSliderProps) {
                   <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FED100] animate-pulse" />
                 )}
 
-                {/* Avatar with gold ring */}
+                {/* Insignia Icon Badge */}
                 <div
-                  className={`relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden shrink-0 border-2 transition-transform duration-300 ${
+                  className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0 border-2 transition-all duration-300 ${
                     isActive
-                      ? 'border-[#FED100] scale-105 shadow-md shadow-[#FED100]/20'
-                      : 'border-white/20 group-hover:border-white/50'
+                      ? 'bg-gradient-to-br from-[#c8931a] to-[#a87315] text-[#0d2340] border-[#FED100] shadow-md shadow-[#FED100]/20 scale-105'
+                      : 'bg-white/10 text-[#FED100] border-white/20 group-hover:border-white/50'
                   }`}
                 >
-                  <Image
-                    src={leader.photo}
-                    alt={leader.name_en}
-                    fill
-                    sizes="48px"
-                    className="object-cover"
-                    priority={idx === 0}
-                  />
+                  <Landmark className="w-5 h-5" />
                 </div>
 
                 {/* Leader Brief */}
@@ -328,30 +351,40 @@ export function LeadershipSlider({ locale }: LeadershipSliderProps) {
                 {/* Glow ring */}
                 <div className="absolute -inset-1.5 bg-gradient-to-r from-[#1a4f8b] via-[#FED100] to-[#009b44] rounded-3xl blur-md opacity-40 group-hover:opacity-75 transition duration-500" />
 
-                {/* Main Photo Container */}
-                <div className="relative aspect-square w-full rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl bg-[#0d2340]">
-                  <Image
-                    src={currentLeader.photo}
-                    alt={currentLeader.name_en}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 360px"
-                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                    priority
-                  />
-
-                  {/* Gradient bottom overlay */}
-                  <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/85 via-black/40 to-transparent flex items-end p-4" />
+                {/* Official Executive Insignia Frame */}
+                <div className="relative aspect-square w-full rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl bg-gradient-to-br from-[#0c2340] via-[#1a4f8b] to-[#071527] flex flex-col items-center justify-center p-6 text-center">
+                  {currentLeader.photo ? (
+                    <Image
+                      src={currentLeader.photo}
+                      alt={getName(currentLeader)}
+                      fill
+                      className="object-cover"
+                      sizes="340px"
+                    />
+                  ) : (
+                    <>
+                      <div className="w-24 h-24 rounded-full bg-white/10 border-2 border-[#FED100]/60 flex items-center justify-center mb-4 shadow-inner text-4xl">
+                        <span>{currentLeader.icon || '🏛️'}</span>
+                      </div>
+                      <span className="text-xs font-black uppercase tracking-widest text-[#FED100] px-3 py-1 rounded-full bg-white/10 border border-white/20">
+                        Official Cabinet Post
+                      </span>
+                      <span className="text-sm font-bold text-gray-200 mt-2 line-clamp-1">
+                        Angolela Tera Woreda
+                      </span>
+                    </>
+                  )}
 
                   {/* Top-Right Badge: Rank & Authority */}
-                  <div className="absolute top-3.5 right-3.5 bg-black/70 backdrop-blur-md border border-[#FED100]/60 px-3 py-1 rounded-full flex items-center gap-1.5 text-xs font-bold text-[#FED100] shadow-md">
+                  <div className="absolute top-3.5 right-3.5 bg-black/70 backdrop-blur-md border border-[#FED100]/60 px-3 py-1 rounded-full flex items-center gap-1.5 text-xs font-bold text-[#FED100] shadow-md z-10">
                     <Award className="w-3.5 h-3.5 text-[#FED100]" />
-                    <span>0{currentIndex + 1} / 04</span>
+                    <span>{String(currentIndex + 1).padStart(2, '0')} / {String(leaders.length).padStart(2, '0')}</span>
                   </div>
 
                   {/* Top-Left: Verified Seal */}
-                  <div className="absolute top-3.5 left-3.5 bg-emerald-950/80 backdrop-blur-md border border-emerald-500/50 px-2.5 py-1 rounded-full flex items-center gap-1 text-[11px] font-semibold text-emerald-300">
+                  <div className="absolute top-3.5 left-3.5 bg-emerald-950/80 backdrop-blur-md border border-emerald-500/50 px-2.5 py-1 rounded-full flex items-center gap-1 text-[11px] font-semibold text-emerald-300 z-10">
                     <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                    <span>Official Post</span>
+                    <span>Verified</span>
                   </div>
                 </div>
               </div>
@@ -416,7 +449,7 @@ export function LeadershipSlider({ locale }: LeadershipSliderProps) {
                     <span>{labels.portfoliosTitle}</span>
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {getPortfolios(currentLeader).map((item, idx) => (
+                    {(getPortfolios(currentLeader) || []).map((item, idx) => (
                       <div
                         key={idx}
                         className="flex items-start gap-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-3 transition-colors"
@@ -448,19 +481,27 @@ export function LeadershipSlider({ locale }: LeadershipSliderProps) {
                     <ChevronRight className="w-5 h-5" />
                   </button>
 
-                  <div className="flex items-center gap-1.5 ml-2">
-                    {leaders.map((_, dotIdx) => (
-                      <button
-                        key={dotIdx}
-                        onClick={() => setCurrentIndex(dotIdx)}
-                        className={`h-2.5 rounded-full transition-all duration-300 ${
-                          dotIdx === currentIndex
-                            ? 'w-8 bg-[#FED100]'
-                            : 'w-2.5 bg-white/30 hover:bg-white/60'
-                        }`}
-                        aria-label={`Go to slide ${dotIdx + 1}`}
-                      />
-                    ))}
+                  <div className="flex items-center gap-2 ml-2">
+                    <span className="text-xs font-bold text-[#FED100] px-2.5 py-1 rounded-lg bg-white/10 border border-white/15">
+                      {String(currentIndex + 1).padStart(2, '0')} / {String(leaders.length).padStart(2, '0')}
+                    </span>
+                    <div className="hidden sm:flex items-center gap-1">
+                      {leaders.slice(0, 8).map((_, dotIdx) => (
+                        <button
+                          key={dotIdx}
+                          onClick={() => setCurrentIndex(dotIdx)}
+                          className={`h-2 rounded-full transition-all duration-300 ${
+                            dotIdx === currentIndex
+                              ? 'w-6 bg-[#FED100]'
+                              : 'w-2 bg-white/30 hover:bg-white/60'
+                          }`}
+                          aria-label={`Go to slide ${dotIdx + 1}`}
+                        />
+                      ))}
+                      {leaders.length > 8 && (
+                        <span className="text-[10px] text-gray-400 font-bold ml-1">+{leaders.length - 8}</span>
+                      )}
+                    </div>
                   </div>
                 </div>
 

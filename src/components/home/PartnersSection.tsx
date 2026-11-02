@@ -156,40 +156,6 @@ export function PartnersSection({ locale }: PartnersSectionProps) {
         ],
       },
     },
-    om: {
-      badge: 'Dhaabbilee Qindoomina Misoomaa',
-      title: 'Dhaabbilee Hiriyyummaa Keenya',
-      subtitle:
-        'Aanaan Angolallaa Xaraa warshaalee dhuunfaa gurguddoo — JERR PLC fi Komaarii PLC — waliin carraa hojii uumuu, gabaa qonnaan bultootaa fi misooma naannoo mirkaneessuuf qindoominaan hojjeta.',
-      partnerSince: 'Bara Qindoominaa',
-      sectorLabel: 'Dhaabbata Dhuunfaa Hiriyyaa Misoomaa',
-      visitWebsite: 'Marsariitii',
-      callDesk: 'Lakkoofsa Bilbilaa',
-      emailDesk: 'Imeelii',
-      viewAll: 'Tarree Dhaabbilee Hiriyyummaa Hunda Ilaali',
-      featured: 'Agarsiisa Dhaabbilee Hiriyyummaa',
-      slideOf: 'Hiriyyaa',
-      of: 'keessaa',
-      keyContributions: 'Kanneen Qindoominaan Hojjetaman',
-      pause: 'Dhaabi',
-      play: 'Jalqabsiisi',
-      next: 'Itti Aanu',
-      prev: 'Duraa',
-      tags: {
-        'partner-jerr': [
-          'Oomisha Nyaataa fi Zayitii',
-          'Nyaata Beeyladaa',
-          'Gabaa Qonnaan Bultootaa',
-          'Hojii 350+ Uumame',
-        ],
-        'partner-komari': [
-          'Warshaa Dhugaatii (Arada)',
-          'Leenjii Ogummaa Dargaggootaa',
-          'Eegumsa Qabeenya Bishaanii',
-          'Hojii 250+ Uumame',
-        ],
-      },
-    },
   }[locale]
 
   return (
@@ -268,12 +234,10 @@ export function PartnersSection({ locale }: PartnersSectionProps) {
               const isSelected = index === currentIndex
               const name =
                 locale === 'am' ? partner.name_am || partner.name_en :
-                locale === 'om' ? partner.name_om || partner.name_en :
                 partner.name_en
 
               const desc =
                 locale === 'am' ? partner.description_am || partner.description_en :
-                locale === 'om' ? partner.description_om || partner.description_en :
                 partner.description_en
 
               const partnerTags = (t.tags as Record<string, string[]>)[partner.id] || []

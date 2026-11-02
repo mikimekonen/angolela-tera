@@ -6,7 +6,6 @@ interface NavItem {
   id: string
   label_en: string
   label_am?: string
-  label_om?: string
   url: string
   displayOrder: number
   isActive: boolean
@@ -23,7 +22,6 @@ export default function AdminNavigationPage() {
   // Form state
   const [labelEn, setLabelEn] = useState('')
   const [labelAm, setLabelAm] = useState('')
-  const [labelOm, setLabelOm] = useState('')
   const [url, setUrl] = useState('')
   const [isExternal, setIsExternal] = useState(false)
   const [isActive, setIsActive] = useState(true)
@@ -51,7 +49,6 @@ export default function AdminNavigationPage() {
     setEditingItem(null)
     setLabelEn('')
     setLabelAm('')
-    setLabelOm('')
     setUrl('/')
     setIsExternal(false)
     setIsActive(true)
@@ -62,7 +59,6 @@ export default function AdminNavigationPage() {
     setEditingItem(item)
     setLabelEn(item.label_en)
     setLabelAm(item.label_am || '')
-    setLabelOm(item.label_om || '')
     setUrl(item.url)
     setIsExternal(item.isExternal)
     setIsActive(item.isActive)
@@ -86,7 +82,6 @@ export default function AdminNavigationPage() {
             id: editingItem.id,
             label_en: labelEn,
             label_am: labelAm || null,
-            label_om: labelOm || null,
             url,
             isExternal,
             isActive,
@@ -108,7 +103,6 @@ export default function AdminNavigationPage() {
           body: JSON.stringify({
             label_en: labelEn,
             label_am: labelAm || null,
-            label_om: labelOm || null,
             url,
             isExternal,
             isActive,
@@ -219,7 +213,7 @@ export default function AdminNavigationPage() {
           </div>
 
           <form onSubmit={handleSave} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1">
                   Label (English) *
@@ -242,18 +236,6 @@ export default function AdminNavigationPage() {
                   placeholder="e.g. ጨረታዎች"
                   value={labelAm}
                   onChange={(e) => setLabelAm(e.target.value)}
-                  className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">
-                  Label (Afaan Oromo)
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. Caalbaasii"
-                  value={labelOm}
-                  onChange={(e) => setLabelOm(e.target.value)}
                   className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
                 />
               </div>

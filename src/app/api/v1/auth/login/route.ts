@@ -3,51 +3,31 @@ import { loginSchema } from '@/lib/validations'
 import { verifyPassword, setSessionCookie } from '@/lib/auth'
 import { createAuditLog, getClientIp } from '@/lib/audit'
 import { prisma } from '@/lib/db'
+import { rateLimiter } from '@/lib/rateLimit'
 import type { SessionPayload, UserRole } from '@/types'
-
-// Default seed users for immediate operational testing & offline dev
-const FALLBACK_USERS = [
-  {
-    id: 'usr_superadmin_miki',
-    email: 'mikimekonen9@gmail.com',
-    name: 'Miki Mekonen (Head Administrator)',
-    passwordHash: '$2b$10$wN9i09H8YdE7Bf6KxJ3b.eK25zO2e9Uv6.e90Tz7E4J76sVp0nK22',
-    role: 'SUPER_ADMIN' as UserRole,
-    officeId: null,
-    isActive: true,
-  },
-  {
-    id: 'usr_superadmin_01',
-    email: 'admin@angolelatera.gov.et',
-    name: 'Woreda Head Administrator',
-    // Hash for 'Admin@Angolela2026!'
-    passwordHash: '$2b$10$wN9i09H8YdE7Bf6KxJ3b.eK25zO2e9Uv6.e90Tz7E4J76sVp0nK22',
-    role: 'SUPER_ADMIN' as UserRole,
-    officeId: null,
-    isActive: true,
-  },
-  {
-    id: 'usr_editor_01',
-    email: 'editor@angolelatera.gov.et',
-    name: 'Sector Bureau Communications Officer',
-    passwordHash: '$2b$10$wN9i09H8YdE7Bf6KxJ3b.eK25zO2e9Uv6.e90Tz7E4J76sVp0nK22',
-    role: 'OFFICE_EDITOR' as UserRole,
-    officeId: 'off_agri_01',
-    isActive: true,
-  },
-  {
-    id: 'usr_reviewer_01',
-    email: 'reviewer@angolelatera.gov.et',
-    name: 'Cabinet Chief Quality Officer',
-    passwordHash: '$2b$10$wN9i09H8YdE7Bf6KxJ3b.eK25zO2e9Uv6.e90Tz7E4J76sVp0nK22',
-    role: 'REVIEWER' as UserRole,
-    officeId: null,
-    isActive: true,
-  },
-]
 
 export async function POST(req: NextRequest) {
   try {
+    const ipAddress = getClientIp(req.headers)
+    const userAgent = req.headers.get('user-agent') || ''
+
+    // Rate Limiting: 15 login attempts per 15 minutes per IP
+    const rateCheck = rateLimiter.check(`login:${ipAddress}`, 15, 15 * 60 * 1000)
+    if (!rateCheck.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Too many failed login attempts. Please try again in ${rateCheck.reset} seconds.`,
+        },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': String(rateCheck.reset),
+          },
+        }
+      )
+    }
+
     const body = await req.json()
     const validation = loginSchema.safeParse(body)
 
@@ -63,8 +43,6 @@ export async function POST(req: NextRequest) {
     }
 
     const { email, password } = validation.data
-    const ipAddress = getClientIp(req.headers)
-    const userAgent = req.headers.get('user-agent') || ''
 
     let matchedUser: {
       id: string
@@ -76,11 +54,11 @@ export async function POST(req: NextRequest) {
       isActive: boolean
     } | null = null
 
-    // Try finding in database if Prisma is active
+    // 1. Primary lookup: PostgreSQL database via Prisma
     try {
       if (prisma?.user?.findUnique) {
         const dbUser = await prisma.user.findUnique({
-          where: { email },
+          where: { email: email.toLowerCase() },
         })
         if (dbUser) {
           matchedUser = {
@@ -95,15 +73,17 @@ export async function POST(req: NextRequest) {
         }
       }
     } catch {
-      // Prisma DB query fallback
+      // Prisma fallback to local dataStore if DB offline during migration
     }
 
-    // Check persistent dataStore users first
+    // 2. Fallback lookup: local dataStore
     if (!matchedUser) {
       try {
         const { getUsers } = await import('@/lib/dataStore')
         const storeUsers = getUsers()
-        const storeMatch = storeUsers.find((u) => u.email.toLowerCase() === email.toLowerCase())
+        const storeMatch = storeUsers.find(
+          (u) => u.email.toLowerCase() === email.toLowerCase()
+        )
         if (storeMatch) {
           matchedUser = {
             ...storeMatch,
@@ -115,32 +95,34 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Check fallback user dictionary
-    if (!matchedUser) {
-      const fallback = FALLBACK_USERS.find(
-        (u) => u.email.toLowerCase() === email.toLowerCase()
-      )
-      if (fallback) {
-        matchedUser = fallback
-      }
-    }
+    // Strictly authenticate via bcrypt password hashing (supports both Michu0907 and Michu0907..)
+    let passwordMatches = matchedUser
+      ? await verifyPassword(password, matchedUser.passwordHash)
+      : false
 
-    // Validate credentials
-    let passwordMatches = false
-    if (matchedUser) {
-      // Allow the standardized seed password or direct hash comparison
-      if (
-        password === 'Michu0907' ||
-        password === 'Admin@Angolela2026!' ||
-        password === 'admin123'
-      ) {
+    if (!passwordMatches && matchedUser) {
+      const cleanPass = password.trim()
+      if (await verifyPassword(cleanPass, matchedUser.passwordHash)) {
         passwordMatches = true
-      } else {
-        passwordMatches = await verifyPassword(password, matchedUser.passwordHash)
+      } else if (cleanPass.endsWith('..') && await verifyPassword(cleanPass.slice(0, -2), matchedUser.passwordHash)) {
+        passwordMatches = true
+      } else if (!cleanPass.endsWith('..') && await verifyPassword(cleanPass + '..', matchedUser.passwordHash)) {
+        passwordMatches = true
       }
     }
 
     if (!matchedUser || !passwordMatches) {
+      // Log failed authentication attempt for security monitoring
+      await createAuditLog({
+        userId: matchedUser ? matchedUser.id : 'unknown',
+        action: 'LOGIN',
+        entityType: 'User',
+        entityId: email,
+        notes: `Failed login attempt for email: ${email}`,
+        ipAddress,
+        userAgent,
+      })
+
       return NextResponse.json(
         {
           success: false,
@@ -171,6 +153,9 @@ export async function POST(req: NextRequest) {
 
     // Set secure HTTP-only cookie
     await setSessionCookie(sessionPayload)
+
+    // Reset rate limiter on successful authentication
+    rateLimiter.reset(`login:${ipAddress}`)
 
     // Write audit log
     await createAuditLog({

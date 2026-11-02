@@ -45,18 +45,6 @@ export default async function KebelesPage({
       admin: 'የቀበሌው አስተዳዳሪ',
       contact: 'የቢሮ ስልክ',
     },
-    om: {
-      tag: 'Gandoolee fi Magaalota',
-      title: 'Gandoolee Aanaa Angolallaa Xaraa',
-      subtitle: 'Aanaan Angolallaa Xaraa gandoolee baadiyyaa fi magaalota 19 of keessaa qaba.',
-      rural: 'Ganda Baadiyyaa',
-      urban: 'Magaalaa',
-      population: 'Baay\'ina Uummataa',
-      distance: 'Fageenya Caccetti irraa',
-      agroEcology: 'Haala Qilleensaa',
-      admin: 'Bulchaa Gandaa',
-      contact: 'Bilbila',
-    },
   }[locale as Locale]
 
   return (
@@ -80,7 +68,7 @@ export default async function KebelesPage({
         {/* Kebeles Directory Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {kebeles.map((k) => {
-            const name = locale === 'am' ? k.name_am || k.name_en : locale === 'om' ? k.name_om || k.name_en : k.name_en
+            const name = locale === 'am' ? k.name_am || k.name_en : k.name_en
             const eco = locale === 'am' ? k.economicActivities_am || k.economicActivities_en : k.economicActivities_en
 
             return (

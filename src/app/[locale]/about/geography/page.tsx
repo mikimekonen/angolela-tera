@@ -60,27 +60,6 @@ export default async function GeographyPage({
       ],
       backToAbout: 'ወደ ወረዳው አጠቃላይ መረጃ ተመለስ',
     },
-    om: {
-      tag: 'Teessuma Lafa Baddaa',
-      title: 'Teessuma Lafa, Qilleensa fi Qabeenya Uumamaa',
-      subtitle: 'Qilleensa baddaa, laggeen fi lafa qonnaaf mijatu aanaa keenyaa.',
-      elevationTitle: 'Olka\'iinsa fi Qilleensa',
-      elevationText:
-        'Aanaan kun galaana irraa olka\'iinsa meetira 2,600 hanga 3,050 irratti argama. Qilleensi ishee baddaa fi oomisha qamadii fi loowwaniif mijataadha.',
-      riverTitle: 'Laggeen fi Bishaan',
-      riverText:
-        'Laggi Caaccetti fi laggeen biroo aanaa kana keessa yaa\'uun waggaa guutuu tajaajila jallisii fi dhugaatiitiif oolu.',
-      soilTitle: 'Biyyee fi Qonna',
-      soilText:
-        'Biyyeen gurraachi lafa aanaa kana keessatti bal\'inaan argamu oomishtummaa qamadii, garbuu fi baaqelaatiif baay\'ee gaariidha.',
-      climateStats: [
-        { label: 'Olka\'iinsa', value: '2,600 – 3,050 m', sub: 'Baddaa' },
-        { label: 'Rooba Waggaa', value: '950 – 1,200 mm', sub: 'Rooba Gahaa' },
-        { label: 'Ho\'a Giddu-galeessaa', value: '11°C – 19°C', sub: 'Qilleensa Qabbanaawaa' },
-        { label: 'Laga Guddaa', value: 'Laga Caaccetti', sub: 'Laga Abbayyaatti Yaa\'a' },
-      ],
-      backToAbout: 'Gara Fuula Duraatti Deebi\'i',
-    },
   }[locale as Locale]
 
   return (

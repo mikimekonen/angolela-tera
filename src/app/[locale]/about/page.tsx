@@ -38,6 +38,7 @@ export default async function AboutPage({
       ctaOffices: 'Explore Woreda Sector Bureaus',
       ctaServices: 'Browse Citizen Services',
       ctaLeadership: 'View Cabinet Leadership',
+      ctaICT: 'ICT & Digital Team',
     },
     am: {
       tag: 'ታሪካዊና መልክአ ምድራዊ ቅርስ',
@@ -59,27 +60,7 @@ export default async function AboutPage({
       ctaOffices: 'የወረዳው መስሪያ ቤቶች',
       ctaServices: 'የህዝብ አገልግሎቶች',
       ctaLeadership: 'የወረዳው ካቢኔ አመራር',
-    },
-    om: {
-      tag: 'Seenaa fi Qabeenya Uumamaa',
-      title: 'Waa\'ee Aanaa Angolallaa Xaraa',
-      subtitle: 'Handhuura seenaa Shawaa, wiirtuu qonnaa fi karra gabaa.',
-      historyTitle: 'Seenaa fi Hundeeffama Aanaa',
-      historyP1:
-        'Angolallaan jaarraa 19ffaa keessa teessoo mootota Shawaa ture. Bakka dipilomaasiin biyya alaa itti gaggeeffamaa tureedha.',
-      historyP2:
-        'Har\'as seenaa ishee kabajuun wiirtuu qonna ammayyaa fi industirii taatee jirti.',
-      geoTitle: 'Teessuma Lafa fi Qilleensa Baddaa',
-      geoP1:
-        'Godina Shawaa Kaabaa keessatti daandii Finfinnee-Dabra Birhaan irratti argamti. Finfinnee irraa km 110 fagaatti.',
-      geoP2:
-        'Qilleensi ishee baddaa fi oomisha qamadii, garbuu fi loowwaniif mijataadha.',
-      adminTitle: 'Bulchiinsa fi Baay\'ina Uummataa',
-      adminP1:
-        'Gandoolee 19 baadiyyaa fi gandoolee 2 magaalaa Caaccetti qabdi. Uummata 142,500 ol qabdi.',
-      ctaOffices: 'Waajjiroota Sektera',
-      ctaServices: 'Tajaajila Uummataa',
-      ctaLeadership: 'Hoggansa Kaabinee',
+      ctaICT: 'የአይሲቲ (ICT) ቡድን',
     },
   }[locale as Locale]
 
@@ -199,6 +180,12 @@ export default async function AboutPage({
                   className="w-full text-center block bg-[#1a4f8b] hover:bg-[#133a6b] text-white text-xs font-semibold py-2.5 rounded-lg shadow-xs transition-colors"
                 >
                   {content.ctaLeadership}
+                </Link>
+                <Link
+                  href={`/${locale}/about/ict`}
+                  className="w-full text-center block bg-blue-50 hover:bg-blue-100 text-[#1a4f8b] border border-blue-200 text-xs font-semibold py-2.5 rounded-lg transition-colors"
+                >
+                  {content.ctaICT}
                 </Link>
                 <Link
                   href={`/${locale}/services`}

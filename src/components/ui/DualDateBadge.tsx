@@ -38,7 +38,7 @@ export function DualDateBadge({ locale, compact = false }: DualDateBadgeProps) {
       const gregorian = `${gDay}, ${gMonth} ${gDate}, ${gYear}`
 
       // Ethiopian
-      const ethiopian = formatEthiopianDate(etd, locale === 'am' ? 'am' : locale === 'om' ? 'om' : 'en')
+      const ethiopian = formatEthiopianDate(etd, locale === 'am' ? 'am' : 'en')
 
       setDates({ gregorian, ethiopian })
     }

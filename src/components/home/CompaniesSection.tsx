@@ -33,10 +33,6 @@ export function CompaniesSection({ locale }: CompaniesSectionProps) {
       investorNotice: 'ባለሀብት ነዎት? ለኢንቨስትመንት የተዘጋጁ የሊዝ መሬቶችና ማበረታቻዎችን ይመልከቱ።',
       investBtn: 'የኢንቨስትመንት መመሪያ →',
     },
-    om: {
-      investorNotice: 'Abbaa qabeenyaa? Carraawwan invastimantii qoradhaa.',
-      investBtn: 'Qajeelfama Invastimantii →',
-    },
   }[locale]
 
   return (

@@ -19,7 +19,6 @@ export default async function TourismPage({
   setRequestLocale(locale)
 
   const isAm = locale === 'am'
-  const isOm = locale === 'om'
 
   const liveTourism = getTourism().filter((t: any) => t.status === 'PUBLISHED' || !t.status)
 
@@ -48,18 +47,6 @@ export default async function TourismPage({
       locationLabel: 'አድራሻ / ኮኦርዲኔት',
       bestSeasonLabel: 'ምቹ ወቅት',
     },
-    om: {
-      tag: 'Tuuriizimii fi Aadaa',
-      title: 'Angolallaa Xaraa Daawwadhaa',
-      subtitle: 'Bakka seenaa mootota Shawaa, tulluuwwan babbaddaa fi aadaa boonsaa.',
-      attractionsTitle: 'Bakkeewwan Daawwannaaf Mijatan',
-      festivalsTitle: 'Ayyaanota Aadaa',
-      festivalsDesc: 'Ayyaana Masqalaa, Cuuphaa laga Caaccetti kabajamu fi ayyaanota biroo hirmaadhaa.',
-      ctaVisit: 'Kutaa Daawwattootaa Qunnamaa',
-      activitiesLabel: 'Sochiiwwan',
-      locationLabel: 'Bakka / Teessoo',
-      bestSeasonLabel: 'Yeroo Gaarii',
-    },
   }[locale as Locale]
 
   return (
@@ -83,8 +70,8 @@ export default async function TourismPage({
         {/* Attractions Grid - Dynamic from dataStore */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {liveTourism.map((att: any) => {
-            const name = isAm ? (att.name_am || att.name_en) : isOm ? (att.name_om || att.name_en) : att.name_en
-            const desc = isAm ? (att.description_am || att.description_en) : isOm ? (att.description_om || att.description_en) : att.description_en
+            const name = isAm ? (att.name_am || att.name_en) : att.name_en
+            const desc = isAm ? (att.description_am || att.description_en) : att.description_en
 
             return (
               <div

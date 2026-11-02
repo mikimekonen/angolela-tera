@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Emblem } from '@/components/ui/Emblem'
@@ -15,7 +15,22 @@ interface HeaderProps {
 
 export function Header({ locale, onMobileMenuToggle, isMobileMenuOpen }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState('')
+  const [scrollProgress, setScrollProgress] = useState(0)
   const router = useRouter()
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight =
+        document.documentElement.scrollHeight - window.innerHeight
+      if (totalHeight > 0) {
+        const progress = (window.scrollY / totalHeight) * 100
+        setScrollProgress(Math.min(100, Math.max(0, progress)))
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -41,19 +56,17 @@ export function Header({ locale, onMobileMenuToggle, isMobileMenuOpen }: HeaderP
       citizenDesk: 'የዜጎች አገልግሎት',
       contactUs: 'ቀጥታ መስመር',
     },
-    om: {
-      primary: 'Aanaa Angolallaa Xaraa',
-      secondary: 'Godina Shawaa Kaabaa • Mootummaa Naannoo Amaaraa • Itoophiyaa',
-      subtitle: 'Fuula Tajaajila Uummataa, Waajjiroota fi Invastimantii',
-      searchPlaceholder: 'Tajaajiloota, seera, oduu barbaadi...',
-      citizenDesk: 'Tajaajila Lammiilee',
-      contactUs: 'Sarara Kallattii',
-    },
   }[locale]
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4">
+    <header className="bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-40 shadow-xs relative">
+      {/* Dynamic Scroll Reading Indicator Bar */}
+      <div
+        className="absolute bottom-0 left-0 h-[2.5px] bg-gradient-to-r from-[#009A44] via-[#FED100] to-[#1a4f8b] transition-all duration-100 ease-out z-50 pointer-events-none"
+        style={{ width: `${scrollProgress}%` }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-3.5">
         <div className="flex items-center justify-between gap-4">
           {/* Logo & Identity Branding */}
           <Link

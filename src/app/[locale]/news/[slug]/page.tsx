@@ -52,14 +52,6 @@ export default async function NewsDetailPage({
       backToNews: 'ወደ ሁሉም ዜናዎች ተመለስ',
       shareLabel: 'መግለጫውን አጋራ',
     },
-    om: {
-      breadcrumbHome: 'Fuula Duraa',
-      breadcrumbNews: 'Oduu',
-      authorPrefix: 'Kan Baase',
-      relatedTitle: 'Oduuwwan Dhihoo',
-      backToNews: 'Gara Oduutti Deebi\'i',
-      shareLabel: 'Qoodaa',
-    },
   }[locale as Locale]
 
   return (

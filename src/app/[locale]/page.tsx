@@ -2,7 +2,13 @@ import React from 'react'
 import { setRequestLocale } from 'next-intl/server'
 import { locales, type Locale } from '@/i18n/config'
 import { notFound } from 'next/navigation'
-import { getHomepageSections, getSliders } from '@/lib/dataStore'
+import {
+  getHomepageSections,
+  getSliders,
+  getLeadership,
+  getServices,
+  getNews,
+} from '@/lib/dataStore'
 import { HeroSection } from '@/components/home/HeroSection'
 import { CitizenActionFinder } from '@/components/home/CitizenActionFinder'
 import { AtAGlance } from '@/components/home/AtAGlance'
@@ -30,9 +36,12 @@ export default async function HomePage({
 
   setRequestLocale(locale)
 
-  // Fetch dynamic section configurations and sliders from persistent store
+  // Fetch dynamic configurations and live entity data from persistent store
   const sections = getHomepageSections()
   const sliders = getSliders()
+  const leaders = getLeadership()
+  const services = getServices()
+  const news = getNews()
 
   const isEnabled = (key: string) => {
     const sec = sections.find((s) => s.sectionKey === key)
@@ -41,17 +50,17 @@ export default async function HomePage({
 
   return (
     <div className="flex flex-col w-full">
-      {/* 1. Official Governmental Hero Section */}
+      {/* 1. Official Governmental Hero Section with Topographic Graphics & Animated Stats */}
       {isEnabled('hero') && <HeroSection locale={locale as Locale} sliders={sliders} />}
 
-      {/* 2. Citizen Action Finder ("I Want To..." / "ምን ማድረግ ይፈልጋሉ?") */}
+      {/* 2. Interactive Citizen Action Finder with Instant Requirements Drawer */}
       {isEnabled('action_finder') && <CitizenActionFinder locale={locale as Locale} />}
 
-      {/* 3. Key Woreda Profile & Verified Stats (At a Glance) */}
+      {/* 3. Key Woreda Profile & Verified Stats with Animated Count-Up Metrics */}
       {isEnabled('at_a_glance') && <AtAGlance locale={locale as Locale} />}
 
       {/* 4. Essential Citizen & Business Public Services */}
-      {isEnabled('services') && <ServicesSection locale={locale as Locale} />}
+      {isEnabled('services') && <ServicesSection locale={locale as Locale} services={services} />}
 
       {/* 5. Private Companies & Enterprises in the Woreda */}
       {isEnabled('companies') && <CompaniesSection locale={locale as Locale} />}
@@ -59,14 +68,14 @@ export default async function HomePage({
       {/* 6. Partner Organizations & Development Agencies */}
       {isEnabled('partners') && <PartnersSection locale={locale as Locale} />}
 
-      {/* 7. Executive Leadership & Sector Directors */}
-      {isEnabled('leadership') && <LeadershipSection locale={locale as Locale} />}
+      {/* 7. Executive Leadership & Strategic Governance */}
+      {isEnabled('leadership') && <LeadershipSection locale={locale as Locale} leaders={leaders} />}
 
-      {/* 8. Strategic Investment & Economic Corridor Banner */}
+      {/* 8. Interactive Strategic Investment Sector Radar Banner */}
       {isEnabled('investment') && <InvestmentBanner locale={locale as Locale} />}
 
       {/* 9. Official News, Council Resolutions & Announcements */}
-      {isEnabled('news') && <NewsSection locale={locale as Locale} />}
+      {isEnabled('news') && <NewsSection locale={locale as Locale} news={news} />}
     </div>
   )
 }

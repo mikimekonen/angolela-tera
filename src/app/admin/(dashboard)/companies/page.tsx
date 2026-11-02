@@ -26,11 +26,9 @@ export default function AdminCompaniesPage() {
   // Form states
   const [nameEn, setNameEn] = useState('')
   const [nameAm, setNameAm] = useState('')
-  const [nameOm, setNameOm] = useState('')
   const [sector, setSector] = useState<BusinessSector>('AGRO_PROCESSING')
   const [descriptionEn, setDescriptionEn] = useState('')
   const [descriptionAm, setDescriptionAm] = useState('')
-  const [descriptionOm, setDescriptionOm] = useState('')
   const [address, setAddress] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
@@ -62,11 +60,9 @@ export default function AdminCompaniesPage() {
     setEditingCompany(null)
     setNameEn('')
     setNameAm('')
-    setNameOm('')
     setSector('AGRO_PROCESSING')
     setDescriptionEn('')
     setDescriptionAm('')
-    setDescriptionOm('')
     setAddress('')
     setPhone('')
     setEmail('')
@@ -85,11 +81,9 @@ export default function AdminCompaniesPage() {
     setEditingCompany(comp)
     setNameEn(comp.name_en)
     setNameAm(comp.name_am || '')
-    setNameOm(comp.name_om || '')
     setSector(comp.sector)
     setDescriptionEn(comp.description_en || '')
     setDescriptionAm(comp.description_am || '')
-    setDescriptionOm(comp.description_om || '')
     setAddress(comp.address || '')
     setPhone(comp.phone || '')
     setEmail(comp.email || '')
@@ -109,11 +103,9 @@ export default function AdminCompaniesPage() {
       const payload: any = {
         name_en: nameEn.trim(),
         name_am: nameAm.trim() || undefined,
-        name_om: nameOm.trim() || undefined,
         sector,
         description_en: descriptionEn.trim() || undefined,
         description_am: descriptionAm.trim() || undefined,
-        description_om: descriptionOm.trim() || undefined,
         address: address.trim() || undefined,
         phone: phone.trim() || undefined,
         email: email.trim() || undefined,
@@ -349,7 +341,7 @@ export default function AdminCompaniesPage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Names */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="sm:col-span-2">
+                <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
                     Company Name (English) *
                   </label>
@@ -372,19 +364,6 @@ export default function AdminCompaniesPage() {
                     value={nameAm}
                     onChange={(e) => setNameAm(e.target.value)}
                     placeholder="ለምሳሌ: ጫቻ አግሮ-ፕሮሰሲንግ ኃ.የተ.የ.ማ"
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">
-                    Maqaa Dhaabbataa (Afaan Oromoo)
-                  </label>
-                  <input
-                    type="text"
-                    value={nameOm}
-                    onChange={(e) => setNameOm(e.target.value)}
-                    placeholder="fkn: Caccetti Agro-Processing PLC"
                     className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
                   />
                 </div>
@@ -521,32 +500,17 @@ export default function AdminCompaniesPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">
-                    አጭር መግለጫ (Amharic)
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={descriptionAm}
-                    onChange={(e) => setDescriptionAm(e.target.value)}
-                    placeholder="ስለ ድርጅቱ ምርትና አገልግሎት አጭር መግለጫ..."
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">
-                    Ibsa Gabaabaa (Afaan Oromoo)
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={descriptionOm}
-                    onChange={(e) => setDescriptionOm(e.target.value)}
-                    placeholder="Ibsa waa'ee dhaabbataa..."
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
-                  />
-                </div>
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1">
+                  አጭር መግለጫ (Amharic)
+                </label>
+                <textarea
+                  rows={2}
+                  value={descriptionAm}
+                  onChange={(e) => setDescriptionAm(e.target.value)}
+                  placeholder="ስለ ድርጅቱ ምርትና አገልግሎት አጭር መግለጫ..."
+                  className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
+                />
               </div>
 
               {/* Actions */}

@@ -19,7 +19,6 @@ export async function GET(req: NextRequest) {
         (b) =>
           b.name_en?.toLowerCase().includes(q) ||
           (b.name_am && b.name_am.includes(q)) ||
-          (b.name_om && b.name_om.toLowerCase().includes(q)) ||
           (b.description_en && b.description_en.toLowerCase().includes(q)) ||
           (b.address && b.address.toLowerCase().includes(q))
       )
@@ -56,10 +55,8 @@ export async function POST(req: NextRequest) {
       id: `biz-${Date.now()}`,
       name_en: body.name_en,
       name_am: body.name_am || null,
-      name_om: body.name_om || null,
       description_en: body.description_en || null,
       description_am: body.description_am || null,
-      description_om: body.description_om || null,
       sector: body.sector,
       address: body.address || null,
       phone: body.phone || null,

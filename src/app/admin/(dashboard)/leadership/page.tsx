@@ -14,16 +14,14 @@ export default function AdminLeadershipPage() {
   // Form states
   const [nameEn, setNameEn] = useState('')
   const [nameAm, setNameAm] = useState('')
-  const [nameOm, setNameOm] = useState('')
   const [titleEn, setTitleEn] = useState('')
   const [titleAm, setTitleAm] = useState('')
-  const [titleOm, setTitleOm] = useState('')
   const [bioEn, setBioEn] = useState('')
   const [bioAm, setBioAm] = useState('')
-  const [bioOm, setBioOm] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [photo, setPhoto] = useState('')
+  const [uploadingPhoto, setUploadingPhoto] = useState(false)
   const [displayOrder, setDisplayOrder] = useState<number>(1)
 
   const fetchLeaders = async () => {
@@ -49,13 +47,10 @@ export default function AdminLeadershipPage() {
     setEditingLeader(null)
     setNameEn('')
     setNameAm('')
-    setNameOm('')
     setTitleEn('')
     setTitleAm('')
-    setTitleOm('')
     setBioEn('')
     setBioAm('')
-    setBioOm('')
     setPhone('')
     setEmail('')
     setPhoto('')
@@ -71,13 +66,10 @@ export default function AdminLeadershipPage() {
     setEditingLeader(l)
     setNameEn(l.name_en)
     setNameAm(l.name_am)
-    setNameOm(l.name_om)
     setTitleEn(l.title_en)
     setTitleAm(l.title_am)
-    setTitleOm(l.title_om)
     setBioEn(l.bio_en)
     setBioAm(l.bio_am)
-    setBioOm(l.bio_om)
     setPhone(l.phone || '')
     setEmail(l.email || '')
     setPhoto(l.photo || '')
@@ -94,13 +86,10 @@ export default function AdminLeadershipPage() {
       const payload: any = {
         name_en: nameEn.trim(),
         name_am: nameAm.trim() || nameEn.trim(),
-        name_om: nameOm.trim() || nameEn.trim(),
         title_en: titleEn.trim(),
         title_am: titleAm.trim() || titleEn.trim(),
-        title_om: titleOm.trim() || titleEn.trim(),
         bio_en: bioEn.trim() || undefined,
         bio_am: bioAm.trim() || undefined,
-        bio_om: bioOm.trim() || undefined,
         phone: phone.trim() || undefined,
         email: email.trim() || undefined,
         photo: photo.trim() || undefined,
@@ -111,8 +100,9 @@ export default function AdminLeadershipPage() {
         payload.id = editingLeader.id
       }
 
+      const method = editingLeader ? 'PUT' : 'POST'
       const res = await fetch('/api/v1/leadership', {
-        method: 'POST',
+        method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
@@ -211,18 +201,8 @@ export default function AdminLeadershipPage() {
             >
               <div>
                 <div className="flex items-center gap-3.5 mb-4">
-                  {/* Portrait / Avatar */}
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#1a4f8b] to-[#c8931a] flex items-center justify-center text-white text-xl font-bold border-2 border-white shadow-sm shrink-0 overflow-hidden">
-                    {leader.photo ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={leader.photo}
-                        alt={leader.name_en}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <span>{leader.name_en.slice(0, 2).toUpperCase()}</span>
-                    )}
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#1a4f8b] to-[#c8931a] flex items-center justify-center text-white text-base font-black border-2 border-white shadow-sm shrink-0">
+                    <span>{leader.name_en.slice(0, 2).toUpperCase()}</span>
                   </div>
 
                   <div className="min-w-0">
@@ -305,7 +285,7 @@ export default function AdminLeadershipPage() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Names */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
                     Full Name (English) *
@@ -332,23 +312,10 @@ export default function AdminLeadershipPage() {
                     className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
                   />
                 </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">
-                    Maqaa Guutuu (Afaan Oromoo)
-                  </label>
-                  <input
-                    type="text"
-                    value={nameOm}
-                    onChange={(e) => setNameOm(e.target.value)}
-                    placeholder="fkn: Obbo Aleemuu Baqalee"
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
-                  />
-                </div>
               </div>
 
               {/* Official Titles */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
                     Official Position (English) *
@@ -375,34 +342,57 @@ export default function AdminLeadershipPage() {
                     className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
                   />
                 </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">
-                    Itti Gaafatamummaa (Oromo)
-                  </label>
-                  <input
-                    type="text"
-                    value={titleOm}
-                    onChange={(e) => setTitleOm(e.target.value)}
-                    placeholder="Bulchaa Aanaa / Itti Gaafatamaa"
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
-                  />
-                </div>
               </div>
 
               {/* Photo & Contacts */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
-                    Photo URL or Local Path
+                    Photo URL or Direct Upload
                   </label>
-                  <input
-                    type="text"
-                    value={photo}
-                    onChange={(e) => setPhoto(e.target.value)}
-                    placeholder="/images/leadership/leader-1.jpg"
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
-                  />
+                  <div className="flex gap-2 items-center">
+                    <input
+                      type="text"
+                      value={photo}
+                      onChange={(e) => setPhoto(e.target.value)}
+                      placeholder="/uploads/images/leader.jpg"
+                      className="flex-1 px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
+                    />
+                    <label className="px-3 py-2 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-lg text-xs font-bold text-gray-700 cursor-pointer shrink-0 transition-colors">
+                      {uploadingPhoto ? 'Uploading...' : '📁 Upload'}
+                      <input
+                        type="file"
+                        accept="image/jpeg,image/png,image/webp"
+                        className="hidden"
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0]
+                          if (!file) return
+                          setUploadingPhoto(true)
+                          const fd = new FormData()
+                          fd.append('file', file)
+                          try {
+                            const res = await fetch('/api/v1/media/upload', {
+                              method: 'POST',
+                              body: fd,
+                            })
+                            const data = await res.json()
+                            if (data.url) setPhoto(data.url)
+                            else alert(data.error || 'Upload failed')
+                          } catch {
+                            alert('Upload error')
+                          } finally {
+                            setUploadingPhoto(false)
+                          }
+                        }}
+                      />
+                    </label>
+                  </div>
+                  {photo && (
+                    <div className="mt-1.5 flex items-center gap-2">
+                      <img src={photo} alt="Preview" className="w-8 h-8 rounded-full object-cover border border-gray-300" />
+                      <span className="text-[11px] text-gray-500 truncate max-w-[200px]">{photo}</span>
+                    </div>
+                  )}
                 </div>
 
                 <div>
@@ -446,32 +436,17 @@ export default function AdminLeadershipPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">
-                    አጭር የህይወት ታሪክና የስራ ልምድ (Amharic)
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={bioAm}
-                    onChange={(e) => setBioAm(e.target.value)}
-                    placeholder="የስራ ልምድና የወረዳውን ህዝብ ለማገልገል ያላቸው ራዕይ..."
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">
-                    Ibsa Seenaa fi Hojii (Afaan Oromoo)
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={bioOm}
-                    onChange={(e) => setBioOm(e.target.value)}
-                    placeholder="Muuxannoo hojii..."
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
-                  />
-                </div>
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1">
+                  አጭር የህይወት ታሪክና የስራ ልምድ (Amharic)
+                </label>
+                <textarea
+                  rows={2}
+                  value={bioAm}
+                  onChange={(e) => setBioAm(e.target.value)}
+                  placeholder="የስራ ልምድና የወረዳውን ህዝብ ለማገልገል ያላቸው ራዕይ..."
+                  className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
+                />
               </div>
 
               {/* Actions */}

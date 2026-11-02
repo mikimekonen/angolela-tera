@@ -52,21 +52,6 @@ export default async function TendersPage({
       downloadDocs: 'የጨረታ ሰነድ አውርድ',
       contactDesk: 'የግዥና ንብረት አስተዳደር ዴስክ',
     },
-    om: {
-      tag: 'Caalbaasii Mootummaa',
-      title: 'Beeksisa Caalbaasii Mootummaa',
-      subtitle: 'Caalbaasiiwwan ifaa fi bittaa mootummaa Aanaa Angolallaa Xaraa.',
-      bidNumber: 'Lakk. Caalbaasii',
-      procuringEntity: 'Waajjira Raawwatu',
-      bondSecurity: 'Wabii Caalbaasii (CPO)',
-      docPrice: 'Gatii Sanadaa',
-      deadline: 'Guyyaa Cufiinsaa',
-      status: 'Sadarkaa',
-      activeBids: 'Caalbaasiiwwan Banamaa',
-      empty: 'Caalbaasiin banamaan hin jiru.',
-      downloadDocs: 'Sanada Buufadhaa',
-      contactDesk: 'Kutaa Bittaa',
-    },
   }[locale as Locale]
 
   return (
@@ -107,7 +92,7 @@ export default async function TendersPage({
               {tenders.map((tender) => {
                 const title = locale === 'am' ? tender.title_am || tender.title_en : tender.title_en
                 const closeDate = new Date(tender.closingDate)
-                const etCloseDate = formatEthiopianDate(toEthiopian(closeDate), locale as 'en' | 'am' | 'om')
+                const etCloseDate = formatEthiopianDate(toEthiopian(closeDate), locale as 'en' | 'am')
                 const isUrgent = closeDate.getTime() - Date.now() < 5 * 86400000
 
                 return (

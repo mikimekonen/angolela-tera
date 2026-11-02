@@ -41,17 +41,6 @@ export default async function ServicesPage({
       needHelp: 'ቅሬታ ወይም ተጨማሪ ጥያቄ አለዎት?',
       contactHelp: 'የወረዳውን የቅሬታ ሰሚ ያነጋግሩ',
     },
-    om: {
-      tag: 'Tajaajila Uummataa',
-      title: 'Tarree Tajaajiloota Uummataa fi Daldalaa',
-      subtitle: 'Ulaagaalee, yeroo fudhatu fi kaffaltii tajaajiloota aanaa keenyaa.',
-      timeLabel: 'Yeroo Fudhatu',
-      costLabel: 'Kaffaltii Seeraa',
-      officeLabel: 'Waajjira Kennu',
-      viewGuide: 'Qajeelfama fi Ulaagaalee Dubbisi',
-      needHelp: 'Komiin yookiin gaaffiin qabduu?',
-      contactHelp: 'Kutaa Komii Uummataa Qunnamaa',
-    },
   }[locale as Locale]
 
   return (

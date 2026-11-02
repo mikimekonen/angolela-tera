@@ -98,23 +98,6 @@ export default async function ServiceDetailPage({
       appealDesc: 'ያልተገባ መዘግየት ወይም የአገልግሎት አሰጣጥ ችግር ካጋጠመዎት ለወረዳው የቅሬታ ሰሚ ያመልክቱ።',
       fileGrievance: 'አቤቱታ ያቅርቡ',
     },
-    om: {
-      breadcrumbHome: 'Fuula Duraa',
-      breadcrumbServices: 'Tajaajiloota',
-      requirementsTitle: 'Ulaagaalee fi Ragaalee Barbaachisan',
-      stepsTitle: 'Tarkaanfiiwwan Tajaajila Argachuu',
-      summaryTitle: 'Odeeffannoo Gabaabaa',
-      timeLabel: 'Yeroo Fudhatu',
-      costLabel: 'Kaffaltii Seeraa',
-      officeLabel: 'Waajjira Kennu',
-      locationLabel: 'Teessoo',
-      locationDefault: 'Gamooma Bulchiinsa Caaccetti',
-      downloadForm: 'Foormii Iyyannoo Buufadhaa (PDF)',
-      viewBureau: 'Odeeffannoo Waajjiraa Ilaali',
-      appealTitle: 'Komiin qabduu?',
-      appealDesc: 'Yoo tajaajilli harkifate kutaa komii aanaatti iyyachuu dandeessu.',
-      fileGrievance: 'Iyyannoo Dhiheessaa',
-    },
   }[locale as Locale]
 
   return (

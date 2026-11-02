@@ -24,7 +24,6 @@ export async function GET(req: NextRequest) {
         (n: any) =>
           n.title_en?.toLowerCase().includes(q) ||
           (n.title_am && n.title_am.includes(q)) ||
-          (n.title_om && n.title_om.toLowerCase().includes(q)) ||
           (n.summary_en && n.summary_en.toLowerCase().includes(q))
       )
     }
@@ -69,22 +68,16 @@ export async function POST(req: NextRequest) {
       slug: body.slug,
       title_en: body.title_en,
       title_am: body.title_am || body.title_en,
-      title_om: body.title_om || body.title_en,
       category_en: body.category_en || 'Administration & Governance',
       category_am: body.category_am || 'አስተዳደር እና መልካም አስተዳደር',
-      category_om: body.category_om || 'Bulchiinsa fi Mootummaa',
       date_en: body.date_en || today,
       date_am: body.date_am || today,
-      date_om: body.date_om || today,
       author_en: session.name || 'Woreda Communication Directorate',
       author_am: 'የወረዳው ኮሙኒኬሽን ዳይሬክቶሬት',
-      author_om: 'Daayirektooreetii Kominikeeshinii Aanaa',
       summary_en: body.summary_en || body.excerpt_en || '',
       summary_am: body.summary_am || body.excerpt_am || '',
-      summary_om: body.summary_om || body.excerpt_om || '',
       content_en: Array.isArray(body.content_en) ? body.content_en : [body.content_en || body.body_en || ''],
       content_am: Array.isArray(body.content_am) ? body.content_am : [body.content_am || body.body_am || ''],
-      content_om: Array.isArray(body.content_om) ? body.content_om : [body.content_om || body.body_om || ''],
       isFeatured: Boolean(body.isFeatured),
       status: body.status || 'PUBLISHED',
       createdAt: new Date().toISOString(),

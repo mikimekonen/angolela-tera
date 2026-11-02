@@ -36,16 +36,7 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
           { title: 'Administration & Cabinet', href: `/${locale}/about/leadership`, description: 'Executive leadership and office holders' },
           { title: 'Historical Background', href: `/${locale}/about/history`, description: 'Heritage and founding of Angolela Tera' },
           { title: 'Geography & Climate', href: `/${locale}/about/geography`, description: 'Topography, weather, agro-ecological zones' },
-        ],
-      },
-      {
-        id: 'government',
-        label: 'Government',
-        href: `/${locale}/kebeles`,
-        children: [
-          { title: 'Woreda Council', href: `/${locale}/government/council`, description: 'Legislative body and representative assemblies' },
-          { title: 'Kebele Administrations', href: `/${locale}/kebeles`, description: 'Grassroots administrative divisions — all 19 kebeles' },
-          { title: 'Organizational Structure', href: `/${locale}/government/structure`, description: 'Governance and accountability chart' },
+          { title: 'ICT & Digital Team', href: `/${locale}/about/ict`, description: 'Systems, network infrastructure, cybersecurity & portal administration' },
         ],
       },
       {
@@ -66,8 +57,8 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         href: `/${locale}/development`,
         children: [
           { title: 'Key Development Projects', href: `/${locale}/development`, description: 'Ongoing infrastructure and capital investments' },
-          { title: 'Water & Irrigation Schemes', href: `/${locale}/development/water`, description: 'Clean drinking water and river diversions' },
-          { title: 'Rural Road Access', href: `/${locale}/development/roads`, description: 'Universal rural road access program' },
+          { title: 'Water & Irrigation Schemes', href: `/${locale}/development/water`, description: 'Clean drinking water, Ajima-Chacha dam and river diversions' },
+          { title: 'Rural Road Access', href: `/${locale}/development/roads`, description: 'Universal rural road connectivity projects' },
         ],
       },
       {
@@ -126,15 +117,7 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
           { title: 'አመራርና ካቢኔ', href: `/${locale}/about/leadership`, description: 'የስራ አስፈጻሚ አካላት ዝርዝር' },
           { title: 'ታሪካዊ አመጣጥ', href: `/${locale}/about/history`, description: 'የአንጎሌላ ተራ ታሪክና ቅርስ' },
           { title: 'መልክአ ምድርና የአየር ንብረት', href: `/${locale}/about/geography`, description: 'የመሬት አቀማመጥና ስነ-ምህዳር' },
-        ],
-      },
-      {
-        id: 'government',
-        label: 'መንግሥት',
-        href: `/${locale}/kebeles`,
-        children: [
-          { title: 'የወረዳው ምክር ቤት', href: `/${locale}/government/council`, description: 'የህዝብ ተወካዮች ምክር ቤት' },
-          { title: 'የቀበሌ አስተዳደሮች', href: `/${locale}/kebeles`, description: 'ሁሉም 19 ቀበሌዎች ና ከተሞች' },
+          { title: 'የአይሲቲ (ICT) ቡድን', href: `/${locale}/about/ict`, description: 'የሲስተም፣ ኔትወርክ፣ ሳይበር ደህንነትና ፖርታል ባለሙያዎች' },
         ],
       },
       {
@@ -154,7 +137,7 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         href: `/${locale}/development`,
         children: [
           { title: 'የልማት ፕሮጀክቶች', href: `/${locale}/development`, description: 'በሂደት ላይ ያሉ የመሰረተ ልማት ስራዎች' },
-          { title: 'ውሃና መስኖ', href: `/${locale}/development/water`, description: 'የንጹህ መጠጥ ውሃና የመስኖ ልማት' },
+          { title: 'ውሃና መስኖ', href: `/${locale}/development/water`, description: 'የንጹህ መጠጥ ውሃና የአጂማ-ጫቻ ግድብ መስኖ ልማት' },
           { title: 'ገጠር መንገዶች', href: `/${locale}/development/roads`, description: 'የገጠር ተደራሽነት የመንገድ ግንባታ' },
         ],
       },
@@ -198,53 +181,6 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         ],
       },
       { id: 'contact', label: 'ያግኙን', href: `/${locale}/contact` },
-    ],
-    om: [
-      { id: 'home', label: 'Fuula Duraa', href: `/${locale}` },
-      {
-        id: 'about',
-        label: 'Waa\'ee Aanaa',
-        href: `/${locale}/about`,
-        children: [
-          { title: 'Waa\'ee Aanaa', href: `/${locale}/about`, description: 'Ilaalcha, ergama fi qabeenya' },
-          { title: 'Hoggansa & Kaabinee', href: `/${locale}/about/leadership`, description: 'Hoggantoota aanaa' },
-        ],
-      },
-      {
-        id: 'government',
-        label: 'Mootummaa',
-        href: `/${locale}/kebeles`,
-        children: [
-          { title: 'Manni Maree Aanaa', href: `/${locale}/government/council`, description: 'Miseensota mana maree' },
-          { title: 'Gandoolee Aanaa', href: `/${locale}/kebeles`, description: 'Gandoolee 19' },
-        ],
-      },
-      {
-        id: 'services',
-        label: 'Tajaajiloota',
-        href: `/${locale}/services`,
-        children: [
-          { title: 'Galmee Ragaalee Murtii', href: `/${locale}/services/civil-registration`, description: 'Dhaloota, gaa\'ela fi du\'a' },
-          { title: 'Bulchiinsa Lafaa', href: `/${locale}/services/land-certificate`, description: 'Ragaa abbaa qabiyyummaa' },
-          { title: 'Galtee Qonnaa', href: `/${locale}/services/agriculture`, description: 'Sanyii filatamaa fi xaa\'oo' },
-          { title: 'Hayaama Daldalaa', href: `/${locale}/services/business-license`, description: 'Gibiraa fi daldala' },
-        ],
-      },
-      { id: 'development', label: 'Misooma', href: `/${locale}/development` },
-      { id: 'investment', label: 'Invastimantii', href: `/${locale}/investment` },
-      { id: 'tourism', label: 'Tuuriizimii', href: `/${locale}/tourism` },
-      {
-        id: 'news',
-        label: 'Oduu',
-        href: `/${locale}/news`,
-        children: [
-          { title: 'Oduu Haaraa', href: `/${locale}/news`, description: 'Ibsa mootummaa fi oduu aanaa' },
-          { title: 'Beeksisa Bittaa', href: `/${locale}/tenders`, description: 'Bittaa banaa fi beeksisa dhiyeessii' },
-          { title: 'Kebele Hundeessaa', href: `/${locale}/kebeles`, description: 'Odeeffannoo kebele 19 fi magaalota' },
-        ],
-      },
-      { id: 'resources', label: 'Qabeenya', href: `/${locale}/resources` },
-      { id: 'contact', label: 'Qunnamtii', href: `/${locale}/contact` },
     ],
   }
 
@@ -302,9 +238,9 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
                   {hasDropdown && activeDropdown === item.id && (
                     <div className="absolute left-0 mt-0 w-72 bg-white rounded-b-lg shadow-xl border border-gray-200 py-2 z-50 animate-fadeIn">
                       <div className="py-1">
-                        {item.children?.map((sub) => (
+                        {item.children?.map((sub, subIdx) => (
                           <Link
-                            key={sub.href}
+                            key={`${item.id}-${sub.title}-${subIdx}`}
                             href={sub.href}
                             className="block px-4 py-2.5 hover:bg-blue-50 text-gray-800 transition-colors group/sub"
                           >
@@ -386,9 +322,9 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
 
                       {hasChildren && isExpanded && (
                         <div className="pl-4 py-1 space-y-1 bg-black/20 rounded-md my-1">
-                          {item.children?.map((sub) => (
+                          {item.children?.map((sub, subIdx) => (
                             <Link
-                              key={sub.href}
+                              key={`${item.id}-mob-${sub.title}-${subIdx}`}
                               href={sub.href}
                               onClick={onCloseMobile}
                               className="block py-1.5 text-xs text-gray-300 hover:text-white transition-colors"

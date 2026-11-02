@@ -6,9 +6,10 @@ import { LeadershipSlider } from './LeadershipSlider'
 
 interface LeadershipSectionProps {
   locale: Locale
+  leaders?: any[]
 }
 
-export function LeadershipSection({ locale }: LeadershipSectionProps) {
+export function LeadershipSection({ locale, leaders = [] }: LeadershipSectionProps) {
   const content = {
     en: {
       tag: 'Leadership & Executive Governance',
@@ -74,23 +75,26 @@ export function LeadershipSection({ locale }: LeadershipSectionProps) {
       ],
       readMore: 'ስለ ወረዳው አስተዳደር የበለጠ ይወቁ',
     },
-    om: {
-      tag: 'Hoggansa fi Ilaalcha',
-      title: "Ergaa Bulchaa Ol'aanaa Aanaa",
-      name: 'Obbo Darrasaa Dammaqqaa',
-      office: "Bulchaa Ol'aanaa • Aanaa Angolallaa Xaraa",
-      quote:
-        "“Bulchiinsi keenya tajaajila uummataa ifa ta'e kennuuf, nageenya amansiisaa mirkaneessuuf, baajata sirnaan bulchuuf fi misooma gandoolee 19 maraaf cimsee hojjetaa jira.”",
-      pillarsTitle: 'Utuboota Misooma Keenyaa',
-      pillars: [
-        { title: "Ce'umsa Qonnaa", desc: 'Qonna ammayyeessuu, sanyii filatamaa raabsuu fi galii qonnaan bulaa dabaluu.', icon: '🌾' },
-        { title: "Bu'uuraalee Misoomaa", desc: "Daandii fi bishaan qulqulluu gandoolee maraaf dhiheessuu.", icon: '🛣️' },
-        { title: 'Tajaajila Iftoomina Qabu', desc: 'Bulchiinsa gaarii fi tajaajila teeknooloojiin deeggarame.', icon: '🏛️' },
-        { title: "Invastimantii fi Hojii Uumuu", desc: "Carraawwan invastimantii qonnaa fi industirii magaalaa Caacceetti babal'isuu.", icon: '💼' },
-      ],
-      readMore: "Waa'ee Hoggansa Aanaa Dabalataan Dubbisi",
-    },
   }[locale]
+
+  // Dynamic Chief Administrator extraction from live CMS / Database
+  const chief = (leaders && leaders.length > 0)
+    ? (leaders.find((l: any) => l.isAdministrator || l.displayOrder === 1) || leaders[0])
+    : null
+
+  const chiefName = chief
+    ? (chief[`name_${locale}`] || chief.name_en || chief.name)
+    : content.name
+
+  const chiefOffice = chief
+    ? (chief[`title_${locale}`] || chief.title_en || chief.title) + ' • Angolela Tera Woreda'
+    : content.office
+
+  const chiefQuote = chief
+    ? (chief[`message_${locale}`] || chief[`bio_${locale}`] || chief.bio_en || chief.bio || content.quote)
+    : content.quote
+
+  const chiefPhoto = chief?.photo || '/images/leadership/derese-dememe.jpg'
 
   return (
     <div className="flex flex-col w-full">
@@ -105,28 +109,28 @@ export function LeadershipSection({ locale }: LeadershipSectionProps) {
             {/* Left Column: Official Message & Portrait Frame (5 cols) */}
             <div className="lg:col-span-5 bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 backdrop-blur-xs relative overflow-hidden group">
               <div className="flex items-center gap-4 mb-6">
-                {/* Official Portrait Avatar with Gold Border */}
-                <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-[#FED100] shadow-lg shrink-0 bg-[#0d2340]">
+                {/* Official Executive Insignia Badge with Photo */}
+                <div className="w-16 h-16 rounded-2xl border-2 border-[#FED100] shadow-lg shrink-0 relative overflow-hidden bg-[#061426]">
                   <Image
-                    src="/images/leadership/derese-dememe.jpg"
-                    alt={content.name}
+                    src={chiefPhoto}
+                    alt={chiefName}
                     fill
+                    className="object-cover"
                     sizes="64px"
-                    className="object-cover object-top"
                   />
                 </div>
                 <div>
                   <h3 className="text-base sm:text-lg font-bold text-white leading-tight">
-                    {content.name}
+                    {chiefName}
                   </h3>
                   <p className="text-xs text-[#FED100] mt-0.5 font-medium">
-                    {content.office}
+                    {chiefOffice}
                   </p>
                 </div>
               </div>
 
               <blockquote className="text-sm sm:text-base text-gray-200 leading-relaxed italic border-l-2 border-[#FED100] pl-4 my-4">
-                {content.quote}
+                {chiefQuote}
               </blockquote>
 
               <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
@@ -172,7 +176,7 @@ export function LeadershipSection({ locale }: LeadershipSectionProps) {
       </section>
 
       {/* 2. Interactive Executive Leadership & Party Secretariat Slider Carousel */}
-      <LeadershipSlider locale={locale} />
+      <LeadershipSlider locale={locale} leaders={leaders} />
     </div>
   )
 }

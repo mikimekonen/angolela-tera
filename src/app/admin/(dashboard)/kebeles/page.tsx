@@ -13,7 +13,6 @@ export default function AdminKebelesPage() {
   // Form state
   const [nameEn, setNameEn] = useState('')
   const [nameAm, setNameAm] = useState('')
-  const [nameOm, setNameOm] = useState('')
   const [slug, setSlug] = useState('')
   const [type, setType] = useState<'RURAL_KEBELE' | 'URBAN_TOWN'>('RURAL_KEBELE')
   const [population, setPopulation] = useState('')
@@ -47,7 +46,6 @@ export default function AdminKebelesPage() {
     setEditingItem(null)
     setNameEn('')
     setNameAm('')
-    setNameOm('')
     setSlug('')
     setType('RURAL_KEBELE')
     setPopulation('')
@@ -64,7 +62,6 @@ export default function AdminKebelesPage() {
     setEditingItem(item)
     setNameEn(item.name_en)
     setNameAm(item.name_am || '')
-    setNameOm(item.name_om || '')
     setSlug(item.slug)
     setType(item.type)
     setPopulation(item.population ? item.population.toString() : '')
@@ -88,7 +85,6 @@ export default function AdminKebelesPage() {
       const payload = {
         name_en: nameEn,
         name_am: nameAm || null,
-        name_om: nameOm || null,
         slug: slug.toLowerCase().trim().replace(/\s+/g, '-'),
         type,
         population: population ? Number(population) : undefined,

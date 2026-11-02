@@ -20,7 +20,6 @@ export default async function ResourcesPage({
   setRequestLocale(locale)
 
   const isAm = locale === 'am'
-  const isOm = locale === 'om'
 
   const liveDocs = getDocuments().filter((d: any) => d.status === 'PUBLISHED' || !d.status)
 
@@ -36,12 +35,6 @@ export default async function ResourcesPage({
       title: 'ሰነዶች፣ ቅጾችና ህጋዊ መመሪያዎች',
       subtitle: 'የህዝብ አገልግሎት ማመልከቻ ቅጾች፣ የወረዳ ምክር ቤት አዋጆች፣ ዓመታዊ የፋይናንስ ኦዲት ሪፖርቶችና ለነዋሪዎችና ለንግድ ማህበረሰቡ የተዘጋጁ ይፋዊ ሰነዶች።',
       downloadBtn: 'ሰነዱን ያውርዱ',
-    },
-    om: {
-      tag: 'Sanadoota Mootummaa',
-      title: 'Qabeenya, Foormiiwwan fi Qajeelfamoota',
-      subtitle: 'Foormiiwwan tajaajilaa, qajeelfamoota seeraa fi gabaasaalee aanaa keenyaa.',
-      downloadBtn: 'Sanada Buufadhaa',
     },
   }[locale as Locale]
 
@@ -66,8 +59,8 @@ export default async function ResourcesPage({
         {/* Dynamic Documents Grid from dataStore */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {liveDocs.map((doc: any) => {
-            const title = isAm ? (doc.title_am || doc.title_en) : isOm ? (doc.title_om || doc.title_en) : doc.title_en
-            const desc = isAm ? (doc.description_am || doc.description_en) : isOm ? (doc.description_om || doc.description_en) : doc.description_en
+            const title = isAm ? (doc.title_am || doc.title_en) : doc.title_en
+            const desc = isAm ? (doc.description_am || doc.description_en) : doc.description_en
 
             return (
               <div

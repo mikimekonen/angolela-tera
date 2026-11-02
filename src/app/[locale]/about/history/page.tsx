@@ -76,30 +76,6 @@ export default async function HistoryPage({
       ],
       backToAbout: 'ወደ ወረዳው አጠቃላይ መረጃ ተመለስ',
     },
-    om: {
-      tag: 'Seenaa Shawaa',
-      title: 'Seenaa Hundeeffama Aanaa Angolallaa Xaraa',
-      subtitle: 'Seenaa mootota Shawaa irraa hanga bulchiinsa ammayyaatti.',
-      timelineTitle: 'Bara Seenaa Ijoo',
-      timeline: [
-        {
-          era: 'Jaarraa 19ffaa Jalqaba',
-          heading: 'Bara Mootii Saahila Sillaasee',
-          text: 'Mootichi Angolallaa teessoo isaa taasisee ture. Bakka qonnaa bal\'aa fi loltummaaf mijatuudha.',
-        },
-        {
-          era: 'Bara 1841 – 1843',
-          heading: 'Ergamoota Biyya Ingilizii Waliin Waliigaltee',
-          text: 'Waliigalteen daldalaa fi hariiroo alaa Angolallaa keessatti mallatteeffame.',
-        },
-        {
-          era: 'Bara Ammayyaa',
-          heading: 'Hundeeffama Aanaa Angolallaa Xaraa',
-          text: 'Aanaan kun magaalaa Caaccetti teessoo isaa taasifatee tajaajila uummataa kennaa jira.',
-        },
-      ],
-      backToAbout: 'Gara Fuula Duraatti Deebi\'i',
-    },
   }[locale as Locale]
 
   return (

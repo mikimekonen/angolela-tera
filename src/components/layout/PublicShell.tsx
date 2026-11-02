@@ -13,9 +13,10 @@ import type { Locale } from '@/i18n/config'
 interface PublicShellProps {
   children: React.ReactNode
   locale: Locale
+  settings?: Record<string, string>
 }
 
-export function PublicShell({ children, locale }: PublicShellProps) {
+export function PublicShell({ children, locale, settings }: PublicShellProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
@@ -49,7 +50,7 @@ export function PublicShell({ children, locale }: PublicShellProps) {
       <SpeedDial locale={locale} />
 
       {/* Institutional 4-Column Footer */}
-      <Footer locale={locale} />
+      <Footer locale={locale} settings={settings} />
     </div>
   )
 }

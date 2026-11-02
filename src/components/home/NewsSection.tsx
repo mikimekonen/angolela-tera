@@ -4,9 +4,10 @@ import type { Locale } from '@/i18n/config'
 
 interface NewsSectionProps {
   locale: Locale
+  news?: any[]
 }
 
-export function NewsSection({ locale }: NewsSectionProps) {
+export function NewsSection({ locale, news }: NewsSectionProps) {
   const content = {
     en: {
       tag: 'Official Communication',
@@ -78,42 +79,24 @@ export function NewsSection({ locale }: NewsSectionProps) {
         },
       ],
     },
-    om: {
-      tag: 'Oduu fi Beeksisa',
-      title: 'Oduuwwan fi Beeksisoota Haaraa',
-      desc: 'Murteewwan kaabinee aanaa fi oduuwwan misoomaa hordofaa.',
-      viewAll: 'Oduuwwan Hundumaa Ilaali',
-      items: [
-        {
-          id: 'news-1',
-          title: 'Manni Maree Aanaa Baajata Misoomaa Mirkaneesse',
-          category: 'Murtee Mana Maree',
-          date: 'Fulbaana 14, 2026',
-          summary: 'Manni maree aanaa baajata daandii fi bishaan qulqulluuf oolu mirkaneessee jira.',
-          href: `/${locale}/news/budget-2026`,
-          featured: true,
-        },
-        {
-          id: 'news-2',
-          title: 'Sanyiin Qamadii Filatamaa Gandoolee 19tti Raabsamuu Jalqabe',
-          category: 'Qonna',
-          date: 'Fulbaana 8, 2026',
-          summary: 'Waajjirri qonnaa qamadii kuintaala 12,000 ol qonnaan bultootaaf raabsaa jira.',
-          href: `/${locale}/news/wheat-distribution`,
-          featured: false,
-        },
-        {
-          id: 'news-3',
-          title: 'Beeksisa Invastimantii: Magaalaa Caaccetti Lafa Qophaa\'e',
-          category: 'Invastimantii',
-          date: 'Fulbaana 2, 2026',
-          summary: 'Abbootiin qabeenyaa invastimantii qonnaa irratti bobba\'uu barbaadan waamichi ta\'eeraaf.',
-          href: `/${locale}/news/agro-park-tender`,
-          featured: false,
-        },
-      ],
-    },
   }[locale]
+
+  // Dynamic news mapped from CMS/Database with fallback to content.items
+  const displayedNews =
+    news && news.length > 0
+      ? news
+          .filter((n: any) => n.status === 'PUBLISHED' || !n.status)
+          .slice(0, 3)
+          .map((n: any) => ({
+            id: n.id || n.slug,
+            title: n[`title_${locale}`] || n.title_en || n.title,
+            category: n[`category_${locale}`] || n.category_en || n.category || 'Official Press',
+            date: n[`date_${locale}`] || n.date_en || (n.publishedAt ? new Date(n.publishedAt).toLocaleDateString() : 'Recent'),
+            summary: n[`summary_${locale}`] || n.summary_en || n.summary || n[`excerpt_${locale}`] || '',
+            href: `/${locale}/news/${n.slug}`,
+            featured: Boolean(n.isFeatured),
+          }))
+      : content.items
 
   return (
     <section className="py-16 bg-[#f0f4f8] border-b border-gray-200">
@@ -141,7 +124,7 @@ export function NewsSection({ locale }: NewsSectionProps) {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {content.items.map((news) => (
+          {displayedNews.map((news) => (
             <article
               key={news.id}
               className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between group"

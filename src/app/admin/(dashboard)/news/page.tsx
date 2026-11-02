@@ -34,7 +34,6 @@ export default function AdminNewsPage() {
           slug,
           title_en: newTitle,
           title_am: newTitle,
-          title_om: newTitle,
           excerpt_en: newExcerpt,
           category_en: newCategory,
           isFeatured,

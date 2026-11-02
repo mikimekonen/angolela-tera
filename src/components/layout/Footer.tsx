@@ -5,9 +5,10 @@ import type { Locale } from '@/i18n/config'
 
 interface FooterProps {
   locale: Locale
+  settings?: Record<string, string>
 }
 
-export function Footer({ locale }: FooterProps) {
+export function Footer({ locale, settings }: FooterProps) {
   const content = {
     en: {
       tagline: 'Serving our communities through transparent governance, accessible public services, and sustainable economic development.',
@@ -42,23 +43,6 @@ export function Footer({ locale }: FooterProps) {
       hoursDetail: 'ከሰኞ – አርብ፡ ከጠዋቱ 2:30 – 11:30 (የምሳ እረፍት ከ 6:30 – 7:30)',
       rights: 'መብቱ በህግ የተጠበቀ ነው። የአንጎሌላ ተራ ወረዳ ይፋዊ ፖርታል።',
       portalNotice: 'በኢትዮጵያ የኤሌክትሮኒክስ መንግሥት (E-Government) መመዘኛዎች መሰረት የተዘጋጀ።',
-    },
-    om: {
-      tagline: 'Tajaajila uummataa dhihoo, iftoomina fi misooma diinagdee itti fufiinsa qabuun hawaasa keenya ni tajaajilla.',
-      addressTitle: 'Waajjira Ol\'aanaa Aanaa',
-      addressLine1: 'Gamooma Waajjiroota Aanaa Angolallaa Xaraa',
-      addressLine2: 'Magaalaa Caccetti, Godina Shawaa Kaabaa',
-      addressLine3: 'Mootummaa Naannoo Amaaraa, Itoophiyaa',
-      emergencyTitle: 'Bilbila Ariifachiisaa',
-      police: 'Poolisii Aanaa: +251 (0) 58 661 0111',
-      health: 'Hospitaala Sad. 1ffaa Caaccetti: +251 (0) 58 661 0222',
-      fire: 'Ittisa Balaa: +251 (0) 58 661 0333',
-      quickLinks: 'Tajaajiloota Uummataa',
-      officesTitle: 'Dinagdee fi Dhaabbilee',
-      workingHours: 'Sa\'aatii Hojii',
-      hoursDetail: 'Wiixata – Jimmata: Ganama 2:30 – 11:30 (Boqonnaa Guyyaa 6:30 – 7:30)',
-      rights: 'Mirgi qopheessaa seeraan eeggamaadha. Fuula Aanaa Angolallaa Xaraa.',
-      portalNotice: 'Ulaagaalee Mootummaa Elektirooniksii Itoophiyaa hordofee kan qophaa\'e.',
     },
   }[locale]
 
@@ -138,32 +122,32 @@ export function Footer({ locale }: FooterProps) {
             <ul className="space-y-2 text-xs">
               <li>
                 <Link href={`/${locale}/companies`} className="hover:text-[#FED100] transition-colors">
-                  {locale === 'am' ? 'የግል ድርጅቶችና ፋብሪካዎች' : locale === 'om' ? 'Warshaalee fi Dhaabbilee' : 'Private Industries & Enterprises'}
+                  {locale === 'am' ? 'የግል ድርጅቶችና ፋብሪካዎች' : 'Private Industries & Enterprises'}
                 </Link>
               </li>
               <li>
                 <Link href={`/${locale}/investment`} className="hover:text-[#FED100] transition-colors">
-                  {locale === 'am' ? 'የኢንቨስትመንት መመሪያ' : locale === 'om' ? 'Qajeelfama Invastimantii' : 'Industrial Investment Guide'}
+                  {locale === 'am' ? 'የኢንቨስትመንት መመሪያ' : 'Industrial Investment Guide'}
                 </Link>
               </li>
               <li>
                 <Link href={`/${locale}/kebeles`} className="hover:text-[#FED100] transition-colors">
-                  {locale === 'am' ? '19ቱ የገጠርና ከተማ ቀበሌዎች' : locale === 'om' ? 'Gandoolee 19 Bulchiinsaa' : '19 Kebele Administrations'}
+                  {locale === 'am' ? '19ቱ የገጠርና ከተማ ቀበሌዎች' : '19 Kebele Administrations'}
                 </Link>
               </li>
               <li>
                 <Link href={`/${locale}/about/leadership`} className="hover:text-[#FED100] transition-colors">
-                  {locale === 'am' ? 'የወረዳው ካቢኔ አመራር' : locale === 'om' ? 'Hoggansa Ol\'aanaa Aanaa' : 'Woreda Cabinet Leadership'}
+                  {locale === 'am' ? 'የወረዳው ካቢኔ አመራር' : 'Woreda Cabinet Leadership'}
                 </Link>
               </li>
               <li>
                 <Link href={`/${locale}/development`} className="hover:text-[#FED100] transition-colors">
-                  {locale === 'am' ? 'የልማት ፕሮጀክቶች' : locale === 'om' ? 'Piroojektii Misoomaa' : 'Capital Development Projects'}
+                  {locale === 'am' ? 'የልማት ፕሮጀክቶች' : 'Capital Development Projects'}
                 </Link>
               </li>
               <li>
                 <Link href={`/${locale}/partners`} className="hover:text-[#FED100] transition-colors">
-                  {locale === 'am' ? 'አጋር ድርጅቶች' : locale === 'om' ? 'Dhaabbilee Deeggartootaa' : 'Development Partners'}
+                  {locale === 'am' ? 'አጋር ድርጅቶች' : 'Development Partners'}
                 </Link>
               </li>
             </ul>
@@ -184,13 +168,17 @@ export function Footer({ locale }: FooterProps) {
               <div className="text-[11px] font-semibold text-[#FED100] mb-1">
                 {content.emergencyTitle}
               </div>
-              <p className="text-xs text-gray-300 font-mono">{content.police}</p>
-              <p className="text-xs text-gray-300 font-mono">{content.health}</p>
+              <p className="text-xs text-gray-300 font-mono">
+                {settings?.emergency_police ? `Woreda Police: ${settings.emergency_police}` : content.police}
+              </p>
+              <p className="text-xs text-gray-300 font-mono">
+                {settings?.emergency_health ? `Chacha Hospital: ${settings.emergency_health}` : content.health}
+              </p>
             </div>
 
             <div className="pt-2 text-[11px] text-gray-400 border-t border-white/5">
               <span className="font-semibold text-gray-300">{content.workingHours}: </span>
-              {content.hoursDetail}
+              {settings?.[`working_hours_${locale}`] || settings?.working_hours_en || content.hoursDetail}
             </div>
           </div>
         </div>

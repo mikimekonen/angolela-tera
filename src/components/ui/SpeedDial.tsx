@@ -26,13 +26,6 @@ export function SpeedDial({ locale }: SpeedDialProps) {
       contact: 'የወረዳው መረጃ ዴስክ',
       tooltip: 'ፈጣን የዜጎች እገዛ',
     },
-    om: {
-      emergency: 'Bilbila Balaa',
-      grievance: 'Komii Dhiyeessuu',
-      services: 'Tajaajiloota',
-      contact: 'Waajjira Aanaa',
-      tooltip: 'Gargaarsa Ariifachiisaa',
-    },
   }[locale]
 
   return (

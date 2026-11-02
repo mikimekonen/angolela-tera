@@ -19,7 +19,6 @@ export async function GET(req: NextRequest) {
         (k) =>
           k.name_en.toLowerCase().includes(q) ||
           (k.name_am && k.name_am.includes(q)) ||
-          (k.name_om && k.name_om.toLowerCase().includes(q)) ||
           k.slug.toLowerCase().includes(q)
       )
     }
@@ -48,14 +47,12 @@ export async function POST(req: NextRequest) {
       slug: body.slug,
       name_en: body.name_en,
       name_am: body.name_am || null,
-      name_om: body.name_om || null,
       type: body.type || 'RURAL_KEBELE',
       population: body.population ? Number(body.population) : undefined,
       distanceFromCapitalKm: body.distanceFromCapitalKm ? Number(body.distanceFromCapitalKm) : undefined,
       mainAgroEcology: body.mainAgroEcology || null,
       economicActivities_en: body.economicActivities_en || null,
       economicActivities_am: body.economicActivities_am || null,
-      economicActivities_om: body.economicActivities_om || null,
       administratorName: body.administratorName || null,
       contactPhone: body.contactPhone || null,
       displayOrder: body.displayOrder ? Number(body.displayOrder) : 0,

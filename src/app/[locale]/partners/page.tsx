@@ -42,16 +42,6 @@ export default async function PartnersDirectoryPage({
       hq: 'ዋና መስሪያ ቤት / ክልል',
       visit: 'ይፋዊ ድረ-ገጽ ↗',
     },
-    om: {
-      badge: 'Qindoomina Misoomaa',
-      title: 'Dhaabbilee Hiriyyummaa fi Dhaabbilee Misoomaa',
-      subtitle:
-        'Aanaan Angolallaa Xaraa guddina dinagdee fi hawaasummaa mirkaneessuuf dhaabbilee barnootaa fi misoomaa waliin hojjeta.',
-      scope: 'Balbalina Hojii',
-      since: 'Bara Qindoominaa',
-      hq: 'Teessoo',
-      visit: 'Marsariitii ↗',
-    },
   }[locale as Locale]
 
   return (
@@ -77,12 +67,10 @@ export default async function PartnersDirectoryPage({
           {getPartners().filter((p: any) => p.status !== 'ARCHIVED').map((p: any) => {
             const name =
               locale === 'am' ? p.name_am || p.name_en :
-              locale === 'om' ? p.name_om || p.name_en :
               p.name_en
 
             const desc =
               locale === 'am' ? p.description_am || p.description_en :
-              locale === 'om' ? p.description_om || p.description_en :
               p.description_en
 
             const hasLogo = Boolean(p.logo?.url)

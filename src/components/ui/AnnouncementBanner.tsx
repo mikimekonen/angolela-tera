@@ -37,7 +37,6 @@ export function AnnouncementBanner({ locale, announcements }: AnnouncementBanner
 
   const text =
     locale === 'am' ? ann.text_am || ann.text_en :
-    locale === 'om' ? ann.text_om || ann.text_en :
     ann.text_en
 
   return (

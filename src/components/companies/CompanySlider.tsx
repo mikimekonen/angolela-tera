@@ -27,10 +27,8 @@ export interface CompanyItem {
   id: string
   name_en: string
   name_am?: string
-  name_om?: string
   description_en: string
   description_am?: string
-  description_om?: string
   sector: string
   address?: string
   phone?: string
@@ -149,42 +147,6 @@ export function CompanySlider({
       close: 'ዝጋ',
       investmentTitle: 'የኢንዱስትሪ መሬት ወይም የንግድ እድሎችን ይፈልጋሉ?',
       investmentLink: 'የወረዳው ኢንቨስትመንት ዴስክን ያነጋግሩ →',
-    },
-    om: {
-      badge: 'Kooridoorii Warshaalee Caccetti fi Wiirtuu Invastimantii',
-      title: 'Agarsiisa Warshaalee fi Dhaabbilee Dhuunfaa',
-      subtitle:
-        'Aanaa Angolallaa Xaraa keessatti warshaalee dhugaatii ammayyaa, warshaalee qonnaa fi aannanii, fi dhaabbilee daldalaa dinagdee naannoo guddiftan.',
-      sectors: {
-        ALL: 'Warshaalee Hunda',
-        AGRO_PROCESSING: 'Qonnaa fi Aannanii',
-        MANUFACTURING: 'Dhugaatii fi Warshaa',
-        AGRICULTURE: 'Sanyii fi Qonna',
-        CONSTRUCTION: 'Ijaarsa',
-      },
-      prev: 'Duraa',
-      next: 'Itti Aanu',
-      pause: 'Dhaabi',
-      play: 'Taphachiisi',
-      employees: 'Hojjettoota',
-      est: 'Bara Hundeeffama',
-      quickView: 'Ibsa Gabaabaa',
-      details: 'Ibsa Guutuu',
-      visitSite: 'Weebsaayitii',
-      verified: 'Kan Mirkanaa\'e',
-      address: 'Bakka',
-      contact: 'Quunnamtii',
-      phone: 'Bilbila',
-      email: 'Iimeeyilii',
-      website: 'Weebsaayitii Seera Qabeessa',
-      sector: 'Damee Hojii',
-      sliderView: 'Agarsiisa Slaayidii',
-      gridView: 'Tarree Hunda',
-      showing: 'Warshaa',
-      of: 'keessaa',
-      close: 'Cufi',
-      investmentTitle: 'Lafa invastimantii barbaadduu?',
-      investmentLink: 'Waajjira Invastimantii Aanaa Quunnamaa →',
     },
   }[locale]
 
@@ -537,12 +499,10 @@ export function CompanySlider({
               {filtered.map((biz) => {
                 const name =
                   locale === 'am' ? biz.name_am || biz.name_en :
-                  locale === 'om' ? biz.name_om || biz.name_en :
                   biz.name_en
 
                 const desc =
                   locale === 'am' ? biz.description_am || biz.description_en :
-                  locale === 'om' ? biz.description_om || biz.description_en :
                   biz.description_en
 
                 const sectorMeta = getSectorMeta(biz.sector)
@@ -695,12 +655,10 @@ export function CompanySlider({
           {filtered.map((biz) => {
             const name =
               locale === 'am' ? biz.name_am || biz.name_en :
-              locale === 'om' ? biz.name_om || biz.name_en :
               biz.name_en
 
             const desc =
               locale === 'am' ? biz.description_am || biz.description_en :
-              locale === 'om' ? biz.description_om || biz.description_en :
               biz.description_en
 
             const sectorMeta = getSectorMeta(biz.sector)
@@ -832,8 +790,6 @@ export function CompanySlider({
                 <h3 className="text-xl sm:text-2xl font-black text-[#0d2340]">
                   {locale === 'am'
                     ? selectedCompany.name_am || selectedCompany.name_en
-                    : locale === 'om'
-                    ? selectedCompany.name_om || selectedCompany.name_en
                     : selectedCompany.name_en}
                 </h3>
 
@@ -853,8 +809,6 @@ export function CompanySlider({
               <p className="text-sm text-gray-700 leading-relaxed">
                 {locale === 'am'
                   ? selectedCompany.description_am || selectedCompany.description_en
-                  : locale === 'om'
-                  ? selectedCompany.description_om || selectedCompany.description_en
                   : selectedCompany.description_en}
               </p>
             </div>

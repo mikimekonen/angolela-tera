@@ -92,6 +92,27 @@ export default function AdminSidebar({ user }: { user: SessionPayload }) {
     router.refresh()
   }
 
+  const isSuperAdmin = user.role === 'SUPER_ADMIN'
+  const isAdmin = user.role === 'ADMIN' || isSuperAdmin
+
+  const visibleGroups = NAV_GROUPS.map((group) => {
+    const visibleItems = group.items.filter((item) => {
+      if (item.href === '/admin/users' || item.href === '/admin/settings') {
+        return isSuperAdmin
+      }
+      if (
+        item.href === '/admin/sections' ||
+        item.href === '/admin/navigation' ||
+        item.href === '/admin/sliders' ||
+        item.href === '/admin/audit-log'
+      ) {
+        return isAdmin
+      }
+      return true
+    })
+    return { ...group, items: visibleItems }
+  }).filter((group) => group.items.length > 0)
+
   return (
     <aside
       className={`${
@@ -161,7 +182,7 @@ export default function AdminSidebar({ user }: { user: SessionPayload }) {
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto py-4 px-2 space-y-5 scrollbar-none">
-        {NAV_GROUPS.map((group) => (
+        {visibleGroups.map((group) => (
           <div key={group.label}>
             {!collapsed && (
               <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest px-2 mb-1.5">

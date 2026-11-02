@@ -19,7 +19,6 @@ export default async function DevelopmentPage({
   setRequestLocale(locale)
 
   const isAm = locale === 'am'
-  const isOm = locale === 'om'
 
   const liveProjects = getDevelopmentProjects().filter((p: any) => p.status !== 'ARCHIVED')
 
@@ -52,20 +51,6 @@ export default async function DevelopmentPage({
       ctaOffices: 'የመሰረተ ልማት ቢሮን ያነጋግሩ',
       ctaContact: 'የመሰረተ ልማት አስተያየት ይስጡ',
     },
-    om: {
-      tag: 'Ijaarsaa fi Misooma',
-      title: 'Piroojektiiwwan Misoomaa fi Bu\'uuraalee',
-      subtitle: 'Piroojektiiwwan bishaan dhugaatii, daandii baadiyyaa, manneen barumsaa fi ibsaa aanaa Angolallaa Xaraa keessatti gaggeeffamaa jiran.',
-      statusOngoing: 'Adeemsa Irra Kan Jiru',
-      statusCompleted: 'Kan Xumurame',
-      budgetLabel: 'Baajata Piroojektii',
-      contractorLabel: 'Ijaaraa',
-      fundingLabel: 'Madda Maallaqaa',
-      completionLabel: 'Yeroo Xumuramu',
-      progressLabel: 'Sadarkaa Raawwii',
-      ctaOffices: 'Waajjira Ijaarsaa Qunnamaa',
-      ctaContact: 'Yaada Misoomaa Galchaa',
-    },
   }[locale as Locale]
 
   return (
@@ -89,8 +74,8 @@ export default async function DevelopmentPage({
         {/* Dynamic Projects List from dataStore */}
         <div className="space-y-6 mb-12">
           {liveProjects.map((proj: any) => {
-            const title = isAm ? (proj.title_am || proj.title_en) : isOm ? (proj.title_om || proj.title_en) : proj.title_en
-            const desc = isAm ? (proj.description_am || proj.description_en) : isOm ? (proj.description_om || proj.description_en) : proj.description_en
+            const title = isAm ? (proj.title_am || proj.title_en) : proj.title_en
+            const desc = isAm ? (proj.description_am || proj.description_en) : proj.description_en
             const budgetFormatted = proj.budget_etb
               ? `${(proj.budget_etb / 1000000).toFixed(1)} Million ETB`
               : (proj.budget || 'Allocated')

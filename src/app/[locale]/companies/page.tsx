@@ -46,17 +46,6 @@ export default async function CompaniesDirectoryPage({
         'የወረዳው ኢንቨስትመንት ዴስክ በጫቻ አግሮ-ኢንዱስትሪ ኮሪደር ፈጣን የመሬት አቅርቦትና የ70 ዓመት የሊዝ ዋስትና ያቀርባል።',
       investorBtn: 'የኢንቨስትመንት አማራጮችን ይመልከቱ →',
     },
-    om: {
-      badge: 'Galmee Warshaalee fi Invastimantii',
-      title: 'Warshaalee Dhuunfaa fi Dhaabbilee Daldalaa',
-      subtitle:
-        'Galmee seera qabeessaa warshaalee dhugaatii ammayyaa, qophii oomishaalee qonnaa fi aannanii, dhiyeessitoota sanyii fi dhaabbilee ijaarsaa Aanaa Angolallaa Xaraa.',
-      totalCount: 'Warshaalee Galmaa\'an',
-      investorCardTitle: 'Aanaa Angolallaa Xaraatti invast gochuu barbaaddu?',
-      investorCardDesc:
-        'Waajjirri invastimantii aanaa lafa daandii qarqaraa fi wabii liizii waggaa 70 dhiyeessa.',
-      investorBtn: 'Carraawwan Invastimantii Ilaalaa →',
-    },
   }[locale as Locale]
 
   const rawCompanies = getCompanies().filter((c: any) => c.status !== 'ARCHIVED')
@@ -64,10 +53,8 @@ export default async function CompaniesDirectoryPage({
     id: c.id,
     name_en: c.name_en,
     name_am: c.name_am,
-    name_om: c.name_om,
     description_en: c.description_en,
     description_am: c.description_am,
-    description_om: c.description_om,
     sector: c.sector,
     address: c.address,
     phone: c.phone,

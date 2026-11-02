@@ -19,7 +19,6 @@ export async function GET(req: NextRequest) {
         (s: any) =>
           s.title_en?.toLowerCase().includes(q) ||
           s.title_am?.toLowerCase().includes(q) ||
-          s.title_om?.toLowerCase().includes(q) ||
           s.description_en?.toLowerCase().includes(q) ||
           s.category_en?.toLowerCase().includes(q)
       )
@@ -63,21 +62,17 @@ export async function POST(req: NextRequest) {
       slug: body.slug,
       title_en: body.title_en,
       title_am: body.title_am || body.title_en,
-      title_om: body.title_om || body.title_en,
       officeSlug: body.officeSlug || 'administration',
       officeName_en: body.officeName_en || 'Woreda Administration',
       officeName_am: body.officeName_am || 'የወረዳ አስተዳደር',
-      officeName_om: body.officeName_om || 'Bulchiinsa Aanaa',
       category_en: body.category_en || 'General Public Service',
       category_am: body.category_am || 'አጠቃላይ የህዝብ አገልግሎት',
-      category_om: body.category_om || 'Tajaajila Waliigalaa',
       processingTime_en: body.processingTime_en || '1 - 3 Working Days',
       processingTime_am: body.processingTime_am || '1 - 3 የሥራ ቀናት',
       cost_en: body.cost_en || 'Free of Charge',
       cost_am: body.cost_am || 'ያለ ክፍያ',
       description_en: body.description_en || '',
       description_am: body.description_am || '',
-      description_om: body.description_om || '',
       requirements_en: Array.isArray(body.requirements_en) ? body.requirements_en : [],
       requirements_am: Array.isArray(body.requirements_am) ? body.requirements_am : [],
       steps_en: Array.isArray(body.steps_en) ? body.steps_en : [],

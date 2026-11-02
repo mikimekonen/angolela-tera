@@ -37,7 +37,6 @@ export async function POST(req: NextRequest) {
       id: `nav-${Date.now()}`,
       label_en: body.label_en,
       label_am: body.label_am || null,
-      label_om: body.label_om || null,
       url: body.url,
       parentId: body.parentId || null,
       displayOrder: body.displayOrder ? Number(body.displayOrder) : 10,

@@ -14,7 +14,6 @@ export async function GET(req: NextRequest) {
         (l) =>
           l.name_en?.toLowerCase().includes(q) ||
           (l.name_am && l.name_am.includes(q)) ||
-          (l.name_om && l.name_om.toLowerCase().includes(q)) ||
           l.title_en?.toLowerCase().includes(q) ||
           (l.title_am && l.title_am.includes(q))
       )
@@ -47,17 +46,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'name_en and title_en are required' }, { status: 400 })
     }
 
+    if (body.id) {
+      const updated = updateLeader(body.id, body, session.name)
+      if (updated) {
+        return NextResponse.json({ success: true, data: updated })
+      }
+    }
+
     const newLeader = {
       id: `leader-${Date.now()}`,
       name_en: body.name_en,
       name_am: body.name_am || '',
-      name_om: body.name_om || '',
       title_en: body.title_en,
       title_am: body.title_am || '',
-      title_om: body.title_om || '',
       bio_en: body.bio_en || '',
       bio_am: body.bio_am || '',
-      bio_om: body.bio_om || '',
       phone: body.phone || undefined,
       email: body.email || undefined,
       photo: body.photo || undefined,

@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { locales, type Locale } from '@/i18n/config'
 import { PublicShell } from '@/components/layout/PublicShell'
+import { getSiteSettings } from '@/lib/dataStore'
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -28,10 +29,6 @@ export async function generateMetadata({
     am: {
       title: 'የአንጎሌላ ተራ ወረዳ | ይፋዊ የመንግሥት ፖርታል',
       desc: 'የአንጎሌላ ተራ ወረዳ ይፋዊ ድረ-ገጽ፣ ሰሜን ሸዋ ዞን፣ አማራ ክልል፣ ኢትዮጵያ። የህዝብ አገልግሎቶች፣ ሴክተር መስሪያ ቤቶች፣ የልማትና ኢንቨስትመንት መረጃ።',
-    },
-    om: {
-      title: 'Aanaa Angolallaa Xaraa | Fuula Mootummaa',
-      desc: 'Fuula mootummaa Aanaa Angolallaa Xaraa, Godina Shawaa Kaabaa, Naannoo Amaaraa, Itoophiyaa. Tajaajiloota uummataa, waajjiroota fi invastimantii.',
     },
   }
 
@@ -91,10 +88,11 @@ export default async function LocaleLayout({
 
   // Fetch messages for next-intl
   const messages = await getMessages()
+  const settings = getSiteSettings()
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <PublicShell locale={locale as Locale}>
+      <PublicShell locale={locale as Locale} settings={settings}>
         {children}
       </PublicShell>
     </NextIntlClientProvider>

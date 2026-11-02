@@ -19,7 +19,6 @@ export async function GET(req: NextRequest) {
         (i) =>
           i.title_en.toLowerCase().includes(q) ||
           (i.title_am && i.title_am.includes(q)) ||
-          (i.title_om && i.title_om.toLowerCase().includes(q)) ||
           (i.summary_en && i.summary_en.toLowerCase().includes(q)) ||
           i.slug.toLowerCase().includes(q)
       )
@@ -49,21 +48,16 @@ export async function POST(req: NextRequest) {
       slug: body.slug,
       title_en: body.title_en,
       title_am: body.title_am || null,
-      title_om: body.title_om || null,
       sector: body.sector || 'Agro-processing',
       summary_en: body.summary_en || null,
       summary_am: body.summary_am || null,
-      summary_om: body.summary_om || null,
       description_en: body.description_en || null,
       description_am: body.description_am || null,
-      description_om: body.description_om || null,
       availableLandHa: body.availableLandHa ? Number(body.availableLandHa) : undefined,
       incentives_en: body.incentives_en || null,
       incentives_am: body.incentives_am || null,
-      incentives_om: body.incentives_om || null,
       procedures_en: body.procedures_en || null,
       procedures_am: body.procedures_am || null,
-      procedures_om: body.procedures_om || null,
       contactPerson: body.contactPerson || null,
       contactPhone: body.contactPhone || null,
       contactEmail: body.contactEmail || null,

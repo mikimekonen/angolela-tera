@@ -51,7 +51,7 @@ export type LoginInput = z.infer<typeof loginSchema>
 // ------------------------------------------------------------------
 export const searchSchema = z.object({
   q:      z.string().min(1).max(200).trim(),
-  locale: z.enum(['en', 'am', 'om']).default('en'),
+  locale: z.enum(['en', 'am']).default('en'),
   page:   z.coerce.number().int().positive().default(1),
 })
 

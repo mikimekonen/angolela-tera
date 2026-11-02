@@ -6,7 +6,6 @@ import { notFound } from 'next/navigation'
  *
  *  en  — English (default, fallback)
  *  am  — Amharic (አማርኛ) — written in Ethiopic script
- *  om  — Afaan Oromo — written in Latin script
  *
  * ADDING A NEW LOCALE:
  *  1. Add the locale code below to `locales`
@@ -15,7 +14,7 @@ import { notFound } from 'next/navigation'
  *  4. Ensure the Ethiopic font stack is loaded if the language uses Ge'ez script
  */
 
-export const locales = ['en', 'am', 'om'] as const
+export const locales = ['en', 'am'] as const
 export type Locale = (typeof locales)[number]
 
 export const defaultLocale: Locale = 'en'
@@ -24,14 +23,12 @@ export const defaultLocale: Locale = 'en'
 export const localeNames: Record<Locale, string> = {
   en: 'English',
   am: 'አማርኛ',
-  om: 'Afaan Oromo',
 }
 
 /** Text direction (all currently LTR) */
 export const localeDirection: Record<Locale, 'ltr' | 'rtl'> = {
   en: 'ltr',
   am: 'ltr', // Ethiopic script is left-to-right
-  om: 'ltr',
 }
 
 /**
@@ -41,7 +38,6 @@ export const localeDirection: Record<Locale, 'ltr' | 'rtl'> = {
 export const usesEthiopicScript: Record<Locale, boolean> = {
   en: false,
   am: true,
-  om: false, // Afaan Oromo uses Latin script
 }
 
 export default getRequestConfig(async ({ requestLocale }) => {

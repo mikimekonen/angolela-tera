@@ -12,18 +12,12 @@ export const ET_MONTHS_AM = [
   'መጋቢት', 'ሚያዚያ', 'ግንቦት', 'ሰኔ', 'ሐምሌ', 'ነሐሴ', 'ጳጉሜ',
 ]
 
-export const ET_MONTHS_OM = [
-  'Fulbaana', 'Onkoloolessa', 'Sadaasa', 'Muddee', 'Ammajjii', 'Guraandhala',
-  'Bitootessa', 'Elba', 'Caamsaa', 'Waxabajjii', 'Adoolessa', 'Hagayya', 'Qaammee',
-]
-
 export const ET_MONTHS_EN = [
   'Meskerem', 'Tikimt', 'Hidar', 'Tahsas', 'Tir', 'Yekatit',
   'Megabit', 'Miazia', 'Ginbot', 'Sene', 'Hamle', 'Nehase', 'Pagume',
 ]
 
 export const ET_DAYS_AM = ['ሰኞ', 'ማክሰኞ', 'ረቡዕ', 'ሐሙስ', 'አርብ', 'ቅዳሜ', 'እሑድ']
-export const ET_DAYS_OM = ['Wiixata', 'Kibxata', 'Roobii', 'Kamisa', 'Jimaata', 'Sanbata', 'Dilbata']
 export const ET_DAYS_EN = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 export interface EthiopianDate {
@@ -33,10 +27,8 @@ export interface EthiopianDate {
   dayOfWeek: number // 0=Monday … 6=Sunday
   monthName_en: string
   monthName_am: string
-  monthName_om: string
   dayName_en: string
   dayName_am: string
-  dayName_om: string
 }
 
 /**
@@ -80,10 +72,8 @@ export function toEthiopian(date: Date): EthiopianDate {
     dayOfWeek: dow,
     monthName_en: ET_MONTHS_EN[monthIdx],
     monthName_am: ET_MONTHS_AM[monthIdx],
-    monthName_om: ET_MONTHS_OM[monthIdx],
     dayName_en: ET_DAYS_EN[dow],
     dayName_am: ET_DAYS_AM[dow],
-    dayName_om: ET_DAYS_OM[dow],
   }
 }
 
@@ -91,14 +81,10 @@ export function toEthiopian(date: Date): EthiopianDate {
  * Format a short Ethiopian date string like:
  *   EN: "Meskerem 20, 2018 E.C."
  *   AM: "መስከረም 20 ቀን 2018 ዓ.ም"
- *   OM: "Fulbaana 20, 2018 M.N."
  */
-export function formatEthiopianDate(etd: EthiopianDate, locale: 'en' | 'am' | 'om'): string {
+export function formatEthiopianDate(etd: EthiopianDate, locale: 'en' | 'am'): string {
   if (locale === 'am') {
     return `${etd.dayName_am}፣ ${etd.monthName_am} ${etd.day} ቀን ${etd.year} ዓ.ም`
-  }
-  if (locale === 'om') {
-    return `${etd.dayName_om}, ${etd.monthName_om} ${etd.day}, ${etd.year} M.N.`
   }
   return `${etd.dayName_en}, ${etd.monthName_en} ${etd.day}, ${etd.year} E.C.`
 }

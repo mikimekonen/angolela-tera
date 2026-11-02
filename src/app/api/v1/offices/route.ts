@@ -14,7 +14,6 @@ export async function GET(req: NextRequest) {
         (o: any) =>
           o.name_en?.toLowerCase().includes(q) ||
           (o.name_am && o.name_am.includes(q)) ||
-          (o.name_om && o.name_om.toLowerCase().includes(q)) ||
           o.slug?.toLowerCase().includes(q)
       )
     }
@@ -56,27 +55,20 @@ export async function POST(req: NextRequest) {
       slug: body.slug,
       name_en: body.name_en,
       name_am: body.name_am || body.name_en,
-      name_om: body.name_om || body.name_en,
       head_en: body.head_en || 'Head of Directorate',
       head_am: body.head_am || 'የዳይሬክቶሬት ሃላፊ',
-      head_om: body.head_om || 'Hogganaa Daayirektooreetii',
       headTitle_en: body.headTitle_en || 'Sector Bureau Head',
       headTitle_am: body.headTitle_am || 'የዘርፍ ቢሮ ሃላፊ',
-      headTitle_om: body.headTitle_om || 'Hogganaa Biiroo',
       phone: body.phone || '+251 58 661 0100',
       email: body.email || `info@angolela-tera.gov.et`,
       location_en: body.location_en || 'Woreda Main Administration Complex, Chacha',
       location_am: body.location_am || 'የወረዳው ዋና አስተዳደር ግቢ፣ ጫቻ',
-      location_om: body.location_om || 'Caccetti',
       about_en: body.about_en || '',
       about_am: body.about_am || '',
-      about_om: body.about_om || '',
       responsibilities_en: Array.isArray(body.responsibilities_en) ? body.responsibilities_en : [],
       responsibilities_am: Array.isArray(body.responsibilities_am) ? body.responsibilities_am : [],
-      responsibilities_om: Array.isArray(body.responsibilities_om) ? body.responsibilities_om : [],
       servicesProvided_en: Array.isArray(body.servicesProvided_en) ? body.servicesProvided_en : [],
       servicesProvided_am: Array.isArray(body.servicesProvided_am) ? body.servicesProvided_am : [],
-      servicesProvided_om: Array.isArray(body.servicesProvided_om) ? body.servicesProvided_om : [],
       status: 'PUBLISHED',
       createdAt: new Date().toISOString(),
     }

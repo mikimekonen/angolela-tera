@@ -78,7 +78,6 @@ export interface MediaItem {
   height?: number
   altText_en?: string
   altText_am?: string
-  altText_om?: string
   url: string
   createdAt: Date
 }
@@ -93,10 +92,8 @@ export interface Statistic {
   value: string
   label_en: string
   label_am?: string
-  label_om?: string
   unit_en?: string
   unit_am?: string
-  unit_om?: string
   icon?: string
   displayOrder: number
   isVerified: boolean
@@ -111,7 +108,6 @@ export interface OfficeListItem {
   slug: string
   name_en: string
   name_am?: string
-  name_om?: string
   displayOrder: number
   status: ContentStatus
 }
@@ -119,13 +115,10 @@ export interface OfficeListItem {
 export interface OfficeDetail extends OfficeListItem {
   about_en?: string
   about_am?: string
-  about_om?: string
   vision_en?: string
   vision_am?: string
-  vision_om?: string
   mission_en?: string
   mission_am?: string
-  mission_om?: string
   phone?: string
   email?: string
   fax?: string
@@ -141,7 +134,6 @@ export interface OfficeResponsibility {
   id: string
   text_en: string
   text_am?: string
-  text_om?: string
   order: number
 }
 
@@ -154,13 +146,10 @@ export interface LeadershipItem {
   name: string
   title_en: string
   title_am?: string
-  title_om?: string
   bio_en?: string
   bio_am?: string
-  bio_om?: string
   message_en?: string
   message_am?: string
-  message_om?: string
   photo?: MediaItem
   isAdministrator: boolean
   displayOrder: number
@@ -176,10 +165,8 @@ export interface ServiceListItem {
   slug: string
   name_en: string
   name_am?: string
-  name_om?: string
   description_en?: string
   description_am?: string
-  description_om?: string
   icon?: string
   officeId?: string
   displayOrder: number
@@ -189,10 +176,8 @@ export interface ServiceListItem {
 export interface ServiceDetail extends ServiceListItem {
   requirements_en?: string
   requirements_am?: string
-  requirements_om?: string
   steps_en?: string
   steps_am?: string
-  steps_om?: string
   externalUrl?: string
 }
 
@@ -205,7 +190,6 @@ export interface NewsCategory {
   slug: string
   name_en: string
   name_am?: string
-  name_om?: string
   color?: string
 }
 
@@ -214,10 +198,8 @@ export interface NewsListItem {
   slug: string
   title_en: string
   title_am?: string
-  title_om?: string
   excerpt_en?: string
   excerpt_am?: string
-  excerpt_om?: string
   coverImage?: MediaItem
   category?: NewsCategory
   status: ContentStatus
@@ -229,7 +211,6 @@ export interface NewsListItem {
 export interface NewsDetail extends NewsListItem {
   body_en?: string
   body_am?: string
-  body_om?: string
   metaTitle_en?: string
   metaDesc_en?: string
 }
@@ -242,7 +223,6 @@ export interface DocumentItem {
   id: string
   title_en: string
   title_am?: string
-  title_om?: string
   description_en?: string
   file: MediaItem
   category: string
@@ -259,10 +239,8 @@ export interface ProjectListItem {
   slug: string
   name_en: string
   name_am?: string
-  name_om?: string
   description_en?: string
   description_am?: string
-  description_om?: string
   category: string
   completionPct?: number
   projectStatus: string
@@ -279,10 +257,8 @@ export interface TourismSiteItem {
   slug: string
   name_en: string
   name_am?: string
-  name_om?: string
   description_en?: string
   description_am?: string
-  description_om?: string
   category: string
   location?: string
   latitude?: number
@@ -300,10 +276,8 @@ export interface HeroSlide {
   image: MediaItem
   title_en?: string
   title_am?: string
-  title_om?: string
   subtitle_en?: string
   subtitle_am?: string
-  subtitle_om?: string
   ctaPrimary_en?: string
   ctaPrimaryUrl?: string
   ctaSecondary_en?: string
@@ -401,10 +375,8 @@ export interface BusinessItem {
   id: string
   name_en: string
   name_am?: string
-  name_om?: string
   description_en?: string
   description_am?: string
-  description_om?: string
   sector: BusinessSector
   address?: string
   phone?: string
@@ -436,10 +408,8 @@ export interface PartnerItem {
   id: string
   name_en: string
   name_am?: string
-  name_om?: string
   description_en?: string
   description_am?: string
-  description_om?: string
   partnerType: PartnerType
   country?: string
   website?: string
@@ -463,7 +433,6 @@ export interface AnnouncementItem {
   id: string
   text_en: string
   text_am?: string
-  text_om?: string
   type: AnnouncementType
   linkUrl?: string
   linkLabel_en?: string
@@ -483,14 +452,12 @@ export interface KebeleItem {
   slug: string
   name_en: string
   name_am?: string
-  name_om?: string
   type: KebeleType
   population?: number
   distanceFromCapitalKm?: number
   mainAgroEcology?: string
   economicActivities_en?: string
   economicActivities_am?: string
-  economicActivities_om?: string
   administratorName?: string
   contactPhone?: string
   featuredImageId?: string
@@ -509,21 +476,16 @@ export interface InvestmentOpportunityItem {
   slug: string
   title_en: string
   title_am?: string
-  title_om?: string
   sector: string
   summary_en?: string
   summary_am?: string
-  summary_om?: string
   description_en?: string
   description_am?: string
-  description_om?: string
   availableLandHa?: number
   incentives_en?: string
   incentives_am?: string
-  incentives_om?: string
   procedures_en?: string
   procedures_am?: string
-  procedures_om?: string
   contactPerson?: string
   contactPhone?: string
   contactEmail?: string
@@ -543,7 +505,6 @@ export interface HomepageSectionConfigItem {
   sectionKey: string
   title_en?: string
   title_am?: string
-  title_om?: string
   isEnabled: boolean
   displayOrder: number
   updatedAt: Date
@@ -557,7 +518,6 @@ export interface NavigationMenuItem {
   id: string
   label_en: string
   label_am?: string
-  label_om?: string
   url: string
   parentId?: string | null
   displayOrder: number
@@ -607,10 +567,8 @@ export interface TenderItem {
   bidNumber: string
   title_en: string
   title_am?: string
-  title_om?: string
   description_en?: string
   description_am?: string
-  description_om?: string
   procuringEntity: string
   bidBondAmount?: string
   documentPrice?: string

@@ -7,7 +7,7 @@ import Link from 'next/link'
 export default function AdminLoginPage() {
   const router = useRouter()
   const [email, setEmail] = useState('mikimekonen9@gmail.com')
-  const [password, setPassword] = useState('Michu0907')
+  const [password, setPassword] = useState('Michu0907..')
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -237,7 +237,7 @@ export default function AdminLoginPage() {
             </p>
             <div className="grid grid-cols-3 gap-2">
               {[
-                { label: 'Super Admin', email: 'mikimekonen9@gmail.com', pass: 'Michu0907', color: 'bg-blue-50 border-blue-200 text-[#1a4f8b] hover:bg-blue-100' },
+                { label: 'Super Admin', email: 'mikimekonen9@gmail.com', pass: 'Michu0907..', color: 'bg-blue-50 border-blue-200 text-[#1a4f8b] hover:bg-blue-100' },
                 { label: 'Editor', email: 'editor@angolelatera.gov.et', pass: 'Admin@Angolela2026!', color: 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100' },
                 { label: 'Reviewer', email: 'reviewer@angolelatera.gov.et', pass: 'Admin@Angolela2026!', color: 'bg-amber-50 border-amber-200 text-amber-800 hover:bg-amber-100' },
               ].map((cred) => (

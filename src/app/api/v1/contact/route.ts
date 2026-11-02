@@ -2,9 +2,32 @@ import { NextRequest, NextResponse } from 'next/server'
 import { contactFormSchema } from '@/lib/validations'
 import { createAuditLog, getClientIp } from '@/lib/audit'
 import { prisma } from '@/lib/db'
+import { createInquiry } from '@/lib/dataStore'
+import { rateLimiter } from '@/lib/rateLimit'
+import { sendCitizenSMSNotification } from '@/lib/notifications'
 
 export async function POST(req: NextRequest) {
   try {
+    const ipAddress = getClientIp(req.headers)
+    const userAgent = req.headers.get('user-agent') || ''
+
+    // Rate Limiting: 5 submissions per hour per IP to prevent spam attacks
+    const rateCheck = rateLimiter.check(`contact:${ipAddress}`, 5, 60 * 60 * 1000)
+    if (!rateCheck.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Too many inquiries submitted from this connection. Please try again in ${rateCheck.reset} seconds.`,
+        },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': String(rateCheck.reset),
+          },
+        }
+      )
+    }
+
     const body = await req.json()
     const validation = contactFormSchema.safeParse(body)
 
@@ -20,54 +43,72 @@ export async function POST(req: NextRequest) {
     }
 
     const { name, email, phone, subject, message } = validation.data
-    const ipAddress = getClientIp(req.headers)
-    const userAgent = req.headers.get('user-agent') || ''
 
-    // Generate unique government tracking ticket number
-    const randomSuffix = Math.floor(1000 + Math.random() * 9000)
-    const trackingNumber = `AGT-${Date.now().toString().slice(-4)}-${randomSuffix}`
-
-    const inquiryRecord = {
-      id: `inq_${Date.now()}`,
-      trackingNumber,
+    // Persist inquiry to dataStore for immediate Super Admin visibility
+    const inquiryItem = createInquiry({
       name,
       email,
-      phone: phone || null,
+      phone: phone || undefined,
       subject,
       message,
-      status: 'PENDING_REVIEW',
+      category: 'grievance',
+      status: 'SUBMITTED',
       ipAddress,
-      createdAt: new Date(),
-    }
+    })
 
+    // Also attempt PostgreSQL write if active
     try {
       if (prisma?.contactSubmission?.create) {
         await prisma.contactSubmission.create({
-          data: inquiryRecord,
+          data: {
+            id: inquiryItem.id,
+            name,
+            email,
+            phone: phone || null,
+            subject,
+            message,
+            status: 'unread',
+            ipAddress,
+            createdAt: new Date(),
+          },
         })
       }
     } catch {
-      // Prisma fallback
+      // Prisma DB write fallback handled by dataStore
     }
 
-    // Write audit log for grievance oversight
+    // Write audit log for institutional oversight
     await createAuditLog({
       userId: 'public_citizen',
       action: 'CREATE',
-      entityType: 'ContactSubmission',
-      entityId: trackingNumber,
-      newData: { name, email, subject, trackingNumber },
+      entityType: 'CitizenInquiry',
+      entityId: inquiryItem.trackingCode,
+      newData: { name, email, subject, trackingNumber: inquiryItem.trackingCode },
       notes: `Citizen inquiry submitted from IP ${ipAddress}`,
       ipAddress,
       userAgent,
     })
 
+    // Dispatch official citizen SMS confirmation if phone number is provided
+    if (phone) {
+      sendCitizenSMSNotification({
+        trackingCode: inquiryItem.trackingCode,
+        fullName: name,
+        phone,
+        email,
+        subject,
+        category: 'grievance',
+      }).catch((err) => console.error('[SMS Dispatch Error]:', err))
+    }
+
     return NextResponse.json(
       {
         success: true,
-        message: 'Your inquiry/grievance has been officially received and logged into the Woreda tracking system.',
-        trackingNumber,
-        submittedAt: inquiryRecord.createdAt,
+        message:
+          'Your inquiry/grievance has been officially received and logged into the Woreda tracking system.',
+        trackingNumber: inquiryItem.trackingCode,
+        trackingCode: inquiryItem.trackingCode,
+        submittedAt: inquiryItem.createdAt,
       },
       { status: 201 }
     )

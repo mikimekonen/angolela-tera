@@ -7,7 +7,6 @@ interface TourismItem {
   slug: string
   name_en: string
   name_am?: string
-  name_om?: string
   category: string
   description_en?: string
   description_am?: string

@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # --------------------------------------------------------------------------
+  # Next.js Government Portal Web Application
+  # --------------------------------------------------------------------------
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://angolela_admin:${DB_PASSWORD:-secure_db_pass_2026}@postgres:5432/angolela_db?schema=public
+      - JWT_SECRET=${JWT_SECRET:-generate_strong_64_char_random_key_for_gov_portal}
+      - NEXT_PUBLIC_SITE_URL=https://angolela-tera.gov.et
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - angolela_network
+
+  # --------------------------------------------------------------------------
+  # PostgreSQL 16 Enterprise Database
+  # --------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: angolela_admin
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secure_db_pass_2026}
+      POSTGRES_DB: angolela_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./prisma/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - '127.0.0.1:5432:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U angolela_admin -d angolela_db']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - angolela_network
+
+networks:
+  angolela_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local

@@ -7,7 +7,6 @@ interface Office {
   slug: string
   name_en: string
   name_am?: string
-  name_om?: string
   head_en?: string
   headTitle_en?: string
   head_am?: string

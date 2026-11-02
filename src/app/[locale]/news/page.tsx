@@ -44,14 +44,6 @@ export default async function NewsPage({
       authorLabel: 'አውጪው አካል',
       featuredTag: 'ዋና ይፋዊ መግለጫ',
     },
-    om: {
-      tag: 'Oduu fi Kominikeeshinii',
-      title: 'Oduuwwan fi Beeksisoota Haaraa',
-      subtitle: 'Oduuwwan aanaa, beeksisa caalbaasii fi murteewwan mana maree.',
-      readMore: 'Oduu Guutuu Dubbisi',
-      authorLabel: 'Kan Baase',
-      featuredTag: 'Ibsa Ijoo',
-    },
   }[locale as Locale]
 
   const allNews = getNews().filter((n: any) => n.status === 'PUBLISHED' || !n.status)
