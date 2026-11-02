@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSession } from '@/lib/auth'
+import { requireAuth } from '@/lib/auth'
 import { getKebeles, createKebele, updateKebele, deleteKebele } from '@/lib/dataStore'
 
 export async function GET(req: NextRequest) {
@@ -32,10 +32,8 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await getSession()
-    if (!session) {
-      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
-    }
+    const { session, errorResponse } = await requireAuth(['SUPER_ADMIN', 'ADMIN'])
+    if (errorResponse) return errorResponse
 
     const body = await req.json()
     if (!body.name_en || !body.slug) {
@@ -71,10 +69,8 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   try {
-    const session = await getSession()
-    if (!session) {
-      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
-    }
+    const { session, errorResponse } = await requireAuth(['SUPER_ADMIN', 'ADMIN'])
+    if (errorResponse) return errorResponse
 
     const body = await req.json()
     if (!body.slug) {
@@ -95,10 +91,8 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
-    const session = await getSession()
-    if (!session || session.role !== 'SUPER_ADMIN') {
-      return NextResponse.json({ success: false, error: 'Forbidden: Super Admin only' }, { status: 403 })
-    }
+    const { session, errorResponse } = await requireAuth(['SUPER_ADMIN', 'ADMIN'])
+    if (errorResponse) return errorResponse
 
     const { searchParams } = new URL(req.url)
     const slug = searchParams.get('slug')

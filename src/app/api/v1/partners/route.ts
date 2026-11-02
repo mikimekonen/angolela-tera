@@ -84,6 +84,13 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
     }
 
+    if (!hasPermission(session.role, 'canEditAll')) {
+      return NextResponse.json(
+        { success: false, error: 'Forbidden: Insufficient permissions to edit partners' },
+        { status: 403 }
+      )
+    }
+
     const body = await req.json()
     if (!body.id) {
       return NextResponse.json({ success: false, error: 'id is required' }, { status: 400 })

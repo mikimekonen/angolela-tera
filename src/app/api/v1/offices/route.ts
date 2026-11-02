@@ -96,6 +96,13 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
     }
 
+    if (!hasPermission(session.role, 'canEditAll') && session.role !== 'OFFICE_EDITOR') {
+      return NextResponse.json(
+        { success: false, error: 'Forbidden: Insufficient permissions to edit sector offices' },
+        { status: 403 }
+      )
+    }
+
     const body = await req.json()
     if (!body.slug) {
       return NextResponse.json({ success: false, error: 'slug is required' }, { status: 400 })

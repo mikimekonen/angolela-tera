@@ -86,6 +86,13 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
     }
 
+    if (session.role === 'VIEWER') {
+      return NextResponse.json(
+        { success: false, error: 'Forbidden: Insufficient privileges to update inquiries' },
+        { status: 403 }
+      )
+    }
+
     const body = await req.json()
     const { id, status, responseNotes, assignedOfficeId } = body
 

@@ -28,6 +28,13 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    if (session.role === 'VIEWER') {
+      return NextResponse.json(
+        { error: 'Forbidden. Read-only viewers cannot upload media assets.' },
+        { status: 403 }
+      )
+    }
+
     const formData = await req.formData()
     const file = formData.get('file') as File | null
 

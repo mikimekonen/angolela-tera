@@ -1,8 +1,24 @@
 import bcrypt from 'bcryptjs'
 import { cookies } from 'next/headers'
+import { NextResponse } from 'next/server'
 import type { UserRole, SessionPayload } from '@/types'
 
-const JWT_SECRET = process.env.JWT_SECRET || 'angolela-tera-woreda-gov-portal-secret-key-2026'
+function getJwtSecret(): string {
+  const secret = process.env.JWT_SECRET
+  if (
+    process.env.NODE_ENV === 'production' &&
+    (!secret ||
+      secret === 'angolela-tera-woreda-gov-portal-secret-key-2026' ||
+      secret.includes('change-in-production'))
+  ) {
+    console.error(
+      '🚨 CRITICAL SECURITY WARNING: Weak or default JWT_SECRET detected in production! Please generate a strong 64+ char random secret.'
+    )
+  }
+  return secret || 'angolela-tera-woreda-gov-portal-secret-key-2026'
+}
+
+const JWT_SECRET = getJwtSecret()
 const COOKIE_NAME = 'admin_session'
 
 // Password Utilities
@@ -196,4 +212,67 @@ export function hasPermission(
   action: keyof typeof ROLE_PERMISSIONS['SUPER_ADMIN']
 ): boolean {
   return ROLE_PERMISSIONS[role]?.[action] ?? false
+}
+
+/**
+ * Verifies that the current request has an active session and, optionally, one of the allowed roles.
+ * Returns { session } on success, or { errorResponse } if unauthenticated/unauthorized.
+ */
+export async function requireAuth(allowedRoles?: UserRole[]) {
+  const session = await getSession()
+  if (!session) {
+    return {
+      session: null,
+      errorResponse: NextResponse.json(
+        { success: false, error: 'Unauthorized: Administrative authentication required' },
+        { status: 401 }
+      ),
+    }
+  }
+
+  if (allowedRoles && allowedRoles.length > 0 && !allowedRoles.includes(session.role)) {
+    return {
+      session: null,
+      errorResponse: NextResponse.json(
+        {
+          success: false,
+          error: `Forbidden: Action requires one of [${allowedRoles.join(', ')}] roles. Current role: ${session.role}.`,
+        },
+        { status: 403 }
+      ),
+    }
+  }
+
+  return { session, errorResponse: null }
+}
+
+/**
+ * Verifies that the current request has an active session with the specified granular permission.
+ */
+export async function requirePermission(action: keyof (typeof ROLE_PERMISSIONS)['SUPER_ADMIN']) {
+  const session = await getSession()
+  if (!session) {
+    return {
+      session: null,
+      errorResponse: NextResponse.json(
+        { success: false, error: 'Unauthorized: Administrative authentication required' },
+        { status: 401 }
+      ),
+    }
+  }
+
+  if (!hasPermission(session.role, action)) {
+    return {
+      session: null,
+      errorResponse: NextResponse.json(
+        {
+          success: false,
+          error: `Forbidden: Insufficient privileges for action '${action}'. Current role: ${session.role}.`,
+        },
+        { status: 403 }
+      ),
+    }
+  }
+
+  return { session, errorResponse: null }
 }

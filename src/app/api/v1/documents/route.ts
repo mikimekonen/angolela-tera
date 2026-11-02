@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSession } from '@/lib/auth'
+import { getSession, hasPermission } from '@/lib/auth'
 import { getDocuments, createDocument, updateDocument, deleteDocument } from '@/lib/dataStore'
 
 export async function GET(req: NextRequest) {
@@ -43,6 +43,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
     }
 
+    if (!hasPermission(session.role, 'canCreate')) {
+      return NextResponse.json(
+        { success: false, error: 'Forbidden: Insufficient permissions to upload or publish documents' },
+        { status: 403 }
+      )
+    }
+
     const body = await req.json()
     if (!body.title_en) {
       return NextResponse.json({ success: false, error: 'title_en is required' }, { status: 400 })
@@ -81,6 +88,13 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
     }
 
+    if (!hasPermission(session.role, 'canEditAll') && session.role !== 'OFFICE_EDITOR') {
+      return NextResponse.json(
+        { success: false, error: 'Forbidden: Insufficient permissions to edit documents' },
+        { status: 403 }
+      )
+    }
+
     const body = await req.json()
     if (!body.id) {
       return NextResponse.json({ success: false, error: 'id is required' }, { status: 400 })
@@ -101,8 +115,8 @@ export async function PUT(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   try {
     const session = await getSession()
-    if (!session) {
-      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
+    if (!session || (session.role !== 'SUPER_ADMIN' && session.role !== 'ADMIN')) {
+      return NextResponse.json({ success: false, error: 'Forbidden: Super Admin or Admin only' }, { status: 403 })
     }
 
     const { searchParams } = new URL(req.url)
