@@ -44,6 +44,7 @@ const NAV_GROUPS = [
   {
     label: 'CMS Configuration',
     items: [
+      { href: '/admin/profile', label: 'My Profile & Security', icon: '👤' },
       { href: '/admin/sliders', label: 'Hero Sliders', icon: '🖼️' },
       { href: '/admin/sections', label: 'Homepage Sections', icon: '⚙️' },
       { href: '/admin/navigation', label: 'Menu Management', icon: '🧭' },
@@ -158,13 +159,19 @@ export default function AdminSidebar({ user }: { user: SessionPayload }) {
 
       {/* User Card */}
       {!collapsed && (
-        <div className="mx-3 mt-3 p-3 rounded-xl bg-white/5 border border-white/8">
+        <Link
+          href="/admin/profile"
+          className="mx-3 mt-3 p-3 rounded-xl bg-white/5 border border-white/8 hover:bg-white/10 hover:border-white/15 transition-all block group"
+          title="Manage My Profile & Password"
+        >
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#1a4f8b] to-[#0a1b32] flex items-center justify-center text-xs font-black text-white shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#1a4f8b] to-[#0a1b32] flex items-center justify-center text-xs font-black text-white shrink-0 group-hover:scale-105 transition-transform">
               {getInitials(user.name)}
             </div>
             <div className="min-w-0">
-              <p className="text-xs font-bold text-white truncate leading-tight">{user.name}</p>
+              <p className="text-xs font-bold text-white truncate leading-tight group-hover:text-blue-300 transition-colors">
+                {user.name}
+              </p>
               <p className="text-[10px] text-gray-400 truncate">{user.email}</p>
             </div>
           </div>
@@ -177,7 +184,7 @@ export default function AdminSidebar({ user }: { user: SessionPayload }) {
               Active
             </span>
           </div>
-        </div>
+        </Link>
       )}
 
       {/* Navigation */}

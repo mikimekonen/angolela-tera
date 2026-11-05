@@ -10,7 +10,7 @@ interface LeadershipSectionProps {
 }
 
 export function LeadershipSection({ locale, leaders = [] }: LeadershipSectionProps) {
-  const content = {
+  const contentDict = {
     en: {
       tag: 'Leadership & Executive Governance',
       title: 'Message from the Chief Administrator',
@@ -75,7 +75,40 @@ export function LeadershipSection({ locale, leaders = [] }: LeadershipSectionPro
       ],
       readMore: 'ስለ ወረዳው አስተዳደር የበለጠ ይወቁ',
     },
-  }[locale]
+    om: {
+      tag: 'Hoggansa & Mul\'ata Raawwachiisummaa',
+      title: 'Ergaa Bulchaa Ol\'aanaa Aanaa',
+      name: 'Obbo Darasee Dammamee',
+      office: 'Bulchaa Ol\'aanaa • Aanaa Angoolaalaa Xaraa',
+      quote:
+        '“Bulchiinsi aanaa keenyaa bulchiinsa naannoo itti gaafatamummaa qabu, gaaffii uummataatiif deebii ariifachiisaa kennu fi guddina diinagdee saffisiisu ijaaruuf kutannoodhaan hojjetaa jira. Sagantaalee misoomaa, bulchiinsa baajataa, fi nageenya uummataa hoogganuudhaan fayyadamummaa lammiilee keenyaa hunda mirkaneessina.”',
+      pillarsTitle: 'Xiyyeeffannoo Kallattii Hoggansaa',
+      pillars: [
+        {
+          title: 'Jijjiirama Qonnaa',
+          desc: 'Qonna baddaa ammayyeessuu, oomisha kilaastara qamadii fi garbuu babal\'isuu fi galii qonnaan bulaa guddisuu.',
+          icon: '🌾',
+        },
+        {
+          title: 'Bu\'uuraalee Misoomaa',
+          desc: 'Gandoolee hunda daandii ammayyaatiin walitti hidhuu, ibsaa fi bishaan dhugaatii qulqulluu gahuu mirkaneessuu.',
+          icon: '🛣️',
+        },
+        {
+          title: 'Tajaajila Ifa fi Haqaa',
+          desc: 'Bulchiinsa gaarii mirkaneessuu, tajaajila uummataa teeknooloojiidhaan ammayyeessuu fi mirga lammiilee kabachiisuu.',
+          icon: '🏛️',
+        },
+        {
+          title: 'Invastimantii fi Carraa Hojii',
+          desc: 'Carraa gaarii kooridarii Finfinnee-Dasee jiru fayyadamuun agroo-indastirii fi daldala jajjabeessuu.',
+          icon: '💼',
+        },
+      ],
+      readMore: 'Waa\'ee Bulchiinsa Aanaa Caalaatti Baraa',
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   // Dynamic Chief Administrator extraction from live CMS / Database
   const chief = (leaders && leaders.length > 0)
@@ -155,7 +188,7 @@ export function LeadershipSection({ locale, leaders = [] }: LeadershipSectionPro
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {content.pillars.map((pillar, idx) => (
+                {content.pillars.map((pillar: any, idx: number) => (
                   <div
                     key={idx}
                     className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-5 transition-all duration-200 group"

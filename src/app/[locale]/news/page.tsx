@@ -27,7 +27,7 @@ export default async function NewsPage({
   if (!locales.includes(locale as Locale)) notFound()
   setRequestLocale(locale)
 
-  const content = {
+  const contentDict = {
     en: {
       tag: 'Official Press & Media Desk',
       title: 'News & Official Announcements',
@@ -44,7 +44,16 @@ export default async function NewsPage({
       authorLabel: 'አውጪው አካል',
       featuredTag: 'ዋና ይፋዊ መግለጫ',
     },
-  }[locale as Locale]
+    om: {
+      tag: 'Odeeffannoo Mootummaa fi Preesii',
+      title: 'Oduuwwan fi Beeksisoota Mootummaa',
+      subtitle: 'Oduuwwan yeroo, beeksisoota caalbaasii, qajeelfamoota qonnaa fi murteewwan marii Bulchiinsa Aanaa Angoolaalaa Xaraa.',
+      readMore: 'Ibsa Guutuu Dubbisaa',
+      authorLabel: 'Qaama Baase',
+      featuredTag: 'Ibsa Mootummaa Ijoo',
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   const allNews = getNews().filter((n: any) => n.status === 'PUBLISHED' || !n.status)
   const featured = allNews.find((n: any) => n.isFeatured) || allNews[0]
@@ -71,41 +80,59 @@ export default async function NewsPage({
         {/* Featured Story */}
         {featured && (
           <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-xs mb-10 hover:border-[#1a4f8b] transition-all">
-            <div className="p-6 sm:p-10">
-              <div className="flex flex-wrap items-center gap-3 mb-3">
-                <span className="text-xs font-bold text-[#FED100] bg-[#0d2340] px-3 py-1 rounded-full uppercase tracking-wider">
-                  ★ {content.featuredTag}
-                </span>
-                <span className="text-xs font-semibold text-[#1a4f8b] bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
-                  {featured[`category_${locale as Locale}`] || featured.category_en}
-                </span>
-                <time className="text-xs text-gray-400 font-medium">
-                  {featured[`date_${locale as Locale}`] || featured.date_en}
-                </time>
-              </div>
+            <div className="flex flex-col lg:flex-row">
+              {(featured.imageUrl || featured.coverImage) && (
+                <div className="lg:w-2/5 shrink-0 bg-gray-100 overflow-hidden relative min-h-[240px]">
+                  <img
+                    src={featured.imageUrl || featured.coverImage}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                  {featured.videoUrl && (
+                    <span className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full bg-black/70 text-white text-[11px] font-bold backdrop-blur-xs flex items-center gap-1.5">
+                      <span>🎥</span> Video Communiqué
+                    </span>
+                  )}
+                </div>
+              )}
+              <div className="p-6 sm:p-10 flex-1 flex flex-col justify-between">
+                <div>
+                  <div className="flex flex-wrap items-center gap-3 mb-3">
+                    <span className="text-xs font-bold text-[#FED100] bg-[#0d2340] px-3 py-1 rounded-full uppercase tracking-wider">
+                      ★ {content.featuredTag}
+                    </span>
+                    <span className="text-xs font-semibold text-[#1a4f8b] bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
+                      {featured[`category_${locale as Locale}`] || featured.category_en}
+                    </span>
+                    <time className="text-xs text-gray-400 font-medium">
+                      {featured[`date_${locale as Locale}`] || featured.date_en}
+                    </time>
+                  </div>
 
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#0d2340] hover:text-[#1a4f8b] transition-colors leading-tight">
-                <Link href={`/${locale}/news/${featured.slug}`}>
-                  {featured[`title_${locale as Locale}`] || featured.title_en}
-                </Link>
-              </h2>
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#0d2340] hover:text-[#1a4f8b] transition-colors leading-tight">
+                    <Link href={`/${locale}/news/${featured.slug}`}>
+                      {featured[`title_${locale as Locale}`] || featured.title_en}
+                    </Link>
+                  </h2>
 
-              <p className="text-xs sm:text-sm text-gray-600 mt-3 max-w-4xl leading-relaxed">
-                {featured[`summary_${locale as Locale}`] || featured.summary_en}
-              </p>
+                  <p className="text-xs sm:text-sm text-gray-600 mt-3 max-w-4xl leading-relaxed">
+                    {featured[`summary_${locale as Locale}`] || featured.summary_en}
+                  </p>
+                </div>
 
-              <div className="mt-6 pt-4 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4">
-                <span className="text-xs text-gray-500 font-medium">
-                  {content.authorLabel}: <strong className="text-gray-800">{featured[`author_${locale as Locale}`] || featured.author_en}</strong>
-                </span>
+                <div className="mt-6 pt-4 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4">
+                  <span className="text-xs text-gray-500 font-medium">
+                    {content.authorLabel}: <strong className="text-gray-800">{featured[`author_${locale as Locale}`] || featured.author_en}</strong>
+                  </span>
 
-                <Link
-                  href={`/${locale}/news/${featured.slug}`}
-                  className="inline-flex items-center gap-1.5 bg-[#1a4f8b] hover:bg-[#133a6b] text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
-                >
-                  <span>{content.readMore}</span>
-                  <span>→</span>
-                </Link>
+                  <Link
+                    href={`/${locale}/news/${featured.slug}`}
+                    className="inline-flex items-center gap-1.5 bg-[#1a4f8b] hover:bg-[#133a6b] text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
+                  >
+                    <span>{content.readMore}</span>
+                    <span>→</span>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -120,30 +147,48 @@ export default async function NewsPage({
             const summary = news[`summary_${locale as Locale}`] || news.summary_en
             const author = news[`author_${locale as Locale}`] || news.author_en
 
+            const newsImg = (news as any).imageUrl || (news as any).coverImage || null
+
             return (
               <article
                 key={news.slug}
-                className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md hover:border-[#1a4f8b] transition-all flex flex-col justify-between"
+                className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-xs hover:shadow-md hover:border-[#1a4f8b] transition-all flex flex-col justify-between group"
               >
-                <div className="p-6">
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-[11px] font-semibold text-[#1a4f8b] bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
-                      {category}
-                    </span>
-                    <time className="text-[11px] text-gray-400 font-medium">
-                      {date}
-                    </time>
+                <div>
+                  {newsImg && (
+                    <div className="h-48 w-full overflow-hidden bg-gray-100 relative">
+                      <img
+                        src={newsImg}
+                        alt=""
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      {(news as any).videoUrl && (
+                        <span className="absolute bottom-2.5 left-2.5 px-2 py-0.5 rounded-full bg-black/70 text-white text-[10px] font-bold backdrop-blur-xs flex items-center gap-1">
+                          <span>🎥</span> Video
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="text-[11px] font-semibold text-[#1a4f8b] bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
+                        {category}
+                      </span>
+                      <time className="text-[11px] text-gray-400 font-medium">
+                        {date}
+                      </time>
+                    </div>
+
+                    <h3 className="text-base font-bold text-[#0d2340] group-hover:text-[#1a4f8b] transition-colors leading-snug">
+                      <Link href={`/${locale}/news/${news.slug}`}>
+                        {title}
+                      </Link>
+                    </h3>
+
+                    <p className="text-xs text-gray-600 mt-2.5 leading-relaxed line-clamp-3">
+                      {summary}
+                    </p>
                   </div>
-
-                  <h3 className="text-base font-bold text-[#0d2340] hover:text-[#1a4f8b] transition-colors leading-snug">
-                    <Link href={`/${locale}/news/${news.slug}`}>
-                      {title}
-                    </Link>
-                  </h3>
-
-                  <p className="text-xs text-gray-600 mt-2.5 leading-relaxed line-clamp-3">
-                    {summary}
-                  </p>
                 </div>
 
                 <div className="px-6 py-3.5 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-xs">

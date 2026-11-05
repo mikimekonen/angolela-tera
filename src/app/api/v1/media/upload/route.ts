@@ -1,10 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile, mkdir } from 'fs/promises'
+import { writeFile, mkdir, unlink } from 'fs/promises'
 import { existsSync } from 'fs'
 import path from 'path'
 import { getSession } from '@/lib/auth'
-import { createAuditLog } from '@/lib/audit'
 import { validateFileBuffer, sanitizeFileName } from '@/lib/fileSecurity'
+import {
+  getMediaAssets,
+  createMediaAsset,
+  updateMediaAsset,
+  deleteMediaAsset,
+  getMediaUsage,
+} from '@/lib/dataStore'
+import type { MediaCategory } from '@/types'
 
 // Allowed MIME types → storage subdirectory
 const ALLOWED_TYPES: Record<string, string> = {
@@ -13,9 +20,12 @@ const ALLOWED_TYPES: Record<string, string> = {
   'image/png':       'images',
   'image/webp':      'images',
   'application/pdf': 'documents',
+  'video/mp4':       'videos',
+  'video/webm':      'videos',
 }
 
-const MAX_SIZE_BYTES = 10 * 1024 * 1024 // 10 MB
+const MAX_IMAGE_SIZE = 15 * 1024 * 1024  // 15 MB
+const MAX_VIDEO_SIZE = 50 * 1024 * 1024  // 50 MB
 
 export async function POST(req: NextRequest) {
   try {
@@ -50,7 +60,7 @@ export async function POST(req: NextRequest) {
     if (!subdir) {
       return NextResponse.json(
         {
-          error: `Unsupported file type: "${declaredMime}". Allowed types: JPEG, PNG, WebP, PDF.`,
+          error: `Unsupported file type: "${declaredMime}". Allowed types: JPEG, PNG, WebP, PDF, MP4, WebM.`,
         },
         { status: 415 }
       )
@@ -60,10 +70,14 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(await file.arrayBuffer())
 
     // 3. Validate size
-    if (buffer.byteLength > MAX_SIZE_BYTES) {
+    const isVideo = declaredMime.startsWith('video/')
+    const maxAllowed = isVideo ? MAX_VIDEO_SIZE : MAX_IMAGE_SIZE
+    const maxMb = isVideo ? 50 : 15
+
+    if (buffer.byteLength > maxAllowed) {
       return NextResponse.json(
         {
-          error: `File exceeds maximum allowed size of 10 MB (provided: ${(buffer.byteLength / 1024 / 1024).toFixed(1)} MB).`,
+          error: `File exceeds maximum allowed size of ${maxMb} MB (provided: ${(buffer.byteLength / 1024 / 1024).toFixed(1)} MB).`,
         },
         { status: 413 }
       )
@@ -91,23 +105,43 @@ export async function POST(req: NextRequest) {
 
     const publicUrl = `/uploads/${subdir}/${filename}`
 
-    // 6. Security Audit Log
-    await createAuditLog({
-      userId: session.userId,
-      action: 'UPLOAD_MEDIA',
-      entityType: 'Media',
-      entityId: filename,
-      notes: `Uploaded "${file.name}" (${(buffer.byteLength / 1024).toFixed(0)} KB) → ${publicUrl}`,
-    })
+    // 6. Register into Centralized Media Library Asset Store
+    const mediaType = isVideo ? 'VIDEO' : subdir === 'documents' ? 'DOCUMENT' : 'IMAGE'
+    const categoryRaw = formData.get('category') as string | null
+    const category: MediaCategory = (categoryRaw as MediaCategory) || (isVideo ? 'VIDEOS' : subdir === 'documents' ? 'DOCUMENTS' : 'GENERAL')
+    const title = (formData.get('title') as string) || file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ')
+    const altText_en = (formData.get('altText_en') as string) || title
+    const altText_am = (formData.get('altText_am') as string) || undefined
+    const altText_om = (formData.get('altText_om') as string) || undefined
+    const caption = (formData.get('caption') as string) || undefined
+
+    const asset = createMediaAsset(
+      {
+        title,
+        filename,
+        url: publicUrl,
+        category,
+        mediaType,
+        mimeType: validation.detectedMime || declaredMime,
+        fileSize: buffer.byteLength,
+        altText_en,
+        altText_am,
+        altText_om,
+        caption,
+        uploadedBy: session.email,
+      },
+      session.name
+    )
 
     return NextResponse.json({
       success: true,
+      asset,
       filename,
       url: publicUrl,
       size: buffer.byteLength,
       mimeType: validation.detectedMime || declaredMime,
       uploadedBy: session.email,
-      uploadedAt: new Date().toISOString(),
+      uploadedAt: asset.createdAt,
     })
   } catch (err) {
     console.error('[SECURE MEDIA UPLOAD ERROR]', err)
@@ -115,7 +149,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// GET: list uploaded files safely
+// GET: query media assets safely with category, search, and usage checks
 export async function GET(req: NextRequest) {
   try {
     const session = await getSession()
@@ -124,32 +158,131 @@ export async function GET(req: NextRequest) {
     }
 
     const { searchParams } = new URL(req.url)
-    const type = searchParams.get('type') === 'documents' ? 'documents' : 'images'
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', type)
-
-    if (!existsSync(uploadDir)) {
-      return NextResponse.json({ files: [], total: 0 })
+    const checkUsageUrl = searchParams.get('checkUsage')
+    if (checkUsageUrl) {
+      const usages = getMediaUsage(checkUsageUrl)
+      return NextResponse.json({ success: true, usages, inUse: usages.length > 0 })
     }
 
-    const { readdir, stat } = await import('fs/promises')
-    const files = await readdir(uploadDir)
-    const details = await Promise.all(
-      files
-        .filter((f) => !f.startsWith('.'))
-        .map(async (f) => {
-          const s = await stat(path.join(uploadDir, f))
-          return {
-            filename: f,
-            url: `/uploads/${type}/${f}`,
-            size: s.size,
-            modified: s.mtime.toISOString(),
-          }
-        })
-    )
-    details.sort((a, b) => b.modified.localeCompare(a.modified))
+    const category = searchParams.get('category') || 'ALL'
+    const search = searchParams.get('search') || ''
+    const assets = getMediaAssets(category, search)
 
-    return NextResponse.json({ files: details, total: details.length })
+    // Also support backward compatibility for legacy callers expecting `files: [...]`
+    const files = assets.map((a) => ({
+      id: a.id,
+      filename: a.filename,
+      url: a.url,
+      size: a.fileSize,
+      modified: a.createdAt,
+      category: a.category,
+      mediaType: a.mediaType,
+      title: a.title,
+    }))
+
+    return NextResponse.json({
+      success: true,
+      assets,
+      files,
+      total: assets.length,
+    })
   } catch {
-    return NextResponse.json({ error: 'Failed to list files' }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to retrieve media library assets' }, { status: 500 })
+  }
+}
+
+// PATCH: update asset metadata (title, category, alt text, caption)
+export async function PATCH(req: NextRequest) {
+  try {
+    const session = await getSession()
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    if (session.role === 'VIEWER') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+
+    const body = await req.json()
+    const { id, title, category, altText_en, altText_am, altText_om, caption } = body
+
+    if (!id) {
+      return NextResponse.json({ error: 'Media asset ID is required' }, { status: 400 })
+    }
+
+    const updated = updateMediaAsset(
+      id,
+      {
+        title,
+        category,
+        altText_en,
+        altText_am,
+        altText_om,
+        caption,
+      },
+      session.name
+    )
+
+    if (!updated) {
+      return NextResponse.json({ error: 'Media asset not found' }, { status: 404 })
+    }
+
+    return NextResponse.json({ success: true, asset: updated })
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Failed to update asset'
+    return NextResponse.json({ error: message }, { status: 500 })
+  }
+}
+
+// DELETE: safely delete an asset with reference usage checks
+export async function DELETE(req: NextRequest) {
+  try {
+    const session = await getSession()
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    if (session.role === 'VIEWER') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+
+    const { searchParams } = new URL(req.url)
+    const id = searchParams.get('id')
+
+    if (!id) {
+      return NextResponse.json({ error: 'Media asset ID is required' }, { status: 400 })
+    }
+
+    const assets = getMediaAssets()
+    const targetAsset = assets.find((a) => a.id === id)
+
+    const result = deleteMediaAsset(id, session.name)
+    if (!result.success) {
+      return NextResponse.json(
+        {
+          error: result.error,
+          usages: result.usages,
+          inUse: true,
+        },
+        { status: 409 } // Conflict: asset in active use
+      )
+    }
+
+    // If disk file exists, delete it
+    if (targetAsset && targetAsset.url.startsWith('/uploads/')) {
+      const diskPath = path.join(process.cwd(), 'public', targetAsset.url.replace(/^\//, ''))
+      if (existsSync(diskPath)) {
+        try {
+          await unlink(diskPath)
+        } catch (unlinkErr) {
+          console.warn('[MEDIA DELETE DISK WARNING]', unlinkErr)
+        }
+      }
+    }
+
+    return NextResponse.json({ success: true, message: 'Media asset deleted successfully.' })
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Failed to delete media asset'
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

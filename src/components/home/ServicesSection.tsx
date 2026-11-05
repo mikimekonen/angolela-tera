@@ -8,7 +8,7 @@ interface ServicesSectionProps {
 }
 
 export function ServicesSection({ locale, services }: ServicesSectionProps) {
-  const content = {
+  const contentDict = {
     en: {
       tag: 'Public Service Delivery',
       title: 'Citizen & Business Services',
@@ -121,7 +121,64 @@ export function ServicesSection({ locale, services }: ServicesSectionProps) {
         },
       ],
     },
-  }[locale]
+    om: {
+      tag: 'Kenniinsa Tajaajila Uummataa',
+      title: 'Tajaajila Lammiilee fi Daldalaa',
+      desc: 'Tajaajiloota bu\'uuraa Aanaan Angoolaalaa Xaraa kennu, ulaagaalee barbaachisanii fi teessoo waajjiraalee asitti argadhaa.',
+      viewAll: 'Tajaajiloota 18 Hunda Ilaalaa',
+      services: [
+        {
+          title: 'Galmee Ragaalee Murteessoo',
+          desc: 'Waraqaa ragaa dhalootaa, gaa\'elaa, hiikkaa fi du\'aa galmeessuu fi kennuu.',
+          time: 'Guyyoota Hojii 1–2',
+          office: 'Waajjira Galmee Ragaalee Murteessoo',
+          href: `/${locale}/services/civil-registration`,
+          icon: '📋',
+        },
+        {
+          title: 'Qabiyyee fi Kaadaastarii Lafaa Baadiyyaa',
+          desc: 'Waraqaa ragaa qabiyyee lafa qonnaan bulaa, daangaa kabachiisuu fi dabarsuu.',
+          time: 'Guyyoota Hojii 3–5',
+          office: 'Waajjira Bulchiinsa fi Itti Fayyadama Lafaa',
+          href: `/${locale}/services/land-certificate`,
+          icon: '🗺️',
+        },
+        {
+          title: 'Ekisteenshinii fi Galtee Qonnaa',
+          desc: 'Sanyii filatamaa, xaa\'oo fi qoricha beeyladaa raabsuu.',
+          time: 'Kallattiin',
+          office: 'Waajjira Qonnaa fi Misooma Baadiyyaa',
+          href: `/${locale}/services/agriculture`,
+          icon: '🌾',
+        },
+        {
+          title: 'Hayyama Daldalaa fi Galmee',
+          desc: 'Hayyama daldalaa haaraa baasuu, haaromsuu fi gibira shallaguu.',
+          time: 'Guyyaa Hojii 1',
+          office: 'Waajjira Daldalaa fi Indastirii',
+          href: `/${locale}/services/business-license`,
+          icon: '🏪',
+        },
+        {
+          title: 'Hayyama Ijaarsaa fi To\'annoo',
+          desc: 'Pilaanii mirkaneessuu, hayyama ijaarsaa fi eeyyama bu\'uuraalee misoomaa.',
+          time: 'Guyyoota Hojii 5–7',
+          office: 'Waajjira Misooma Magaalaa fi Ijaarsaa',
+          href: `/${locale}/services/building-permits`,
+          icon: '🏗️',
+        },
+        {
+          title: 'Eegumsa Hawaasaa fi Foddaa Koomii',
+          desc: 'Gargaarsa seeraa, galmee seefteenetii fi koomii hawaasaa hiikuu.',
+          time: 'Akka Dhimmaatti',
+          office: 'Kutaa Dhimma Hawaasummaa fi Koomii',
+          href: `/${locale}/contact`,
+          icon: '⚖️',
+        },
+      ],
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   // Dynamic services mapped from CMS/Database with fallback to content.services
   const displayedServices =
@@ -165,7 +222,7 @@ export function ServicesSection({ locale, services }: ServicesSectionProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedServices.map((item, idx) => (
+          {displayedServices.map((item: any, idx: number) => (
             <div
               key={idx}
               className="border border-gray-200 rounded-xl p-6 hover:border-[#1a4f8b] hover:shadow-md transition-all duration-200 flex flex-col justify-between group bg-gradient-to-b from-white to-gray-50/50"

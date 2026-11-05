@@ -63,7 +63,7 @@ export default async function ServiceDetailPage({
   const requirements: string[] = (service[`requirements_${locale as Locale}`] || service.requirements_en || [])
   const steps: string[] = (service[`steps_${locale as Locale}`] || service.steps_en || [])
 
-  const content = {
+  const contentDict = {
     en: {
       breadcrumbHome: 'Home',
       breadcrumbServices: 'Services',
@@ -98,7 +98,25 @@ export default async function ServiceDetailPage({
       appealDesc: 'ያልተገባ መዘግየት ወይም የአገልግሎት አሰጣጥ ችግር ካጋጠመዎት ለወረዳው የቅሬታ ሰሚ ያመልክቱ።',
       fileGrievance: 'አቤቱታ ያቅርቡ',
     },
-  }[locale as Locale]
+    om: {
+      breadcrumbHome: 'Fuula Duraa',
+      breadcrumbServices: 'Tajaajiloota',
+      requirementsTitle: 'Ulaagaalee fi Sanadoota Barbaachisan',
+      stepsTitle: 'Qajeelfama Adeemsa Tajaajilaa (Tartiibaan)',
+      summaryTitle: 'Cuunfaa Tajaajilaa',
+      timeLabel: 'Yeroo Hojii Fudhatu',
+      costLabel: 'Kaffaltii Seeraa',
+      officeLabel: 'Waajjira / Foddaa Tajaajila Kennu',
+      locationLabel: 'Teessoo Waajjiraa',
+      locationDefault: 'Mooraa Bulchiinsaa Magaalaa Chaccisaa, Godina Shawaa Kaabaa',
+      downloadForm: 'Uunkaa Iyyannoo Buufadhaa (PDF)',
+      viewBureau: 'Odeeffannoo Waajjiraa Guutuu Ilaalaa',
+      appealTitle: 'Komii yookiin Ol-iyyannoo Qabduu?',
+      appealDesc: 'Turtii sirrii hin taane yookiin rakkoon tajaajilaa yoo isin mudate kutaa komii dhagahuuf iyyadhaa.',
+      fileGrievance: 'Komii Dhiyeessaa',
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   return (
     <div className="bg-[#f0f4f8] min-h-screen py-8 sm:py-12">

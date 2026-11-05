@@ -20,7 +20,7 @@ export default async function InvestmentPage({
 
   const dynamicInvestments = getInvestments()
 
-  const content = {
+  const contentDict = {
     en: {
       tag: 'Economic Development & Industrial Corridor',
       title: 'Invest in Angolela Tera: The Highland Gateway',
@@ -101,7 +101,48 @@ export default async function InvestmentPage({
       ctaDesk: 'የኢንቨስትመንት ዴስኩን ያነጋግሩ',
       ctaServices: 'የንግድ ፈቃድ ያመልክቱ',
     },
-  }[locale as Locale]
+    om: {
+      tag: 'Misooma Dinagdee fi Koriidarii Industirii',
+      title: 'Angoolaalaa Xaraa Keessatti Invast Godhaa: Karra Tulluuwwanii',
+      subtitle: 'Dhiyeenya Finfinnee fi Dabrabirhaan, qabeenya qonnaa bal\'aa fi gargaarsa invastimantii mootummaa naannootti fayyadamaa.',
+      sectorsTitle: 'Carraawwan Invastimantii Dursi Kennamuuf',
+      sectors: [
+        {
+          title: 'Warshaa Aannanii fi Bu\'aalee Aannanii',
+          desc: 'Aanaan Angoolaalaa Xaraa aannan guyyaatti liitira 85,000 ol oomisha. Warshaalee ammayyaatiif carraa bal\'aadha.',
+          icon: '🥛',
+        },
+        {
+          title: 'Oomisha fi Qophii Garbuu Biiraa',
+          desc: 'Garbuu qulqullina olaanaa qabu warshaalee biiraatiif dhiyeessuun invastarootaaf carraa guddaadha.',
+          icon: '🌾',
+        },
+        {
+          title: 'Kuusaa Qabbanaawaa fi Sanyii Dinnichaa',
+          desc: 'Qilleensi qabbanaawaan kuusaa kuduraalee fi muduraalee ijaaruuf baay\'ee mijataadha.',
+          icon: '🥔',
+        },
+        {
+          title: 'Horii Horsiisuu fi Hojii Foonii Al-ergaa',
+          desc: 'Buufata Xiyyaaraa Boolee irraa km 110 qofa fagaatee argamuun foon gara gabaa biyya alaatti erguuf gargaara.',
+          icon: '🥩',
+        },
+      ],
+      landTitle: 'Koriidarii Industirii Chaccisaa fi Baankii Lafaa',
+      landDesc: 'Daandii guddaa Finfinnee-Dasee irratti lafti heektaara 120 industiriif qophaa\'eera. Ibsaa, tajaajilli faayiberaa fi bishaan qulqulluun guutameera.',
+      incentivesTitle: 'Gargaarsa fi Jajjabeessituuwwan Invastimantiif Kennaman',
+      incentives: [
+        'Warshaalee fi qonna ammayyaatiif gibira irraa bilisa ta\'uu hanga waggaa 5',
+        'Meeshaalee kaappitaalaa fi maashinoota 100% qaraxa malee galchuu',
+        'Waliigaltee liizii industirii waggaa 70 gatii madaalawaan',
+        'Magaalaa Chaccisaa keessatti tajaajila foddaa tokkoon sa\'aatii 48 keessatti heyyama xumuruu',
+        'Waldaalee qonnaan bultootaa irraa dhiyeessii meeshaa dheedhii mirkaneessuu',
+      ],
+      ctaDesk: 'Kutaa Invastimantii Quunnamaa',
+      ctaServices: 'Heyyama Daldalaa Gaafadhaa',
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   return (
     <div className="bg-[#f0f4f8] min-h-screen py-10 sm:py-16">
@@ -218,7 +259,7 @@ export default async function InvestmentPage({
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {content.sectors.map((sec, idx) => (
+            {content.sectors.map((sec: any, idx: number) => (
               <div
                 key={idx}
                 className="bg-white border border-gray-200 rounded-xl p-6 shadow-xs hover:shadow-md transition-shadow group"
@@ -273,7 +314,7 @@ export default async function InvestmentPage({
             {content.incentivesTitle}
           </h2>
           <ul className="space-y-3">
-            {content.incentives.map((inc, idx) => (
+            {content.incentives.map((inc: any, idx: number) => (
               <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-gray-700">
                 <span className="h-5 w-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
                   ✓

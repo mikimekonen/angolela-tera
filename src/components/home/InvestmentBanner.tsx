@@ -84,7 +84,7 @@ export function InvestmentBanner({ locale }: InvestmentBannerProps) {
   const [activeSectorId, setActiveSectorId] = useState<string>('dairy')
   const isAm = locale === 'am'
 
-  const content = {
+  const contentDict = {
     en: {
       badge: 'Strategic Economic Corridors & Industrial Growth',
       title: 'Invest in Angolela Tera: The Highland Gateway',
@@ -119,7 +119,25 @@ export function InvestmentBanner({ locale }: InvestmentBannerProps) {
         'አስተማማኝ የግብርና ጥሬ እቃ አቅርቦት',
       ],
     },
-  }[locale]
+    om: {
+      badge: 'Kooridarii Diinagdee fi Misooma Indastirii',
+      title: 'Angoolaalaa Xaraatti Invast Godhaa: Karra Baddaa',
+      desc:
+        'Daandii Finfinnee-Dabrabirhaan (A2) cinaatti kan argamtu Aanaan Angoolaalaa Xaraa, agroo-piroosesiingii, misooma aannanii, fi warshaaleef bakka filatamaa dha.',
+      cta: 'Qajeelfama Invastimantii fi Baankii Lafaa',
+      hotline: 'Toora Kallattii Invastimantii',
+      selectPillar: 'Damee diinagdee filachuudhaan odeeffannoo lafaa fi jajjabeessituu ilaalaa:',
+      landAvail: 'Qophii Lafaa',
+      keyIncentive: 'Jajjabeessituu Mootummaa',
+      advantages: [
+        'Tajaajila Hayyamaa Foddaa Tokkoo',
+        'Walitti Dhufeenya Daandii Aspaaltii (A2)',
+        'Gatii Liizii Mijataa fi Wabii Waggaa 70',
+        'Dhiyeessii Oomisha Qonnaa Amanamaa',
+      ],
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   const activeSector =
     SECTOR_PILLARS.find((s) => s.id === activeSectorId) || SECTOR_PILLARS[0]
@@ -148,7 +166,7 @@ export function InvestmentBanner({ locale }: InvestmentBannerProps) {
 
         {/* Advantages Bullet Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
-          {content.advantages.map((adv, idx) => (
+          {content.advantages.map((adv: any, idx: number) => (
             <div
               key={idx}
               className="flex items-center gap-2.5 bg-white/8 backdrop-blur-md border border-white/10 rounded-xl p-3 text-xs text-gray-200 font-medium"

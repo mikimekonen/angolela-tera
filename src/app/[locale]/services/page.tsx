@@ -18,7 +18,7 @@ export default async function ServicesPage({
   if (!locales.includes(locale as Locale)) notFound()
   setRequestLocale(locale)
 
-  const content = {
+  const contentDict = {
     en: {
       tag: 'Public Service Delivery',
       title: 'Citizen & Commercial Services Directory',
@@ -41,7 +41,19 @@ export default async function ServicesPage({
       needHelp: 'ቅሬታ ወይም ተጨማሪ ጥያቄ አለዎት?',
       contactHelp: 'የወረዳውን የቅሬታ ሰሚ ያነጋግሩ',
     },
-  }[locale as Locale]
+    om: {
+      tag: 'Kenniinsa Tajaajila Ummataa',
+      title: 'Galmee Tajaajiloota Ummataa fi Daldalaa',
+      subtitle: 'Qajeelfamoota, ulaagaalee, yeroo fudhatu fi kaffaltii seeraa tajaajiloota Aanaa Angoolaalaa Xaraa keessatti kennaman.',
+      timeLabel: 'Yeroo Hojii Fudhatu',
+      costLabel: 'Kaffaltii Seeraa',
+      officeLabel: 'Waajjira Tajaajila Kennu',
+      viewGuide: 'Qajeelfama fi Ulaagaalee Hunda Ilaalaa',
+      needHelp: 'Gaaffii yookiin komii tajaajilaa qabduu?',
+      contactHelp: 'Kutaa Dhagaha Komii Ummataa Daawwadhaa',
+    },
+  }
+  const content = contentDict[locale as Locale] || contentDict.en
 
   return (
     <div className="bg-[#f0f4f8] min-h-screen py-10 sm:py-16">

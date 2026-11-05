@@ -8,7 +8,7 @@ interface NewsSectionProps {
 }
 
 export function NewsSection({ locale, news }: NewsSectionProps) {
-  const content = {
+  const contentDict = {
     en: {
       tag: 'Official Communication',
       title: 'Latest News & Announcements',
@@ -79,7 +79,43 @@ export function NewsSection({ locale, news }: NewsSectionProps) {
         },
       ],
     },
-  }[locale]
+    om: {
+      tag: 'Odeeffannoo fi Kominikeeshinii Mootummaa',
+      title: 'Oduuwwan Yeroo fi Beeksisoota Mootummaa',
+      desc: 'Murteewwan kabineettii Aanaa Angoolaalaa Xaraa, oduuwwan misoomaa fi beeksisoota uummataa hordofaa.',
+      viewAll: 'Oduuwwan fi Beeksisoota Hunda Ilaalaa',
+      items: [
+        {
+          id: 'news-1',
+          title: 'Manni Maree Aanaa Baajata Misoomaa fi Bu\'uuraalee Misoomaa Bara 2019 Raggaasise',
+          category: 'Murtee Mana Maree',
+          date: 'Fulbaana 14/2019',
+          summary: 'Manni Maree Aanaa Angoolaalaa Xaraa yaa\'ii idilee geggeessuun baajata bishaan dhugaatii fi daandii baadiyyaatiif dursa kennu raggaasiseera.',
+          href: `/${locale}/news/budget-2026`,
+          featured: true,
+        },
+        {
+          id: 'news-2',
+          title: 'Gandoolee Baadiyyaa 19 Keessatti Sanyii Qamadii Baddaa fi Xaa\'oo Raabsuun Eegalame',
+          category: 'Misooma Qonnaa',
+          date: 'Fulbaana 8/2019',
+          summary: 'Waajjirri Qonnaa fi Misooma Baadiyyaa Aanaa sanyii qamadii filatamaa kuntaala 12,000 ol qonnaan bultootaaf raabsaa jira.',
+          href: `/${locale}/news/wheat-distribution`,
+          featured: false,
+        },
+        {
+          id: 'news-3',
+          title: 'Beeksisa Caalbaasii: Magaalaa Caacaatti Iddoowwan Invastimantii Agroo-Piroosesiingiif Qophaa\'an',
+          category: 'Invastimantii',
+          date: 'Fulbaana 2/2019',
+          summary: 'Iddoowwan indastirii fi agroo-piroosesiingii daandii guddaa Caacaa cinaatti qophaa\'aniif abbootiin qabeenyaa yaada pirojektii akka dhiyeessan waamichi dhiyaateera.',
+          href: `/${locale}/news/agro-park-tender`,
+          featured: false,
+        },
+      ],
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   // Dynamic news mapped from CMS/Database with fallback to content.items
   const displayedNews =
@@ -95,6 +131,7 @@ export function NewsSection({ locale, news }: NewsSectionProps) {
             summary: n[`summary_${locale}`] || n.summary_en || n.summary || n[`excerpt_${locale}`] || '',
             href: `/${locale}/news/${n.slug}`,
             featured: Boolean(n.isFeatured),
+            imageUrl: n.imageUrl || n.coverImage || null,
           }))
       : content.items
 
@@ -124,30 +161,41 @@ export function NewsSection({ locale, news }: NewsSectionProps) {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {displayedNews.map((news) => (
+          {displayedNews.map((news: any) => (
             <article
               key={news.id}
-              className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between group"
+              className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between group"
             >
-              <div className="p-6">
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-[11px] font-semibold text-[#1a4f8b] bg-blue-50 border border-blue-100 px-2.5 py-0.5 rounded-full">
-                    {news.category}
-                  </span>
-                  <time className="text-[11px] text-gray-400 font-medium">
-                    {news.date}
-                  </time>
+              <div>
+                {news.imageUrl && (
+                  <div className="h-44 w-full overflow-hidden bg-gray-100 relative">
+                    <img
+                      src={news.imageUrl}
+                      alt={news.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                )}
+                <div className="p-6">
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="text-[11px] font-semibold text-[#1a4f8b] bg-blue-50 border border-blue-100 px-2.5 py-0.5 rounded-full">
+                      {news.category}
+                    </span>
+                    <time className="text-[11px] text-gray-400 font-medium">
+                      {news.date}
+                    </time>
+                  </div>
+
+                  <h3 className="text-base font-bold text-[#0d2340] group-hover:text-[#1a4f8b] transition-colors leading-snug">
+                    <Link href={news.href}>
+                      {news.title}
+                    </Link>
+                  </h3>
+
+                  <p className="text-xs text-gray-600 mt-3 leading-relaxed line-clamp-3">
+                    {news.summary}
+                  </p>
                 </div>
-
-                <h3 className="text-base font-bold text-[#0d2340] group-hover:text-[#1a4f8b] transition-colors leading-snug">
-                  <Link href={news.href}>
-                    {news.title}
-                  </Link>
-                </h3>
-
-                <p className="text-xs text-gray-600 mt-3 leading-relaxed line-clamp-3">
-                  {news.summary}
-                </p>
               </div>
 
               <div className="px-6 py-3.5 bg-gray-50 border-t border-gray-100 flex items-center justify-between">

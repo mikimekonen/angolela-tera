@@ -14,7 +14,7 @@ import { notFound } from 'next/navigation'
  *  4. Ensure the Ethiopic font stack is loaded if the language uses Ge'ez script
  */
 
-export const locales = ['en', 'am'] as const
+export const locales = ['en', 'am', 'om'] as const
 export type Locale = (typeof locales)[number]
 
 export const defaultLocale: Locale = 'en'
@@ -23,12 +23,14 @@ export const defaultLocale: Locale = 'en'
 export const localeNames: Record<Locale, string> = {
   en: 'English',
   am: 'አማርኛ',
+  om: 'Afaan Oromoo',
 }
 
 /** Text direction (all currently LTR) */
 export const localeDirection: Record<Locale, 'ltr' | 'rtl'> = {
   en: 'ltr',
   am: 'ltr', // Ethiopic script is left-to-right
+  om: 'ltr',
 }
 
 /**
@@ -38,6 +40,7 @@ export const localeDirection: Record<Locale, 'ltr' | 'rtl'> = {
 export const usesEthiopicScript: Record<Locale, boolean> = {
   en: false,
   am: true,
+  om: false, // Afaan Oromoo is written in Qubee (Latin alphabet)
 }
 
 export default getRequestConfig(async ({ requestLocale }) => {

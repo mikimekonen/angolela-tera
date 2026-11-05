@@ -21,7 +21,7 @@ export default async function PartnersDirectoryPage({
 
   setRequestLocale(locale)
 
-  const t = {
+  const tDict = {
     en: {
       badge: 'Development Cooperation & Strategic Allies',
       title: 'Partnership Organizations & Development Agencies',
@@ -42,7 +42,18 @@ export default async function PartnersDirectoryPage({
       hq: 'ዋና መስሪያ ቤት / ክልል',
       visit: 'ይፋዊ ድረ-ገጽ ↗',
     },
-  }[locale as Locale]
+    om: {
+      badge: 'Tumsa Misoomaa fi Michoota Hojii',
+      title: 'Dhaabbilee Michootaa fi Eejansiiwwan Misoomaa',
+      subtitle:
+        'Aanaan Angoolaalaa Xaraa guddina dinagdee fi hawaasummaa mirkaneessuuf dhaabbilee barnootaa olaanoo, sagantaalee misoomaa fi bulchiinsota naannoo waliin qindoominaan hojjeta.',
+      scope: 'Kutaa Hojii fi Sagantaalee',
+      since: 'Yeroo Waliin Hojjechuu Jalqaban',
+      hq: 'Waajjira Guddaa / Teessoo',
+      visit: 'Weebsaayitii Mootummaa ↗',
+    },
+  }
+  const t = (tDict as any)[locale] || tDict.en
 
   return (
     <div className="bg-gray-50/50 min-h-screen py-12">

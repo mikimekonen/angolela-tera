@@ -12,6 +12,8 @@ import type {
   AdminPermissionItem,
   TenderItem,
   AdminResource,
+  MediaAssetItem,
+  MediaCategory,
 } from '@/types'
 
 const STORE_PATH = path.join(process.cwd(), 'src', 'data', 'dbStore.json')
@@ -26,6 +28,9 @@ export interface UserAccount {
   isActive: boolean
   createdAt: string
   lastLoginAt?: string
+  phone?: string
+  designation?: string
+  avatarUrl?: string
 }
 
 export interface CitizenInquiry {
@@ -66,6 +71,7 @@ export interface StoreData {
   developmentProjects: any[]
   documents: any[]
   sliders: any[]
+  mediaAssets: MediaAssetItem[]
 }
 
 // Generate default store structure
@@ -589,6 +595,104 @@ function getInitialStore(): StoreData {
         isActive: true,
       },
     ],
+    mediaAssets: [
+      {
+        id: 'med-logo-woreda',
+        title: 'Official Angolela Tera Woreda Crest & Coat of Arms',
+        filename: 'logo.png',
+        url: '/logo.png',
+        category: 'BRANDING',
+        mediaType: 'IMAGE',
+        mimeType: 'image/png',
+        fileSize: 45200,
+        altText_en: 'Official Emblem of Angolela Tera Woreda Administration',
+        altText_am: 'የአንጎለላና ጠራ ወረዳ አስተዳደር ይፋዊ አርማ',
+        altText_om: 'Mallattoo Bulchiinsa Aanaa Angolalaa fi Xaraa',
+        caption: 'Official institutional coat of arms for digital and print communications',
+        uploadedBy: 'admin@angolelatera.gov.et',
+        createdAt: '2025-01-01T00:00:00.000Z',
+      },
+      {
+        id: 'med-chacha-panoramic',
+        title: 'Chacha Town Municipal Center & Commercial Corridor',
+        filename: 'chacha-city.jpg',
+        url: '/images/hero-agriculture.jpg',
+        category: 'NEWS',
+        mediaType: 'IMAGE',
+        mimeType: 'image/jpeg',
+        fileSize: 1845000,
+        altText_en: 'Panoramic view of Chacha municipal administrative center',
+        altText_am: 'የጫቻ ከተማ ማዘጋጃ ቤታዊ ማዕከል ገጽታ',
+        altText_om: 'Giddu-gala Bulchiinsa Magaalaa Caacaa',
+        caption: 'Chacha town administrative center along the Addis Ababa - Debre Berhan highway corridor',
+        uploadedBy: 'admin@angolelatera.gov.et',
+        createdAt: '2025-01-10T08:30:00.000Z',
+      },
+      {
+        id: 'med-health-center-site',
+        title: 'Cheki Health Center Expansion Site Inspection',
+        filename: 'cheki-health-center.jpg',
+        url: '/images/project-health.jpg',
+        category: 'PROJECTS',
+        mediaType: 'IMAGE',
+        mimeType: 'image/jpeg',
+        fileSize: 2150000,
+        altText_en: 'Civil construction works at Cheki primary health facility',
+        altText_am: 'የጨቂ የመጀመሪያ ደረጃ ጤና ጣቢያ ግንባታ ሂደት',
+        altText_om: 'Ijaarsa Buufata Fayyaa Calqabaa Caqii',
+        caption: 'Phase II maternal ward construction with regional health bureau financing',
+        uploadedBy: 'admin@angolelatera.gov.et',
+        createdAt: '2025-01-15T11:20:00.000Z',
+      },
+      {
+        id: 'med-chitu-waterfalls',
+        title: 'Chitu River Natural Gorge and Eco-Tourism Site',
+        filename: 'chitu-waterfalls.jpg',
+        url: '/images/tourism-gorge.jpg',
+        category: 'TOURISM',
+        mediaType: 'IMAGE',
+        mimeType: 'image/jpeg',
+        fileSize: 3420000,
+        altText_en: 'Chitu waterfalls and surrounding afro-alpine gorge biodiversity',
+        altText_am: 'የቺቱ ፏፏቴ የተፈጥሮ መስህብና ገደላማ ስነ-ምህዳር',
+        altText_om: "Fincaa'aa laga Ciituu fi naannoo daawwannaasaa",
+        caption: 'Protected ecological tourism site 12km from Chacha town center',
+        uploadedBy: 'admin@angolelatera.gov.et',
+        createdAt: '2025-01-20T14:10:00.000Z',
+      },
+      {
+        id: 'med-citizens-charter-pdf',
+        title: 'Woreda Citizens Service Charter 2026 (Official Circular)',
+        filename: 'service-charter-2026.pdf',
+        url: '/uploads/documents/vital-events-form.pdf',
+        category: 'DOCUMENTS',
+        mediaType: 'DOCUMENT',
+        mimeType: 'application/pdf',
+        fileSize: 685000,
+        altText_en: 'Statutory 48-Hour Citizen Service Guarantee Charter',
+        altText_am: 'የወረዳው ነዋሪዎች አገልግሎት አሰጣጥ ቻርተር',
+        altText_om: 'Chaartarii Tajaajila Lammummaa Aanaa',
+        caption: 'Gazetted standards for land administration, licensing, and civil registration',
+        uploadedBy: 'admin@angolelatera.gov.et',
+        createdAt: '2025-02-01T09:00:00.000Z',
+      },
+      {
+        id: 'med-irrigation-video',
+        title: 'Beressa Basin Micro-Dam Irrigation Documentary (Short)',
+        filename: 'beressa-irrigation-scheme.mp4',
+        url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        category: 'VIDEOS',
+        mediaType: 'VIDEO',
+        mimeType: 'video/mp4',
+        fileSize: 18450000,
+        altText_en: 'Farmer cooperative irrigation channels at Beressa river basin',
+        altText_am: 'የበረሳ ተፋሰስ የመስኖ ልማትና የአርሶ አደሮች ተጠቃሚነት',
+        altText_om: 'Misooma Mishingaa Laga Barreesaa',
+        caption: 'Documentary featuring modern drip irrigation covering 450 hectares of horticulture',
+        uploadedBy: 'admin@angolelatera.gov.et',
+        createdAt: '2025-02-10T16:45:00.000Z',
+      },
+    ],
   }
 }
 
@@ -610,6 +714,10 @@ export function getStore(): StoreData {
         Array.isArray(parsed.companies) && parsed.companies.length > 0
           ? parsed.companies
           : initial.companies,
+      mediaAssets:
+        Array.isArray(parsed.mediaAssets) && parsed.mediaAssets.length > 0
+          ? parsed.mediaAssets
+          : initial.mediaAssets,
     }
   } catch (err) {
     console.error('Error reading data store, using fallback:', err)
@@ -960,6 +1068,17 @@ export function getUsers(): UserAccount[] {
 export function getUserById(id: string): UserAccount | undefined {
   return getStore().users.find((u) => u.id === id)
 }
+export function updateUser(userId: string, updates: Partial<UserAccount>, actor?: string): UserAccount | null {
+  const store = getStore()
+  const idx = store.users.findIndex((u) => u.id === userId)
+  if (idx !== -1) {
+    store.users[idx] = { ...store.users[idx], ...updates }
+    recordAudit(store, actor || store.users[idx].email, 'UPDATE', 'User', userId, `Updated user profile/credentials for [${store.users[idx].email}]`)
+    saveStore(store)
+    return store.users[idx]
+  }
+  return null
+}
 export function createUser(user: UserAccount, permissions: AdminPermissionItem[] = [], actor?: string) {
   const store = getStore()
   store.users.push(user)
@@ -1269,6 +1388,184 @@ export function addAuditLog(entry: { userId: string; userName: string; action: s
 // --- AUDIT LOGS QUERY ---
 export function getAuditLogs() {
   return getStore().auditLogs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+}
+
+// --- MEDIA ASSETS MANAGEMENT & USAGE CHECKING ---
+export function getMediaAssets(category?: string, search?: string): MediaAssetItem[] {
+  let list = getStore().mediaAssets || []
+  if (category && category !== 'ALL') {
+    list = list.filter((m) => m.category === category)
+  }
+  if (search && search.trim()) {
+    const q = search.toLowerCase()
+    list = list.filter(
+      (m) =>
+        m.title.toLowerCase().includes(q) ||
+        m.filename.toLowerCase().includes(q) ||
+        (m.altText_en && m.altText_en.toLowerCase().includes(q)) ||
+        (m.altText_am && m.altText_am.toLowerCase().includes(q)) ||
+        (m.caption && m.caption.toLowerCase().includes(q))
+    )
+  }
+  return list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+}
+
+export function getMediaAssetById(id: string): MediaAssetItem | null {
+  const store = getStore()
+  return (store.mediaAssets || []).find((m) => m.id === id) || null
+}
+
+export function createMediaAsset(
+  asset: Omit<MediaAssetItem, 'id' | 'createdAt'>,
+  user?: string
+): MediaAssetItem {
+  const store = getStore()
+  if (!store.mediaAssets) store.mediaAssets = []
+  const newAsset: MediaAssetItem = {
+    ...asset,
+    id: `med-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+    createdAt: new Date().toISOString(),
+  }
+  store.mediaAssets.unshift(newAsset)
+  recordAudit(
+    store,
+    user,
+    'UPLOAD_MEDIA',
+    'MediaAsset',
+    newAsset.filename,
+    `Uploaded ${newAsset.mediaType} asset: "${newAsset.title}" [${newAsset.category}]`
+  )
+  saveStore(store)
+  return newAsset
+}
+
+export function updateMediaAsset(
+  id: string,
+  updates: Partial<MediaAssetItem>,
+  user?: string
+): MediaAssetItem | null {
+  const store = getStore()
+  if (!store.mediaAssets) store.mediaAssets = []
+  const idx = store.mediaAssets.findIndex((m) => m.id === id)
+  if (idx !== -1) {
+    store.mediaAssets[idx] = {
+      ...store.mediaAssets[idx],
+      ...updates,
+      updatedAt: new Date().toISOString(),
+    }
+    recordAudit(
+      store,
+      user,
+      'UPDATE',
+      'MediaAsset',
+      id,
+      `Updated metadata for media asset: "${store.mediaAssets[idx].title}"`
+    )
+    saveStore(store)
+    return store.mediaAssets[idx]
+  }
+  return null
+}
+
+export function deleteMediaAsset(id: string, user?: string): { success: boolean; error?: string; usages?: any[] } {
+  const store = getStore()
+  if (!store.mediaAssets) return { success: true }
+  const asset = store.mediaAssets.find((m) => m.id === id)
+  if (!asset) return { success: false, error: 'Asset not found' }
+
+  // Check active references
+  const usages = getMediaUsage(asset.url)
+  if (usages.length > 0) {
+    return {
+      success: false,
+      error: `Asset is currently in use across ${usages.length} publication(s).`,
+      usages,
+    }
+  }
+
+  store.mediaAssets = store.mediaAssets.filter((m) => m.id !== id)
+  recordAudit(
+    store,
+    user,
+    'DELETE',
+    'MediaAsset',
+    asset.filename,
+    `Deleted media asset: "${asset.title}" (${asset.url})`
+  )
+  saveStore(store)
+  return { success: true }
+}
+
+export function getMediaUsage(urlOrFilename: string): Array<{ entityType: string; entityTitle: string; entityId: string }> {
+  const store = getStore()
+  const usages: Array<{ entityType: string; entityTitle: string; entityId: string }> = []
+  if (!urlOrFilename) return usages
+
+  const target = urlOrFilename.trim().toLowerCase()
+
+  // 1. News
+  ;(store.news || []).forEach((n: any) => {
+    const imgMatch = n.imageUrl && n.imageUrl.toLowerCase().includes(target)
+    const vidMatch = n.videoUrl && n.videoUrl.toLowerCase().includes(target)
+    const docMatch = n.documentUrl && n.documentUrl.toLowerCase().includes(target)
+    const galleryMatch = Array.isArray(n.gallery) && n.gallery.some((g: any) => g.url && g.url.toLowerCase().includes(target))
+    if (imgMatch || vidMatch || docMatch || galleryMatch) {
+      usages.push({
+        entityType: 'News & Announcements',
+        entityTitle: n.title_en || n.title_am || n.slug,
+        entityId: n.slug,
+      })
+    }
+  })
+
+  // 2. Development Projects
+  ;(store.developmentProjects || []).forEach((p: any) => {
+    const imgMatch = Array.isArray(p.images) && p.images.some((img: string) => img.toLowerCase().includes(target))
+    if (imgMatch) {
+      usages.push({
+        entityType: 'Development Project',
+        entityTitle: p.title_en || p.title_am || p.slug,
+        entityId: p.slug,
+      })
+    }
+  })
+
+  // 3. Tourism
+  ;(store.tourism || []).forEach((t: any) => {
+    const imgMatch = t.imageUrl && t.imageUrl.toLowerCase().includes(target)
+    const galleryMatch = Array.isArray(t.gallery) && t.gallery.some((img: string) => img.toLowerCase().includes(target))
+    if (imgMatch || galleryMatch) {
+      usages.push({
+        entityType: 'Tourism Destination',
+        entityTitle: t.name_en || t.name_am || t.slug,
+        entityId: t.slug,
+      })
+    }
+  })
+
+  // 4. Documents
+  ;(store.documents || []).forEach((d: any) => {
+    if (d.fileUrl && d.fileUrl.toLowerCase().includes(target)) {
+      usages.push({
+        entityType: 'Document Library',
+        entityTitle: d.title_en || d.title_am || d.id,
+        entityId: d.id,
+      })
+    }
+  })
+
+  // 5. Hero Sliders
+  ;(store.sliders || []).forEach((s: any) => {
+    if (s.imageUrl && s.imageUrl.toLowerCase().includes(target)) {
+      usages.push({
+        entityType: 'Homepage Hero Slider',
+        entityTitle: s.title_en || s.id,
+        entityId: s.id,
+      })
+    }
+  })
+
+  return usages
 }
 
 function recordAudit(store: StoreData, user: string | undefined, action: string, entityType: string, entityId: string, notes: string) {

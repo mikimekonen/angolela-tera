@@ -17,7 +17,7 @@ export default async function AboutPage({
   if (!locales.includes(locale as Locale)) notFound()
   setRequestLocale(locale)
 
-  const content = {
+  const contentDict = {
     en: {
       tag: 'Historical & Geographic Heritage',
       title: 'About Angolela Tera Woreda',
@@ -62,7 +62,30 @@ export default async function AboutPage({
       ctaLeadership: 'የወረዳው ካቢኔ አመራር',
       ctaICT: 'የአይሲቲ (ICT) ቡድን',
     },
-  }[locale as Locale]
+    om: {
+      tag: 'Dhaala Seenaa fi Teessuma Lafaati',
+      title: 'Waa\'ee Aanaa Angoolaalaa Xaraa',
+      subtitle: 'Mootummaa Shawaa durii, bu\'uura qonna ammayyaa fi karra guddina Naannoo Amaaraa.',
+      historyTitle: 'Bu\'uura Seenaa fi Dhaala Mootummaa',
+      historyP1:
+        'Angoolaalaan seenaa Itoophiyaa keessatti bakka guddaa qabdi. Jaarraa 19ffaa keessa Mootichi Saahila Sillaasee Angoolaalaa magaalaa mootummaa fi buufata waraanaa isaa godhatee ture.',
+      historyP2:
+        'Manni mootummaa gara Ankoobar, sana boodas gara Intxootxoo fi Finfinneetti ce\'uun dura, Angoolaalaan giddugala siyaasaa fi daldalaa guddaa turte. Har\'as aanichi seenaa kana eeguun giddugala qonna ammayyaa ta\'aa jira.',
+      geoTitle: 'Teessuma Lafaafi Qilleensa Gaarii',
+      geoP1:
+        'Aanaan Angoolaalaa Xaraa Godina Shawaa Kaabaa keessatti daandii guddaa Finfinnee-Dasee irratti argama. Finfinnee irraa km 110, Dabrabirhaan irraa ammoo km 20 fagaatee argama.',
+      geoP2:
+        'Qilleensi isaa guutummaatti qabbanaawaa (Dagaa) dha. Laga Chaccisaa fi biyyee gurraacha gabbataa qabaachuun isaa qamadii, garbuu, baaqelaa fi horii horsiisuuf mijataadha.',
+      adminTitle: 'Baay\'ina Ummataa fi Bulchiinsa Gandoolee',
+      adminP1:
+        'Aanichi gandoolee baadiyyaa 19 fi gandoolee magaalotaa 2 of keessaa qaba. Ummata 142,500 ol kan qabu yoo ta\'u, hawaasa aadaa hojii cimaa qabuudha.',
+      ctaOffices: 'Waajjiroota Aanaa',
+      ctaServices: 'Tajaajiloota Ummataa',
+      ctaLeadership: 'Hoggansa Kaabinee Aanaa',
+      ctaICT: 'Garee ICT',
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   return (
     <div className="bg-[#f0f4f8] min-h-screen py-10 sm:py-16">

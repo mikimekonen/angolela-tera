@@ -17,7 +17,7 @@ export default async function GeographyPage({
   if (!locales.includes(locale as Locale)) notFound()
   setRequestLocale(locale)
 
-  const content = {
+  const contentDict = {
     en: {
       tag: 'Highland Topography & Natural Environment',
       title: 'Geography, Climate & Agro-Ecology',
@@ -60,7 +60,29 @@ export default async function GeographyPage({
       ],
       backToAbout: 'ወደ ወረዳው አጠቃላይ መረጃ ተመለስ',
     },
-  }[locale as Locale]
+    om: {
+      tag: 'Teessuma Lafaafi Qilleensa Tulluuwwanii',
+      title: 'Teessuma Lafaafi Qilleensa Aanaa Angoolaalaa Xaraa',
+      subtitle: 'Haala qilleensaa, daangaa olka\'iinsaa, madda bishaanii fi amala biyyee Aanaa Angoolaalaa Xaraa.',
+      elevationTitle: 'Olka\'iinsa Lafaafi Ramaddii Qilleensaa',
+      elevationText:
+        'Aanaan Angoolaalaa Xaraa olka\'iinsa galaana irraa meetira 2,600 hanga 3,050 irratti argama. Kunis qilleensa qabbanaawaa (Dagaa) uuma.',
+      riverTitle: 'Laga Chaccisaa fi Madda Bishaanii',
+      riverText:
+        'Aanichi laggeen uumamaa gurguddoo kan akka Laga Chaccisaa fi laggeen gara Abbayyaatti yaa\'an qaba.',
+      soilTitle: 'Gosa Biyyee fi Oomishitummaa',
+      soilText:
+        'Dirreen Angoolaalaa Xaraa biyyee gurraacha gabbataa (Vertisol) qaba. Biyyeen kun qamadii, garbuu, baaqelaa fi ataraaf baay\'ee gaariidha.',
+      climateStats: [
+        { label: 'Olka\'iinsa', value: '2,600 – 3,050 m', sub: 'Tulluu Dagaa Olaanaa' },
+        { label: 'Rooba Waggaa', value: '950 – 1,200 mm', sub: 'Waqtii Arfaasaa fi Ganna' },
+        { label: 'Ho\'a Giddu-galeessaa', value: '11°C – 19°C', sub: 'Qilleensa Qabbanaawaa' },
+        { label: 'Laga Guddaa', value: 'Laga Chaccisaa', sub: 'Madda Yaa\'a Abbayyaa' },
+      ],
+      backToAbout: 'Gara Waa\'ee Aanaatti Deebi\'aa',
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   return (
     <div className="bg-[#f0f4f8] min-h-screen py-10 sm:py-16">
@@ -82,7 +104,7 @@ export default async function GeographyPage({
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
-          {content.climateStats.map((stat, idx) => (
+          {content.climateStats.map((stat: any, idx: number) => (
             <div key={idx} className="bg-white border border-gray-200 rounded-xl p-5 shadow-xs">
               <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">
                 {stat.label}

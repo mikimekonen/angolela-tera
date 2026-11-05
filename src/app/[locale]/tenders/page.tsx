@@ -21,7 +21,7 @@ export default async function TendersPage({
 
   const tenders = getTenders()
 
-  const t = {
+  const tDict = {
     en: {
       tag: 'Public Procurement & Commercial Transparency',
       title: 'Official Government Bids & Tenders',
@@ -52,7 +52,23 @@ export default async function TendersPage({
       downloadDocs: 'የጨረታ ሰነድ አውርድ',
       contactDesk: 'የግዥና ንብረት አስተዳደር ዴስክ',
     },
-  }[locale as Locale]
+    om: {
+      tag: 'Bittaa Mootummaa fi Iftoomina Daldalaa',
+      title: 'Caalbaasii fi Bittaa Mootummaa Ifaa',
+      subtitle: 'Beeksisoota caalbaasii banaa, waamicha ijaarsa bu\'uuraalee misoomaa fi dhiyeessii meeshaalee Bulchiinsa Aanaa Angoolaalaa Xaraa.',
+      bidNumber: 'Lakk. Caalbaasii',
+      procuringEntity: 'Waajjira Bittaa Raawwatu',
+      bondSecurity: 'Kabachiisa Caalbaasii (CPO)',
+      docPrice: 'Gatii Sanadaa',
+      deadline: 'Guyyaa Cufiinsa Caalbaasii',
+      status: 'Haala Caalbaasii',
+      activeBids: 'Beeksisoota Caalbaasii Banaa',
+      empty: 'Yeroo ammaa kanatti caalbaasiin banaa ta\'e hin jiru.',
+      downloadDocs: 'Sanada Caalbaasii Buufadhaa',
+      contactDesk: 'Kutaa Bittaa fi Qabeenyaa',
+    },
+  }
+  const t = (tDict as any)[locale] || tDict.en
 
   return (
     <div className="bg-[#f0f4f8] min-h-screen py-10 sm:py-16">

@@ -3,6 +3,7 @@ import { getSession, hashPassword } from '@/lib/auth'
 import {
   getUsers,
   createUser,
+  updateUser,
   toggleUserStatus,
   getUserPermissions,
   setUserPermission,
@@ -26,7 +27,10 @@ export async function GET() {
         email: u.email,
         role: u.role,
         officeId: u.officeId,
+        designation: u.designation,
+        phone: u.phone,
         isActive: u.isActive,
+        lastLoginAt: u.lastLoginAt,
         createdAt: u.createdAt,
         permissions: perms,
       }
@@ -47,7 +51,7 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json()
-    const { name, email, password, role, officeId, permissions } = body
+    const { name, email, password, role, officeId, designation, phone, permissions } = body
 
     if (!name || !email || !password || !role) {
       return NextResponse.json({ success: false, error: 'Name, email, password, and role are required' }, { status: 400 })
@@ -69,6 +73,8 @@ export async function POST(req: NextRequest) {
       passwordHash,
       role: role as UserRole,
       officeId: officeId || null,
+      designation: designation || undefined,
+      phone: phone || undefined,
       isActive: true,
       createdAt: new Date().toISOString(),
     }
@@ -118,16 +124,57 @@ export async function PUT(req: NextRequest) {
     }
 
     const body = await req.json()
-    const { action, userId, isActive, permission } = body
+    const { action, userId, isActive, name, role, officeId, designation, phone, permissions, newPassword } = body
 
-    if (action === 'toggleStatus' && userId !== undefined) {
+    if (!userId) {
+      return NextResponse.json({ success: false, error: 'User ID is required' }, { status: 400 })
+    }
+
+    // 1. Toggle Active / Suspended
+    if (action === 'toggleStatus' && isActive !== undefined) {
       const updated = toggleUserStatus(userId, Boolean(isActive), session.name)
       return NextResponse.json({ success: true, data: updated })
     }
 
-    if (action === 'setPermission' && permission) {
-      const updatedPerm = setUserPermission(permission, session.name)
-      return NextResponse.json({ success: true, data: updatedPerm })
+    // 2. Administrative Password Reset
+    if (action === 'resetPassword') {
+      if (!newPassword || newPassword.length < 8) {
+        return NextResponse.json({ success: false, error: 'New password must be at least 8 characters' }, { status: 400 })
+      }
+      const passwordHash = await hashPassword(newPassword)
+      const updated = updateUser(userId, { passwordHash }, session.name)
+      return NextResponse.json({ success: true, message: 'Password reset successfully', data: { id: updated?.id } })
+    }
+
+    // 3. Edit User Details & Scopes
+    if (action === 'updateUser') {
+      const updates: any = {}
+      if (name) updates.name = name.trim()
+      if (role) updates.role = role
+      if (officeId !== undefined) updates.officeId = officeId || null
+      if (designation !== undefined) updates.designation = designation.trim()
+      if (phone !== undefined) updates.phone = phone.trim()
+
+      const updated = updateUser(userId, updates, session.name)
+
+      // Update permissions if provided
+      if (Array.isArray(permissions)) {
+        permissions.forEach((p: any) => {
+          setUserPermission({
+            id: p.id || `perm-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+            userId,
+            resource: p.resource as AdminResource,
+            canView: Boolean(p.canView),
+            canCreate: Boolean(p.canCreate),
+            canEdit: Boolean(p.canEdit),
+            canDelete: Boolean(p.canDelete),
+            canPublish: Boolean(p.canPublish),
+            officeScopeId: p.officeScopeId || officeId || null,
+          }, session.name)
+        })
+      }
+
+      return NextResponse.json({ success: true, data: updated })
     }
 
     return NextResponse.json({ success: false, error: 'Invalid action' }, { status: 400 })

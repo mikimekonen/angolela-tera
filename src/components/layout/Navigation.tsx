@@ -182,6 +182,83 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
       },
       { id: 'contact', label: 'ያግኙን', href: `/${locale}/contact` },
     ],
+    om: [
+      { id: 'home', label: 'Fuula Duraa', href: `/${locale}` },
+      {
+        id: 'about',
+        label: 'Waa\'ee Keenya',
+        href: `/${locale}/about`,
+        children: [
+          { title: 'Waa\'ee Aanaa', href: `/${locale}/about`, description: 'Ibsa waliigalaa, teessuma lafaa, mul\'ata fi ergama' },
+          { title: 'Bulchiinsa fi Kaabinee', href: `/${locale}/about/leadership`, description: 'Hoggantoota olaanoo fi waajjiroota sekteeraa' },
+          { title: 'Seenaa Aanaa', href: `/${locale}/about/history`, description: 'Dhaala seenaa fi hundeeffama Angoolaalaa Xaraa' },
+          { title: 'Teessuma Lafaafi Qilleensa', href: `/${locale}/about/geography`, description: 'Haala qilleensaa fi qabeenya uumamaa' },
+          { title: 'Garee ICT fi Dijitaalaa', href: `/${locale}/about/ict`, description: 'Sirna, bu\'uura neetwoorkii fi eegumsa saayibarii' },
+        ],
+      },
+      {
+        id: 'services',
+        label: 'Tajaajiloota',
+        href: `/${locale}/services`,
+        children: [
+          { title: 'Galmee Ragaalee Murteessoo', href: `/${locale}/services/civil-registration`, description: 'Waraqaa ragaa dhalootaa, gaa\'elaa fi du\'aa' },
+          { title: 'Bulchiinsa fi Qabiyyee Lafaa', href: `/${locale}/services/land-certificate`, description: 'Ragaa qabiyyee lafaa fi wabiin daangaa' },
+          { title: 'Eeksteenshinii Qonnaa fi Sanyii', href: `/${locale}/services/agriculture`, description: 'Leenjii qonnaan bultootaa, sanyii filatamaa fi xaa\'oo' },
+          { title: 'Daldala fi Gibira', href: `/${locale}/services/business-license`, description: 'Heyyama daldalaa, qorannoo fi tajaajila gibiraa' },
+          { title: 'Barnoota fi Tajaajila Fayyaa', href: `/${locale}/services/health-insurance`, description: 'Inshuraansii fayyaa hawaasaa fi buufata fayyaa' },
+        ],
+      },
+      {
+        id: 'development',
+        label: 'Misooma',
+        href: `/${locale}/development`,
+        children: [
+          { title: 'Pirojektoota Misoomaa Ijoo', href: `/${locale}/development`, description: 'Bu\'uuraalee misoomaa fi invastimantii kaappitaalaa' },
+          { title: 'Bishaan fi Sagantaalee Jallisii', href: `/${locale}/development/water`, description: 'Bishaan dhugaatii qulqulluu fi hidha Ajiimaa-Chaccisaa' },
+          { title: 'Daandiiwwan Baadiyyaa', href: `/${locale}/development/roads`, description: 'Ijaarsa daandii wal-qunnamsiisa gandoolee' },
+        ],
+      },
+      {
+        id: 'investment',
+        label: 'Invastimantii',
+        href: `/${locale}/investment`,
+        children: [
+          { title: 'Carraawwan Invastimantii', href: `/${locale}/investment`, description: 'Qonna, oomisha aannanii fi industirii' },
+          { title: 'Baankii Lafaa', href: `/${locale}/investment`, description: 'Lafa industiriif qophaa\'e' },
+          { title: 'Dhaabbilee fi Warshaalee', href: `/${locale}/companies`, description: 'Dhaabbilee dhuunfaa galmaa\'an' },
+          { title: 'Michoota Misoomaa', href: `/${locale}/partners`, description: 'Eejansiiwwan fi dhaabbilee michootaa' },
+        ],
+      },
+      {
+        id: 'tourism',
+        label: 'Tuurizimii',
+        href: `/${locale}/tourism`,
+        children: [
+          { title: 'Bakkeewwan Seenaa fi Aadaa', href: `/${locale}/tourism`, description: 'Bakkeewwan seenaa fi manneen amantaa durii' },
+          { title: 'Uumama fi Tulluuwwan', href: `/${locale}/tourism`, description: 'Laggeen, holqa fi tulluuwwan babbareedoo' },
+        ],
+      },
+      {
+        id: 'news',
+        label: 'Oduu',
+        href: `/${locale}/news`,
+        children: [
+          { title: 'Oduuwwan Haaraa', href: `/${locale}/news`, description: 'Ibsa mootummaa fi oduu guddinaa' },
+          { title: 'Beeksisoota', href: `/${locale}/news`, description: 'Beeksisoota caalbaasii fi qaxarrii hojii' },
+          { title: 'Caalbaasii fi Bittaa', href: `/${locale}/tenders`, description: 'Caalbaasii banaa fi bittaa mootummaa' },
+        ],
+      },
+      {
+        id: 'resources',
+        label: 'Sanadoota',
+        href: `/${locale}/resources`,
+        children: [
+          { title: 'Seerota fi Dambiiwwan', href: `/${locale}/resources`, description: 'Qajeelfamoota fi dambiiwwan aanaa' },
+          { title: 'Uunkaalee Tajaajilaa', href: `/${locale}/resources`, description: 'Uunkaalee iyyannoo buufachuuf' },
+        ],
+      },
+      { id: 'contact', label: 'Nu Quunnamaa', href: `/${locale}/contact` },
+    ],
   }
 
   const items = navData[locale] || navData.en

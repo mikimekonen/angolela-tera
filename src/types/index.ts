@@ -82,6 +82,34 @@ export interface MediaItem {
   createdAt: Date
 }
 
+export type MediaCategory =
+  | 'BRANDING'
+  | 'NEWS'
+  | 'PROJECTS'
+  | 'TOURISM'
+  | 'OFFICES'
+  | 'VIDEOS'
+  | 'DOCUMENTS'
+  | 'GENERAL'
+
+export interface MediaAssetItem {
+  id: string
+  title: string
+  filename: string
+  url: string
+  category: MediaCategory
+  mediaType: 'IMAGE' | 'VIDEO' | 'DOCUMENT'
+  mimeType: string
+  fileSize: number
+  altText_en?: string
+  altText_am?: string
+  altText_om?: string
+  caption?: string
+  uploadedBy?: string
+  createdAt: string
+  updatedAt?: string
+}
+
 // ------------------------------------------------------------------
 // STATISTICS
 // ------------------------------------------------------------------
@@ -198,9 +226,21 @@ export interface NewsListItem {
   slug: string
   title_en: string
   title_am?: string
+  title_om?: string
   excerpt_en?: string
   excerpt_am?: string
+  excerpt_om?: string
   coverImage?: MediaItem
+  imageUrl?: string | null
+  imageCaption_en?: string
+  imageCaption_am?: string
+  imageCaption_om?: string
+  videoUrl?: string | null
+  videoType?: string
+  gallery?: Array<{ url: string; caption_en?: string; caption_am?: string; caption_om?: string }>
+  documentUrl?: string | null
+  documentTitle?: string
+  referenceNumber?: string
   category?: NewsCategory
   status: ContentStatus
   isFeatured: boolean
@@ -578,6 +618,9 @@ export interface TenderItem {
   documentUrl?: string
   tenderStatus: 'ACTIVE' | 'EVALUATING' | 'AWARDED' | 'CANCELLED'
   status: ContentStatus
+  eligibilityCriteria?: string[]
+  awardedContractor?: string
+  winningBidAmount?: string
   createdAt: Date
   updatedAt: Date
 }

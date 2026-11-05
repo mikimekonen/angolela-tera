@@ -17,7 +17,7 @@ export default async function HistoryPage({
   if (!locales.includes(locale as Locale)) notFound()
   setRequestLocale(locale)
 
-  const content = {
+  const contentDict = {
     en: {
       tag: 'Royal Heritage & Shewan History',
       title: 'History & Founding of Angolela Tera',
@@ -76,7 +76,32 @@ export default async function HistoryPage({
       ],
       backToAbout: 'ወደ ወረዳው አጠቃላይ መረጃ ተመለስ',
     },
-  }[locale as Locale]
+    om: {
+      tag: 'Dhaala Mootummaa fi Seenaa Shawaa',
+      title: 'Seenaa fi Hundeeffama Angoolaalaa Xaraa',
+      subtitle: 'Giddugala bulchiinsa mootummaa Shawaa jaarraa 19ffaa irraa gara giddugala qonna ammayyaatti.',
+      timelineTitle: 'Bara Seenaa Ijoo',
+      timeline: [
+        {
+          era: 'Bara 1813 – 1847',
+          heading: 'Bara Mooticha Saahila Sillaasee',
+          text: 'Angoolaalaan magaalaa mootummaa fi buufata waraanaa taatee tajaajilaa turte.',
+        },
+        {
+          era: 'Dhuma Jaarraa 19ffaa',
+          heading: 'Manni Mootummaa gara Ankoobar fi Finfinneetti Ce\'uu',
+          text: 'Manni mootummaa gara Finfinneetti yoo ce\'ellee, Angoolaalaan kuusaa midhaanii taatee itti fufte.',
+        },
+        {
+          era: 'Bara Ammayyaa',
+          heading: 'Hundeeffama Aanaa Angoolaalaa Xaraa',
+          text: 'Angoolaalaa fi Xaraan tokkummaan aanaa tokko ta\'anii Chaccisa magaalaa guddittii godhachuun tajaajila eegalan.',
+        },
+      ],
+      backToAbout: 'Gara Waa\'ee Aanaatti Deebi\'aa',
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   return (
     <div className="bg-[#f0f4f8] min-h-screen py-10 sm:py-16">
@@ -103,7 +128,7 @@ export default async function HistoryPage({
           </h2>
 
           <div className="space-y-8 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-blue-100">
-            {content.timeline.map((item, idx) => (
+            {content.timeline.map((item: any, idx: number) => (
               <div key={idx} className="relative flex items-start gap-6">
                 <span className="h-7 w-7 rounded-full bg-[#1a4f8b] text-[#FED100] flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 z-10 shadow-xs">
                   {idx + 1}

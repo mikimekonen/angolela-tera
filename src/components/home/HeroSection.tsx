@@ -25,7 +25,7 @@ export function HeroSection({ locale, sliders = [] }: HeroSectionProps) {
     return () => clearInterval(timer)
   }, [activeSliders.length])
 
-  const content = {
+  const contentDict = {
     en: {
       badge: 'Official Portal • North Shewa Zone',
       climateBadge: 'Chacha: 18°C • Alt: 2,840m • Highland Corridor',
@@ -72,26 +72,50 @@ export function HeroSection({ locale, sliders = [] }: HeroSectionProps) {
         { num: 2800, suffix: ' ሜትር', label: 'ደጋማ ስነ-ምህዳር' },
       ],
     },
-  }[locale]
+    om: {
+      badge: 'Pootaalii Mootummaa • Godina Shawaa Kaabaa',
+      climateBadge: 'Caacaa: 18°C • Olka\'iinsa: 2,840m • Baddaa',
+      title: 'Baga Gara Aanaa Angoolaalaa Xaraatti Dhuftan',
+      subtitle:
+        'Tajaajila hawaasaa ammayyeessuu, misooma qonnaa fi babal\'ina invastimantiitiin hawaasa badhaadhaa, iftoomina qabu fi cimee ijaaraa jirra.',
+      ctaServices: 'Tajaajiloota Uummataa',
+      ctaInvestment: 'Carraawwan Invastimantii',
+      quickTitle: 'Foddaa Tajaajila Ariifachiisaa',
+      quickPills: [
+        { label: 'Galmee Ragaalee Murteessoo', href: `/${locale}/services/civil-registration`, icon: '📜' },
+        { label: 'Waraqaa Ragaa Qabiyyee Lafaa', href: `/${locale}/services/land-certificate`, icon: '🗺️' },
+        { label: 'Galtee Qonnaa fi Xaa\'oo', href: `/${locale}/services/agriculture`, icon: '🌾' },
+        { label: 'Hayyama Daldalaa fi Gibira', href: `/${locale}/services/business-license`, icon: '💼' },
+        { label: 'Foddaa Koomii Lammiilee', href: `/${locale}/contact`, icon: '⚖️' },
+      ],
+      highlights: [
+        { num: 19, suffix: '', label: 'Gandoolee Baadiyyaa fi Magaalaa' },
+        { num: 140, suffix: 'K+', label: 'Lammiilee Tajaajilaman' },
+        { num: 110, suffix: ' km', label: 'Fageenya Finfinnee Irraa' },
+        { num: 2800, suffix: 'm', label: 'Haala Qilleensa Baddaa' },
+      ],
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   const currentSlider = activeSliders[activeSlideIdx]
 
   const headline = currentSlider
     ? isAm
       ? currentSlider.title_am || currentSlider.title_en
-      : currentSlider.title_en
+      : (locale === 'om' ? (currentSlider as any).title_om : currentSlider.title_en) || currentSlider.title_en
     : content.title
 
   const subline = currentSlider
     ? isAm
       ? currentSlider.subtitle_am || currentSlider.subtitle_en
-      : currentSlider.subtitle_en
+      : (locale === 'om' ? (currentSlider as any).subtitle_om : currentSlider.subtitle_en) || currentSlider.subtitle_en
     : content.subtitle
 
   const ctaBtnText = currentSlider
     ? isAm
       ? currentSlider.buttonText_am || currentSlider.buttonText_en
-      : currentSlider.buttonText_en
+      : (locale === 'om' ? (currentSlider as any).buttonText_om : currentSlider.buttonText_en) || currentSlider.buttonText_en
     : content.ctaServices
 
   const ctaBtnUrl = currentSlider?.buttonUrl
@@ -274,7 +298,7 @@ export function HeroSection({ locale, sliders = [] }: HeroSectionProps) {
             </span>
           </div>
           <div className="flex flex-wrap gap-2 sm:gap-3">
-            {content.quickPills.map((pill, idx) => (
+            {content.quickPills.map((pill: any, idx: number) => (
               <Link
                 key={idx}
                 href={pill.href}
@@ -294,7 +318,7 @@ export function HeroSection({ locale, sliders = [] }: HeroSectionProps) {
 
         {/* Animated Highlight Metrics Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-8 pt-8 border-t border-white/15">
-          {content.highlights.map((item, idx) => (
+          {content.highlights.map((item: any, idx: number) => (
             <div
               key={idx}
               className="group bg-white/8 hover:bg-white/15 border border-white/15 hover:border-[#c8931a]/60 rounded-2xl p-4 sm:p-5 backdrop-blur-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1"

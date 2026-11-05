@@ -22,7 +22,7 @@ export default async function TourismPage({
 
   const liveTourism = getTourism().filter((t: any) => t.status === 'PUBLISHED' || !t.status)
 
-  const content = {
+  const contentDict = {
     en: {
       tag: 'Heritage, Culture & Highland Ecotourism',
       title: 'Discover Angolela Tera: Nature & History',
@@ -47,7 +47,20 @@ export default async function TourismPage({
       locationLabel: 'አድራሻ / ኮኦርዲኔት',
       bestSeasonLabel: 'ምቹ ወቅት',
     },
-  }[locale as Locale]
+    om: {
+      tag: 'Dhaala, Aadaa fi Tuurizimii Qilleensa Gaarii',
+      title: 'Angoolaalaa Xaraa Daawwadhaa: Uumama fi Seenaa',
+      subtitle: 'Mootummoota Shawaa jaarraa 19ffaa irraa eegalee hanga tulluuwwan babbareedoo, manneen amantaa durii fi aadaawwan hawaasaa.',
+      attractionsTitle: 'Bakkeewwan Seenaa fi Uumamaa Ijoo',
+      festivalsTitle: 'Ayyaanota fi Sirnoota Hawaasaa',
+      festivalsDesc: 'Ayyaanota amantaa fi aadaa Itoophiyaa kan akka Masqalaa, Cuuphaa (Laga Chacciitti kan kabajamu) fi ayyaana midhaan sassaabuu waliin dabarsaa.',
+      ctaVisit: 'Kutaa Tuurizimii fi Daawwattootaa Quunnamaa',
+      activitiesLabel: 'Sochiiwwan fi Bakkeewwan Ijoo',
+      locationLabel: 'Teessoo / Argama',
+      bestSeasonLabel: 'Waqtii Filatamaa',
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   return (
     <div className="bg-[#f0f4f8] min-h-screen py-10 sm:py-16">

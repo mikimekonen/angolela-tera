@@ -19,7 +19,7 @@ export default async function WaterAndIrrigationPage({
 
   const isAm = locale === 'am'
 
-  const content = {
+  const contentDict = {
     en: {
       breadcrumbHome: 'Home',
       breadcrumbDev: 'Development',
@@ -136,7 +136,64 @@ export default async function WaterAndIrrigationPage({
       phone: '+251 (0) 58 661 0204',
       email: 'water@angolela-tera.gov.et',
     },
-  }[locale as Locale]
+    om: {
+      breadcrumbHome: 'Fuula Duraa',
+      breadcrumbDev: 'Misooma',
+      breadcrumbCurrent: 'Bishaan fi Qulqullina',
+      badge: 'Bishaan Qulqulluu • Qulqullina Naannoo (WASH)',
+      title: 'Dhiyeessii Bishaan Dhugaatii Qulqulluu fi Eegumsa Tulluuwwanii',
+      subtitle:
+        'Hordoffii pirojektoota bishaan dhugaatii qulqulluu, boolla bishaanii fi eegumsa burqituuwwan uumamaa Aanaa Angoolaalaa Xaraa keessatti gaggeeffaman.',
+      metrics: [
+        { value: '82.4%', label: 'Qaqqabamummaa Bishaan Qulqulluu' },
+        { value: '148,000+', label: 'Ummata Tajaajilamaa Jiru' },
+        { value: '184', label: 'Madda Bishaan Qulqulluu Hojjetame' },
+        { value: '29', label: 'Boolla Bishaan Gadi-Fagoo' },
+        { value: '14 Magaalota', label: 'Sirna Bishaan Boombii Chaccisaa' },
+        { value: '98.6%', label: 'Qulqullina Laabiraatoriin Mirkanaa\'e' },
+      ],
+      schemesTitle: 'Pirojektoota Bishaan Dhugaatii fi Qulqullinaa Ijoo',
+      schemesDesc:
+        'Mootummaan naannoo fi gargaartonni misoomaa walta\'uun pirojektoota bishaanii gandoolee baadiyyaa fi magaalotaaf hojjetan.',
+      schemes: [
+        {
+          name: 'Sirna Bishaan Boombii Magaalaa Chaccisaa',
+          type: 'Boolla Gadi-fagoo & Sirna Boombii',
+          location: 'Ganda Magaalaa Chaccisaa 01 & 02',
+          capacity: 'Guyyaatti liitira 1,200,000',
+          beneficiaries: 'Jiraattota 28,000 fi Warshaalee',
+          status: 'Tajaajila Guutuu',
+        },
+        {
+          name: 'Sirna Bishaan Burqituu Kotobaa – Qawaat',
+          type: 'Burqituu Qulqulluu & Boombii',
+          location: 'Ganda Kotobaa',
+          capacity: 'Guyyaatti liitira 350,000',
+          beneficiaries: 'Jiraattota 9,400',
+          status: 'Tajaajila Guutuu',
+        },
+        {
+          name: 'Sirna Bishaan Baadiyyaa Eejersa – Dambal',
+          type: 'Boolla Humna Aduun Hojjetu',
+          location: 'Ganda Eejersa',
+          capacity: 'Guyyaatti liitira 220,000',
+          beneficiaries: 'Jiraattota 6,800',
+          status: 'Tajaajila Guutuu',
+        },
+      ],
+      watershedTitle: 'Eegumsa Madda Bishaanii fi Kunuunsa Biyyee',
+      watershedDesc:
+        'Kuusaa bishaanii fi hidhawwan akka hin guunneef hojiiwwan daka lafaa fi misooma tulluuwwanii gaggeeffaman.',
+      ctaHelpdesk: 'Waajjira Tajaajila Bishaanii',
+      ctaReportLeak: 'Dhangala\'iinsa yookiin Cufamuu Bishaanii Gabaasaa',
+      ctaApply: 'Sarara Bishaan Haaraa Galchuuf Iyyadhaa',
+      officeDesk: 'Waajjira Bishaan fi Inarjii Aanaa Angoolaalaa Xaraa',
+      location: 'Mooraa Bulchiinsaa Guddaa, Magaalaa Chaccisaa',
+      phone: '+251 (0) 58 661 0204',
+      email: 'water@angolela-tera.gov.et',
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   return (
     <div className="bg-[#f0f4f8] min-h-screen py-10 sm:py-16">
@@ -178,7 +235,7 @@ export default async function WaterAndIrrigationPage({
 
         {/* Key Metrics Statistics Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5 mb-12">
-          {content.metrics.map((item, idx) => (
+          {content.metrics.map((item: any, idx: number) => (
             <div
               key={idx}
               className="bg-white border border-gray-200/90 rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between"
@@ -209,7 +266,7 @@ export default async function WaterAndIrrigationPage({
 
           {/* Technical Specifications Table Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {content.damSpecs.map((spec, idx) => (
+            {content.damSpecs.map((spec: any, idx: number) => (
               <div
                 key={idx}
                 className="bg-gray-50/80 border border-gray-200/80 rounded-2xl p-4 hover:bg-blue-50/30 transition-colors"
@@ -274,7 +331,7 @@ export default async function WaterAndIrrigationPage({
               </p>
 
               <ul className="space-y-3 text-xs text-gray-700">
-                {content.potablePoints.map((point, idx) => (
+                {content.potablePoints.map((point: any, idx: number) => (
                   <li key={idx} className="flex items-start gap-2.5">
                     <span className="h-5 w-5 rounded-full bg-blue-100 text-[#1a4f8b] flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">
                       ✓
@@ -313,7 +370,7 @@ export default async function WaterAndIrrigationPage({
               </p>
 
               <ul className="space-y-3 text-xs text-gray-700">
-                {content.ruralPoints.map((point, idx) => (
+                {content.ruralPoints.map((point: any, idx: number) => (
                   <li key={idx} className="flex items-start gap-2.5">
                     <span className="h-5 w-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">
                       ✓

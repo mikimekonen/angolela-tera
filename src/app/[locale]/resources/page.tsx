@@ -23,7 +23,7 @@ export default async function ResourcesPage({
 
   const liveDocs = getDocuments().filter((d: any) => d.status === 'PUBLISHED' || !d.status)
 
-  const content = {
+  const contentDict = {
     en: {
       tag: 'Public Documents & Legal Repository',
       title: 'Resources, Forms & Legal Directives',
@@ -36,7 +36,14 @@ export default async function ResourcesPage({
       subtitle: 'የህዝብ አገልግሎት ማመልከቻ ቅጾች፣ የወረዳ ምክር ቤት አዋጆች፣ ዓመታዊ የፋይናንስ ኦዲት ሪፖርቶችና ለነዋሪዎችና ለንግድ ማህበረሰቡ የተዘጋጁ ይፋዊ ሰነዶች።',
       downloadBtn: 'ሰነዱን ያውርዱ',
     },
-  }[locale as Locale]
+    om: {
+      tag: 'Sanadoota Ummataa fi Kuusaa Seeraa',
+      title: 'Qabeenyaalee, Uunkaalee fi Qajeelfamoota Seeraa',
+      subtitle: 'Kuusaa uunkaalee iyyannoo, labsiiwwan marii aanaa, gabaasota odiitii fi qajeelfamoota hojii jiraattota fi daldaltootaaf qophaa\'an.',
+      downloadBtn: 'Sanada Buufadhaa',
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   return (
     <div className="bg-[#f0f4f8] min-h-screen py-10 sm:py-16">

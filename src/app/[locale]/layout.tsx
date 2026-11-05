@@ -30,6 +30,10 @@ export async function generateMetadata({
       title: 'የአንጎሌላ ተራ ወረዳ | ይፋዊ የመንግሥት ፖርታል',
       desc: 'የአንጎሌላ ተራ ወረዳ ይፋዊ ድረ-ገጽ፣ ሰሜን ሸዋ ዞን፣ አማራ ክልል፣ ኢትዮጵያ። የህዝብ አገልግሎቶች፣ ሴክተር መስሪያ ቤቶች፣ የልማትና ኢንቨስትመንት መረጃ።',
     },
+    om: {
+      title: 'Bulchiinsa Aanaa Angoolaalaa Xaraa | Fuula Weebsaayitii Mootummaa',
+      desc: 'Weebsaayitii Mootummaa Bulchiinsa Aanaa Angoolaalaa Xaraa, Godina Shawaa Kaabaa, Naannoo Amaaraa, Itoophiyaa. Tajaajiloota ummataa, waajjiroota sekteeraa, misooma fi carraawwan invastimantii.',
+    },
   }
 
   const meta = titles[locale as Locale] || titles.en

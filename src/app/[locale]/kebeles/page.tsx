@@ -20,7 +20,7 @@ export default async function KebelesPage({
 
   const kebeles = getKebeles()
 
-  const t = {
+  const tDict = {
     en: {
       tag: 'Demographic Jurisdictions & Municipal Centers',
       title: 'Kebeles & Towns of Angolela Tera',
@@ -45,7 +45,20 @@ export default async function KebelesPage({
       admin: 'የቀበሌው አስተዳዳሪ',
       contact: 'የቢሮ ስልክ',
     },
-  }[locale as Locale]
+    om: {
+      tag: 'Daangaa Bulchiinsaa fi Magaalota',
+      title: 'Gandoolee fi Magaalota Angoolaalaa Xaraa',
+      subtitle: 'Aanaan Angoolaalaa Xaraa gandoolee baadiyyaa fi magaalota gurguddoo Chaccisa dabalatee kutaalee bulchiinsaa 19 of keessaa qaba.',
+      rural: 'Ganda Baadiyyaa',
+      urban: 'Ganda Magaalaa',
+      population: 'Baay\'ina Ummataa Mirkanaa\'e',
+      distance: 'Fageenya Chacciirraa Qabu',
+      agroEcology: 'Haala Qilleensaa',
+      admin: 'Bulchiinsa Gandaa',
+      contact: 'Bilbila Waajjiraa',
+    },
+  }
+  const t = (tDict as any)[locale] || tDict.en
 
   return (
     <div className="bg-[#f0f4f8] min-h-screen py-10 sm:py-16">

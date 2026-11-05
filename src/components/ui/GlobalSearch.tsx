@@ -48,6 +48,7 @@ export function GlobalSearch({ locale, placeholder }: GlobalSearchProps) {
   const ph: Record<Locale, string> = {
     en: placeholder || 'Search services, news, tenders...',
     am: 'አገልግሎቶችን፣ ዜናዎችን፣ ጨረታዎችን ይፈልጉ...',
+    om: placeholder || 'Tajaajiloota, oduu, caalbaasii barbaadaa...',
   }
 
   useEffect(() => {

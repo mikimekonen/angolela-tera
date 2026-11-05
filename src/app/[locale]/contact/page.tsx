@@ -36,7 +36,7 @@ export default function ContactPage({ params }: ContactPageProps) {
   } | null>(null)
   const [trackingError, setTrackingError] = useState<string | null>(null)
 
-  const content = {
+  const contentDict = {
     en: {
       tag: 'Citizen Voice & Direct Engagement',
       title: 'Contact Us & Citizen Grievance Desk',
@@ -127,7 +127,53 @@ export default function ContactPage({ params }: ContactPageProps) {
       hospitalHotline: 'የህክምናና አምቡላንስ ጥሪ፡ 907 / +251 58 661 0112',
       investmentHotline: 'የኢንቨስትመንት መስኮት፡ +251 58 661 0180',
     },
-  }[locale]
+    om: {
+      tag: 'Sagalee Lammiilee & Hirmannaa Kallattii',
+      title: 'Nu Qunnamaa & Waajjira Koomii Lammiilee',
+      subtitle: 'Bulchiinsa Aanaa Angoolaalaa Xaraa qunnamaa. Yaada keessan dhiyeessaa, hanqina tajaajilaa gabaasaa, yookiin haala komii keessanii koodiidhaan hordofaa.',
+      formTitle: 'Iyyannoo yookiin Gaaffii Tajaajilaa Galmeessaa',
+      nameLabel: 'Maqaa Guutuu *',
+      namePlaceholder: 'fkn, Abbabaa Kabbadaa Tasammaa',
+      phoneLabel: 'Lakkoofsa Bilbilaa *',
+      phonePlaceholder: 'fkn, 0911 234 567',
+      emailLabel: 'Teessoo Imeelii *',
+      emailPlaceholder: 'name@example.com',
+      kebeleLabel: 'Ganda Jireenyaa',
+      kebelePlaceholder: 'fkn, Caacaa 01, Caqii, Kootuu...',
+      categoryLabel: 'Damee Dhimmaa *',
+      categories: [
+        { value: 'grievance', label: 'Koomii / Iyyannoo Kenniinsa Tajaajilaa' },
+        { value: 'water_disruption', label: 'Hanqina Sarara Bishaan Dhugaatii fi Jallisi' },
+        { value: 'land', label: 'Qabiyyee fi Daangaa Lafaa Baadiyyaa' },
+        { value: 'general', label: 'Gaaffii Bulchiinsaa Waliigalaa' },
+        { value: 'investment', label: 'Hayyama Daldalaa fi Invastimantii' },
+        { value: 'agriculture', label: 'Galtee Qonnaa fi Xaa\'oo' },
+      ],
+      subjectLabel: 'Mata Duree Iyyannoo *',
+      subjectPlaceholder: 'Cuunfaa gabaabaa dhimma keessanii...',
+      messageLabel: 'Ergaa / Ibsa Bal\'aa Iyyannoo *',
+      messagePlaceholder: 'Oodeeffannoo bal\'aa guyyaa, bakka fi ibsa dhimmaa ifatti barreessaa...',
+      submitBtn: 'Iyyannoo Galmeessi',
+      submittingBtn: 'Galmeessaa jira...',
+      successTitle: 'Iyyannoon Keessan Milkaa\'inaan Galmaa\'eera!',
+      successDesc: 'Iyyannoon keessan galmee Chaartarii Lammiilee Aanaa irratti galmaa\'eera. Maaloo koodii hordoffii kana of eeggannoodhaan qabaadhaa:',
+      submitAnother: 'Iyyannoo Biroo Dhiyeessuuf',
+      trackTitle: 'Sadarkaa Iyyannoo Dhiyaatee Hordofaa',
+      trackSubtitle: 'Koodii hordoffii keessan (fkn: AT-GR-2026-0042) galchuudhaan adeemsa fi deebii iyyannoo keessanii ilaalaa.',
+      trackPlaceholder: 'Koodii hordoffii galchaa...',
+      trackBtn: 'Sadarkaa Qoradhu',
+      hqTitle: 'Waajjira Bulchiinsaa Ol\'aanaa Aanaa',
+      hqAddress: 'Mooraa Bulchiinsaa Guddaa, Magaalaa Caacaa, Godina Shawaa Kaabaa, Naannoo Amaaraa',
+      hqHours: 'Wiixata – Jimaata: Sa\'aatii 2:30 – 11:30 (Boqonnaa Guyyaa 6:30 – 7:30)',
+      hqPhone: 'Bilbila Waajjiraa: +251 (0) 58 661 0100',
+      hqEmail: 'info@angolela-tera.gov.et',
+      hotlinesTitle: 'Bilbiloota Balaa fi Nageenya Uummataa',
+      policeHotline: 'Toora Balaa Poolisii: 991 / +251 58 661 0110',
+      hospitalHotline: 'Waamicha Yaala Fayyaa fi Ambulaansii: 907 / +251 58 661 0112',
+      investmentHotline: 'Foddaa Invastimantii: +251 58 661 0180',
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -309,7 +355,7 @@ export default function ContactPage({ params }: ContactPageProps) {
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                       className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-xs text-gray-800 focus:outline-none focus:border-[#1a4f8b] focus:ring-1 focus:ring-[#1a4f8b]"
                     >
-                      {content.categories.map((c) => (
+                      {content.categories.map((c: any) => (
                         <option key={c.value} value={c.value}>
                           {c.label}
                         </option>

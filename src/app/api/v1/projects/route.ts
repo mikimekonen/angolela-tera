@@ -16,11 +16,11 @@ export async function GET(req: NextRequest) {
 
     let items = getDevelopmentProjects()
 
-    if (sector) {
+    if (sector && sector !== 'ALL') {
       items = items.filter((p: any) => p.sector?.toLowerCase() === sector.toLowerCase())
     }
 
-    if (status) {
+    if (status && status !== 'ALL') {
       items = items.filter((p: any) => p.status === status)
     }
 
@@ -30,6 +30,7 @@ export async function GET(req: NextRequest) {
           p.title_en?.toLowerCase().includes(q) ||
           p.title_am?.includes(q) ||
           p.description_en?.toLowerCase().includes(q) ||
+          p.contractor?.toLowerCase().includes(q) ||
           p.slug?.toLowerCase().includes(q)
       )
     }
@@ -72,16 +73,20 @@ export async function POST(req: NextRequest) {
       budget_etb: body.budget_etb ? Number(body.budget_etb) : 0,
       fundingSource: body.fundingSource || null,
       contractor: body.contractor || null,
+      beneficiaries: body.beneficiaries || null,
       startDate: body.startDate || new Date().toISOString().split('T')[0],
       expectedCompletion: body.expectedCompletion || null,
       status: body.status || 'IN_PROGRESS',
       progressPercent: body.progressPercent !== undefined ? Number(body.progressPercent) : 0,
+      images: Array.isArray(body.images) ? body.images : [],
+      milestones: Array.isArray(body.milestones) ? body.milestones : [],
+      isPublicTransparency: body.isPublicTransparency !== undefined ? Boolean(body.isPublicTransparency) : true,
       displayOrder: body.displayOrder ? Number(body.displayOrder) : 0,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }
 
-    createDevelopmentProject(newProject, session.email)
+    createDevelopmentProject(newProject, session.name)
     return NextResponse.json({ success: true, data: newProject }, { status: 201 })
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Internal Server Error'
@@ -108,7 +113,7 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'id is required' }, { status: 400 })
     }
 
-    const updated = updateDevelopmentProject(body.id, body, session.email)
+    const updated = updateDevelopmentProject(body.id, body, session.name)
     if (!updated) {
       return NextResponse.json({ success: false, error: 'Project not found' }, { status: 404 })
     }
@@ -133,7 +138,7 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'id query param required' }, { status: 400 })
     }
 
-    deleteDevelopmentProject(id, session.email)
+    deleteDevelopmentProject(id, session.name)
     return NextResponse.json({ success: true, message: 'Project deleted' })
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Internal Server Error'

@@ -11,11 +11,11 @@ export async function GET(req: NextRequest) {
 
     let items = getDocuments()
 
-    if (category) {
+    if (category && category !== 'ALL') {
       items = items.filter((d: any) => d.category?.toLowerCase() === category.toLowerCase())
     }
 
-    if (status) {
+    if (status && status !== 'ALL') {
       items = items.filter((d: any) => d.status === status)
     }
 
@@ -24,6 +24,7 @@ export async function GET(req: NextRequest) {
         (d: any) =>
           d.title_en?.toLowerCase().includes(q) ||
           d.title_am?.includes(q) ||
+          d.referenceNumber?.toLowerCase().includes(q) ||
           d.description_en?.toLowerCase().includes(q) ||
           d.officeName?.toLowerCase().includes(q)
       )
@@ -66,6 +67,9 @@ export async function POST(req: NextRequest) {
       officeName: body.officeName || 'Woreda Administration Office',
       description_en: body.description_en || null,
       description_am: body.description_am || null,
+      referenceNumber: body.referenceNumber || null,
+      version: body.version || '1.0',
+      downloadCount: body.downloadCount ? Number(body.downloadCount) : 0,
       status: body.status || 'PUBLISHED',
       publishedAt: body.publishedAt || new Date().toISOString().split('T')[0],
       displayOrder: body.displayOrder ? Number(body.displayOrder) : 0,
@@ -73,7 +77,7 @@ export async function POST(req: NextRequest) {
       updatedAt: new Date().toISOString(),
     }
 
-    createDocument(newDoc, session.email)
+    createDocument(newDoc, session.name)
     return NextResponse.json({ success: true, data: newDoc }, { status: 201 })
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Internal Server Error'
@@ -100,7 +104,7 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'id is required' }, { status: 400 })
     }
 
-    const updated = updateDocument(body.id, body, session.email)
+    const updated = updateDocument(body.id, body, session.name)
     if (!updated) {
       return NextResponse.json({ success: false, error: 'Document not found' }, { status: 404 })
     }
@@ -125,7 +129,7 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'id query param required' }, { status: 400 })
     }
 
-    deleteDocument(id, session.email)
+    deleteDocument(id, session.name)
     return NextResponse.json({ success: true, message: 'Document deleted' })
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Internal Server Error'

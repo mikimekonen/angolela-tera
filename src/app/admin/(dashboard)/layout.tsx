@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import { getSession } from '@/lib/auth'
 import AdminSidebar from '@/components/admin/AdminSidebar'
 import AdminHeader from '@/components/admin/AdminHeader'
+import { CommandPalette } from '@/components/admin/CommandPalette'
 
 export default async function AdminDashboardLayout({
   children,
@@ -17,6 +18,7 @@ export default async function AdminDashboardLayout({
 
   return (
     <div className="min-h-screen bg-[#f1f5f9] flex flex-row font-sans">
+      <CommandPalette />
       <AdminSidebar user={session} />
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <AdminHeader user={session} />

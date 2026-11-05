@@ -9,7 +9,7 @@ interface FooterProps {
 }
 
 export function Footer({ locale, settings }: FooterProps) {
-  const content = {
+  const contentDict = {
     en: {
       tagline: 'Serving our communities through transparent governance, accessible public services, and sustainable economic development.',
       addressTitle: 'Administration Headquarters',
@@ -44,7 +44,25 @@ export function Footer({ locale, settings }: FooterProps) {
       rights: 'መብቱ በህግ የተጠበቀ ነው። የአንጎሌላ ተራ ወረዳ ይፋዊ ፖርታል።',
       portalNotice: 'በኢትዮጵያ የኤሌክትሮኒክስ መንግሥት (E-Government) መመዘኛዎች መሰረት የተዘጋጀ።',
     },
-  }[locale]
+    om: {
+      tagline: 'Bulchiinsa iftoomina qabu, tajaajila ummataa qaqqabamaa fi misooma dinagdee itti fufiinsa qabuun hawaasa tajaajiluu.',
+      addressTitle: 'Waajjira Guddaa Bulchiinsaa',
+      addressLine1: 'Mooraa Bulchiinsa Aanaa Angoolaalaa Xaraa',
+      addressLine2: 'Magaalaa Chaccisaa, Godina Shawaa Kaabaa',
+      addressLine3: 'Mootummaa Naannoo Amaaraa, Itoophiyaa',
+      emergencyTitle: 'Lakk. Bilbila Yeroo Balaa',
+      police: 'Qajeelcha Poolisii Aanaa: +251 (0) 58 661 0111',
+      health: 'Hospitaala Sad. 1ffaa Chaccisaa: +251 (0) 58 661 0222',
+      fire: 'Ittisa Balaa fi Qophaa\'ummaa: +251 (0) 58 661 0333',
+      quickLinks: 'Tajaajiloota Ummataa',
+      officesTitle: 'Dinagdee fi Dhaabbilee Dhuunfaa',
+      workingHours: 'Sa\'aatii Hojii',
+      hoursDetail: 'Wiixata – Jimaata: Sa\'aatii 2:30 – 11:30 (Boqonnaa Laaqanaa: 6:30 – 7:30)',
+      rights: 'Mirgi hundi seeraan kan eegame. Weebsaayitii Mootummaa Aanaa Angoolaalaa Xaraa.',
+      portalNotice: 'Ulaagaa Mootummaa Dijitaalaa (E-Government) Itoophiyaa hordofee kan qophaa\'e.',
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   return (
     <footer className="bg-[#0d2340] text-gray-300 border-t-4 border-[#c8931a] relative z-20">

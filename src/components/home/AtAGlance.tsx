@@ -12,7 +12,7 @@ interface AtAGlanceProps {
 export function AtAGlance({ locale }: AtAGlanceProps) {
   const isAm = locale === 'am'
 
-  const content = {
+  const contentDict = {
     en: {
       tag: 'Key Woreda Profile & Verified Stats',
       title: 'Angolela Tera at a Glance',
@@ -137,7 +137,70 @@ export function AtAGlance({ locale }: AtAGlanceProps) {
         },
       ],
     },
-  }[locale]
+    om: {
+      tag: 'Ibsa Bu\'uuraa Aanaa fi Istaatistiksii Mirkanaa\'e',
+      title: 'Angoolaalaa Xaraa Fakkiidhaan',
+      desc: 'Daandii guddaa Finfinnee-Dasee irratti Godina Shawaa Kaabaa Naannoo Amaaraatti kan argamtu Aanaan Angoolaalaa Xaraa, wiirtuu oomisha qonnaa, kooridarri agroo-piroosesiingii guddachaa jiru fi aanaa baddaa seena-qabeessa dha.',
+      viewMore: 'Ibsa Guutuu Aanaa Dubbisaa',
+      stats: [
+        {
+          label: 'Magaalaa Bulchiinsaa',
+          endNum: null,
+          displayValue: 'Magaalaa Caacaa',
+          desc: 'Wiirtuu bulchiinsaa fi daldalaa guddaa',
+          icon: '🏛️',
+          accent: 'border-blue-300',
+        },
+        {
+          label: 'Baay\'ina Uummataa',
+          endNum: 142500,
+          suffix: '+',
+          displayValue: '142,500+',
+          desc: 'Hawaasa qonnaan bulaa jabaa fi dargaggoota hojii qaban',
+          icon: '👥',
+          accent: 'border-emerald-300',
+        },
+        {
+          label: 'Gandoolee',
+          endNum: 19,
+          suffix: ' Baadiyyaa / 2 Magaalaa',
+          displayValue: '19 Baadiyyaa / 2 Magaalaa',
+          desc: 'Caasaa bulchiinsa gandaa sirriitti diriire',
+          icon: '📍',
+          accent: 'border-amber-300',
+        },
+        {
+          label: 'Lafa Qonnaa Qotamu',
+          endNum: 86400,
+          suffix: ' Hektaara',
+          displayValue: '86,400 Hektaara',
+          desc: 'Lafa Gabbataa qamadii, garbuu fi mi\'eessituuf mijatu',
+          icon: '🌾',
+          accent: 'border-green-300',
+        },
+        {
+          label: 'Olka\'iinsa fi Qilleensa',
+          endNum: 2840,
+          prefix: 'Giddu-galeessaan ',
+          suffix: ' m (Baddaa)',
+          displayValue: '2,600 – 3,050 m',
+          desc: 'Qilleensa baddaa fi rooba yeroo lamaa amanamaa',
+          icon: '⛰️',
+          accent: 'border-indigo-300',
+        },
+        {
+          label: 'Dhiheenya Kooridarii',
+          endNum: 20,
+          suffix: ' km gara Dabrabirhaan',
+          displayValue: '20 km gara Dabrabirhaan',
+          desc: 'Daandii aspaaltii qajeelaa gara gabaa indastirii',
+          icon: '🚛',
+          accent: 'border-cyan-300',
+        },
+      ],
+    },
+  }
+  const content = (contentDict as any)[locale] || contentDict.en
 
   return (
     <section className="py-20 bg-gradient-to-b from-[#f0f4f8] via-white to-[#f0f4f8] border-b border-gray-200 relative overflow-hidden">
@@ -172,7 +235,7 @@ export function AtAGlance({ locale }: AtAGlanceProps) {
 
         {/* Interactive Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {content.stats.map((stat, idx) => (
+          {content.stats.map((stat: any, idx: number) => (
             <div
               key={idx}
               className={`bg-white/95 border border-gray-200 hover:border-[#1a4f8b] rounded-2xl p-6 shadow-xs hover:shadow-xl transition-all duration-300 group hover:-translate-y-1 relative overflow-hidden backdrop-blur-xs`}
