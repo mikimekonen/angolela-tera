@@ -14,7 +14,6 @@ jobs:
       DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/angolela_tera_db?schema=public"
       JWT_SECRET: "angolela-tera-ci-build-secret-key-32charsmin"
       NEXT_TELEMETRY_DISABLED: "1"
-      NODE_ENV: "production"
 
     steps:
       - name: Checkout Source Code
@@ -26,13 +25,15 @@ jobs:
           node-version: 20
 
       - name: Install Dependencies
-        run: npm install --no-audit
+        run: npm install --include=dev --no-audit
 
       - name: Run Prisma Client Generation
         run: npx prisma generate
 
       - name: Run Next.js Production Build
         run: npm run build
+        env:
+          NODE_ENV: production
 
       - name: Verify TypeScript Types (Strict Mode)
         run: npx tsc --noEmit
