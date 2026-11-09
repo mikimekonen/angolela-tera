@@ -359,7 +359,7 @@ export const MOCK_BUSINESSES: BusinessItem[] = [
     description_en:
       'A state-of-the-art modern beverage manufacturing plant located in Cheki Kebele, Angolela Tera Woreda. Komari is the pioneer producer of "Arada", Ethiopia\'s first hard seltzer brand (ready-to-drink sparkling fruit and botanical flavored beverage), operating advanced European brewing and distillation lines.',
     description_am:
-      'በአንጎሌላ ተራ ወረዳ በጨቂ ቀበሌ ውስጥ የተገነባ እጅግ ዘመናዊ የመጠጥ ማምረቻ ፋብሪካ። በኢትዮጵያ የመጀመሪያውን "አራዳ" (Arada) የተሰኘ ሃርድ ሴልትዘር (ቀለል ያለ የተፈጥሮ ፍራፍሬ ጣዕም ያለው የአልኮል መጠጥ) በዓለም አቀፍ ደረጃ በታገዘ ዘመናዊ ቴክኖሎጂ አምርቶ በማቅረብ ይታወቃል።',
+      'በአንጎለላ ጠራ ወረዳ በጨቂ ቀበሌ ውስጥ የተገነባ እጅግ ዘመናዊ የመጠጥ ማምረቻ ፋብሪካ። በኢትዮጵያ የመጀመሪያውን "አራዳ" (Arada) የተሰኘ ሃርድ ሴልትዘር (ቀለል ያለ የተፈጥሮ ፍራፍሬ ጣዕም ያለው የአልኮል መጠጥ) በዓለም አቀፍ ደረጃ በታገዘ ዘመናዊ ቴክኖሎጂ አምርቶ በማቅረብ ይታወቃል።',
     sector: 'MANUFACTURING',
     address: 'Cheki Kebele, Addis Ababa–Dessie Highway (Km 96), Angolela Tera Woreda',
     phone: '+251 (0) 11 667 8500',
@@ -419,7 +419,7 @@ export const MOCK_BUSINESSES: BusinessItem[] = [
     description_en:
       'An ISO-certified (ISO 9001/14001/22000) high-technology industrial distillery and beverage manufacturing share company located at Km 73 in Angolela Tera Woreda. Produces Extra Neutral Alcohol (ENA) and renowned spirit brands including Champion Dry Gin, Champion Vodka, Champion Coffee Liqueur, Cognac, Whisky, and KAT traditional grain spirit.',
     description_am:
-      'በአንጎሌላ ተራ ወረዳ 73ኛ ኪ.ሜ ላይ የሚገኝ ከፍተኛ ቴክኖሎጂ የታጠቀ የአልኮል ዳይስቲለሪ እና መጠጥ ማምረቻ አክሲዮን ማህበር። በአይኤስኦ (ISO 9001/14001/22000) ደረጃ የተመሰከረለት ሲሆን፣ ኤክስትራ ኒውትራል አልኮል (ENA)፣ ሻምፒዮን ጂን፣ ቮድካ፣ ዊስኪ እና "ካት" የተሰኘውን የባህል ጥራት አልኮል ያመርታል።',
+      'በአንጎለላ ጠራ ወረዳ 73ኛ ኪ.ሜ ላይ የሚገኝ ከፍተኛ ቴክኖሎጂ የታጠቀ የአልኮል ዳይስቲለሪ እና መጠጥ ማምረቻ አክሲዮን ማህበር። በአይኤስኦ (ISO 9001/14001/22000) ደረጃ የተመሰከረለት ሲሆን፣ ኤክስትራ ኒውትራል አልኮል (ENA)፣ ሻምፒዮን ጂን፣ ቮድካ፣ ዊስኪ እና "ካት" የተሰኘውን የባህል ጥራት አልኮል ያመርታል።',
     sector: 'MANUFACTURING',
     address: 'Km 73 Trunk Highway, Angolela Tera Woreda',
     phone: '+251 (0) 11 668 7272',
@@ -479,7 +479,7 @@ export const MOCK_BUSINESSES: BusinessItem[] = [
     description_en:
       'State-of-the-art commercial edible oil processing and refining facility located in the Kotu corridor of Angolela Tera Woreda. PIAM partners with regional smallholders to source locally cultivated niger seed (nug), sesame, and sunflower, driving import substitution with clean, unadulterated edible oils.',
     description_am:
-      'በአንጎሌላ ተራ ወረዳ ኮቱ አካባቢ የሚገኝ ዘመናዊ የምግብ ዘይት ማምረቻ ፋብሪካ። ከአካባቢው አርሶ አደሮች ኑግ፣ ሰሊጥና የሱፍ ፍሬ በመረከብ ጥራት ያለው የምግብ ዘይት በማምረት የሀገር ውስጥ ገበያን ያሟላል።',
+      'በአንጎለላ ጠራ ወረዳ ኮቱ አካባቢ የሚገኝ ዘመናዊ የምግብ ዘይት ማምረቻ ፋብሪካ። ከአካባቢው አርሶ አደሮች ኑግ፣ ሰሊጥና የሱፍ ፍሬ በመረከብ ጥራት ያለው የምግብ ዘይት በማምረት የሀገር ውስጥ ገበያን ያሟላል።',
     sector: 'AGRO_PROCESSING',
     address: 'Kotu Industrial Belt, Chacha, Angolela Tera Woreda',
     phone: '+251 (0) 11 662 4455',

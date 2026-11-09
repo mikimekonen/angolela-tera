@@ -27,8 +27,8 @@ export async function generateMetadata({
       desc: 'Official portal of Angolela Tera Woreda, North Shewa Zone, Amhara Region, Ethiopia. Public services, sector offices, economic development, and investment opportunities.',
     },
     am: {
-      title: 'የአንጎሌላ ተራ ወረዳ | ይፋዊ የመንግሥት ፖርታል',
-      desc: 'የአንጎሌላ ተራ ወረዳ ይፋዊ ድረ-ገጽ፣ ሰሜን ሸዋ ዞን፣ አማራ ክልል፣ ኢትዮጵያ። የህዝብ አገልግሎቶች፣ ሴክተር መስሪያ ቤቶች፣ የልማትና ኢንቨስትመንት መረጃ።',
+      title: 'የአንጎለላ ጠራ ወረዳ | ይፋዊ የመንግሥት ፖርታል',
+      desc: 'የአንጎለላ ጠራ ወረዳ ይፋዊ ድረ-ገጽ፣ ሰሜን ሸዋ ዞን፣ አማራ ክልል፣ ኢትዮጵያ። የህዝብ አገልግሎቶች፣ ሴክተር መስሪያ ቤቶች፣ የልማትና ኢንቨስትመንት መረጃ።',
     },
   }
 
@@ -42,7 +42,7 @@ export async function generateMetadata({
     description: meta.desc,
     keywords: [
       'Angolela Tera',
-      'አንጎሌላ ተራ',
+      'አንጎለላ ጠራ',
       'Chacha',
       'North Shewa',
       'Amhara',

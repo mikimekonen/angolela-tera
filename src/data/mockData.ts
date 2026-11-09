@@ -75,7 +75,7 @@ export const SECTOR_OFFICES: OfficeDetail[] = [
     location_en: 'Main Administrative Compound, Block B, 1st Floor, Chacha',
     location_am: 'ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ለ፣ 1ኛ ፎቅ፣ ጫቻ',
     about_en: 'The Agriculture and Rural Development Office spearheads food security, crop yield maximization, natural resource conservation, and modern livestock breeding across the 19 rural kebeles of Angolela Tera.',
-    about_am: 'የአንጎሌላ ተራ ወረዳ ግብርናና ገጠር ልማት ጽ/ቤት በ19ኙም የገጠር ቀበሌዎች የምግብ ዋስትናን ለማረጋገጥ፣ የሰብል ምርታማነትን ለማሳደግ፣ የተፈጥሮ ሀብት ጥበቃና ዘመናዊ የእንስሳት እርባታን ለማስፋፋት በግንባር ቀደምትነት ይሰራል፡',
+    about_am: 'የአንጎለላ ጠራ ወረዳ ግብርናና ገጠር ልማት ጽ/ቤት በ19ኙም የገጠር ቀበሌዎች የምግብ ዋስትናን ለማረጋገጥ፣ የሰብል ምርታማነትን ለማሳደግ፣ የተፈጥሮ ሀብት ጥበቃና ዘመናዊ የእንስሳት እርባታን ለማስፋፋት በግንባር ቀደምትነት ይሰራል፡',
     responsibilities_en: [
       'Facilitating seasonal distribution of certified rust-resistant wheat and barley seeds',
       'Implementing watershed development and soil erosion containment across highland slopes',
@@ -394,7 +394,7 @@ export const CITIZEN_SERVICES: ServiceDetail[] = [
     cost_en: '50 ETB (Government stamp fee; free within 90 days of birth)',
     cost_am: '50 ብር (የቴምብር ክፍያ፤ በ90 ቀናት ውስጥ ለተወለዱ ነጻ)',
     description_en: 'Legal registration and issuance of official authenticated certificates for births, marriages, divorces, and deaths for residents of Angolela Tera Woreda, in accordance with federal vital event proclamation laws.',
-    description_am: 'በአንጎሌላ ተራ ወረዳ ነዋሪ ለሆኑ ዜጎች በኢትዮጵያ የፌዴራል ወሳኝ ኩነት ምዝገባ ህግ መሰረት የልደት፣ ጋብቻ፣ ፍቺ እና የሞት ይፋዊ ህጋዊ የምስክር ወረቀት ምዝገባና አሰጣጥ።',
+    description_am: 'በአንጎለላ ጠራ ወረዳ ነዋሪ ለሆኑ ዜጎች በኢትዮጵያ የፌዴራል ወሳኝ ኩነት ምዝገባ ህግ መሰረት የልደት፣ ጋብቻ፣ ፍቺ እና የሞት ይፋዊ ህጋዊ የምስክር ወረቀት ምዝገባና አሰጣጥ።',
     requirements_en: [
       'Official Kebele Resident ID card of parents or applicant',
       'Hospital/Health Center Birth Notification (for births)',
@@ -474,7 +474,7 @@ export const CITIZEN_SERVICES: ServiceDetail[] = [
     cost_en: 'Varies by sector (120 ETB – 500 ETB fixed statutory registration fee)',
     cost_am: 'እንደ ንግድ ዘርፉ ይለያያል (ከ120 ብር እስከ 500 ብር ህጋዊ ክፍያ)',
     description_en: 'Full-service commercial licensing for sole proprietorships, partnerships, and private limited companies operating in retail, grain trade, transport, manufacturing, and hospitality within Angolela Tera.',
-    description_am: 'በአንጎሌላ ተራ ወረዳ ለሚሰሩ የችርቻሮ፣ የእህል ንግድ፣ የአግሮ-ፕሮሰሲንግ፣ የትራንስፖርትና የእንግዳ ተቀባይነት ንግዶች ፈቃድ መስጠትና ማደስ።',
+    description_am: 'በአንጎለላ ጠራ ወረዳ ለሚሰሩ የችርቻሮ፣ የእህል ንግድ፣ የአግሮ-ፕሮሰሲንግ፣ የትራንስፖርትና የእንግዳ ተቀባይነት ንግዶች ፈቃድ መስጠትና ማደስ።',
     requirements_en: [
       'Valid Tax Identification Number (TIN) certificate',
       'Two passport-sized photographs of applicant / general manager',
@@ -550,7 +550,7 @@ export const CITIZEN_SERVICES: ServiceDetail[] = [
     cost_en: 'Government subsidized cooperative tariff per quintal',
     cost_am: 'በመንግስት የድጎማ ተመን መሰረት በኩንታል',
     description_en: 'Official distribution of certified rust-resistant highland wheat seeds, malt barley, balanced NPS-B and Urea chemical fertilizers, agrochemicals, and improved poultry breeds across all 19 rural kebeles through primary multipurpose agricultural cooperative depots.',
-    description_am: 'በአንጎሌላ ተራ ወረዳ በሁሉም 19ኙ የገጠር ቀበሌዎች ለሚገኙ አርሶ አደሮች በየቀበሌው ባሉ ሁለገብ የገበሬዎች ህብረት ስራ ማህበራት መጋዘኖች በኩል ምርጥ የስንዴና የገብስ ዘር፣ ኤን.ፒ.ኤስ-ቦሮን እና ዩሪያ ማዳበሪያ፣ የጸረ-ተባይ ኬሚካሎችና የተሻሻሉ የዶሮ ዝርያዎችን የማቅረብና የማሰራጨት ይፋዊ አገልግሎት።',
+    description_am: 'በአንጎለላ ጠራ ወረዳ በሁሉም 19ኙ የገጠር ቀበሌዎች ለሚገኙ አርሶ አደሮች በየቀበሌው ባሉ ሁለገብ የገበሬዎች ህብረት ስራ ማህበራት መጋዘኖች በኩል ምርጥ የስንዴና የገብስ ዘር፣ ኤን.ፒ.ኤስ-ቦሮን እና ዩሪያ ማዳበሪያ፣ የጸረ-ተባይ ኬሚካሎችና የተሻሻሉ የዶሮ ዝርያዎችን የማቅረብና የማሰራጨት ይፋዊ አገልግሎት።',
     requirements_en: [
       'Official Kebele Resident ID card',
       'Valid Rural Landholding Certificate (Green Book) confirming cultivated acreage',
@@ -590,7 +590,7 @@ export const CITIZEN_SERVICES: ServiceDetail[] = [
     cost_en: 'Statutory architectural review and site inspection fee based on building category',
     cost_am: 'እንደ ህንጻው ደረጃ የሚወሰን ህጋዊ የፕላን ምርመራና የመስክ ቁጥጥር ክፍያ',
     description_en: 'Formal review, site inspection, and approval of architectural site plans, structural engineering drawings, and zoning clearances for residential, commercial, and industrial construction projects within Angolela Tera.',
-    description_am: 'በአንጎሌላ ተራ ወረዳ ለሚከናወኑ የመኖሪያ፣ የንግድና የኢንዱስትሪ ግንባታዎች የሳይት ፕላን ምርመራ፣ መዋቅራዊ ኢንጂነሪንግ ማረጋገጫና ህጋዊ የግንባታ ፈቃድ አሰጣጥ።',
+    description_am: 'በአንጎለላ ጠራ ወረዳ ለሚከናወኑ የመኖሪያ፣ የንግድና የኢንዱስትሪ ግንባታዎች የሳይት ፕላን ምርመራ፣ መዋቅራዊ ኢንጂነሪንግ ማረጋገጫና ህጋዊ የግንባታ ፈቃድ አሰጣጥ።',
     requirements_en: [
       'Proof of legal land ownership or long-term lease contract',
       'Four copies of complete architectural and structural design plans signed by licensed engineers',
@@ -625,7 +625,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
   {
     slug: 'budget-2026',
     title_en: 'Angolela Tera Woreda Council Concludes Ordinary Session; Approves Annual Capital Budget',
-    title_am: 'የአንጎሌላ ተራ ወረዳ ምክር ቤት መደበኛ ጉባዔውን አጠናቀቀ፤ የዓመቱን የካፒታል በጀት አጸደቀ',
+    title_am: 'የአንጎለላ ጠራ ወረዳ ምክር ቤት መደበኛ ጉባዔውን አጠናቀቀ፤ የዓመቱን የካፒታል በጀት አጸደቀ',
     category_en: 'Council Resolution',
     category_am: 'የምክር ቤት ውሳኔ',
     date_en: 'September 24, 2026',
@@ -634,14 +634,14 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     author_am: 'የመንግሥት ኮሙኒኬሽን ጉዳዮች ጽ/ቤት',
     isFeatured: true,
     summary_en: 'The Woreda Council convened for its ordinary session in Chacha, formally ratifying the annual public expenditure plan prioritizing rural water schemes, primary road graveling, and agricultural cooperative subsidies.',
-    summary_am: 'የአንጎሌላ ተራ ወረዳ ምክር ቤት በጫቻ ከተማ ባካሄደው መደበኛ ጉባዔ ለንጹህ መጠጥ ውሃ መስፋፋት፣ ለገጠር መንገዶች ጠጠር ማልበስ እና ለአርሶ አደር ማህበራት ድጋፍ ቅድሚያ የሰጠውን በጀት አጸደቀ።',
+    summary_am: 'የአንጎለላ ጠራ ወረዳ ምክር ቤት በጫቻ ከተማ ባካሄደው መደበኛ ጉባዔ ለንጹህ መጠጥ ውሃ መስፋፋት፣ ለገጠር መንገዶች ጠጠር ማልበስ እና ለአርሶ አደር ማህበራት ድጋፍ ቅድሚያ የሰጠውን በጀት አጸደቀ።',
     content_en: [
       'The 6th Angolela Tera Woreda Council has concluded its high-level ordinary session following two days of constructive deliberations in the administrative hall at Chacha town.',
       'The approved budget prioritizes three major socioeconomic pillars: the expansion of deep water borehole schemes across 6 moisture-stressed kebeles, the upgrade of 45 kilometers of community feeder roads connecting farming villages to the main A2 highway, and modernization subsidies for local agricultural cooperatives.',
       'Chief Administrator of the Woreda, in his address to council members, underscored that fiscal transparency, timely project completion, and strict monitoring of public expenditure will remain the uncompromising standards of the executive cabinet.',
     ],
     content_am: [
-      '6ኛው የአንጎሌላ ተራ ወረዳ ምክር ቤት በጫቻ ከተማ በሚገኘው የአስተዳደር አዳራሽ ለሁለት ቀናት ያካሄደውን መደበኛ ጉባዔ በተሳካ ሁኔታ አጠናቋል።',
+      '6ኛው የአንጎለላ ጠራ ወረዳ ምክር ቤት በጫቻ ከተማ በሚገኘው የአስተዳደር አዳራሽ ለሁለት ቀናት ያካሄደውን መደበኛ ጉባዔ በተሳካ ሁኔታ አጠናቋል።',
       'የጸደቀው በጀት ለሶስት ዋና ዋና የልማት መስኮች ትኩረት የሰጠ ሲሆን፡ በ6 ደረቃማ አካባቢዎች የጥልቅ ውሃ ጉድጓድ ቁፋሮ፣ 45 ኪሎ ሜትር የገጠር መንገዶችን ጠጠር የማልበስ እና የአርሶ አደሩን የህብረት ስራ ማህበራት የማጠናከር ስራዎችን ያካትታል።',
       'የወረዳው ዋና አስተዳዳሪ ለምክር ቤቱ አባላት ባደረጉት ንግግር የፋይናንስ ግልጽነትን ማስፈን፣ የልማት ፕሮጀክቶችን በወቅቱ ማጠናቀቅ እና የህዝብ ሀብትን በቁጠባ መጠቀም የአስፈጻሚው አካል የማይታጠፍ አቋም መሆኑን አሳስበዋል።',
     ],
@@ -665,7 +665,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
       'Field development agents (DAs) are actively providing localized technical demonstrations on cluster farming, balanced fertilizer application, and mechanized sowing techniques to ensure farmers achieve maximum productivity.',
     ],
     content_am: [
-      'የአንጎሌላ ተራ ወረዳ ግብርናና ገጠር ልማት ጽ/ቤት በሁሉም የቀበሌ ሁለገብ የህብረት ስራ ማህበራት መጋዘኖች በኩል የግብርና ግብአቶችን ለአርሶ አደሮች የማሰራጨት ስራን ጀምሯል።',
+      'የአንጎለላ ጠራ ወረዳ ግብርናና ገጠር ልማት ጽ/ቤት በሁሉም የቀበሌ ሁለገብ የህብረት ስራ ማህበራት መጋዘኖች በኩል የግብርና ግብአቶችን ለአርሶ አደሮች የማሰራጨት ስራን ጀምሯል።',
       'ስርጭቱ ከ2,600 ሜትር በላይ ባሉ ደጋማ አካባቢዎች ከፍተኛ ምርት በሚሰጡና ቢጫ ዋግ የተባለውን የስንዴ በሽታ በሚቋቋሙ ዝርያዎች ላይ ያተኮረ ነው።',
       'በየቀበሌው ያሉ የግብርና ባለሙያዎች አርሶ አደሩ በመስመር እንዲዘራ፣ የተመጣጠነ ማዳበሪያ እንዲጠቀምና በኩታ-ገጠም አስተራረስ ምርቱን እንዲያሳድግ የተግባር ድጋፍ በመስጠት ላይ ይገኛሉ።',
     ],
@@ -689,7 +689,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
       'Qualified investors will enjoy expedited one-stop clearances, competitive 70-year lease terms, local raw material supply guarantees, and dedicated administrative support.',
     ],
     content_am: [
-      'የአንጎሌላ ተራ ወረዳ በሰሜን ሸዋ ዞን ዋነኛ የአግሮ-ኢንዱስትሪ ማዕከል ለመሆን ሰፊ ዝግጅት እያደረገ ይገኛል።',
+      'የአንጎለላ ጠራ ወረዳ በሰሜን ሸዋ ዞን ዋነኛ የአግሮ-ኢንዱስትሪ ማዕከል ለመሆን ሰፊ ዝግጅት እያደረገ ይገኛል።',
       'በአዲስ አበባ-ደብረ ብርሃን አስፋልት መንገድ ላይ መገኘቱ፣ የተረጋጋ የኤሌክትሪክ ሀይል፣ አስተማማኝ የተፈጥሮ ምንጭ ውሃ እና በቂ የሰው ሀይል መኖሩ ለኢንቨስትመንት ተመራጭ አድርጎታል።',
       'ወረዳው በአንድ መስኮት አገልግሎት ፈቃድ ለመስጠት፣ የ70 ዓመት የሊዝ ይዞታ ዋስትና ለመስጠት እና ከአርሶ አደሮች ጋር የጥሬ እቃ ትስስር ለመፍጠር ቁርጠኛ ነው።',
     ],

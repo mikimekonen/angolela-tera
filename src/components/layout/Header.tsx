@@ -49,7 +49,7 @@ export function Header({ locale, onMobileMenuToggle, isMobileMenuOpen }: HeaderP
       contactUs: 'Direct Line',
     },
     am: {
-      primary: 'የአንጎሌላ ተራ ወረዳ',
+      primary: 'የአንጎለላ ጠራ ወረዳ',
       secondary: 'ሰሜን ሸዋ ዞን • የአማራ ብሔራዊ ክልላዊ መንግሥት • ኢትዮጵያ',
       subtitle: 'የህዝብ አገልግሎቶች፣ ሴክተር መስሪያ ቤቶችና ኢንቨስትመንት ይፋዊ ፖርታል',
       searchPlaceholder: 'አገልግሎቶችን፣ መመሪያዎችን፣ ዜናዎችን ይፈልጉ...',

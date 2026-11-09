@@ -85,7 +85,7 @@ export default async function WaterAndIrrigationPage({
       badge: 'የዓባይ ተፋሰስ • የጀማ ንዑስ ተፋሰስ መሰረተ ልማት',
       title: 'የውሃ ሀብትና የመስኖ ልማት ፕሮጀክቶች',
       subtitle:
-        'የአንጎሌላ ተራ ወረዳን የተትረፈረፈ የደጋማ ወንዞች፣ ምንጮች እና የከርሰ-ምድር ውሃ ሀብት ለምግብ ዋስትና፣ ለዓመታዊ መስኖ እርሻ እና ለንጹህ መጠጥ ውሃ አቅርቦት ማዋል፡',
+        'የአንጎለላ ጠራ ወረዳን የተትረፈረፈ የደጋማ ወንዞች፣ ምንጮች እና የከርሰ-ምድር ውሃ ሀብት ለምግብ ዋስትና፣ ለዓመታዊ መስኖ እርሻ እና ለንጹህ መጠጥ ውሃ አቅርቦት ማዋል፡',
       metrics: [
         { value: '5.0+ ቢሊዮን ብር', label: 'የአጂማ-ጫቻ ሜጋ ፕሮጀክት በጀት' },
         { value: '55 ሚሊዮን ሜ³', label: 'የግድቡ የውሃ ማቆር አቅም' },
@@ -96,7 +96,7 @@ export default async function WaterAndIrrigationPage({
       ],
       megaProjectTitle: 'የአጂማ-ጫቻ የመስኖ ግድብ ፕሮጀክት',
       megaProjectSubtitle:
-        'በአንጎሌላ ተራ ወረዳ እና በሰሜን ሸዋ ዞን የግብርና ምርታማነትንና የምግብ ዋስትናን በከፍተኛ ደረጃ የሚያሸጋግር ግዙፍ የፌደራልና የክልል የልማት ፕሮጀክት።',
+        'በአንጎለላ ጠራ ወረዳ እና በሰሜን ሸዋ ዞን የግብርና ምርታማነትንና የምግብ ዋስትናን በከፍተኛ ደረጃ የሚያሸጋግር ግዙፍ የፌደራልና የክልል የልማት ፕሮጀክት።',
       damSpecs: [
         { label: 'የግድቡ ዓይነት', val: 'የአፈርና ድንጋይ ሙሌት (Rockfill Embankment)' },
         { label: 'የግድቡ ቁመት', val: '45.5 ሜትር' },
@@ -131,7 +131,7 @@ export default async function WaterAndIrrigationPage({
       ctaHelpdesk: 'የውሃ አገልግሎት ቢሮ',
       ctaReportLeak: 'የውሃ ብክነት ወይም መቋረጥን ያሳውቁ',
       ctaApply: 'አዲስ የውሃ መስመር ለማስገባት ማመልከት',
-      officeDesk: 'የአንጎሌላ ተራ ወረዳ ውሃና ኢነርጂ ጽሕፈት ቤት',
+      officeDesk: 'የአንጎለላ ጠራ ወረዳ ውሃና ኢነርጂ ጽሕፈት ቤት',
       location: 'ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ሐ፣ ጫቻ ከተማ',
       phone: '+251 (0) 58 661 0204',
       email: 'water@angolela-tera.gov.et',

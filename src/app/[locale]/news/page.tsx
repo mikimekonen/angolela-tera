@@ -13,7 +13,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   return {
-    title: locale === 'am' ? 'ዜናና ማስታወቂያዎች — አንጎሌላ ተራ ወረዳ' : 'News & Announcements — Angolela Tera Woreda',
+    title: locale === 'am' ? 'ዜናና ማስታወቂያዎች — አንጎለላ ጠራ ወረዳ' : 'News & Announcements — Angolela Tera Woreda',
     description: 'Official news, press releases and public announcements from Angolela Tera Woreda Administration.',
   }
 }
@@ -39,7 +39,7 @@ export default async function NewsPage({
     am: {
       tag: 'ይፋዊ መረጃና ፕሬስ ዴስክ',
       title: 'ዜናዎችና ይፋዊ ማስታወቂያዎች',
-      subtitle: 'የአንጎሌላ ተራ ወረዳ ወቅታዊ ዜናዎች፣ የጨረታ ማስታወቂያዎች፣ የግብርና መመሪያዎችና የምክር ቤት ውሳኔዎች።',
+      subtitle: 'የአንጎለላ ጠራ ወረዳ ወቅታዊ ዜናዎች፣ የጨረታ ማስታወቂያዎች፣ የግብርና መመሪያዎችና የምክር ቤት ውሳኔዎች።',
       readMore: 'ሙሉውን መግለጫ ያንብቡ',
       authorLabel: 'አውጪው አካል',
       featuredTag: 'ዋና ይፋዊ መግለጫ',

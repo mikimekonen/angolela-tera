@@ -101,7 +101,7 @@ function SearchContent() {
             {isAm ? 'የፖርታል አጠቃላይ ፍለጋ' : 'Unified Global Portal Search'}
           </span>
           <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0d2340] tracking-tight mt-3">
-            {isAm ? 'የአንጎሌላ ተራ መረጃዎችን ይፈልጉ' : 'Search Angolela Tera Public Portal'}
+            {isAm ? 'የአንጎለላ ጠራ መረጃዎችን ይፈልጉ' : 'Search Angolela Tera Public Portal'}
           </h1>
           <p className="text-sm sm:text-base text-gray-600 mt-2">
             {isAm

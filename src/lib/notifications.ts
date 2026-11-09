@@ -49,7 +49,7 @@ export async function sendCitizenSMSNotification(
 
   const isAmharic = payload.locale === 'am'
   const message = isAmharic
-    ? `የአንጎሌላ ተራ ወረዳ አስተዳደር፡ አቤቱታዎ በኮድ ${payload.trackingCode} ተመዝግቧል። ሁኔታውን በድረ-ገጻችን መከታተል ይችላሉ። ስልክ፡ 0586610100`
+    ? `የአንጎለላ ጠራ ወረዳ አስተዳደር፡ አቤቱታዎ በኮድ ${payload.trackingCode} ተመዝግቧል። ሁኔታውን በድረ-ገጻችን መከታተል ይችላሉ። ስልክ፡ 0586610100`
     : `Angolela Tera Woreda: Your grievance is registered with tracking code ${payload.trackingCode}. Track status on our portal. Hotline: 0586610100`
 
   // 1. Ethio Telecom Enterprise SMS Gateway (if configured)

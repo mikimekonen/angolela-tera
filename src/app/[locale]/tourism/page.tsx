@@ -37,7 +37,7 @@ export default async function TourismPage({
     },
     am: {
       tag: 'ቅርስ፣ ባህልና የተፈጥሮ ቱሪዝም',
-      title: 'አንጎሌላ ተራን ይጎብኙ፡ ተፈጥሮና ታሪክ',
+      title: 'አንጎለላ ጠራን ይጎብኙ፡ ተፈጥሮና ታሪክ',
       subtitle: 'ከ19ኛው ክፍለ ዘመን የሸዋ ንጉሣዊ መቀመጫ አንስቶ እስከ አስደናቂ የተፈጥሮ ተራሮች፣ ጥንታዊ ገዳማትና የበለጸጉ ባህላዊ እሴቶች።',
       attractionsTitle: 'ዋና ዋና ታሪካዊና የተፈጥሮ መስህቦች',
       festivalsTitle: 'ባህላዊ በዓላትና አከባበሮች',

@@ -273,7 +273,7 @@ export function LeadershipDirectory({ leaders, locale }: LeadershipDirectoryProp
               </h2>
               <p className="text-xs sm:text-sm text-gray-500 mt-1">
                 {locale === 'am'
-                  ? 'የአንጎሌላ ተራ ወረዳ የ20ዎቹም ሴክተር መስሪያ ቤቶች ዋና ኃላፊዎች ይፋዊ ማውጫ'
+                  ? 'የአንጎለላ ጠራ ወረዳ የ20ዎቹም ሴክተር መስሪያ ቤቶች ዋና ኃላፊዎች ይፋዊ ማውጫ'
                   : 'Authoritative roster of all 20 Woreda sector bureau heads and key cabinet leadership.'}
               </p>
             </div>

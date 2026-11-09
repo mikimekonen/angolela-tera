@@ -759,7 +759,7 @@ export const OFFICIAL_LEADERS: LeaderData[] = [
     category_en: 'Ruling Party Secretariat Leadership',
     category_am: 'የገዥው ፓርቲ ጽህፈት ቤት የበላይ አመራር',
     office_en: 'Woreda Prosperity Party Headquarters • Central Secretariat',
-    office_am: 'የአንጎሌላ ተራ ወረዳ ብልፅግና ፓርቲ ጽህፈት ቤት • ዋና ሴክሬተሪያት',
+    office_am: 'የአንጎለላ ጠራ ወረዳ ብልፅግና ፓርቲ ጽህፈት ቤት • ዋና ሴክሬተሪያት',
     bio_en:
       'The top ruling party leader in the Woreda. He guides political strategy, party institutional builds, ideological dissemination, and acts as the liaison coordinating party policies with district governance objectives.',
     bio_am:

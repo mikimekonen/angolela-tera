@@ -30,7 +30,7 @@ export function Footer({ locale, settings }: FooterProps) {
     am: {
       tagline: 'ተደራሽ የህዝብ አገልግሎት፣ ግልጽነት እና ዘላቂ የኢኮኖሚ ልማት ለማህበረሰባችን።',
       addressTitle: 'የወረዳው ዋና መሥሪያ ቤት',
-      addressLine1: 'የአንጎሌላ ተራ ወረዳ ጽህፈት ቤቶች ቅጥር ጊቢ',
+      addressLine1: 'የአንጎለላ ጠራ ወረዳ ጽህፈት ቤቶች ቅጥር ጊቢ',
       addressLine2: 'ጫቻ ከተማ፣ ሰሜን ሸዋ ዞን',
       addressLine3: 'የአማራ ብሔራዊ ክልላዊ መንግሥት፣ ኢትዮጵያ',
       emergencyTitle: 'የአደጋ ጊዜ ስልኮች',
@@ -41,7 +41,7 @@ export function Footer({ locale, settings }: FooterProps) {
       officesTitle: 'ኢኮኖሚና የግል ድርጅቶች',
       workingHours: 'የስራ ሰዓት',
       hoursDetail: 'ከሰኞ – አርብ፡ ከጠዋቱ 2:30 – 11:30 (የምሳ እረፍት ከ 6:30 – 7:30)',
-      rights: 'መብቱ በህግ የተጠበቀ ነው። የአንጎሌላ ተራ ወረዳ ይፋዊ ፖርታል።',
+      rights: 'መብቱ በህግ የተጠበቀ ነው። የአንጎለላ ጠራ ወረዳ ይፋዊ ፖርታል።',
       portalNotice: 'በኢትዮጵያ የኤሌክትሮኒክስ መንግሥት (E-Government) መመዘኛዎች መሰረት የተዘጋጀ።',
     },
   }

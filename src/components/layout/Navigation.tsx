@@ -115,7 +115,7 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         children: [
           { title: 'የወረዳው አጠቃላይ መረጃ', href: `/${locale}/about`, description: 'ራዕይ፣ ተልዕኮ እና የስነ-ህዝብ መረጃ' },
           { title: 'አመራርና ካቢኔ', href: `/${locale}/about/leadership`, description: 'የስራ አስፈጻሚ አካላት ዝርዝር' },
-          { title: 'ታሪካዊ አመጣጥ', href: `/${locale}/about/history`, description: 'የአንጎሌላ ተራ ታሪክና ቅርስ' },
+          { title: 'ታሪካዊ አመጣጥ', href: `/${locale}/about/history`, description: 'የአንጎለላ ጠራ ታሪክና ቅርስ' },
           { title: 'መልክአ ምድርና የአየር ንብረት', href: `/${locale}/about/geography`, description: 'የመሬት አቀማመጥና ስነ-ምህዳር' },
           { title: 'የአይሲቲ (ICT) ቡድን', href: `/${locale}/about/ict`, description: 'የሲስተም፣ ኔትወርክ፣ ሳይበር ደህንነትና ፖርታል ባለሙያዎች' },
         ],

@@ -72,7 +72,7 @@ const SECTOR_PILLARS: SectorPillar[] = [
     desc_en:
       'Spectacular North Shewa escarpment views, temperate highland air, and close proximity to historical royal sites of King Sahle Selassie.',
     desc_am:
-      'አስደናቂ የተራራ እይታ፣ ንጹህ የደጋ አየር እና የንጉሥ ሣህለ ሥላሴ ታሪካዊ የአንጎሌላ ከተማ መገኛ ላይ ማረፊያ ሎጆችን መገንባት።',
+      'አስደናቂ የተራራ እይታ፣ ንጹህ የደጋ አየር እና የንጉሥ ሣህለ ሥላሴ ታሪካዊ የአንጎለላ ከተማ መገኛ ላይ ማረፊያ ሎጆችን መገንባት።',
     land_en: 'Scenic hilltop parcels overlooking Great Rift escarpments',
     land_am: 'ውብ የተራራማ መልክአ-ምድር ያላቸው የመዝናኛ ስፍራዎች',
     incentive_en: 'Priority municipal licensing + Eco-hospitality concessions',
@@ -104,9 +104,9 @@ export function InvestmentBanner({ locale }: InvestmentBannerProps) {
     },
     am: {
       badge: 'የኢኮኖሚ ኮሪደርና የኢንዱስትሪ ልማት',
-      title: 'በአንጎሌላ ተራ ኢንቨስት ያድርጉ፡ የደጋማው ቀጠና በር',
+      title: 'በአንጎለላ ጠራ ኢንቨስት ያድርጉ፡ የደጋማው ቀጠና በር',
       desc:
-        'ከአዲስ አበባ-ደብረ ብርሃን የኢኮኖሚ መስመር (A2) አጠገብ የምትገኘው አንጎሌላ ተራ ወረዳ፣ ለአግሮ-ፕሮሰሲንግ፣ ለወተትና ከብት እርባታ፣ ለፋብሪካዎችና ለቅዝቃዜ ማከማቻ ኢንዱስትሪዎች ተመራጭ መዳረሻ ናት።',
+        'ከአዲስ አበባ-ደብረ ብርሃን የኢኮኖሚ መስመር (A2) አጠገብ የምትገኘው አንጎለላ ጠራ ወረዳ፣ ለአግሮ-ፕሮሰሲንግ፣ ለወተትና ከብት እርባታ፣ ለፋብሪካዎችና ለቅዝቃዜ ማከማቻ ኢንዱስትሪዎች ተመራጭ መዳረሻ ናት።',
       cta: 'የኢንቨስትመንት መመሪያና የመሬት ባንክ',
       hotline: 'የኢንቨስትመንት ቀጥታ መስመር',
       selectPillar: 'የኢኮኖሚ ዘርፎችን በመምረጥ የመሬትና ማበረታቻ መረጃ ይመልከቱ፡',

@@ -68,7 +68,7 @@ export function ServicesSection({ locale, services }: ServicesSectionProps) {
     am: {
       tag: 'የህዝብ አገልግሎት አሰጣጥ',
       title: 'የዜጎችና የንግድ አገልግሎቶች',
-      desc: 'የአንጎሌላ ተራ ወረዳ የሚሰጣቸውን መሰረታዊ አገልግሎቶች፣ የሚፈለጉ ቅድመ ሁኔታዎችንና የቢሮዎችን መረጃ እዚህ ያግኙ።',
+      desc: 'የአንጎለላ ጠራ ወረዳ የሚሰጣቸውን መሰረታዊ አገልግሎቶች፣ የሚፈለጉ ቅድመ ሁኔታዎችንና የቢሮዎችን መረጃ እዚህ ያግኙ።',
       viewAll: 'ሁሉንም 18 አገልግሎቶች ይመልከቱ',
       services: [
         {

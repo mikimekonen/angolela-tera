@@ -132,7 +132,7 @@ export function LeadershipSlider({ locale, leaders: propLeaders }: LeadershipSli
     },
     am: {
       badge: 'ይፋዊ የወረዳው አስፈጻሚና የፓርቲ አመራር',
-      heading: 'የአንጎሌላ ተራ ወረዳ ከፍተኛ አመራሮች',
+      heading: 'የአንጎለላ ጠራ ወረዳ ከፍተኛ አመራሮች',
       subheading:
         'በወረዳው ውስጥ የህዝብ አገልግሎትን፣ ሰላምና ጸጥታን፣ የኢኮኖሚ እድገትን እና የዜጎችን ተጠቃሚነት በበላይነት የሚመሩ ከፍተኛ የመንግስት እና የፖለቲካ መሪዎች።',
       slideOf: 'አመራር',

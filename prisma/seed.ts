@@ -42,7 +42,7 @@ async function main() {
   // ------------------------------------------------------------------
   const settings = [
     { key: 'site_name_en',     value: 'Angolela Tera Woreda Administration',     label: 'Site Name (English)',      group: 'general' },
-    { key: 'site_name_am',     value: 'አንጎሌላ ተራ ወረዳ አስተዳደር',                    label: 'Site Name (Amharic)',       group: 'general' },
+    { key: 'site_name_am',     value: 'አንጎለላ ጠራ ወረዳ አስተዳደር',                    label: 'Site Name (Amharic)',       group: 'general' },
     { key: 'contact_phone',    value: '[OFFICIAL PHONE NUMBER]',                  label: 'Main Contact Phone',       group: 'contact' },
     { key: 'contact_email',    value: '[OFFICIAL EMAIL ADDRESS]',                 label: 'Main Contact Email',       group: 'contact' },
     { key: 'contact_fax',      value: '[FAX NUMBER]',                             label: 'Fax Number',               group: 'contact' },

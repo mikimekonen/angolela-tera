@@ -296,7 +296,7 @@ export default function AdminSlidersPage() {
                     type="text"
                     value={titleAm}
                     onChange={(e) => setTitleAm(e.target.value)}
-                    placeholder="እንኳን ወደ አንጎሌላ ተራ ወረዳ በደህና መጡ..."
+                    placeholder="እንኳን ወደ አንጎለላ ጠራ ወረዳ በደህና መጡ..."
                     className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
