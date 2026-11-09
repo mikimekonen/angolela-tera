@@ -30,10 +30,6 @@ export async function generateMetadata({
       title: 'የአንጎሌላ ተራ ወረዳ | ይፋዊ የመንግሥት ፖርታል',
       desc: 'የአንጎሌላ ተራ ወረዳ ይፋዊ ድረ-ገጽ፣ ሰሜን ሸዋ ዞን፣ አማራ ክልል፣ ኢትዮጵያ። የህዝብ አገልግሎቶች፣ ሴክተር መስሪያ ቤቶች፣ የልማትና ኢንቨስትመንት መረጃ።',
     },
-    om: {
-      title: 'Bulchiinsa Aanaa Angoolaalaa Xaraa | Fuula Weebsaayitii Mootummaa',
-      desc: 'Weebsaayitii Mootummaa Bulchiinsa Aanaa Angoolaalaa Xaraa, Godina Shawaa Kaabaa, Naannoo Amaaraa, Itoophiyaa. Tajaajiloota ummataa, waajjiroota sekteeraa, misooma fi carraawwan invastimantii.',
-    },
   }
 
   const meta = titles[locale as Locale] || titles.en
@@ -48,29 +44,11 @@ export async function generateMetadata({
       'Angolela Tera',
       'አንጎሌላ ተራ',
       'Chacha',
-      'ጫቻ',
       'North Shewa',
-      'Amhara Region',
-      'Ethiopia Woreda',
-      'Public Services',
-      'Investment Ethiopia',
+      'Amhara',
+      'Ethiopia',
+      'Woreda Administration',
     ],
-    metadataBase: new URL('http://localhost:3000'),
-    openGraph: {
-      title: meta.title,
-      description: meta.desc,
-      locale: locale,
-      type: 'website',
-      siteName: 'Angolela Tera Woreda',
-    },
-    icons: {
-      icon: [
-        { url: '/logo.png', sizes: 'any' },
-        { url: '/icon.png', type: 'image/png' },
-      ],
-      apple: '/logo.png',
-      shortcut: '/logo.png',
-    },
   }
 }
 
@@ -82,15 +60,11 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-
   if (!locales.includes(locale as Locale)) {
     notFound()
   }
 
-  // Enable static rendering
   setRequestLocale(locale)
-
-  // Fetch messages for next-intl
   const messages = await getMessages()
   const settings = getSiteSettings()
 

@@ -7,7 +7,6 @@ export interface GalleryImage {
   url: string
   caption_en?: string
   caption_am?: string
-  caption_om?: string
 }
 
 export interface NewsItem {
@@ -15,26 +14,19 @@ export interface NewsItem {
   slug: string
   title_en: string
   title_am?: string
-  title_om?: string
   category_en: string
   category_am?: string
-  category_om?: string
   date_en?: string
   date_am?: string
-  date_om?: string
   author_en?: string
   author_am?: string
-  author_om?: string
   summary_en?: string
   summary_am?: string
-  summary_om?: string
   content_en?: string[] | string
   content_am?: string[] | string
-  content_om?: string[] | string
   imageUrl?: string | null
   imageCaption_en?: string
   imageCaption_am?: string
-  imageCaption_om?: string
   videoUrl?: string | null
   videoType?: 'embed' | 'upload'
   gallery?: GalleryImage[]
@@ -48,12 +40,12 @@ export interface NewsItem {
 }
 
 const CATEGORY_OPTIONS = [
-  { en: 'Official Press Release', am: 'ይፋዊ መግለጫ', om: 'Ibsa Mootummaa' },
-  { en: 'Agriculture & Food Security', am: 'ግብርናና የምግብ ዋስትና', om: 'Qonna fi Wabii Nyaataa' },
-  { en: 'Economic Development & Investment', am: 'ኢኮኖሚ ልማትና ኢንቨስትመንት', om: 'Misooma Dinagdee fi Invastimantii' },
-  { en: 'Infrastructure & Public Works', am: 'መሠረተ ልማትና የህዝብ ግንባታ', om: 'Bu\'uuraalee Misoomaa' },
-  { en: 'Social Services & Health', am: 'ማህበራዊ አገልግሎትና ጤና', om: 'Tajaajila Hawaasaa fi Fayyaa' },
-  { en: 'Peace, Security & Justice', am: 'ሰላም፣ ጸጥታና ፍትህ', om: 'Nagaa, Nageenya fi Haqaa' },
+  { en: 'Official Press Release', am: 'ይፋዊ መግለጫ' },
+  { en: 'Agriculture & Food Security', am: 'ግብርናና የምግብ ዋስትና' },
+  { en: 'Economic Development & Investment', am: 'ኢኮኖሚ ልማትና ኢንቨስትመንት' },
+  { en: 'Infrastructure & Public Works', am: 'መሠረተ ልማትና የህዝብ ግንባታ' },
+  { en: 'Social Services & Health', am: 'ማህበራዊ አገልግሎትና ጤና' },
+  { en: 'Peace, Security & Justice', am: 'ሰላም፣ ጸጥታና ፍትህ' },
 ]
 
 export default function AdminNewsPage() {
@@ -66,7 +58,7 @@ export default function AdminNewsPage() {
 
   // Modal State & Tabs
   const [showModal, setShowModal] = useState(false)
-  const [modalTab, setModalTab] = useState<'content_en' | 'content_am' | 'content_om' | 'media' | 'workflow' | 'preview'>('content_en')
+  const [modalTab, setModalTab] = useState<'content_en' | 'content_am' | 'media' | 'workflow' | 'preview'>('content_en')
   const [editingItem, setEditingItem] = useState<NewsItem | null>(null)
   const [submitting, setSubmitting] = useState(false)
   const [deletingSlug, setDeletingSlug] = useState<string | null>(null)
@@ -75,25 +67,19 @@ export default function AdminNewsPage() {
   const [slug, setSlug] = useState('')
   const [titleEn, setTitleEn] = useState('')
   const [titleAm, setTitleAm] = useState('')
-  const [titleOm, setTitleOm] = useState('')
   const [categoryEn, setCategoryEn] = useState('Official Press Release')
   const [categoryAm, setCategoryAm] = useState('ይፋዊ መግለጫ')
-  const [categoryOm, setCategoryOm] = useState('Ibsa Mootummaa')
   const [summaryEn, setSummaryEn] = useState('')
   const [summaryAm, setSummaryAm] = useState('')
-  const [summaryOm, setSummaryOm] = useState('')
   const [contentEn, setContentEn] = useState('')
   const [contentAm, setContentAm] = useState('')
-  const [contentOm, setContentOm] = useState('')
   const [authorEn, setAuthorEn] = useState('Woreda Communication Directorate')
   const [authorAm, setAuthorAm] = useState('የወረዳው ኮሙኒኬሽን ዳይሬክቶሬት')
-  const [authorOm, setAuthorOm] = useState('Daayirektooreetii Kominikeeshinii Aanaa')
 
   // Form Fields - Media & Attachments
   const [imageUrl, setImageUrl] = useState('')
   const [imageCaptionEn, setImageCaptionEn] = useState('')
   const [imageCaptionAm, setImageCaptionAm] = useState('')
-  const [imageCaptionOm, setImageCaptionOm] = useState('')
   const [videoMode, setVideoMode] = useState<'none' | 'embed' | 'upload'>('none')
   const [videoUrl, setVideoUrl] = useState('')
   const [gallery, setGallery] = useState<GalleryImage[]>([])
@@ -144,23 +130,17 @@ export default function AdminNewsPage() {
     setSlug('')
     setTitleEn('')
     setTitleAm('')
-    setTitleOm('')
     setCategoryEn('Official Press Release')
     setCategoryAm('ይፋዊ መግለጫ')
-    setCategoryOm('Ibsa Mootummaa')
     setSummaryEn('')
     setSummaryAm('')
-    setSummaryOm('')
     setContentEn('')
     setContentAm('')
-    setContentOm('')
     setAuthorEn('Woreda Communication Directorate')
     setAuthorAm('የወረዳው ኮሙኒኬሽን ዳይሬክቶሬት')
-    setAuthorOm('Daayirektooreetii Kominikeeshinii Aanaa')
     setImageUrl('')
     setImageCaptionEn('')
     setImageCaptionAm('')
-    setImageCaptionOm('')
     setVideoMode('none')
     setVideoUrl('')
     setGallery([])
@@ -179,13 +159,10 @@ export default function AdminNewsPage() {
     setSlug(item.slug)
     setTitleEn(item.title_en || '')
     setTitleAm(item.title_am || '')
-    setTitleOm(item.title_om || '')
     setCategoryEn(item.category_en || 'Official Press Release')
     setCategoryAm(item.category_am || 'ይፋዊ መግለጫ')
-    setCategoryOm(item.category_om || 'Ibsa Mootummaa')
     setSummaryEn(item.summary_en || (item as any).excerpt_en || '')
     setSummaryAm(item.summary_am || (item as any).excerpt_am || '')
-    setSummaryOm(item.summary_om || (item as any).excerpt_om || '')
 
     if (Array.isArray(item.content_en)) {
       setContentEn(item.content_en.join('\n\n'))
@@ -199,20 +176,12 @@ export default function AdminNewsPage() {
       setContentAm(item.content_am || '')
     }
 
-    if (Array.isArray(item.content_om)) {
-      setContentOm(item.content_om.join('\n\n'))
-    } else {
-      setContentOm(item.content_om || '')
-    }
-
     setAuthorEn(item.author_en || 'Woreda Communication Directorate')
     setAuthorAm(item.author_am || 'የወረዳው ኮሙኒኬሽን ዳይሬክቶሬት')
-    setAuthorOm(item.author_om || 'Daayirektooreetii Kominikeeshinii Aanaa')
 
     setImageUrl(item.imageUrl || (item as any).coverImage || '')
     setImageCaptionEn(item.imageCaption_en || '')
     setImageCaptionAm(item.imageCaption_am || '')
-    setImageCaptionOm(item.imageCaption_om || '')
 
     if (item.videoUrl) {
       setVideoUrl(item.videoUrl)
@@ -249,7 +218,6 @@ export default function AdminNewsPage() {
     const match = CATEGORY_OPTIONS.find((c) => c.en === enVal)
     if (match) {
       setCategoryAm(match.am)
-      setCategoryOm(match.om)
     }
   }
 
@@ -315,23 +283,17 @@ export default function AdminNewsPage() {
       slug,
       title_en: titleEn,
       title_am: titleAm || titleEn,
-      title_om: titleOm || titleEn,
       category_en: categoryEn,
       category_am: categoryAm,
-      category_om: categoryOm,
       summary_en: summaryEn,
       summary_am: summaryAm || summaryEn,
-      summary_om: summaryOm || summaryEn,
       content_en: contentEn ? contentEn.split('\n\n').filter((p) => p.trim()) : [],
       content_am: contentAm ? contentAm.split('\n\n').filter((p) => p.trim()) : [],
-      content_om: contentOm ? contentOm.split('\n\n').filter((p) => p.trim()) : [],
       author_en: authorEn,
       author_am: authorAm,
-      author_om: authorOm,
       imageUrl: imageUrl || null,
       imageCaption_en: imageCaptionEn,
       imageCaption_am: imageCaptionAm,
-      imageCaption_om: imageCaptionOm,
       videoUrl: videoMode !== 'none' ? videoUrl : null,
       videoType: videoMode === 'upload' ? 'upload' : 'embed',
       gallery,
@@ -400,7 +362,6 @@ export default function AdminNewsPage() {
   // Translation completeness calculation
   const isEnDone = Boolean(titleEn && summaryEn)
   const isAmDone = Boolean(titleAm && summaryAm)
-  const isOmDone = Boolean(titleOm && summaryOm)
 
   const filteredNews = newsList.filter((n) => {
     const matchesSearch =
@@ -678,9 +639,6 @@ export default function AdminNewsPage() {
                     <span className={`px-2 py-0.2 rounded text-[10px] font-bold ${isAmDone ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
                       AM {isAmDone ? '✓' : 'Pending'}
                     </span>
-                    <span className={`px-2 py-0.2 rounded text-[10px] font-bold ${isOmDone ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-100 text-gray-500'}`}>
-                      OM {isOmDone ? '✓' : 'Optional'}
-                    </span>
                   </div>
                 </div>
               </div>
@@ -712,15 +670,6 @@ export default function AdminNewsPage() {
                 }`}
               >
                 🇪🇹 አማርኛ (Amharic)
-              </button>
-              <button
-                type="button"
-                onClick={() => setModalTab('content_om')}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                  modalTab === 'content_om' ? 'bg-[#1a4f8b] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-                }`}
-              >
-                🌳 Afaan Oromoo
               </button>
               <button
                 type="button"
@@ -874,65 +823,7 @@ export default function AdminNewsPage() {
                 </div>
               )}
 
-              {/* TAB 3: AFAAN OROMOO CONTENT */}
-              {modalTab === 'content_om' && (
-                <div className="space-y-4 animate-in fade-in duration-150">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 mb-1">
-                        Article Title (Afaan Oromoo)
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Fakkeenya: Manni Maree Aanaa Deeggarsa Qonnaa Haaraa Raggaasise"
-                        value={titleOm}
-                        onChange={(e) => setTitleOm(e.target.value)}
-                        className="w-full px-3.5 py-2.5 bg-gray-50/70 border border-gray-300 rounded-xl text-xs focus:bg-white focus:ring-2 focus:ring-[#1a4f8b]"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 mb-1">
-                        Author / Issuing Directorate (Afaan Oromoo)
-                      </label>
-                      <input
-                        type="text"
-                        value={authorOm}
-                        onChange={(e) => setAuthorOm(e.target.value)}
-                        className="w-full px-3.5 py-2.5 bg-gray-50/70 border border-gray-300 rounded-xl text-xs focus:bg-white focus:ring-2 focus:ring-[#1a4f8b]"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">
-                      Executive Summary (Afaan Oromoo)
-                    </label>
-                    <textarea
-                      rows={2}
-                      placeholder="Cuunfaa gabaabaa ibsa kanaa..."
-                      value={summaryOm}
-                      onChange={(e) => setSummaryOm(e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-gray-50/70 border border-gray-300 rounded-xl text-xs focus:bg-white focus:ring-2 focus:ring-[#1a4f8b]"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">
-                      Full Article Body Text (Afaan Oromoo)
-                    </label>
-                    <textarea
-                      rows={7}
-                      placeholder="Ibsa guutuu Afaan Oromootiin barreessaa..."
-                      value={contentOm}
-                      onChange={(e) => setContentOm(e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-gray-50/70 border border-gray-300 rounded-xl text-xs leading-relaxed focus:bg-white focus:ring-2 focus:ring-[#1a4f8b]"
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* TAB 4: MEDIA & BROADCAST */}
+              {/* TAB 3: MEDIA & BROADCAST */}
               {modalTab === 'media' && (
                 <div className="space-y-6 animate-in fade-in duration-150">
                   {/* 1. Cover Photo Section */}

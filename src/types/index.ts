@@ -103,7 +103,6 @@ export interface MediaAssetItem {
   fileSize: number
   altText_en?: string
   altText_am?: string
-  altText_om?: string
   caption?: string
   uploadedBy?: string
   createdAt: string

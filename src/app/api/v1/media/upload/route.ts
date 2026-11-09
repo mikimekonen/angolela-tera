@@ -112,7 +112,6 @@ export async function POST(req: NextRequest) {
     const title = (formData.get('title') as string) || file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ')
     const altText_en = (formData.get('altText_en') as string) || title
     const altText_am = (formData.get('altText_am') as string) || undefined
-    const altText_om = (formData.get('altText_om') as string) || undefined
     const caption = (formData.get('caption') as string) || undefined
 
     const asset = createMediaAsset(
@@ -126,7 +125,6 @@ export async function POST(req: NextRequest) {
         fileSize: buffer.byteLength,
         altText_en,
         altText_am,
-        altText_om,
         caption,
         uploadedBy: session.email,
       },
@@ -204,7 +202,7 @@ export async function PATCH(req: NextRequest) {
     }
 
     const body = await req.json()
-    const { id, title, category, altText_en, altText_am, altText_om, caption } = body
+    const { id, title, category, altText_en, altText_am, caption } = body
 
     if (!id) {
       return NextResponse.json({ error: 'Media asset ID is required' }, { status: 400 })
@@ -217,7 +215,6 @@ export async function PATCH(req: NextRequest) {
         category,
         altText_en,
         altText_am,
-        altText_om,
         caption,
       },
       session.name

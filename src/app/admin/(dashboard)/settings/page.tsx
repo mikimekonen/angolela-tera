@@ -540,7 +540,6 @@ export default function AdminSettingsPage() {
                   >
                     <option value="en">English (Default)</option>
                     <option value="am">አማርኛ (Amharic)</option>
-                    <option value="om">Afaan Oromoo</option>
                   </select>
                 </div>
                 <div>

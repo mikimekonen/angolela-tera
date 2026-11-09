@@ -116,27 +116,8 @@ export default async function ICTTeamPage({
       callBtn: 'ይደውሉ',
       emailBtn: 'ኢሜይል ይላኩ',
     },
-    om: {
-      breadcrumbHome: 'Fuula Duraa',
-      breadcrumbAbout: 'Waa\'ee Aanaa',
-      breadcrumbCurrent: 'Garee ICT fi Dijitaalaa',
-      badge: 'Teeknoolojii Qunnamtii Odeeffannoo (ICT) • E-Mootummaa',
-      title: 'Garee ICT fi Ce\'umsa Dijitaalaa',
-      subtitle:
-        'Ogeessota teeknikaa bulchiinsa sirnaa, eegumsa saayibarii, bu\'uuraalee neetworkii fi misooma weebsaayitii Bulchiinsa Aanaa Angoolaalaa Xaraatiif itti gaafatamoo ta\'an.',
-      mandateTitle: 'Itti-Gaafatamummaa fi Ergama Teeknoolojii Ijoo',
-      rosterTitle: 'Miseensota Garee ICT fi Ogeessota Teeknikaa',
-      rosterSubtitle:
-        'Odeeffannoo quunnamtii ogeessota teeknoolojii aanaa. Gargaarsa teeknikaa, sirnaa fi neetworkiif ogeessota armaan gadii quunnamuu dandeessu.',
-      skillsLabel: 'Ogummaa fi Dandeettii Addaa',
-      helpdeskTitle: 'Waajjira Deeggarsa ICT fi Helpdesk Aanaa',
-      locationLabel: 'Teessoo: Mooraa Bulchiinsaa Guddaa, Magaalaa Chaccisaa',
-      hoursLabel: 'Sa\'aatii Hojii: Wiixata – Jimaata: Sa\'aatii 2:30 – 11:30',
-      callBtn: 'Bilbilaa',
-      emailBtn: 'Iimeeyilii Ergaa',
-    },
   }
-  const t = (tDict as any)[locale] || tDict.en
+  const t = tDict[locale as 'en' | 'am'] || tDict.en
 
   const teamMembers = [
     {
@@ -291,7 +272,7 @@ export default async function ICTTeamPage({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {t.mandates.map((m: any, idx: number) => (
+            {(t.mandates || []).map((m: any, idx: number) => (
               <div
                 key={idx}
                 className="bg-gray-50/70 hover:bg-blue-50/20 border border-gray-200 rounded-2xl p-5 transition-all duration-200 flex flex-col justify-between"
