@@ -82,35 +82,8 @@ export function LeadershipDirectory({ leaders, locale }: LeadershipDirectoryProp
       maleHon: 'አቶ',
       femaleHon: 'ወ/ሮ',
     },
-    om: {
-      searchPlaceholder: 'Hoggantoota maqaa, sekteera yookiin waajjiraan barbaadaa...',
-      allCategories: 'Portofoliyoo Hunda',
-      allCount: 'Galmee Guutuu',
-      categories: {
-        ALL: 'Sekteerota Hunda (20)',
-        EXECUTIVE: 'Hoggansa Ol\'aanaa fi Bulchiinsa',
-        AGRICULTURE: 'Qonnaa, Lafaa fi Beeylada',
-        ECONOMY: 'Diinagdee, Daldala fi Invastimantii',
-        INFRASTRUCTURE: 'Bu\'uuraalee Misoomaa fi Bishaan',
-        SOCIAL: 'Fayyaa, Barnoota fi Aadaa',
-        JUSTICE: 'Nageenya, Tasgabbii fi Haqaa',
-        PARTY: 'Waajjira Paartii Biyyooleessaa',
-      },
-      cabinetOnly: 'Hoggantoota Kabineettii Aanaa',
-      verifiedGov: 'Miseensa Kabineettii Mootummaa',
-      verifiedParty: 'Miseensa Sekireetaariyaatii Paartii',
-      officeDesk: 'Waajjira Hogganan',
-      mandatesTitle: 'Hojiiwwan fi Itti Gaafatamummaa Ijoo',
-      noResults: 'Hoggantoonni barbaaddan hin argamne.',
-      resetFilter: 'Filtarii Haqaa',
-      totalCount: 'Hoggantoota Kabineettii fi Sekireetaariyaatii Aanaa',
-      featuredExecutive: 'Hoggansa Kabineettii Ol\'aanaa',
-      allRosterTitle: 'Galmee Guutuu Kabineettii Sekteeraa',
-      maleHon: 'Obbo',
-      femaleHon: 'Aaddee',
-    },
   }
-  const t = (tDict as any)[locale] || tDict.en
+  const t = tDict[locale] || tDict.en
 
   // Map category filters
   const categoryFilters = [

@@ -178,15 +178,6 @@ export default function AdminSettingsPage() {
                     className="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#1a4f8b]"
                   />
                 </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Institution Name (Afaan Oromoo)</label>
-                  <input
-                    type="text"
-                    value={settings.government_name_om || ''}
-                    onChange={(e) => handleChange('government_name_om', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#1a4f8b]"
-                  />
-                </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

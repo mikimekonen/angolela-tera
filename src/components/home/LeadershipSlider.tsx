@@ -145,25 +145,9 @@ export function LeadershipSlider({ locale, leaders: propLeaders }: LeadershipSli
       viewOriginalLang: 'ወደ አማርኛ መልስ',
       allDirectory: 'ሁሉንም የካቢኔ ቢሮዎች ይመልከቱ →',
       kebeleCount: '19 የገጠርና ከተማ ቀበሌዎችን የሚያስተባብር'
-    },
-    om: {
-      badge: 'Kabinetti fi Barreessaa Paartii Mootummaa',
-      heading: 'Hoggansa Ol\'aanaa Aanaa Angoolaalaa Xaraa',
-      subheading:
-        'Hoggantoota ol\'aanoo guddina naannoo, nageenya, tajaajila uummataa fi dandeettii lammiilee aanaa keenyaa mirkaneessan.',
-      slideOf: 'Hooggana',
-      portfoliosTitle: 'Itti Gaafatamummaa fi Hojiiwwan Ijoo',
-      contactTitle: 'Odeeffannoo Teessoo Qajeelaa',
-      verifiedSource: 'Odeeffannoo Mootummaa Mirkanaa\'e',
-      pause: 'Dhaabi',
-      play: 'Taphachiisi',
-      viewOtherLang: 'Gara Afaan Oromootti',
-      viewOriginalLang: 'Gara Afaan Ingiliziitti',
-      allDirectory: 'Galmee Guutuu Hoggantootaa Ilaalaa →',
-      kebeleCount: 'Gandoolee Baadiyyaa fi Magaalaa 19 kan hoogganu'
     }
   }
-  const labels = (labelsDict as any)[locale] || labelsDict.en
+  const labels = labelsDict[locale] || labelsDict.en
 
   // Localized getters
   const getName = (l?: LeaderData) => {

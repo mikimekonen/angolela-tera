@@ -46,17 +46,6 @@ export default async function CompaniesDirectoryPage({
         'የወረዳው ኢንቨስትመንት ዴስክ በጫቻ አግሮ-ኢንዱስትሪ ኮሪደር ፈጣን የመሬት አቅርቦትና የ70 ዓመት የሊዝ ዋስትና ያቀርባል።',
       investorBtn: 'የኢንቨስትመንት አማራጮችን ይመልከቱ →',
     },
-    om: {
-      badge: 'Galmee Dinagdee fi Industirii',
-      title: 'Warshaalee fi Dhaabbilee Daldalaa Dhuunfaa',
-      subtitle:
-        'Galmee seera qabeessa warshaalee dhugaatii, qonna ammayyaa, warshaalee aannanii fi dhaabbilee ijaarsaa Aanaa Angoolaalaa Xaraa keessatti hojjetan.',
-      totalCount: 'Warshaalee fi Dhaabbilee Galmaa\'an',
-      investorCardTitle: 'Angoolaalaa Xaraa keessatti invast gochuu barbaadduu?',
-      investorCardDesc:
-        'Kutaan Invastimantii Aanaa lafa bu\'uuraalee misoomaa qabu, wabiin liizii waggaa 70 fi tajaajila addaa dhiyeessa.',
-      investorBtn: 'Carraawwan Invastimantii Ilaalaa →',
-    },
   }
   const t = (tDict as any)[locale] || tDict.en
 

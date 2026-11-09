@@ -41,17 +41,6 @@ export default async function ServicesPage({
       needHelp: 'ቅሬታ ወይም ተጨማሪ ጥያቄ አለዎት?',
       contactHelp: 'የወረዳውን የቅሬታ ሰሚ ያነጋግሩ',
     },
-    om: {
-      tag: 'Kenniinsa Tajaajila Ummataa',
-      title: 'Galmee Tajaajiloota Ummataa fi Daldalaa',
-      subtitle: 'Qajeelfamoota, ulaagaalee, yeroo fudhatu fi kaffaltii seeraa tajaajiloota Aanaa Angoolaalaa Xaraa keessatti kennaman.',
-      timeLabel: 'Yeroo Hojii Fudhatu',
-      costLabel: 'Kaffaltii Seeraa',
-      officeLabel: 'Waajjira Tajaajila Kennu',
-      viewGuide: 'Qajeelfama fi Ulaagaalee Hunda Ilaalaa',
-      needHelp: 'Gaaffii yookiin komii tajaajilaa qabduu?',
-      contactHelp: 'Kutaa Dhagaha Komii Ummataa Daawwadhaa',
-    },
   }
   const content = contentDict[locale as Locale] || contentDict.en
 

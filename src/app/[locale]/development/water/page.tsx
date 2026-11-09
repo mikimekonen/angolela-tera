@@ -136,62 +136,6 @@ export default async function WaterAndIrrigationPage({
       phone: '+251 (0) 58 661 0204',
       email: 'water@angolela-tera.gov.et',
     },
-    om: {
-      breadcrumbHome: 'Fuula Duraa',
-      breadcrumbDev: 'Misooma',
-      breadcrumbCurrent: 'Bishaan fi Qulqullina',
-      badge: 'Bishaan Qulqulluu • Qulqullina Naannoo (WASH)',
-      title: 'Dhiyeessii Bishaan Dhugaatii Qulqulluu fi Eegumsa Tulluuwwanii',
-      subtitle:
-        'Hordoffii pirojektoota bishaan dhugaatii qulqulluu, boolla bishaanii fi eegumsa burqituuwwan uumamaa Aanaa Angoolaalaa Xaraa keessatti gaggeeffaman.',
-      metrics: [
-        { value: '82.4%', label: 'Qaqqabamummaa Bishaan Qulqulluu' },
-        { value: '148,000+', label: 'Ummata Tajaajilamaa Jiru' },
-        { value: '184', label: 'Madda Bishaan Qulqulluu Hojjetame' },
-        { value: '29', label: 'Boolla Bishaan Gadi-Fagoo' },
-        { value: '14 Magaalota', label: 'Sirna Bishaan Boombii Chaccisaa' },
-        { value: '98.6%', label: 'Qulqullina Laabiraatoriin Mirkanaa\'e' },
-      ],
-      schemesTitle: 'Pirojektoota Bishaan Dhugaatii fi Qulqullinaa Ijoo',
-      schemesDesc:
-        'Mootummaan naannoo fi gargaartonni misoomaa walta\'uun pirojektoota bishaanii gandoolee baadiyyaa fi magaalotaaf hojjetan.',
-      schemes: [
-        {
-          name: 'Sirna Bishaan Boombii Magaalaa Chaccisaa',
-          type: 'Boolla Gadi-fagoo & Sirna Boombii',
-          location: 'Ganda Magaalaa Chaccisaa 01 & 02',
-          capacity: 'Guyyaatti liitira 1,200,000',
-          beneficiaries: 'Jiraattota 28,000 fi Warshaalee',
-          status: 'Tajaajila Guutuu',
-        },
-        {
-          name: 'Sirna Bishaan Burqituu Kotobaa – Qawaat',
-          type: 'Burqituu Qulqulluu & Boombii',
-          location: 'Ganda Kotobaa',
-          capacity: 'Guyyaatti liitira 350,000',
-          beneficiaries: 'Jiraattota 9,400',
-          status: 'Tajaajila Guutuu',
-        },
-        {
-          name: 'Sirna Bishaan Baadiyyaa Eejersa – Dambal',
-          type: 'Boolla Humna Aduun Hojjetu',
-          location: 'Ganda Eejersa',
-          capacity: 'Guyyaatti liitira 220,000',
-          beneficiaries: 'Jiraattota 6,800',
-          status: 'Tajaajila Guutuu',
-        },
-      ],
-      watershedTitle: 'Eegumsa Madda Bishaanii fi Kunuunsa Biyyee',
-      watershedDesc:
-        'Kuusaa bishaanii fi hidhawwan akka hin guunneef hojiiwwan daka lafaa fi misooma tulluuwwanii gaggeeffaman.',
-      ctaHelpdesk: 'Waajjira Tajaajila Bishaanii',
-      ctaReportLeak: 'Dhangala\'iinsa yookiin Cufamuu Bishaanii Gabaasaa',
-      ctaApply: 'Sarara Bishaan Haaraa Galchuuf Iyyadhaa',
-      officeDesk: 'Waajjira Bishaan fi Inarjii Aanaa Angoolaalaa Xaraa',
-      location: 'Mooraa Bulchiinsaa Guddaa, Magaalaa Chaccisaa',
-      phone: '+251 (0) 58 661 0204',
-      email: 'water@angolela-tera.gov.et',
-    },
   }
   const content = (contentDict as any)[locale] || contentDict.en
 

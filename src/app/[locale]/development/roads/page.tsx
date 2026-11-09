@@ -138,58 +138,6 @@ export default async function RuralRoadsPage({
       ctaReportRoad: 'የመንገድ ብልሽት ወይም የቦይ መደፈንን ያሳውቁ',
       ctaOverview: 'ሁሉንም የልማት ፕሮጀክቶች ይመልከቱ',
     },
-    om: {
-      breadcrumbHome: 'Fuula Duraa',
-      breadcrumbDev: 'Misooma',
-      breadcrumbCurrent: 'Daandii Baadiyyaa',
-      badge: 'URRAP • Sagantaa Wal-qunnamsiisa Daandii Baadiyyaa',
-      title: 'Wal-qunnamtii Daandii Baadiyyaa fi Bu\'uuraalee Geejjibaa',
-      subtitle:
-        'Hundeeffama neetwoorkii daandii qilleensa hunda dandamatu, riqichoota fi calalluuwwan gandoolee Aanaa Angoolaalaa Xaraa gabaa fi hospitaalotaan wal qabsiisu.',
-      metrics: [
-        { value: '210+ km', label: 'Neetwoorkii Daandii Cirrachaa' },
-        { value: 'Gandoolee 19', label: 'Qaqqabamummaa Gandoolee 100%' },
-        { value: 'Riqichoota 28', label: 'Riqichoota fi Qaxxaamura Simmintoo' },
-        { value: 'Daqiiqaa 35', label: 'Yeroo Giddu-galeessaa Chaccisaa Ga\'uuf' },
-        { value: '45,000+ MT', label: 'Oomisha Midhaanii Waggaan Geejjibamu' },
-        { value: '100% Asfaaltii', label: 'Daandii Guddaa A2 Finfinnee-Dasee' },
-      ],
-      corridorsTitle: 'Koriidaroota Daandii Baadiyyaa Ijoo',
-      corridorsDesc:
-        'Daandiiwwan cirrachaa fi konkolaataa gandoolee qonnaan bultootaa giddugala gabaa Chaccisaa waliin wal qunnamsiisan.',
-      corridors: [
-        {
-          name: 'Chaccisaa – Angoolaalaa Magaalaa Durii – Dambal',
-          length: '32 km',
-          status: 'Tajaajila Guutuu',
-          impact: 'Gandoolee 4 fi bakka seenaa mootummaa Shawaa wal qunnamsiisa.',
-          built: 'Bara 2021',
-        },
-        {
-          name: 'Chaccisaa – Kotobaa – Qawaat',
-          length: '24 km',
-          status: 'Tajaajila Guutuu',
-          impact: 'Oomisha aannanii fi garbuu gara daandii guddaatti geessuuf.',
-          built: 'Bara 2022',
-        },
-        {
-          name: 'Chaccisaa – Sholaa Gabayaa – Eejersa',
-          length: '28 km',
-          status: 'Fooyya\'iinsa Irra Jira',
-          impact: 'Giddugala gabaa fi buufata fayyaa baadiyyaa wal qunnamsiisa.',
-          built: 'Bara 2023',
-        },
-      ],
-      communityTitle: 'Hirmaannaa Hawaasaa fi Suphaa Daandii',
-      communityDesc:
-        'Koreewwan daandii gandaan ijaaraman waajjira daandii aanaa waliin suphaa gannaa fi qulqullina booyii raawwatu.',
-      officeDesk: 'Waajjira Daandii fi Geejjibaa Aanaa',
-      location: 'Mooraa Bulchiinsaa Guddaa, Magaalaa Chaccisaa',
-      phone: '+251 (0) 58 661 0206',
-      email: 'transport@angolela-tera.gov.et',
-      ctaReportRoad: 'Miidhama Daandii yookiin Booyii Cufame Gabaasaa',
-      ctaOverview: 'Pirojektoota Misoomaa Hunda Ilaalaa',
-    },
   }
   const content = (contentDict as any)[locale] || contentDict.en
 

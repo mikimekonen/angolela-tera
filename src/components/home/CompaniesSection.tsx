@@ -33,12 +33,8 @@ export function CompaniesSection({ locale }: CompaniesSectionProps) {
       investorNotice: 'ባለሀብት ነዎት? ለኢንቨስትመንት የተዘጋጁ የሊዝ መሬቶችና ማበረታቻዎችን ይመልከቱ።',
       investBtn: 'የኢንቨስትመንት መመሪያ →',
     },
-    om: {
-      investorNotice: 'Abbaa qabeenyaa dhaa? Lafa indastirii fi jajjabeessitoota qophaa\'an ilaalaa.',
-      investBtn: 'Qajeelfama Invastimantii →',
-    },
   }
-  const t = (tDict as any)[locale] || tDict.en
+  const t = tDict[locale] || tDict.en
 
   return (
     <section className="py-16 bg-gradient-to-b from-white via-gray-50/50 to-gray-50/80 border-t border-gray-100">

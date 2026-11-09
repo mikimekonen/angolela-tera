@@ -4,78 +4,57 @@ export interface OfficeDetail {
   slug: string
   name_en: string
   name_am: string
-  name_om?: string
   head_en: string
   head_am: string
-  head_om?: string
   headTitle_en: string
   headTitle_am: string
-  headTitle_om?: string
   phone: string
   email: string
   location_en: string
   location_am: string
-  location_om?: string
   about_en: string
   about_am: string
-  about_om?: string
   responsibilities_en: string[]
   responsibilities_am: string[]
-  responsibilities_om?: string[]
   servicesProvided_en: string[]
   servicesProvided_am: string[]
-  servicesProvided_om?: string[]
 }
 
 export interface ServiceDetail {
   slug: string
   title_en: string
   title_am: string
-  title_om?: string
   category_en: string
   category_am: string
-  category_om?: string
   officeSlug: string
   officeName_en: string
   officeName_am: string
-  officeName_om?: string
   processingTime_en: string
   processingTime_am: string
-  processingTime_om?: string
   cost_en: string
   cost_am: string
-  cost_om?: string
   description_en: string
   description_am: string
-  description_om?: string
   requirements_en: string[]
   requirements_am: string[]
-  requirements_om?: string[]
   steps_en: string[]
   steps_am: string[]
-  steps_om?: string[]
 }
 
 export interface NewsArticle {
   slug: string
   title_en: string
   title_am: string
-  title_om?: string
   category_en: string
   category_am: string
-  category_om?: string
   date_en: string
   date_am: string
-  date_om?: string
   author_en: string
   author_am: string
-  author_om?: string
   summary_en: string
   summary_am: string
-  summary_om?: string
   content_en: string[]
   content_am: string[]
-  content_om?: string[]
   isFeatured?: boolean
 }
 

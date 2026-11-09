@@ -76,30 +76,6 @@ export default async function HistoryPage({
       ],
       backToAbout: 'ወደ ወረዳው አጠቃላይ መረጃ ተመለስ',
     },
-    om: {
-      tag: 'Dhaala Mootummaa fi Seenaa Shawaa',
-      title: 'Seenaa fi Hundeeffama Angoolaalaa Xaraa',
-      subtitle: 'Giddugala bulchiinsa mootummaa Shawaa jaarraa 19ffaa irraa gara giddugala qonna ammayyaatti.',
-      timelineTitle: 'Bara Seenaa Ijoo',
-      timeline: [
-        {
-          era: 'Bara 1813 – 1847',
-          heading: 'Bara Mooticha Saahila Sillaasee',
-          text: 'Angoolaalaan magaalaa mootummaa fi buufata waraanaa taatee tajaajilaa turte.',
-        },
-        {
-          era: 'Dhuma Jaarraa 19ffaa',
-          heading: 'Manni Mootummaa gara Ankoobar fi Finfinneetti Ce\'uu',
-          text: 'Manni mootummaa gara Finfinneetti yoo ce\'ellee, Angoolaalaan kuusaa midhaanii taatee itti fufte.',
-        },
-        {
-          era: 'Bara Ammayyaa',
-          heading: 'Hundeeffama Aanaa Angoolaalaa Xaraa',
-          text: 'Angoolaalaa fi Xaraan tokkummaan aanaa tokko ta\'anii Chaccisa magaalaa guddittii godhachuun tajaajila eegalan.',
-        },
-      ],
-      backToAbout: 'Gara Waa\'ee Aanaatti Deebi\'aa',
-    },
   }
   const content = (contentDict as any)[locale] || contentDict.en
 

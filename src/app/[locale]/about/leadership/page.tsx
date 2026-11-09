@@ -67,21 +67,6 @@ export default async function LeadershipPage({
       ictBtn: '💻 የአይሲቲ (ICT) ቡድን',
       contactBtn: 'የህዝብ ቅሬታና ግንኙነት መስኮት →',
     },
-    om: {
-      tag: 'Bulchiinsa Hoji-Raawwachiiftuu fi Kaabinee Aanaa',
-      title: 'Galmee Hoggantoota fi Miseensota Kaabinee Aanaa',
-      subtitle:
-        'Hoggantoota olaanoo fi hoogganoota waajjiroota sekteeraa 20 kanneen tajaajila ummataa, nagaa fi tasgabbii, misooma bu\'uuraalee fi karoora dinagdee Aanaa Angoolaalaa Xaraa hoogganan.',
-      badgeCount: 'Sekteerota Kaabinee 20',
-      breadHome: 'Fuula Duraa',
-      breadAbout: 'Waa\'ee Aanaa',
-      breadCurrent: 'Hoggansa fi Kaabinee',
-      petitionTitle: 'Hoggantoota olaanoo fi hoogganoota sekteeraa waliin wal arguuf?',
-      petitionSubtitle:
-        'Gaaffii beellamaa, komii yookiin xalayaa bulchiinsaa Magaalaa Chaccisaatti waajjira sekireetaariyaatii aanichaatti dhiyeessuu dandeessu.',
-      ictBtn: '💻 Garee ICT & Dijitaalaa',
-      contactBtn: 'Foddaa Komii fi Quunnamtii Ummataa →',
-    },
   }
   const content = (contentDict as any)[locale] || contentDict.en
 

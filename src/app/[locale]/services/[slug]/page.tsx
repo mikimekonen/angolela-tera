@@ -98,23 +98,6 @@ export default async function ServiceDetailPage({
       appealDesc: 'ያልተገባ መዘግየት ወይም የአገልግሎት አሰጣጥ ችግር ካጋጠመዎት ለወረዳው የቅሬታ ሰሚ ያመልክቱ።',
       fileGrievance: 'አቤቱታ ያቅርቡ',
     },
-    om: {
-      breadcrumbHome: 'Fuula Duraa',
-      breadcrumbServices: 'Tajaajiloota',
-      requirementsTitle: 'Ulaagaalee fi Sanadoota Barbaachisan',
-      stepsTitle: 'Qajeelfama Adeemsa Tajaajilaa (Tartiibaan)',
-      summaryTitle: 'Cuunfaa Tajaajilaa',
-      timeLabel: 'Yeroo Hojii Fudhatu',
-      costLabel: 'Kaffaltii Seeraa',
-      officeLabel: 'Waajjira / Foddaa Tajaajila Kennu',
-      locationLabel: 'Teessoo Waajjiraa',
-      locationDefault: 'Mooraa Bulchiinsaa Magaalaa Chaccisaa, Godina Shawaa Kaabaa',
-      downloadForm: 'Uunkaa Iyyannoo Buufadhaa (PDF)',
-      viewBureau: 'Odeeffannoo Waajjiraa Guutuu Ilaalaa',
-      appealTitle: 'Komii yookiin Ol-iyyannoo Qabduu?',
-      appealDesc: 'Turtii sirrii hin taane yookiin rakkoon tajaajilaa yoo isin mudate kutaa komii dhagahuuf iyyadhaa.',
-      fileGrievance: 'Komii Dhiyeessaa',
-    },
   }
   const content = (contentDict as any)[locale] || contentDict.en
 

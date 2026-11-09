@@ -190,30 +190,8 @@ export function CitizenActionFinder({ locale }: CitizenActionFinderProps) {
         'የተፈለገው አገልግሎት አልተገኘም። በስልክ +251 58 661 0201 ይደውሉ ወይም ሁሉንም አገልግሎቶች ይመልከቱ።',
       viewAll: 'ሁሉንም 18ቱን የህዝብ አገልግሎቶች ይመልከቱ →',
     },
-    om: {
-      heading: 'Aanaan har\'a akkamitti isin tajaajiluu danda\'a?',
-      subheading:
-        'Ulaagaalee qoradhaa, adeemsa tajaajilaa barbaadaa, yookiin tajaajila mootummaa mirkanaa\'e argadhaa.',
-      placeholder:
-        'Waan barbaaddan barreessaa (fkn: waraqaa ragaa lafaa, galmee dhalootaa, gibira daldalaa, sanyii, invastimantii)...',
-      all: 'Tajaajiloota Hunda',
-      citizen: 'Lammiilee',
-      farmers: 'Qonnaan Bultoota',
-      business: 'Daldala fi Invastimantii',
-      grievance: 'Komii fi Seera',
-      startBtn: 'Adeemsa Jalqabaa',
-      previewBtn: 'Ulaagaalee Ilaalaa',
-      closePreview: 'Cufaa',
-      time: 'Yeroo Fudhatu',
-      cost: 'Kaffaltii Seeraa',
-      docs: 'Sanadoota Barbaachisan',
-      desk: 'Waajjira Itti Gaafatamu',
-      noMatch:
-        'Tajaajilli barbaaddan hin argamne. Lakk. bilbilaa +251 58 661 0201 irratti Waajjira Deeggarsaa quunnamaa yookiin galmee tajaajilaa hunda ilaalaa.',
-      viewAll: 'Galmee Tajaajila Ummataa Guutuu (Tajaajiloota 18) Ilaalaa →',
-    },
   }
-  const t = (tDict as any)[locale] || tDict.en
+  const t = tDict[locale] || tDict.en
 
   const filtered = POPULAR_ACTIONS.filter((act) => {
     const matchesCat =

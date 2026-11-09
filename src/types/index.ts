@@ -225,18 +225,15 @@ export interface NewsListItem {
   slug: string
   title_en: string
   title_am?: string
-  title_om?: string
   excerpt_en?: string
   excerpt_am?: string
-  excerpt_om?: string
   coverImage?: MediaItem
   imageUrl?: string | null
   imageCaption_en?: string
   imageCaption_am?: string
-  imageCaption_om?: string
   videoUrl?: string | null
   videoType?: string
-  gallery?: Array<{ url: string; caption_en?: string; caption_am?: string; caption_om?: string }>
+  gallery?: Array<{ url: string; caption_en?: string; caption_am?: string }>
   documentUrl?: string | null
   documentTitle?: string
   referenceNumber?: string

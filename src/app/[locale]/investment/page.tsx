@@ -101,46 +101,6 @@ export default async function InvestmentPage({
       ctaDesk: 'የኢንቨስትመንት ዴስኩን ያነጋግሩ',
       ctaServices: 'የንግድ ፈቃድ ያመልክቱ',
     },
-    om: {
-      tag: 'Misooma Dinagdee fi Koriidarii Industirii',
-      title: 'Angoolaalaa Xaraa Keessatti Invast Godhaa: Karra Tulluuwwanii',
-      subtitle: 'Dhiyeenya Finfinnee fi Dabrabirhaan, qabeenya qonnaa bal\'aa fi gargaarsa invastimantii mootummaa naannootti fayyadamaa.',
-      sectorsTitle: 'Carraawwan Invastimantii Dursi Kennamuuf',
-      sectors: [
-        {
-          title: 'Warshaa Aannanii fi Bu\'aalee Aannanii',
-          desc: 'Aanaan Angoolaalaa Xaraa aannan guyyaatti liitira 85,000 ol oomisha. Warshaalee ammayyaatiif carraa bal\'aadha.',
-          icon: '🥛',
-        },
-        {
-          title: 'Oomisha fi Qophii Garbuu Biiraa',
-          desc: 'Garbuu qulqullina olaanaa qabu warshaalee biiraatiif dhiyeessuun invastarootaaf carraa guddaadha.',
-          icon: '🌾',
-        },
-        {
-          title: 'Kuusaa Qabbanaawaa fi Sanyii Dinnichaa',
-          desc: 'Qilleensi qabbanaawaan kuusaa kuduraalee fi muduraalee ijaaruuf baay\'ee mijataadha.',
-          icon: '🥔',
-        },
-        {
-          title: 'Horii Horsiisuu fi Hojii Foonii Al-ergaa',
-          desc: 'Buufata Xiyyaaraa Boolee irraa km 110 qofa fagaatee argamuun foon gara gabaa biyya alaatti erguuf gargaara.',
-          icon: '🥩',
-        },
-      ],
-      landTitle: 'Koriidarii Industirii Chaccisaa fi Baankii Lafaa',
-      landDesc: 'Daandii guddaa Finfinnee-Dasee irratti lafti heektaara 120 industiriif qophaa\'eera. Ibsaa, tajaajilli faayiberaa fi bishaan qulqulluun guutameera.',
-      incentivesTitle: 'Gargaarsa fi Jajjabeessituuwwan Invastimantiif Kennaman',
-      incentives: [
-        'Warshaalee fi qonna ammayyaatiif gibira irraa bilisa ta\'uu hanga waggaa 5',
-        'Meeshaalee kaappitaalaa fi maashinoota 100% qaraxa malee galchuu',
-        'Waliigaltee liizii industirii waggaa 70 gatii madaalawaan',
-        'Magaalaa Chaccisaa keessatti tajaajila foddaa tokkoon sa\'aatii 48 keessatti heyyama xumuruu',
-        'Waldaalee qonnaan bultootaa irraa dhiyeessii meeshaa dheedhii mirkaneessuu',
-      ],
-      ctaDesk: 'Kutaa Invastimantii Quunnamaa',
-      ctaServices: 'Heyyama Daldalaa Gaafadhaa',
-    },
   }
   const content = (contentDict as any)[locale] || contentDict.en
 

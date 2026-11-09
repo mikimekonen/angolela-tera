@@ -86,20 +86,6 @@ export default async function NewsDetailPage({
       docSubLabel: 'የተረጋገጠ ይፋዊ የፒዲኤፍ ሰነድ',
       downloadBtn: 'ሰነዱን አውርድ',
     },
-    om: {
-      breadcrumbHome: 'Fuula Duraa',
-      breadcrumbNews: 'Oduu fi Beeksisoota',
-      authorPrefix: 'Waajjira Baase',
-      relatedTitle: 'Beeksisoota Mootummaa Dhihoo',
-      backToNews: 'Gara Oduu Hundaatti Deebi\'aa',
-      shareLabel: 'Ibsa Qoodaa',
-      officialVerification: 'Galmee Mootummaa Mirkanaa\'aa',
-      videoLabel: 'Ibsa Viidiyoo Mootummaa',
-      galleryLabel: 'Suuraalee Daawwannaafi Sagantaa',
-      docDownloadLabel: 'Ibsa Mallatteeffame Buufadhaa',
-      docSubLabel: 'Waraqaa Ragaa PDF Mirkanaa\'aa',
-      downloadBtn: 'Waraqaa Buufadhaa',
-    },
   }
   const content = (contentDict as any)[locale] || contentDict.en
 

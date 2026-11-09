@@ -36,12 +36,6 @@ export default async function ResourcesPage({
       subtitle: 'የህዝብ አገልግሎት ማመልከቻ ቅጾች፣ የወረዳ ምክር ቤት አዋጆች፣ ዓመታዊ የፋይናንስ ኦዲት ሪፖርቶችና ለነዋሪዎችና ለንግድ ማህበረሰቡ የተዘጋጁ ይፋዊ ሰነዶች።',
       downloadBtn: 'ሰነዱን ያውርዱ',
     },
-    om: {
-      tag: 'Sanadoota Ummataa fi Kuusaa Seeraa',
-      title: 'Qabeenyaalee, Uunkaalee fi Qajeelfamoota Seeraa',
-      subtitle: 'Kuusaa uunkaalee iyyannoo, labsiiwwan marii aanaa, gabaasota odiitii fi qajeelfamoota hojii jiraattota fi daldaltootaaf qophaa\'an.',
-      downloadBtn: 'Sanada Buufadhaa',
-    },
   }
   const content = (contentDict as any)[locale] || contentDict.en
 

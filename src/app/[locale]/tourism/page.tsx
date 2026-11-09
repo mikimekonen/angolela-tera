@@ -47,18 +47,6 @@ export default async function TourismPage({
       locationLabel: 'አድራሻ / ኮኦርዲኔት',
       bestSeasonLabel: 'ምቹ ወቅት',
     },
-    om: {
-      tag: 'Dhaala, Aadaa fi Tuurizimii Qilleensa Gaarii',
-      title: 'Angoolaalaa Xaraa Daawwadhaa: Uumama fi Seenaa',
-      subtitle: 'Mootummoota Shawaa jaarraa 19ffaa irraa eegalee hanga tulluuwwan babbareedoo, manneen amantaa durii fi aadaawwan hawaasaa.',
-      attractionsTitle: 'Bakkeewwan Seenaa fi Uumamaa Ijoo',
-      festivalsTitle: 'Ayyaanota fi Sirnoota Hawaasaa',
-      festivalsDesc: 'Ayyaanota amantaa fi aadaa Itoophiyaa kan akka Masqalaa, Cuuphaa (Laga Chacciitti kan kabajamu) fi ayyaana midhaan sassaabuu waliin dabarsaa.',
-      ctaVisit: 'Kutaa Tuurizimii fi Daawwattootaa Quunnamaa',
-      activitiesLabel: 'Sochiiwwan fi Bakkeewwan Ijoo',
-      locationLabel: 'Teessoo / Argama',
-      bestSeasonLabel: 'Waqtii Filatamaa',
-    },
   }
   const content = (contentDict as any)[locale] || contentDict.en
 

@@ -60,27 +60,6 @@ export default async function GeographyPage({
       ],
       backToAbout: 'ወደ ወረዳው አጠቃላይ መረጃ ተመለስ',
     },
-    om: {
-      tag: 'Teessuma Lafaafi Qilleensa Tulluuwwanii',
-      title: 'Teessuma Lafaafi Qilleensa Aanaa Angoolaalaa Xaraa',
-      subtitle: 'Haala qilleensaa, daangaa olka\'iinsaa, madda bishaanii fi amala biyyee Aanaa Angoolaalaa Xaraa.',
-      elevationTitle: 'Olka\'iinsa Lafaafi Ramaddii Qilleensaa',
-      elevationText:
-        'Aanaan Angoolaalaa Xaraa olka\'iinsa galaana irraa meetira 2,600 hanga 3,050 irratti argama. Kunis qilleensa qabbanaawaa (Dagaa) uuma.',
-      riverTitle: 'Laga Chaccisaa fi Madda Bishaanii',
-      riverText:
-        'Aanichi laggeen uumamaa gurguddoo kan akka Laga Chaccisaa fi laggeen gara Abbayyaatti yaa\'an qaba.',
-      soilTitle: 'Gosa Biyyee fi Oomishitummaa',
-      soilText:
-        'Dirreen Angoolaalaa Xaraa biyyee gurraacha gabbataa (Vertisol) qaba. Biyyeen kun qamadii, garbuu, baaqelaa fi ataraaf baay\'ee gaariidha.',
-      climateStats: [
-        { label: 'Olka\'iinsa', value: '2,600 – 3,050 m', sub: 'Tulluu Dagaa Olaanaa' },
-        { label: 'Rooba Waggaa', value: '950 – 1,200 mm', sub: 'Waqtii Arfaasaa fi Ganna' },
-        { label: 'Ho\'a Giddu-galeessaa', value: '11°C – 19°C', sub: 'Qilleensa Qabbanaawaa' },
-        { label: 'Laga Guddaa', value: 'Laga Chaccisaa', sub: 'Madda Yaa\'a Abbayyaa' },
-      ],
-      backToAbout: 'Gara Waa\'ee Aanaatti Deebi\'aa',
-    },
   }
   const content = (contentDict as any)[locale] || contentDict.en
 

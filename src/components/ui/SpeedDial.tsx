@@ -26,15 +26,8 @@ export function SpeedDial({ locale }: SpeedDialProps) {
       contact: 'የወረዳው መረጃ ዴስክ',
       tooltip: 'ፈጣን የዜጎች እገዛ',
     },
-    om: {
-      emergency: 'Bilbila Balaa',
-      grievance: 'Komii Dhiyeessaa',
-      services: 'Tajaajiloota Ilaalaa',
-      contact: 'Waajjira Aanaa',
-      tooltip: 'Gargaarsa Ariifachiisaa',
-    },
   }
-  const t = (tDict as any)[locale] || tDict.en
+  const t = tDict[locale] || tDict.en
 
   return (
     <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5">

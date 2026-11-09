@@ -156,42 +156,8 @@ export function PartnersSection({ locale }: PartnersSectionProps) {
         ],
       },
     },
-    om: {
-      badge: 'Michoota Misoomaa Istiraateejikaawaa',
-      title: 'Dhaabbilee Michootaa Keenya',
-      subtitle:
-        'Aanaan Angoolaalaa Xaraa warshaalee dhuunfaa gurguddoo — JERR PLC fi Komari Beverage PLC — waliin carraa hojii uumuu, dhiyeessii midhaanii fi misooma hawaasaa irratti qindoominaan hojjeta.',
-      partnerSince: 'Bara Waliin Hojjechuu Jalqaban',
-      sectorLabel: 'Michuu Misoomaa Dhuunfaa Istiraateejikaawaa',
-      visitWebsite: 'Weebsaayitii Mootummaa',
-      callDesk: 'Bilbila Waajjiraa',
-      emailDesk: 'Teessoo Iimeeyilii',
-      viewAll: 'Michoota Misoomaa Hunda Ilaalaa',
-      featured: 'Mul\'isa Michoota Ijoo',
-      slideOf: 'Michuu',
-      of: 'keessaa',
-      keyContributions: 'Kutaalee Tumsaa fi Misoomaa Ijoo',
-      pause: 'Dhaabaa',
-      play: 'Jalqabaa',
-      next: 'Michuu Itti Aanu',
-      prev: 'Michuu Duraanii',
-      tags: {
-        'partner-jerr': [
-          'Qonna Ammayyaa fi Zayita Nyaataa',
-          'Nyaata Horii',
-          'Gabaa Qonnaan Bultootaa',
-          'Carraa Hojii 350+',
-        ],
-        'partner-komari': [
-          'Oomisha Dhugaatii (Araadaa)',
-          'Leenjii Dargaggootaa',
-          'Eegumsa Madda Bishaanii',
-          'Carraa Hojii 250+',
-        ],
-      },
-    },
   }
-  const t = (tDict as any)[locale] || tDict.en
+  const t = tDict[locale] || tDict.en
 
   return (
     <section className="py-16 sm:py-20 bg-gradient-to-b from-gray-50/60 via-white to-gray-50/40 border-t border-gray-200/80 relative overflow-hidden">

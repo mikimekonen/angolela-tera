@@ -79,43 +79,8 @@ export function NewsSection({ locale, news }: NewsSectionProps) {
         },
       ],
     },
-    om: {
-      tag: 'Odeeffannoo fi Kominikeeshinii Mootummaa',
-      title: 'Oduuwwan Yeroo fi Beeksisoota Mootummaa',
-      desc: 'Murteewwan kabineettii Aanaa Angoolaalaa Xaraa, oduuwwan misoomaa fi beeksisoota uummataa hordofaa.',
-      viewAll: 'Oduuwwan fi Beeksisoota Hunda Ilaalaa',
-      items: [
-        {
-          id: 'news-1',
-          title: 'Manni Maree Aanaa Baajata Misoomaa fi Bu\'uuraalee Misoomaa Bara 2019 Raggaasise',
-          category: 'Murtee Mana Maree',
-          date: 'Fulbaana 14/2019',
-          summary: 'Manni Maree Aanaa Angoolaalaa Xaraa yaa\'ii idilee geggeessuun baajata bishaan dhugaatii fi daandii baadiyyaatiif dursa kennu raggaasiseera.',
-          href: `/${locale}/news/budget-2026`,
-          featured: true,
-        },
-        {
-          id: 'news-2',
-          title: 'Gandoolee Baadiyyaa 19 Keessatti Sanyii Qamadii Baddaa fi Xaa\'oo Raabsuun Eegalame',
-          category: 'Misooma Qonnaa',
-          date: 'Fulbaana 8/2019',
-          summary: 'Waajjirri Qonnaa fi Misooma Baadiyyaa Aanaa sanyii qamadii filatamaa kuntaala 12,000 ol qonnaan bultootaaf raabsaa jira.',
-          href: `/${locale}/news/wheat-distribution`,
-          featured: false,
-        },
-        {
-          id: 'news-3',
-          title: 'Beeksisa Caalbaasii: Magaalaa Caacaatti Iddoowwan Invastimantii Agroo-Piroosesiingiif Qophaa\'an',
-          category: 'Invastimantii',
-          date: 'Fulbaana 2/2019',
-          summary: 'Iddoowwan indastirii fi agroo-piroosesiingii daandii guddaa Caacaa cinaatti qophaa\'aniif abbootiin qabeenyaa yaada pirojektii akka dhiyeessan waamichi dhiyaateera.',
-          href: `/${locale}/news/agro-park-tender`,
-          featured: false,
-        },
-      ],
-    },
   }
-  const content = (contentDict as any)[locale] || contentDict.en
+  const content = contentDict[locale] || contentDict.en
 
   // Dynamic news mapped from CMS/Database with fallback to content.items
   const displayedNews =

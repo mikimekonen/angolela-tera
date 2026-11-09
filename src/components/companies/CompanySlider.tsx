@@ -148,44 +148,8 @@ export function CompanySlider({
       investmentTitle: 'የኢንዱስትሪ መሬት ወይም የንግድ እድሎችን ይፈልጋሉ?',
       investmentLink: 'የወረዳው ኢንቨስትመንት ዴስክን ያነጋግሩ →',
     },
-    om: {
-      badge: 'Kooridarii Indastirii Caacaa fi Wiirtuu Invastimantii',
-      title: 'Agarsiisa Dhaabbilee Dhuunfaa fi Warshaalee',
-      subtitle:
-        'Warshaalee dhugaatii, agroo-piroosesiingii, aannanii fi dhaabbilee daldalaa diinagdee naannichaa utuban ilaalaa.',
-      sectors: {
-        ALL: 'Indastiriilee Hunda',
-        AGRO_PROCESSING: 'Agroo-Piroosesiingii & Aannan',
-        MANUFACTURING: 'Dhugaatii & Warshaa',
-        AGRICULTURE: 'Sanyii & Qonna',
-        CONSTRUCTION: 'Ijaarsa',
-      },
-      prev: 'Kan Duraa',
-      next: 'Kan Itti Aanu',
-      pause: 'Dhaabi',
-      play: 'Taphachiisi',
-      employees: 'Hojjetoota',
-      est: 'Hundeeffama',
-      quickView: 'Ilaalcha Ariifachiisaa',
-      details: 'Odeeffannoo Guutuu',
-      visitSite: 'Weebsaayitii Ilaalaa',
-      verified: 'Dhaabbata Mirkanaa\'e',
-      address: 'Bakka',
-      contact: 'Foddaa Qunnamtii',
-      phone: 'Bilbila',
-      email: 'Imeelii',
-      website: 'Weebsaayitii Mootummaa',
-      sector: 'Damee Hojii',
-      sliderView: 'Ilaalcha Silaayidarii',
-      gridView: 'Ilaalcha Tarree',
-      showing: 'Indastirii',
-      of: 'irraa',
-      close: 'Cufaa',
-      investmentTitle: 'Lafa indastirii yookiin babal\'ina daldalaa barbaaduu?',
-      investmentLink: 'Foddaa Invastimantii Aanaa Qunnamaa →',
-    },
   }
-  const t = (tDict as any)[locale] || tDict.en
+  const t = tDict[locale] || tDict.en
 
   // Filter companies by sector
   const filtered = companies.filter(

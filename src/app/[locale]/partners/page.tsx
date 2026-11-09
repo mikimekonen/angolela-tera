@@ -42,16 +42,6 @@ export default async function PartnersDirectoryPage({
       hq: 'ዋና መስሪያ ቤት / ክልል',
       visit: 'ይፋዊ ድረ-ገጽ ↗',
     },
-    om: {
-      badge: 'Tumsa Misoomaa fi Michoota Hojii',
-      title: 'Dhaabbilee Michootaa fi Eejansiiwwan Misoomaa',
-      subtitle:
-        'Aanaan Angoolaalaa Xaraa guddina dinagdee fi hawaasummaa mirkaneessuuf dhaabbilee barnootaa olaanoo, sagantaalee misoomaa fi bulchiinsota naannoo waliin qindoominaan hojjeta.',
-      scope: 'Kutaa Hojii fi Sagantaalee',
-      since: 'Yeroo Waliin Hojjechuu Jalqaban',
-      hq: 'Waajjira Guddaa / Teessoo',
-      visit: 'Weebsaayitii Mootummaa ↗',
-    },
   }
   const t = (tDict as any)[locale] || tDict.en
 

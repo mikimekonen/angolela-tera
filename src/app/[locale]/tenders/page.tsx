@@ -52,21 +52,6 @@ export default async function TendersPage({
       downloadDocs: 'የጨረታ ሰነድ አውርድ',
       contactDesk: 'የግዥና ንብረት አስተዳደር ዴስክ',
     },
-    om: {
-      tag: 'Bittaa Mootummaa fi Iftoomina Daldalaa',
-      title: 'Caalbaasii fi Bittaa Mootummaa Ifaa',
-      subtitle: 'Beeksisoota caalbaasii banaa, waamicha ijaarsa bu\'uuraalee misoomaa fi dhiyeessii meeshaalee Bulchiinsa Aanaa Angoolaalaa Xaraa.',
-      bidNumber: 'Lakk. Caalbaasii',
-      procuringEntity: 'Waajjira Bittaa Raawwatu',
-      bondSecurity: 'Kabachiisa Caalbaasii (CPO)',
-      docPrice: 'Gatii Sanadaa',
-      deadline: 'Guyyaa Cufiinsa Caalbaasii',
-      status: 'Haala Caalbaasii',
-      activeBids: 'Beeksisoota Caalbaasii Banaa',
-      empty: 'Yeroo ammaa kanatti caalbaasiin banaa ta\'e hin jiru.',
-      downloadDocs: 'Sanada Caalbaasii Buufadhaa',
-      contactDesk: 'Kutaa Bittaa fi Qabeenyaa',
-    },
   }
   const t = (tDict as any)[locale] || tDict.en
 

@@ -119,25 +119,8 @@ export function InvestmentBanner({ locale }: InvestmentBannerProps) {
         'አስተማማኝ የግብርና ጥሬ እቃ አቅርቦት',
       ],
     },
-    om: {
-      badge: 'Kooridarii Diinagdee fi Misooma Indastirii',
-      title: 'Angoolaalaa Xaraatti Invast Godhaa: Karra Baddaa',
-      desc:
-        'Daandii Finfinnee-Dabrabirhaan (A2) cinaatti kan argamtu Aanaan Angoolaalaa Xaraa, agroo-piroosesiingii, misooma aannanii, fi warshaaleef bakka filatamaa dha.',
-      cta: 'Qajeelfama Invastimantii fi Baankii Lafaa',
-      hotline: 'Toora Kallattii Invastimantii',
-      selectPillar: 'Damee diinagdee filachuudhaan odeeffannoo lafaa fi jajjabeessituu ilaalaa:',
-      landAvail: 'Qophii Lafaa',
-      keyIncentive: 'Jajjabeessituu Mootummaa',
-      advantages: [
-        'Tajaajila Hayyamaa Foddaa Tokkoo',
-        'Walitti Dhufeenya Daandii Aspaaltii (A2)',
-        'Gatii Liizii Mijataa fi Wabii Waggaa 70',
-        'Dhiyeessii Oomisha Qonnaa Amanamaa',
-      ],
-    },
   }
-  const content = (contentDict as any)[locale] || contentDict.en
+  const content = contentDict[locale] || contentDict.en
 
   const activeSector =
     SECTOR_PILLARS.find((s) => s.id === activeSectorId) || SECTOR_PILLARS[0]

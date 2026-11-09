@@ -44,14 +44,6 @@ export default async function NewsPage({
       authorLabel: 'አውጪው አካል',
       featuredTag: 'ዋና ይፋዊ መግለጫ',
     },
-    om: {
-      tag: 'Odeeffannoo Mootummaa fi Preesii',
-      title: 'Oduuwwan fi Beeksisoota Mootummaa',
-      subtitle: 'Oduuwwan yeroo, beeksisoota caalbaasii, qajeelfamoota qonnaa fi murteewwan marii Bulchiinsa Aanaa Angoolaalaa Xaraa.',
-      readMore: 'Ibsa Guutuu Dubbisaa',
-      authorLabel: 'Qaama Baase',
-      featuredTag: 'Ibsa Mootummaa Ijoo',
-    },
   }
   const content = (contentDict as any)[locale] || contentDict.en
 

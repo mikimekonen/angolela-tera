@@ -51,20 +51,6 @@ export default async function DevelopmentPage({
       ctaOffices: 'የመሰረተ ልማት ቢሮን ያነጋግሩ',
       ctaContact: 'የመሰረተ ልማት አስተያየት ይስጡ',
     },
-    om: {
-      tag: 'Hojiiwwan Ummataa fi Bu\'uuraalee Misoomaa',
-      title: 'Pirojektoota Bu\'uuraalee Misoomaa fi Hawaasummaa',
-      subtitle: 'Hordoffii pirojektoota bishaan dhugaatii qulqulluu, daandiiwwan baadiyyaa, manneen barnootaa fi ibsaa baadiyyaa Aanaa Angoolaalaa Xaraa.',
-      statusOngoing: 'Hojjatamaa kan jiru',
-      statusCompleted: 'Xumuramee tajaajila kan eegale',
-      budgetLabel: 'Baajata Pirojektii',
-      contractorLabel: 'Kontairaaktara / Dhaabbata',
-      fundingLabel: 'Madda Maallaqaa',
-      completionLabel: 'Yeroo Xumuramu',
-      progressLabel: 'Sadarkaa Raawwii',
-      ctaOffices: 'Waajjira Bu\'uuraalee Misoomaa Quunnamaa',
-      ctaContact: 'Yaada Misoomaa Kennaa',
-    },
   }
   const content = (contentDict as any)[locale] || contentDict.en
 
