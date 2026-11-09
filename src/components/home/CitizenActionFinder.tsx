@@ -103,7 +103,7 @@ const POPULAR_ACTIONS: ActionItem[] = [
   {
     id: 'act-invest',
     label_en: 'Apply for Agro-Industrial Corridor Investment Land',
-    label_am: 'በጫቻ አግሮ-ኢንዱስትሪ ኮሪደር የኢንቨስትመንት መሬት መጠየቅ',
+    label_am: 'በጫጫ አግሮ-ኢንዱስትሪ ኮሪደር የኢንቨስትመንት መሬት መጠየቅ',
     desc_en: 'Explore agro-processing, dairy, and manufacturing plots with 70-year lease security.',
     desc_am: 'የ70 ዓመት የሊዝ ዋስትና ባለው የአግሮ-ኢንዱስትሪ እና የወተት ማቀነባበሪያ መሬት ላይ ኢንቨስት ማድረግ።',
     href: '/investment',

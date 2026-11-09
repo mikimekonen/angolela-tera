@@ -43,7 +43,7 @@ export default async function CompaniesDirectoryPage({
       totalCount: 'የተመዘገቡ ኢንዱስትሪዎች',
       investorCardTitle: 'በአንጎለላ ጠራ ኢንቨስት ማድረግ ይፈልጋሉ?',
       investorCardDesc:
-        'የወረዳው ኢንቨስትመንት ዴስክ በጫቻ አግሮ-ኢንዱስትሪ ኮሪደር ፈጣን የመሬት አቅርቦትና የ70 ዓመት የሊዝ ዋስትና ያቀርባል።',
+        'የወረዳው ኢንቨስትመንት ዴስክ በጫጫ አግሮ-ኢንዱስትሪ ኮሪደር ፈጣን የመሬት አቅርቦትና የ70 ዓመት የሊዝ ዋስትና ያቀርባል።',
       investorBtn: 'የኢንቨስትመንት አማራጮችን ይመልከቱ →',
     },
   }

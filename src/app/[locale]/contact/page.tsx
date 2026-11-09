@@ -94,7 +94,7 @@ export default function ContactPage({ params }: ContactPageProps) {
       emailLabel: 'ኢሜይል አድራሻ *',
       emailPlaceholder: 'name@example.com',
       kebeleLabel: 'የመኖሪያ ቀበሌ',
-      kebelePlaceholder: 'ምሳሌ፡ ጫቻ 01፣ ጨቂ፣ ኮቱ...',
+      kebelePlaceholder: 'ምሳሌ፡ ጫጫ 01፣ ጨቂ፣ ኮቱ...',
       categoryLabel: 'የጉዳዩ ዘርፍ *',
       categories: [
         { value: 'grievance', label: 'የአገልግሎት አሰጣጥ ቅሬታ / አቤቱታ' },
@@ -118,7 +118,7 @@ export default function ContactPage({ params }: ContactPageProps) {
       trackPlaceholder: 'የመከታተያ ኮድ ያስገቡ...',
       trackBtn: 'ደረጃውን መርምር',
       hqTitle: 'የወረዳው ዋና አስተዳደር ጽ/ቤት',
-      hqAddress: 'ዋናው የአስተዳደር ቅጥር ግቢ፣ ጫቻ ከተማ፣ ሰሜን ሸዋ ዞን፣ አማራ ክልል',
+      hqAddress: 'ዋናው የአስተዳደር ቅጥር ግቢ፣ ጫጫ ከተማ፣ ሰሜን ሸዋ ዞን፣ አማራ ክልል',
       hqHours: 'ከሰኞ – አርብ፡ ከጠዋቱ 2:30 – 11:30 (የምሳ እረፍት 6:30 – 7:30)',
       hqPhone: 'ዋና ስልክ፡ +251 (0) 58 661 0100',
       hqEmail: 'info@angolela-tera.gov.et',

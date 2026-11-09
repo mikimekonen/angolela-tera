@@ -117,7 +117,7 @@ function SearchContent() {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder={isAm ? 'ለምሳሌ፡ የልደት ምስክር ወረቀት፣ ጫቻ፣ ግብርና፣ ኢንቨስትመንት...' : 'e.g. Birth certificate, Chacha, Agriculture, Investment, Roads...'}
+                placeholder={isAm ? 'ለምሳሌ፡ የልደት ምስክር ወረቀት፣ ጫጫ፣ ግብርና፣ ኢንቨስትመንት...' : 'e.g. Birth certificate, Chacha, Agriculture, Investment, Roads...'}
                 className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 text-sm focus:border-[#1a4f8b] focus:bg-white focus:outline-none transition-all shadow-inner"
               />
             </div>

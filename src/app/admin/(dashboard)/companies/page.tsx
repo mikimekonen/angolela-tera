@@ -363,7 +363,7 @@ export default function AdminCompaniesPage() {
                     type="text"
                     value={nameAm}
                     onChange={(e) => setNameAm(e.target.value)}
-                    placeholder="ለምሳሌ: ጫቻ አግሮ-ፕሮሰሲንግ ኃ.የተ.የ.ማ"
+                    placeholder="ለምሳሌ: ጫጫ አግሮ-ፕሮሰሲንግ ኃ.የተ.የ.ማ"
                     className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1a4f8b]"
                   />
                 </div>

@@ -137,7 +137,7 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         href: `/${locale}/development`,
         children: [
           { title: 'የልማት ፕሮጀክቶች', href: `/${locale}/development`, description: 'በሂደት ላይ ያሉ የመሰረተ ልማት ስራዎች' },
-          { title: 'ውሃና መስኖ', href: `/${locale}/development/water`, description: 'የንጹህ መጠጥ ውሃና የአጂማ-ጫቻ ግድብ መስኖ ልማት' },
+          { title: 'ውሃና መስኖ', href: `/${locale}/development/water`, description: 'የንጹህ መጠጥ ውሃና የአጂማ-ጫጫ ግድብ መስኖ ልማት' },
           { title: 'ገጠር መንገዶች', href: `/${locale}/development/roads`, description: 'የገጠር ተደራሽነት የመንገድ ግንባታ' },
         ],
       },

@@ -84,7 +84,7 @@ export function AtAGlance({ locale }: AtAGlanceProps) {
         {
           label: 'የአስተዳደሩ መቀመጫ',
           endNum: null,
-          displayValue: 'ጫቻ ከተማ',
+          displayValue: 'ጫጫ ከተማ',
           desc: 'ዋና የአስተዳደርና የንግድ ማዕከል',
           icon: '🏛️',
           accent: 'border-blue-300',

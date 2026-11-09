@@ -91,7 +91,7 @@ export default async function ServiceDetailPage({
       costLabel: 'ህጋዊ ክፍያ',
       officeLabel: 'አገልግሎት ሰጪው ቢሮ / መስኮት',
       locationLabel: 'የቢሮው አድራሻ',
-      locationDefault: 'የጫቻ አስተዳደር ቅጥር ጊቢ፣ ሰሜን ሸዋ ዞን',
+      locationDefault: 'የጫጫ አስተዳደር ቅጥር ጊቢ፣ ሰሜን ሸዋ ዞን',
       downloadForm: 'የአገልግሎት ማመልከቻ ቅጽ ያውርዱ (PDF)',
       viewBureau: 'የቢሮውን ሙሉ መረጃ ይመልከቱ',
       appealTitle: 'ቅሬታ ወይም ይግባኝ አለዎት?',

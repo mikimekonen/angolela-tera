@@ -51,7 +51,7 @@ export function HeroSection({ locale, sliders = [] }: HeroSectionProps) {
     },
     am: {
       badge: 'ይፋዊ ፖርታል • ሰሜን ሸዋ ዞን',
-      climateBadge: 'ጫቻ፡ 18°ሴ • ከፍታ፡ 2,840 ሜ • ደጋማ ቀጠና',
+      climateBadge: 'ጫጫ፡ 18°ሴ • ከፍታ፡ 2,840 ሜ • ደጋማ ቀጠና',
       title: 'እንኳን ወደ አንጎለላ ጠራ ወረዳ በደህና መጡ',
       subtitle:
         'በዘመናዊ የህዝብ አገልግሎት፣ በግብርና ልማትና በኢንቨስትመንት መስፋፋት የበለጸገ፣ ፍትሃዊና ጠንካራ ማህበረሰብ እየገነባን ነው።',

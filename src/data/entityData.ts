@@ -72,7 +72,7 @@ export const MOCK_LEADERSHIP: LeaderProfile[] = [
     bio_en:
       'Directs the healthcare network across Chacha Primary Hospital, health centers, and kebele health posts, expanding Community-Based Health Insurance (CBHI) coverage.',
     bio_am:
-      'በጫቻ የመጀመሪያ ደረጃ ሆስፒታል፣ በጤና ጣቢያዎችና በ19ኙም የቀበሌ ጤና ኬላዎች የሚሰጡትን የህክምና አገልግሎቶችና የማህበረሰብ አቀፍ ጤና መድህን (CBHI) በበላይነት ይመራሉ።',
+      'በጫጫ የመጀመሪያ ደረጃ ሆስፒታል፣ በጤና ጣቢያዎችና በ19ኙም የቀበሌ ጤና ኬላዎች የሚሰጡትን የህክምና አገልግሎቶችና የማህበረሰብ አቀፍ ጤና መድህን (CBHI) በበላይነት ይመራሉ።',
     displayOrder: 3,
     status: 'PUBLISHED',
   },
@@ -85,7 +85,7 @@ export const MOCK_LEADERSHIP: LeaderProfile[] = [
     bio_en:
       'Directs youth and women employment creation, vocational skills training, enterprise incubation, and workforce placement along the Chacha economic corridor.',
     bio_am:
-      'የወጣቶችና የሴቶች የስራ እድል ፈጠራን፣ የቴክኒክና ሙያ ክህሎት ስልጠናዎችን፣ የጥቃቅንና አነስተኛ ኢንተርፕራይዞች ምስረታንና በጫቻ የኢንዱስትሪ ኮሪደር የስራ ትስስርን ይመራሉ።',
+      'የወጣቶችና የሴቶች የስራ እድል ፈጠራን፣ የቴክኒክና ሙያ ክህሎት ስልጠናዎችን፣ የጥቃቅንና አነስተኛ ኢንተርፕራይዞች ምስረታንና በጫጫ የኢንዱስትሪ ኮሪደር የስራ ትስስርን ይመራሉ።',
     displayOrder: 4,
     status: 'PUBLISHED',
   },
@@ -280,7 +280,7 @@ export const MOCK_LEADERSHIP: LeaderProfile[] = [
     bio_en:
       'Directs master plan execution for Chacha municipality, cobblestone and all-weather road infrastructure, municipal utility services, and urban sanitation.',
     bio_am:
-      'የጫቻ ከተማ ማስተር ፕላን አፈጻጸምን፣ የከተማ የኮብልስቶንና የአስፋልት መንገዶች ግንባታን፣ የማዘጋጃ ቤት አገልግሎቶችንና የመሰረተ ልማት ማስፋፊያ ስራዎችን ይመራሉ።',
+      'የጫጫ ከተማ ማስተር ፕላን አፈጻጸምን፣ የከተማ የኮብልስቶንና የአስፋልት መንገዶች ግንባታን፣ የማዘጋጃ ቤት አገልግሎቶችንና የመሰረተ ልማት ማስፋፊያ ስራዎችን ይመራሉ።',
     displayOrder: 19,
     status: 'PUBLISHED',
   },
@@ -339,7 +339,7 @@ export const MOCK_BUSINESSES: BusinessItem[] = [
     description_en:
       'A premier industrial conglomerate operating a multi-billion Birr integrated agro-industrial park in the Chacha corridor. Features high-capacity edible oil refining (fortified soya cooking oil), commercial animal feed processing, corn soy blend (CSB++) manufacturing for nutrition programs, and bulk agricultural commodity processing.',
     description_am:
-      'በጫቻ ኢንዱስትሪ ኮሪደር ውስጥ የሚገኝ ግዙፍ የተቀናጀ የምግብ እና አግሮ-ፕሮሰሲንግ ማዕከል ያለው ድርጅት። ዘመናዊ የምግብ ዘይት ማጣሪያ ፋብሪካ፣ የተመጣጠነ የእንስሳት መኖ ማቀነባበሪያ፣ የCSB++ አልሚ ምግብ ምርት እና የጥራጥሬ ምርቶችን በከፍተኛ ደረጃ በማቀነባበር በመላው ሀገሪቱ ያሰራጫል።',
+      'በጫጫ ኢንዱስትሪ ኮሪደር ውስጥ የሚገኝ ግዙፍ የተቀናጀ የምግብ እና አግሮ-ፕሮሰሲንግ ማዕከል ያለው ድርጅት። ዘመናዊ የምግብ ዘይት ማጣሪያ ፋብሪካ፣ የተመጣጠነ የእንስሳት መኖ ማቀነባበሪያ፣ የCSB++ አልሚ ምግብ ምርት እና የጥራጥሬ ምርቶችን በከፍተኛ ደረጃ በማቀነባበር በመላው ሀገሪቱ ያሰራጫል።',
     sector: 'AGRO_PROCESSING',
     address: 'Chacha Agro-Industrial Corridor, Angolela Tera Woreda',
     phone: '+251 (0) 11 667 4000',
@@ -389,7 +389,7 @@ export const MOCK_BUSINESSES: BusinessItem[] = [
     description_en:
       'Honoring the legacy of visionary entrepreneur Mamo Yenberberu ("Mamo Kacha"), the enterprise operates large-scale highland dairy farming, modern cold-chain logistics, and automated processing facilities in the Chacha milk corridor. Produces premium pasteurized milk, provolone and gouda cheeses, and table butter while sourcing from hundreds of local smallholder cattle cooperatives.',
     description_am:
-      'በታዋቂው ኢትዮጵያዊ የፈጠራ ሰው አቶ ማሞ ይንበርበሩ (ማሞ ካቻ) ስም የተሰየመ ድርጅት ሲሆን፣ በጫቻ የወተት ተፋሰስ ዘመናዊ የወተት ላም እርባታና ማቀነባበሪያ ፋብሪካ ያካሂዳል። ጥራት ያለው ፓስቸራይዝድ ወተት፣ አይብ፣ ቅቤ በማምረት ከአካባቢው አርሶ አደሮች ጋር በቅርበት ይሰራል::',
+      'በታዋቂው ኢትዮጵያዊ የፈጠራ ሰው አቶ ማሞ ይንበርበሩ (ማሞ ካቻ) ስም የተሰየመ ድርጅት ሲሆን፣ በጫጫ የወተት ተፋሰስ ዘመናዊ የወተት ላም እርባታና ማቀነባበሪያ ፋብሪካ ያካሂዳል። ጥራት ያለው ፓስቸራይዝድ ወተት፣ አይብ፣ ቅቤ በማምረት ከአካባቢው አርሶ አደሮች ጋር በቅርበት ይሰራል::',
     sector: 'AGRO_PROCESSING',
     address: 'Chacha–Sheno Agricultural Corridor, Angolela Tera Woreda',
     phone: '+251 (0) 11 551 2233',
@@ -445,11 +445,11 @@ export const MOCK_BUSINESSES: BusinessItem[] = [
   {
     id: 'biz-rorank',
     name_en: 'Rorank Business S.C. (Chacha Distillery & Bottling Plant)',
-    name_am: 'ሮራንክ ቢዝነስ አ.ማ (የጫቻ ዳይስቲለሪ እና ቦትሊንግ ፋብሪካ)',
+    name_am: 'ሮራንክ ቢዝነስ አ.ማ (የጫጫ ዳይስቲለሪ እና ቦትሊንግ ፋብሪካ)',
     description_en:
       'One of Ethiopia\'s foremost industrial beverage manufacturers operating a multi-hectare distillery complex in the Chacha industrial sector. Renowned for market-leading brands including Super Eagle Dry Gin, Crystal Vodka, and Sofi aperitifs, generating substantial manufacturing employment and local raw material linkages.',
     description_am:
-      'በጫቻ ከተማ ሰፊ ግቢ ያለውና በሀገሪቱ ቀዳሚ ከሚባሉት የአልኮል ማጣሪያና መጠጥ ማምረቻ ድርጅቶች አንዱ። እንደ ሱፐር ኢግል (Super Eagle)፣ ክሪስታል ቮድካ (Crystal) እና ሶፊ ያሉ ታዋቂ ምርቶችን በማምረት ለበርካታ የአካባቢ ወጣቶች ቋሚ የስራ እድል ፈጥሯል።',
+      'በጫጫ ከተማ ሰፊ ግቢ ያለውና በሀገሪቱ ቀዳሚ ከሚባሉት የአልኮል ማጣሪያና መጠጥ ማምረቻ ድርጅቶች አንዱ። እንደ ሱፐር ኢግል (Super Eagle)፣ ክሪስታል ቮድካ (Crystal) እና ሶፊ ያሉ ታዋቂ ምርቶችን በማምረት ለበርካታ የአካባቢ ወጣቶች ቋሚ የስራ እድል ፈጥሯል።',
     sector: 'MANUFACTURING',
     address: 'Chacha Industrial Zone, Angolela Tera Woreda',
     phone: '+251 (0) 11 663 8811',
@@ -508,7 +508,7 @@ export const MOCK_BUSINESSES: BusinessItem[] = [
     description_en:
       'A pioneer commercial dairy processing and cattle breeding enterprise in Chacha. Operates modern milk chilling centers, automated pasteurization, and packing lines supplying fresh milk, yogurt, and specialty highland cheeses across regional and Addis Ababa retail chains.',
     description_am:
-      'በጫቻ ከተማ የተመሰረተ ቀዳሚ የወተት ላም እርባታና የወተት ምርቶች ማቀነባበሪያ ድርጅት። ዘመናዊ ማቀዝቀዣ፣ ፓስቸራይዜሽን እና ማሸጊያ ያለው ሲሆን ትኩስ ወተት፣ እርጎ እና የተለያዩ አይቦችን ለገበያ ያቀርባል።',
+      'በጫጫ ከተማ የተመሰረተ ቀዳሚ የወተት ላም እርባታና የወተት ምርቶች ማቀነባበሪያ ድርጅት። ዘመናዊ ማቀዝቀዣ፣ ፓስቸራይዜሽን እና ማሸጊያ ያለው ሲሆን ትኩስ ወተት፣ እርጎ እና የተለያዩ አይቦችን ለገበያ ያቀርባል።',
     sector: 'AGRO_PROCESSING',
     address: 'Chacha Town, Kebele 02, Angolela Tera Woreda',
     phone: '+251 (0) 58 661 0420',
@@ -527,7 +527,7 @@ export const MOCK_BUSINESSES: BusinessItem[] = [
     description_en:
       'Specialized beverage distillation and industrial alcohol processing plant situated in Chacha, producing quality spirits including Double Dutch Vodka and food-grade industrial alcohol derivatives.',
     description_am:
-      'በጫቻ ኢንዱስትሪ ዞን የሚገኝ የአልኮል ማጣሪያና መጠጥ ማምረቻ ድርጅት። ዳብል ደች ቮድካ (Double Dutch Vodka) እና ሌሎች ጥራት ያላቸው መጠጦችን በማምረት ይታወቃል።',
+      'በጫጫ ኢንዱስትሪ ዞን የሚገኝ የአልኮል ማጣሪያና መጠጥ ማምረቻ ድርጅት። ዳብል ደች ቮድካ (Double Dutch Vodka) እና ሌሎች ጥራት ያላቸው መጠጦችን በማምረት ይታወቃል።',
     sector: 'MANUFACTURING',
     address: 'Chacha Industrial Zone, Angolela Tera Woreda',
     phone: '+251 (0) 11 661 9922',
@@ -552,7 +552,7 @@ export const MOCK_BUSINESSES: BusinessItem[] = [
   {
     id: 'biz-4',
     name_en: 'Chacha Honey & Bee Products Enterprise',
-    name_am: 'ጫቻ ማር እና የንብ ምርቶች ድርጅት',
+    name_am: 'ጫጫ ማር እና የንብ ምርቶች ድርጅት',
     description_en:
       'A traditional and organic honey producer tapping into the rich highland flora of Angolela Tera. The enterprise exports bulk and packaged Ethiopian highland honey to Addis Ababa and has recently entered international market channels.',
     description_am:
@@ -582,7 +582,7 @@ export const MOCK_PARTNERS: PartnerItem[] = [
     description_en:
       'A premier industrial conglomerate and key development partner operating an integrated agro-industrial park in the Chacha corridor. Partners with the Woreda on local farmer grain aggregation, fortified vegetable oil distribution, commercial animal feed processing, and large-scale youth employment generation.',
     description_am:
-      'በጫቻ የኢንዱስትሪ ኮሪደር ውስጥ ግዙፍ የተቀናጀ የምግብና አግሮ-ኢንዱስትሪ ማዕከል ያለው ቁልፍ የልማት አጋር ድርጅት። ከወረዳው ጋር በአርሶ አደሮች የሰብል ገበያ ትስስር፣ በምግብ ዘይት አቅርቦት፣ በእንስሳት መኖና በስራ እድል ፈጠራ በስትራቴጂካዊ አጋርነት ይሰራል::',
+      'በጫጫ የኢንዱስትሪ ኮሪደር ውስጥ ግዙፍ የተቀናጀ የምግብና አግሮ-ኢንዱስትሪ ማዕከል ያለው ቁልፍ የልማት አጋር ድርጅት። ከወረዳው ጋር በአርሶ አደሮች የሰብል ገበያ ትስስር፣ በምግብ ዘይት አቅርቦት፣ በእንስሳት መኖና በስራ እድል ፈጠራ በስትራቴጂካዊ አጋርነት ይሰራል::',
     partnerType: 'PRIVATE_SECTOR',
     country: 'Ethiopia',
     website: 'https://www.jerrplc.com',
@@ -635,7 +635,7 @@ export const MOCK_ANNOUNCEMENTS: AnnouncementItem[] = [
     text_en:
       '📢 Public meeting: Woreda 2026/27 Budget Review — All kebele leaders invited. Saturday, Hamle 20, 2018 E.C. at Chacha Cultural Hall.',
     text_am:
-      '📢 የህዝብ ስብሰባ: ወረዳ 2018 ዓ.ም. በጀት ገምጋሚ ስብሰባ — ሐምሌ 20 ቀን 2018 ዓ.ም. ጫቻ ባሕላዊ አዳራሽ። ሁሉም የቀበሌ አመራሮች ተጋብዘዋል።',
+      '📢 የህዝብ ስብሰባ: ወረዳ 2018 ዓ.ም. በጀት ገምጋሚ ስብሰባ — ሐምሌ 20 ቀን 2018 ዓ.ም. ጫጫ ባሕላዊ አዳራሽ። ሁሉም የቀበሌ አመራሮች ተጋብዘዋል።',
     type: 'INFO',
     isActive: true,
     linkUrl: '/news',

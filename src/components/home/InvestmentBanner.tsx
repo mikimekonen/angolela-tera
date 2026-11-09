@@ -32,7 +32,7 @@ const SECTOR_PILLARS: SectorPillar[] = [
     desc_am:
       'በወረዳው ያለውን ከፍተኛ የጥሬ ወተት ምርት፣ የዝርያ ማሻሻያ እና ለአዲስ አበባ ገበያ ያለውን ቅርበት በመጠቀም የወተት ምርቶችን ማቀነባበር።',
     land_en: '30 Hectares Reserved in Chacha Dairy Corridor',
-    land_am: 'በጫቻ ወተት ኮሪደር 30 ሄክታር የተዘጋጀ መሬት',
+    land_am: 'በጫጫ ወተት ኮሪደር 30 ሄክታር የተዘጋጀ መሬት',
     incentive_en: 'Duty-free machinery import + 5-year regional tax exemption',
     incentive_am: 'ከቀረጥ ነፃ የማሽነሪ ማስገባት + የ5 ዓመት የታክስ እፎይታ',
   },

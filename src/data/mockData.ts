@@ -73,7 +73,7 @@ export const SECTOR_OFFICES: OfficeDetail[] = [
     phone: '+251 (0) 58 661 0201',
     email: 'agriculture@angolela-tera.gov.et',
     location_en: 'Main Administrative Compound, Block B, 1st Floor, Chacha',
-    location_am: 'ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ለ፣ 1ኛ ፎቅ፣ ጫቻ',
+    location_am: 'ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ለ፣ 1ኛ ፎቅ፣ ጫጫ',
     about_en: 'The Agriculture and Rural Development Office spearheads food security, crop yield maximization, natural resource conservation, and modern livestock breeding across the 19 rural kebeles of Angolela Tera.',
     about_am: 'የአንጎለላ ጠራ ወረዳ ግብርናና ገጠር ልማት ጽ/ቤት በ19ኙም የገጠር ቀበሌዎች የምግብ ዋስትናን ለማረጋገጥ፣ የሰብል ምርታማነትን ለማሳደግ፣ የተፈጥሮ ሀብት ጥበቃና ዘመናዊ የእንስሳት እርባታን ለማስፋፋት በግንባር ቀደምትነት ይሰራል፡',
     responsibilities_en: [
@@ -112,7 +112,7 @@ export const SECTOR_OFFICES: OfficeDetail[] = [
     phone: '+251 (0) 58 661 0202',
     email: 'land@angolela-tera.gov.et',
     location_en: 'Main Administrative Compound, Block A, Ground Floor, Chacha',
-    location_am: 'ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ሀ፣ ምድር ቤት፣ ጫቻ',
+    location_am: 'ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ሀ፣ ምድር ቤት፣ ጫጫ',
     about_en: 'Responsible for rural cadastral survey, primary and second-level landholding book issuance (Green Book), land use zoning, dispute demarcation, and environmental compliance monitoring.',
     about_am: 'የገጠር መሬት ይዞታ ምዝገባ፣ የሁለተኛ ደረጃ ደብተር (አረንጓዴ ደብተር) አሰጣጥ፣ የመሬት አጠቃቀም ፕላን፣ የይዞታ ወሰን ማካለልና የአካባቢ ተፅዕኖ ግምገማ ያከናውናል።',
     responsibilities_en: [
@@ -151,7 +151,7 @@ export const SECTOR_OFFICES: OfficeDetail[] = [
     phone: '+251 (0) 58 661 0203',
     email: 'trade@angolela-tera.gov.et',
     location_en: 'Commerce Building, Main Highway Junction, Chacha',
-    location_am: 'የንግድ ህንጻ፣ አውራ ጎዳና መገንጠያ፣ ጫቻ',
+    location_am: 'የንግድ ህንጻ፣ አውራ ጎዳና መገንጠያ፣ ጫጫ',
     about_en: 'Oversees domestic trade regulation, commercial licensing, consumer rights protection, cooperative union market linkages, and commodity price monitoring.',
     about_am: 'የንግድ ምዝገባና ፈቃድ አሰጣጥ፣ የገበያ መረጋጋት፣ የሸማቾች መብት ጥበቃ እና የህብረት ስራ ማህበራት የገበያ ትስስር የሚሰጥ ጽህፈት ቤት ነው።',
     responsibilities_en: [
@@ -164,7 +164,7 @@ export const SECTOR_OFFICES: OfficeDetail[] = [
       'የንግድ ምዝገባ፣ የንግድ ፈቃድ መስጠትና አመታዊ እድሳት ማካሄድ',
       'የገበያ ዋጋ ክትትልና የንግድ ሚዛን ትክክለኛነት ፍተሻ ማድረግ',
       'ለአርሶ አደር የህብረት ስራ ማህበራት የሰብልና የእንስሳት ገበያ ትስስር መፍጠር',
-      'በጫቻ ንግድ ኮሪደር የንግድ ፈቃድ አሰጣጥና ቁጥጥር',
+      'በጫጫ ንግድ ኮሪደር የንግድ ፈቃድ አሰጣጥና ቁጥጥር',
     ],
     servicesProvided_en: [
       'New trade license issuance & amendment',
@@ -190,7 +190,7 @@ export const SECTOR_OFFICES: OfficeDetail[] = [
     phone: '+251 (0) 58 661 0204',
     email: 'health@angolela-tera.gov.et',
     location_en: 'Chacha Primary Hospital Compound, Health Administration Wing',
-    location_am: 'የጫቻ የመጀመሪያ ደረጃ ሆስፒታል ቅጥር ጊቢ፣ የጤና አስተዳደር ህንጻ',
+    location_am: 'የጫጫ የመጀመሪያ ደረጃ ሆስፒታል ቅጥር ጊቢ፣ የጤና አስተዳደር ህንጻ',
     about_en: 'Directs the public healthcare delivery network across 1 Primary Hospital, 5 Health Centers, and 19 Kebele Health Posts. Administers Community-Based Health Insurance (CBHI) covering over 85% of woreda households.',
     about_am: 'በ1 የመጀመሪያ ደረጃ ሆስፒታል፣ በ5 ጤና ጣቢያዎችና በ19 የቀበሌ ጤና ኬላዎች የሚሰጠውን የህክምና አገልግሎት ይመራል፡ ከ85% በላይ የሚሆነውን ነዋሪ በማህበረሰብ አቀፍ ጤና መድህን (CBHI) አቅፏል።',
     responsibilities_en: [
@@ -229,7 +229,7 @@ export const SECTOR_OFFICES: OfficeDetail[] = [
     phone: '+251 (0) 58 661 0205',
     email: 'education@angolela-tera.gov.et',
     location_en: 'Education Bureau Building, High School Road, Chacha',
-    location_am: 'የትምህርት መምሪያ ህንጻ፣ አጠቃላይ 2ኛ ደረጃ ት/ቤት መንገድ፣ ጫቻ',
+    location_am: 'የትምህርት መምሪያ ህንጻ፣ አጠቃላይ 2ኛ ደረጃ ት/ቤት መንገድ፣ ጫጫ',
     about_en: 'Administers 38 Primary Schools, 4 Secondary Schools, and 2 Vocational Training clusters across Angolela Tera, ensuring equitable access to quality education, teacher development, and digital learning.',
     about_am: 'በወረዳው የሚገኙ 38 የአንደኛ ደረጃ ት/ቤቶችን፣ 4 የሁለተኛ ደረጃ ት/ቤቶችንና የቴክኒክና ሙያ ማዕከላትን ይመራል፡ የትምህርት ጥራትና ፍትሃዊ ተደራሽነትን ያረጋግጣል።',
     responsibilities_en: [
@@ -268,7 +268,7 @@ export const SECTOR_OFFICES: OfficeDetail[] = [
     phone: '+251 (0) 58 661 0206',
     email: 'finance@angolela-tera.gov.et',
     location_en: 'Main Administrative Compound, Block A, 1st Floor, Chacha',
-    location_am: 'ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ሀ፣ 1ኛ ፎቅ፣ ጫቻ',
+    location_am: 'ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ሀ፣ 1ኛ ፎቅ፣ ጫጫ',
     about_en: 'Prepares the annual woreda capital and recurrent budget, enforces public expenditure accountability, manages local revenue collection, and coordinates socio-economic planning.',
     about_am: 'የወረዳውን ዓመታዊ የካፒታልና የመደበኛ በጀት ያዘጋጃል፣ የፋይናንስ ህግጋትና ኦዲት አፈጻጸምን ይቆጣጠራል፣ የውስጥ ገቢ አሰባሰብንና የልማት እቅድን ይመራል።',
     responsibilities_en: [
@@ -307,7 +307,7 @@ export const SECTOR_OFFICES: OfficeDetail[] = [
     phone: '+251 (0) 58 661 0207',
     email: 'water@angolela-tera.gov.et',
     location_en: 'Main Administrative Compound, Block C, Ground Floor, Chacha',
-    location_am: 'ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ሐ፣ ምድር ቤት፣ ጫቻ',
+    location_am: 'ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ሐ፣ ምድር ቤት፣ ጫጫ',
     about_en: 'Expands potable clean drinking water networks, manages deep borehole installations, springs maintenance, and oversees rural electrification across the 19 kebeles.',
     about_am: 'በወረዳው ንጹህ የመጠጥ ውሃ ተደራሽነትን ማስፋፋት፣ የጥልቅ ጉድጓድና የምንጭ ማጎልበት ስራዎችን፣ የገጠር ኤሌክትሪክ ሃይል ተደራሽነትንና ታዳሽ ሃይል ቴክኖሎጂዎችን ይመራል።',
     responsibilities_en: [
@@ -346,7 +346,7 @@ export const SECTOR_OFFICES: OfficeDetail[] = [
     phone: '+251 (0) 58 661 0208',
     email: 'security@angolela-tera.gov.et',
     location_en: 'Security Directorate Wing, Main Administrative Compound, Chacha',
-    location_am: 'የሰላምና ደህንነት መምሪያ፣ ዋናው የአስተዳደር ቅጥር ጊቢ፣ ጫቻ',
+    location_am: 'የሰላምና ደህንነት መምሪያ፣ ዋናው የአስተዳደር ቅጥር ጊቢ፣ ጫጫ',
     about_en: 'Ensures public tranquility, maintains law and order, coordinates kebele community policing, and secures economic corridors and public infrastructures.',
     about_am: 'የህዝብ ሰላምና ጸጥታን ማስከበር፣ የማህበረሰብ አቀፍ ፖሊስ ስራዎችን፣ የወሳኝ አውራ ጎዳናዎች ደህንነት፣ የቀበሌዎች ሰላምና የግጭት መከላከል ስራዎችን ይመራል።',
     responsibilities_en: [
@@ -415,7 +415,7 @@ export const CITIZEN_SERVICES: ServiceDetail[] = [
     ],
     steps_am: [
       'ደረጃ 1፡ በነዋሪነት ከሚገኙበት ቀበሌ አስተዳደር የማረጋገጫ ደብዳቤ መያዝ',
-      'ደረጃ 2፡ የተሞላውን ማመልከቻ ሰነድ በጫቻ ማዕከላዊ የወሳኝ ኩነት መስኮት ማቅረብ',
+      'ደረጃ 2፡ የተሞላውን ማመልከቻ ሰነድ በጫጫ ማዕከላዊ የወሳኝ ኩነት መስኮት ማቅረብ',
       'ደረጃ 3፡ በብሔራዊ የወሳኝ ኩነት መረጃ ቋት ላይ ትክክለኛነቱ ሲረጋገጥ ማጽደቅ',
       'ደረጃ 4፡ ማህተም የተደረገበትንና የQR ኮድ ጥበቃ ያለውን ይፋዊ የምስክር ወረቀት መረከብ',
     ],
@@ -457,7 +457,7 @@ export const CITIZEN_SERVICES: ServiceDetail[] = [
       'ደረጃ 1፡ በቀበሌው የመሬት አስተዳደር ኮሚቴ ማመልከቻ ማቅረብ',
       'ደረጃ 2፡ የባለሙያ የመስክ ልኬት በጂፒኤስ (GPS) መከናወንና የወሰን ማረጋገጥ',
       'ደረጃ 3፡ የይገባኛል ጥያቄ አለመኖሩን ለማረጋገጥ ለ30 ቀናት የሚቆይ ይፋዊ ማስታወቂያ',
-      'ደረጃ 4፡ በጫቻ የወረዳው መሬት አስተዳደር ጽ/ቤት አረንጓዴውን የይዞታ ደብተር መረከብ',
+      'ደረጃ 4፡ በጫጫ የወረዳው መሬት አስተዳደር ጽ/ቤት አረንጓዴውን የይዞታ ደብተር መረከብ',
     ],
   },
   {
@@ -514,7 +514,7 @@ export const CITIZEN_SERVICES: ServiceDetail[] = [
     cost_en: '600 ETB / household / year (Indigent households 100% subsidized by woreda)',
     cost_am: '600 ብር ለአንድ አባወራ በዓመት (አቅመ ደካሞች በወረዳው በነጻ ይሸፈናሉ)',
     description_en: 'Enrollment in the regional solidarity health insurance fund ensuring family members receive free medical treatment, diagnostics, and essential pharmaceuticals across all government hospitals and health centers.',
-    description_am: 'መላው የቤተሰብ አባላት በወረዳው ባሉ ጤና ጣቢያዎችና በጫቻ ሆስፒታል ነጻ የህክምና፣ የላቦራቶሪና የመድሃኒት አገልግሎት የሚያገኙበት የማህበረሰብ አቀፍ የጤና መድህን ምዝገባ።',
+    description_am: 'መላው የቤተሰብ አባላት በወረዳው ባሉ ጤና ጣቢያዎችና በጫጫ ሆስፒታል ነጻ የህክምና፣ የላቦራቶሪና የመድሃኒት አገልግሎት የሚያገኙበት የማህበረሰብ አቀፍ የጤና መድህን ምዝገባ።',
     requirements_en: [
       'Kebele Resident Family Roster booklet',
       'One photograph of household head and list of eligible dependents under 18',
@@ -634,14 +634,14 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     author_am: 'የመንግሥት ኮሙኒኬሽን ጉዳዮች ጽ/ቤት',
     isFeatured: true,
     summary_en: 'The Woreda Council convened for its ordinary session in Chacha, formally ratifying the annual public expenditure plan prioritizing rural water schemes, primary road graveling, and agricultural cooperative subsidies.',
-    summary_am: 'የአንጎለላ ጠራ ወረዳ ምክር ቤት በጫቻ ከተማ ባካሄደው መደበኛ ጉባዔ ለንጹህ መጠጥ ውሃ መስፋፋት፣ ለገጠር መንገዶች ጠጠር ማልበስ እና ለአርሶ አደር ማህበራት ድጋፍ ቅድሚያ የሰጠውን በጀት አጸደቀ።',
+    summary_am: 'የአንጎለላ ጠራ ወረዳ ምክር ቤት በጫጫ ከተማ ባካሄደው መደበኛ ጉባዔ ለንጹህ መጠጥ ውሃ መስፋፋት፣ ለገጠር መንገዶች ጠጠር ማልበስ እና ለአርሶ አደር ማህበራት ድጋፍ ቅድሚያ የሰጠውን በጀት አጸደቀ።',
     content_en: [
       'The 6th Angolela Tera Woreda Council has concluded its high-level ordinary session following two days of constructive deliberations in the administrative hall at Chacha town.',
       'The approved budget prioritizes three major socioeconomic pillars: the expansion of deep water borehole schemes across 6 moisture-stressed kebeles, the upgrade of 45 kilometers of community feeder roads connecting farming villages to the main A2 highway, and modernization subsidies for local agricultural cooperatives.',
       'Chief Administrator of the Woreda, in his address to council members, underscored that fiscal transparency, timely project completion, and strict monitoring of public expenditure will remain the uncompromising standards of the executive cabinet.',
     ],
     content_am: [
-      '6ኛው የአንጎለላ ጠራ ወረዳ ምክር ቤት በጫቻ ከተማ በሚገኘው የአስተዳደር አዳራሽ ለሁለት ቀናት ያካሄደውን መደበኛ ጉባዔ በተሳካ ሁኔታ አጠናቋል።',
+      '6ኛው የአንጎለላ ጠራ ወረዳ ምክር ቤት በጫጫ ከተማ በሚገኘው የአስተዳደር አዳራሽ ለሁለት ቀናት ያካሄደውን መደበኛ ጉባዔ በተሳካ ሁኔታ አጠናቋል።',
       'የጸደቀው በጀት ለሶስት ዋና ዋና የልማት መስኮች ትኩረት የሰጠ ሲሆን፡ በ6 ደረቃማ አካባቢዎች የጥልቅ ውሃ ጉድጓድ ቁፋሮ፣ 45 ኪሎ ሜትር የገጠር መንገዶችን ጠጠር የማልበስ እና የአርሶ አደሩን የህብረት ስራ ማህበራት የማጠናከር ስራዎችን ያካትታል።',
       'የወረዳው ዋና አስተዳዳሪ ለምክር ቤቱ አባላት ባደረጉት ንግግር የፋይናንስ ግልጽነትን ማስፈን፣ የልማት ፕሮጀክቶችን በወቅቱ ማጠናቀቅ እና የህዝብ ሀብትን በቁጠባ መጠቀም የአስፈጻሚው አካል የማይታጠፍ አቋም መሆኑን አሳስበዋል።',
     ],
@@ -673,7 +673,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
   {
     slug: 'chacha-industrial-park',
     title_en: 'Chacha Agro-Processing Corridor Invites Private Investment Proposals',
-    title_am: 'የጫቻ አግሮ-ፕሮሰሲንግ ኮሪደር ለግል ባለሀብቶች የኢንቨስትመንት ጥሪ አቀረበ',
+    title_am: 'የጫጫ አግሮ-ፕሮሰሲንግ ኮሪደር ለግል ባለሀብቶች የኢንቨስትመንት ጥሪ አቀረበ',
     category_en: 'Investment',
     category_am: 'ኢንቨስትመንት',
     date_en: 'September 12, 2026',

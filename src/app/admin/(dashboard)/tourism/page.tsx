@@ -334,7 +334,7 @@ export default function AdminTourismPage() {
                     type="text"
                     value={nameAm}
                     onChange={(e) => setNameAm(e.target.value)}
-                    placeholder="ምሳሌ፡ የጫቻ ወንዝ ፏፏቴ"
+                    placeholder="ምሳሌ፡ የጫጫ ወንዝ ፏፏቴ"
                     className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:border-emerald-500 focus:outline-none"
                   />
                 </div>

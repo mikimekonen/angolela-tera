@@ -11,7 +11,7 @@
       "phone": "+251 (0) 58 661 0201",
       "email": "agriculture@angolela-tera.gov.et",
       "location_en": "Main Administrative Compound, Block B, 1st Floor, Chacha",
-      "location_am": "ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ለ፣ 1ኛ ፎቅ፣ ጫቻ",
+      "location_am": "ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ለ፣ 1ኛ ፎቅ፣ ጫጫ",
       "about_en": "The Agriculture and Rural Development Office spearheads food security, crop yield maximization, natural resource conservation, and modern livestock breeding across the 19 rural kebeles of Angolela Tera.",
       "about_am": "የአንጎለላ ጠራ ወረዳ ግብርናና ገጠር ልማት ጽ/ቤት በ19ኙም የገጠር ቀበሌዎች የምግብ ዋስትናን ለማረጋገጥ፣ የሰብል ምርታማነትን ለማሳደግ፣ የተፈጥሮ ሀብት ጥበቃና ዘመናዊ የእንስሳት እርባታን ለማስፋፋት በግንባር ቀደምትነት ይሰራል፡",
       "responsibilities_en": [
@@ -50,7 +50,7 @@
       "phone": "+251 (0) 58 661 0202",
       "email": "land@angolela-tera.gov.et",
       "location_en": "Main Administrative Compound, Block A, Ground Floor, Chacha",
-      "location_am": "ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ሀ፣ ምድር ቤት፣ ጫቻ",
+      "location_am": "ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ሀ፣ ምድር ቤት፣ ጫጫ",
       "about_en": "Responsible for rural cadastral survey, primary and second-level landholding book issuance (Green Book), land use zoning, dispute demarcation, and environmental compliance monitoring.",
       "about_am": "የገጠር መሬት ይዞታ ምዝገባ፣ የሁለተኛ ደረጃ ደብተር (አረንጓዴ ደብተር) አሰጣጥ፣ የመሬት አጠቃቀም ፕላን፣ የይዞታ ወሰን ማካለልና የአካባቢ ተፅዕኖ ግምገማ ያከናውናል።",
       "responsibilities_en": [
@@ -89,7 +89,7 @@
       "phone": "+251 (0) 58 661 0203",
       "email": "trade@angolela-tera.gov.et",
       "location_en": "Commerce Building, Main Highway Junction, Chacha",
-      "location_am": "የንግድ ህንጻ፣ አውራ ጎዳና መገንጠያ፣ ጫቻ",
+      "location_am": "የንግድ ህንጻ፣ አውራ ጎዳና መገንጠያ፣ ጫጫ",
       "about_en": "Oversees domestic trade regulation, commercial licensing, consumer rights protection, cooperative union market linkages, and one-stop investor facilitation along the A2 highway corridor.",
       "about_am": "የንግድ ምዝገባና ፈቃድ አሰጣጥ፣ የገበያ መረጋጋት፣ የሸማቾች መብት ጥበቃ፣ የህብረት ስራ ማህበራት የገበያ ትስስር እና የኢንቨስትመንት ድጋፍ የሚሰጥ ጽህፈት ቤት ነው።",
       "responsibilities_en": [
@@ -102,7 +102,7 @@
         "የንግድ ምዝገባ፣ የንግድ ፈቃድ መስጠትና አመታዊ እድሳት ማካሄድ",
         "የገበያ ዋጋ ክትትልና የንግድ ሚዛን ትክክለኛነት ፍተሻ ማድረግ",
         "ለአርሶ አደር የህብረት ስራ ማህበራት የሰብልና የእንስሳት ገበያ ትስስር መፍጠር",
-        "በጫቻ ከተማ ለሚገነቡ አግሮ-ፕሮሰሲንግ ፕሮጀክቶች የአንድ መስኮት ድጋፍ መስጠት"
+        "በጫጫ ከተማ ለሚገነቡ አግሮ-ፕሮሰሲንግ ፕሮጀክቶች የአንድ መስኮት ድጋፍ መስጠት"
       ],
       "servicesProvided_en": [
         "New trade license issuance & amendment",
@@ -128,7 +128,7 @@
       "phone": "+251 (0) 58 661 0204",
       "email": "health@angolela-tera.gov.et",
       "location_en": "Chacha Primary Hospital Compound, Health Administration Wing",
-      "location_am": "የጫቻ የመጀመሪያ ደረጃ ሆስፒታል ቅጥር ጊቢ፣ የጤና አስተዳደር ህንጻ",
+      "location_am": "የጫጫ የመጀመሪያ ደረጃ ሆስፒታል ቅጥር ጊቢ፣ የጤና አስተዳደር ህንጻ",
       "about_en": "Directs the public healthcare delivery network across 1 Primary Hospital, 5 Health Centers, and 19 Kebele Health Posts. Administers Community-Based Health Insurance (CBHI) covering over 85% of woreda households.",
       "about_am": "በ1 የመጀመሪያ ደረጃ ሆስፒታል፣ በ5 ጤና ጣቢያዎችና በ19 የቀበሌ ጤና ኬላዎች የሚሰጠውን የህክምና አገልግሎት ይመራል፡ ከ85% በላይ የሚሆነውን ነዋሪ በማህበረሰብ አቀፍ ጤና መድህን (CBHI) አቅፏል።",
       "responsibilities_en": [
@@ -167,7 +167,7 @@
       "phone": "+251 (0) 58 661 0205",
       "email": "education@angolela-tera.gov.et",
       "location_en": "Education Bureau Building, High School Road, Chacha",
-      "location_am": "የትምህርት መምሪያ ህንጻ፣ አጠቃላይ 2ኛ ደረጃ ት/ቤት መንገድ፣ ጫቻ",
+      "location_am": "የትምህርት መምሪያ ህንጻ፣ አጠቃላይ 2ኛ ደረጃ ት/ቤት መንገድ፣ ጫጫ",
       "about_en": "Administers 38 Primary Schools, 4 Secondary Schools, and 2 Vocational Training clusters across Angolela Tera, ensuring equitable access to quality education, teacher development, and digital learning.",
       "about_am": "በወረዳው የሚገኙ 38 የአንደኛ ደረጃ ት/ቤቶችን፣ 4 የሁለተኛ ደረጃ ት/ቤቶችንና የቴክኒክና ሙያ ማዕከላትን ይመራል፡ የትምህርት ጥራትና ፍትሃዊ ተደራሽነትን ያረጋግጣል።",
       "responsibilities_en": [
@@ -206,7 +206,7 @@
       "phone": "+251 (0) 58 661 0206",
       "email": "finance@angolela-tera.gov.et",
       "location_en": "Main Administrative Compound, Block A, 1st Floor, Chacha",
-      "location_am": "ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ሀ፣ 1ኛ ፎቅ፣ ጫቻ",
+      "location_am": "ዋናው የአስተዳደር ቅጥር ጊቢ፣ ህንጻ ሀ፣ 1ኛ ፎቅ፣ ጫጫ",
       "about_en": "Prepares the annual woreda capital and recurrent budget, enforces public expenditure accountability, manages local revenue collection, and coordinates socio-economic planning.",
       "about_am": "የወረዳውን ዓመታዊ የካፒታልና የመደበኛ በጀት ያዘጋጃል፣ የፋይናንስ ህግጋትና ኦዲት አፈጻጸምን ይቆጣጠራል፣ የውስጥ ገቢ አሰባሰብንና የልማት እቅድን ይመራል።",
       "responsibilities_en": [
@@ -267,7 +267,7 @@
       "title_en": "Head of Health Office",
       "title_am": "የጤና ጽ/ቤት ኃላፊ",
       "bio_en": "Directs the healthcare network across Chacha Primary Hospital, health centers, and kebele health posts, expanding Community-Based Health Insurance (CBHI) coverage.",
-      "bio_am": "በጫቻ የመጀመሪያ ደረጃ ሆስፒታል፣ በጤና ጣቢያዎችና በ19ኙም የቀበሌ ጤና ኬላዎች የሚሰጡትን የህክምና አገልግሎቶችና የማህበረሰብ አቀፍ ጤና መድህን (CBHI) በበላይነት ይመራሉ።",
+      "bio_am": "በጫጫ የመጀመሪያ ደረጃ ሆስፒታል፣ በጤና ጣቢያዎችና በ19ኙም የቀበሌ ጤና ኬላዎች የሚሰጡትን የህክምና አገልግሎቶችና የማህበረሰብ አቀፍ ጤና መድህን (CBHI) በበላይነት ይመራሉ።",
       "displayOrder": 3,
       "status": "PUBLISHED"
     },
@@ -278,7 +278,7 @@
       "title_en": "Head of Labor and Skills Office",
       "title_am": "የስራና ክህሎት ጽ/ቤት ኃላፊ",
       "bio_en": "Directs youth and women employment creation, vocational skills training, enterprise incubation, and workforce placement along the Chacha economic corridor.",
-      "bio_am": "የወጣቶችና የሴቶች የስራ እድል ፈጠራን፣ የቴክኒክና ሙያ ክህሎት ስልጠናዎችን፣ የጥቃቅንና አነስተኛ ኢንተርፕራይዞች ምስረታንና በጫቻ የኢንዱስትሪ ኮሪደር የስራ ትስስርን ይመራሉ።",
+      "bio_am": "የወጣቶችና የሴቶች የስራ እድል ፈጠራን፣ የቴክኒክና ሙያ ክህሎት ስልጠናዎችን፣ የጥቃቅንና አነስተኛ ኢንተርፕራይዞች ምስረታንና በጫጫ የኢንዱስትሪ ኮሪደር የስራ ትስስርን ይመራሉ።",
       "displayOrder": 4,
       "status": "PUBLISHED"
     },
@@ -443,7 +443,7 @@
       "title_en": "Head of Urban & Infrastructure Development Office",
       "title_am": "የከተማና መሰረተ ልማት ጽ/ቤት ኃላፊ",
       "bio_en": "Directs master plan execution for Chacha municipality, cobblestone and all-weather road infrastructure, municipal utility services, and urban sanitation.",
-      "bio_am": "የጫቻ ከተማ ማስተር ፕላን አፈጻጸምን፣ የከተማ የኮብልስቶንና የአስፋልት መንገዶች ግንባታን፣ የማዘጋጃ ቤት አገልግሎቶችንና የመሰረተ ልማት ማስፋፊያ ስራዎችን ይመራሉ።",
+      "bio_am": "የጫጫ ከተማ ማስተር ፕላን አፈጻጸምን፣ የከተማ የኮብልስቶንና የአስፋልት መንገዶች ግንባታን፣ የማዘጋጃ ቤት አገልግሎቶችንና የመሰረተ ልማት ማስፋፊያ ስራዎችን ይመራሉ።",
       "displayOrder": 19,
       "status": "PUBLISHED"
     },
@@ -519,7 +519,7 @@
       ],
       "steps_am": [
         "ደረጃ 1፡ በነዋሪነት ከሚገኙበት ቀበሌ አስተዳደር የማረጋገጫ ደብዳቤ መያዝ",
-        "ደረጃ 2፡ የተሞላውን ማመልከቻ ሰነድ በጫቻ ማዕከላዊ የወሳኝ ኩነት መስኮት ማቅረብ",
+        "ደረጃ 2፡ የተሞላውን ማመልከቻ ሰነድ በጫጫ ማዕከላዊ የወሳኝ ኩነት መስኮት ማቅረብ",
         "ደረጃ 3፡ በብሔራዊ የወሳኝ ኩነት መረጃ ቋት ላይ ትክክለኛነቱ ሲረጋገጥ ማጽደቅ",
         "ደረጃ 4፡ ማህተም የተደረገበትንና የQR ኮድ ጥበቃ ያለውን ይፋዊ የምስክር ወረቀት መረከብ"
       ]
@@ -561,7 +561,7 @@
         "ደረጃ 1፡ በቀበሌው የመሬት አስተዳደር ኮሚቴ ማመልከቻ ማቅረብ",
         "ደረጃ 2፡ የባለሙያ የመስክ ልኬት በጂፒኤስ (GPS) መከናወንና የወሰን ማረጋገጥ",
         "ደረጃ 3፡ የይገባኛል ጥያቄ አለመኖሩን ለማረጋገጥ ለ30 ቀናት የሚቆይ ይፋዊ ማስታወቂያ",
-        "ደረጃ 4፡ በጫቻ የወረዳው መሬት አስተዳደር ጽ/ቤት አረንጓዴውን የይዞታ ደብተር መረከብ"
+        "ደረጃ 4፡ በጫጫ የወረዳው መሬት አስተዳደር ጽ/ቤት አረንጓዴውን የይዞታ ደብተር መረከብ"
       ]
     },
     {
@@ -618,7 +618,7 @@
       "cost_en": "600 ETB / household / year (Indigent households 100% subsidized by woreda)",
       "cost_am": "600 ብር ለአንድ አባወራ በዓመት (አቅመ ደካሞች በወረዳው በነጻ ይሸፈናሉ)",
       "description_en": "Enrollment in the regional solidarity health insurance fund ensuring family members receive free medical treatment, diagnostics, and essential pharmaceuticals across all government hospitals and health centers.",
-      "description_am": "መላው የቤተሰብ አባላት በወረዳው ባሉ ጤና ጣቢያዎችና በጫቻ ሆስፒታል ነጻ የህክምና፣ የላቦራቶሪና የመድሃኒት አገልግሎት የሚያገኙበት የማህበረሰብ አቀፍ የጤና መድህን ምዝገባ።",
+      "description_am": "መላው የቤተሰብ አባላት በወረዳው ባሉ ጤና ጣቢያዎችና በጫጫ ሆስፒታል ነጻ የህክምና፣ የላቦራቶሪና የመድሃኒት አገልግሎት የሚያገኙበት የማህበረሰብ አቀፍ የጤና መድህን ምዝገባ።",
       "requirements_en": [
         "Kebele Resident Family Roster booklet",
         "One photograph of household head and list of eligible dependents under 18",
@@ -734,14 +734,14 @@
       "author_am": "የመንግሥት ኮሙኒኬሽን ጉዳዮች ጽ/ቤት",
       "isFeatured": true,
       "summary_en": "The Woreda Council convened for its ordinary session in Chacha, formally ratifying the annual public expenditure plan prioritizing rural water schemes, primary road graveling, and agricultural cooperative subsidies.",
-      "summary_am": "የአንጎለላ ጠራ ወረዳ ምክር ቤት በጫቻ ከተማ ባካሄደው መደበኛ ጉባዔ ለንጹህ መጠጥ ውሃ መስፋፋት፣ ለገጠር መንገዶች ጠጠር ማልበስ እና ለአርሶ አደር ማህበራት ድጋፍ ቅድሚያ የሰጠውን በጀት አጸደቀ።",
+      "summary_am": "የአንጎለላ ጠራ ወረዳ ምክር ቤት በጫጫ ከተማ ባካሄደው መደበኛ ጉባዔ ለንጹህ መጠጥ ውሃ መስፋፋት፣ ለገጠር መንገዶች ጠጠር ማልበስ እና ለአርሶ አደር ማህበራት ድጋፍ ቅድሚያ የሰጠውን በጀት አጸደቀ።",
       "content_en": [
         "The 6th Angolela Tera Woreda Council has concluded its high-level ordinary session following two days of constructive deliberations in the administrative hall at Chacha town.",
         "The approved budget prioritizes three major socioeconomic pillars: the expansion of deep water borehole schemes across 6 moisture-stressed kebeles, the upgrade of 45 kilometers of community feeder roads connecting farming villages to the main A2 highway, and modernization subsidies for local agricultural cooperatives.",
         "Chief Administrator of the Woreda, in his address to council members, underscored that fiscal transparency, timely project completion, and strict monitoring of public expenditure will remain the uncompromising standards of the executive cabinet."
       ],
       "content_am": [
-        "6ኛው የአንጎለላ ጠራ ወረዳ ምክር ቤት በጫቻ ከተማ በሚገኘው የአስተዳደር አዳራሽ ለሁለት ቀናት ያካሄደውን መደበኛ ጉባዔ በተሳካ ሁኔታ አጠናቋል።",
+        "6ኛው የአንጎለላ ጠራ ወረዳ ምክር ቤት በጫጫ ከተማ በሚገኘው የአስተዳደር አዳራሽ ለሁለት ቀናት ያካሄደውን መደበኛ ጉባዔ በተሳካ ሁኔታ አጠናቋል።",
         "የጸደቀው በጀት ለሶስት ዋና ዋና የልማት መስኮች ትኩረት የሰጠ ሲሆን፡ በ6 ደረቃማ አካባቢዎች የጥልቅ ውሃ ጉድጓድ ቁፋሮ፣ 45 ኪሎ ሜትር የገጠር መንገዶችን ጠጠር የማልበስ እና የአርሶ አደሩን የህብረት ስራ ማህበራት የማጠናከር ስራዎችን ያካትታል።",
         "የወረዳው ዋና አስተዳዳሪ ለምክር ቤቱ አባላት ባደረጉት ንግግር የፋይናንስ ግልጽነትን ማስፈን፣ የልማት ፕሮጀክቶችን በወቅቱ ማጠናቀቅ እና የህዝብ ሀብትን በቁጠባ መጠቀም የአስፈጻሚው አካል የማይታጠፍ አቋም መሆኑን አሳስበዋል።"
       ]
@@ -773,7 +773,7 @@
     {
       "slug": "chacha-industrial-park",
       "title_en": "Chacha Agro-Processing Corridor Invites Private Investment Proposals",
-      "title_am": "የጫቻ አግሮ-ፕሮሰሲንግ ኮሪደር ለግል ባለሀብቶች የኢንቨስትመንት ጥሪ አቀረበ",
+      "title_am": "የጫጫ አግሮ-ፕሮሰሲንግ ኮሪደር ለግል ባለሀብቶች የኢንቨስትመንት ጥሪ አቀረበ",
       "category_en": "Investment",
       "category_am": "ኢንቨስትመንት",
       "date_en": "September 12, 2026",
@@ -800,7 +800,7 @@
       "id": "keb-chacha",
       "slug": "chacha-town-01",
       "name_en": "Chacha Central Town (Kebele 01)",
-      "name_am": "ጫቻ ማዕከላዊ ከተማ (ቀበሌ 01)",
+      "name_am": "ጫጫ ማዕከላዊ ከተማ (ቀበሌ 01)",
       "type": "URBAN_TOWN",
       "population": 18450,
       "distanceFromCapitalKm": 0,
@@ -860,7 +860,7 @@
       "distanceFromCapitalKm": 9,
       "mainAgroEcology": "Weyna Dega",
       "economicActivities_en": "Cereal production (teff and wheat), poultry farms, rural smallholder irrigation along the Chacha basin.",
-      "economicActivities_am": "የጤፍና ስንዴ ምርት፣ የዶሮ እርባታ፣ በጫቻ ወንዝ ተፋሰስ መስኖ ልማት።",
+      "economicActivities_am": "የጤፍና ስንዴ ምርት፣ የዶሮ እርባታ፣ በጫጫ ወንዝ ተፋሰስ መስኖ ልማት።",
       "administratorName": "Ato Melaku Kebede",
       "contactPhone": "+251 58 661 0222",
       "displayOrder": 4,
@@ -875,7 +875,7 @@
       "name_en": "JERR PLC (Integrated Food & Agro-Processing Complex)",
       "name_am": "ጄር ኃ.የተ.የ.ማ (የተቀናጀ የምግብና አግሮ-ኢንዱስትሪ ማዕከል)",
       "description_en": "A premier industrial conglomerate operating a multi-billion Birr integrated agro-industrial park in the Chacha corridor. Features high-capacity edible oil refining (fortified soya cooking oil), commercial animal feed processing, corn soy blend (CSB++) manufacturing for nutrition programs, and bulk agricultural commodity processing.",
-      "description_am": "በጫቻ ኢንዱስትሪ ኮሪደር ውስጥ የሚገኝ ግዙፍ የተቀናጀ የምግብ እና አግሮ-ፕሮሰሲንግ ማዕከል ያለው ድርጅት። ዘመናዊ የምግብ ዘይት ማጣሪያ ፋብሪካ፣ የተመጣጠነ የእንስሳት መኖ ማቀነባበሪያ፣ የCSB++ አልሚ ምግብ ምርት እና የጥራጥሬ ምርቶችን በከፍተኛ ደረጃ በማቀነባበር በመላው ሀገሪቱ ያሰራጫል።",
+      "description_am": "በጫጫ ኢንዱስትሪ ኮሪደር ውስጥ የሚገኝ ግዙፍ የተቀናጀ የምግብ እና አግሮ-ፕሮሰሲንግ ማዕከል ያለው ድርጅት። ዘመናዊ የምግብ ዘይት ማጣሪያ ፋብሪካ፣ የተመጣጠነ የእንስሳት መኖ ማቀነባበሪያ፣ የCSB++ አልሚ ምግብ ምርት እና የጥራጥሬ ምርቶችን በከፍተኛ ደረጃ በማቀነባበር በመላው ሀገሪቱ ያሰራጫል።",
       "sector": "AGRO_PROCESSING",
       "address": "Chacha Agro-Industrial Corridor, Angolela Tera Woreda",
       "phone": "+251 (0) 11 667 4000",
@@ -921,7 +921,7 @@
       "name_en": "Mamo Kacha PLC (Highland Dairy & Agro-Industry)",
       "name_am": "ማሞ ካቻ ኃ.የተ.የ.ማ (የደጋ ወተትና አግሮ-ኢንዱስትሪ)",
       "description_en": "Honoring the legacy of visionary entrepreneur Mamo Yenberberu (\"Mamo Kacha\"), the enterprise operates large-scale highland dairy farming, modern cold-chain logistics, and automated processing facilities in the Chacha milk corridor. Produces premium pasteurized milk, provolone and gouda cheeses, and table butter while sourcing from hundreds of local smallholder cattle cooperatives.",
-      "description_am": "በታዋቂው ኢትዮጵያዊ የፈጠራ ሰው አቶ ማሞ ይንበርበሩ (ማሞ ካቻ) ስም የተሰየመ ድርጅት ሲሆን፣ በጫቻ የወተት ተፋሰስ ዘመናዊ የወተት ላም እርባታና ማቀነባበሪያ ፋብሪካ ያካሂዳል። ጥራት ያለው ፓስቸራይዝድ ወተት፣ አይብ፣ ቅቤ በማምረት ከአካባቢው አርሶ አደሮች ጋር በቅርበት ይሰራል::",
+      "description_am": "በታዋቂው ኢትዮጵያዊ የፈጠራ ሰው አቶ ማሞ ይንበርበሩ (ማሞ ካቻ) ስም የተሰየመ ድርጅት ሲሆን፣ በጫጫ የወተት ተፋሰስ ዘመናዊ የወተት ላም እርባታና ማቀነባበሪያ ፋብሪካ ያካሂዳል። ጥራት ያለው ፓስቸራይዝድ ወተት፣ አይብ፣ ቅቤ በማምረት ከአካባቢው አርሶ አደሮች ጋር በቅርበት ይሰራል::",
       "sector": "AGRO_PROCESSING",
       "address": "Chacha–Sheno Agricultural Corridor, Angolela Tera Woreda",
       "phone": "+251 (0) 11 551 2233",
@@ -975,9 +975,9 @@
     {
       "id": "biz-rorank",
       "name_en": "Rorank Business S.C. (Chacha Distillery & Bottling Plant)",
-      "name_am": "ሮራንክ ቢዝነስ አ.ማ (የጫቻ ዳይስቲለሪ እና ቦትሊንግ ፋብሪካ)",
+      "name_am": "ሮራንክ ቢዝነስ አ.ማ (የጫጫ ዳይስቲለሪ እና ቦትሊንግ ፋብሪካ)",
       "description_en": "One of Ethiopia's foremost industrial beverage manufacturers operating a multi-hectare distillery complex in the Chacha industrial sector. Renowned for market-leading brands including Super Eagle Dry Gin, Crystal Vodka, and Sofi aperitifs, generating substantial manufacturing employment and local raw material linkages.",
-      "description_am": "በጫቻ ከተማ ሰፊ ግቢ ያለውና በሀገሪቱ ቀዳሚ ከሚባሉት የአልኮል ማጣሪያና መጠጥ ማምረቻ ድርጅቶች አንዱ። እንደ ሱፐር ኢግል (Super Eagle)፣ ክሪስታል ቮድካ (Crystal) እና ሶፊ ያሉ ታዋቂ ምርቶችን በማምረት ለበርካታ የአካባቢ ወጣቶች ቋሚ የስራ እድል ፈጥሯል።",
+      "description_am": "በጫጫ ከተማ ሰፊ ግቢ ያለውና በሀገሪቱ ቀዳሚ ከሚባሉት የአልኮል ማጣሪያና መጠጥ ማምረቻ ድርጅቶች አንዱ። እንደ ሱፐር ኢግል (Super Eagle)፣ ክሪስታል ቮድካ (Crystal) እና ሶፊ ያሉ ታዋቂ ምርቶችን በማምረት ለበርካታ የአካባቢ ወጣቶች ቋሚ የስራ እድል ፈጥሯል።",
       "sector": "MANUFACTURING",
       "address": "Chacha Industrial Zone, Angolela Tera Woreda",
       "phone": "+251 (0) 11 663 8811",
@@ -1032,7 +1032,7 @@
       "name_en": "Rut & Hirut Dairy Production & Processing PLC",
       "name_am": "ሩት እና ሂሩት የወተት ላም እርባታና ማቀነባበሪያ ኃ.የተ.የ.ማ",
       "description_en": "A pioneer commercial dairy processing and cattle breeding enterprise in Chacha. Operates modern milk chilling centers, automated pasteurization, and packing lines supplying fresh milk, yogurt, and specialty highland cheeses across regional and Addis Ababa retail chains.",
-      "description_am": "በጫቻ ከተማ የተመሰረተ ቀዳሚ የወተት ላም እርባታና የወተት ምርቶች ማቀነባበሪያ ድርጅት። ዘመናዊ ማቀዝቀዣ፣ ፓስቸራይዜሽን እና ማሸጊያ ያለው ሲሆን ትኩስ ወተት፣ እርጎ እና የተለያዩ አይቦችን ለገበያ ያቀርባል።",
+      "description_am": "በጫጫ ከተማ የተመሰረተ ቀዳሚ የወተት ላም እርባታና የወተት ምርቶች ማቀነባበሪያ ድርጅት። ዘመናዊ ማቀዝቀዣ፣ ፓስቸራይዜሽን እና ማሸጊያ ያለው ሲሆን ትኩስ ወተት፣ እርጎ እና የተለያዩ አይቦችን ለገበያ ያቀርባል።",
       "sector": "AGRO_PROCESSING",
       "address": "Chacha Town, Kebele 02, Angolela Tera Woreda",
       "phone": "+251 (0) 58 661 0420",
@@ -1049,7 +1049,7 @@
       "name_en": "NOSA Manufacturing PLC",
       "name_am": "ኖሳ ማኑፋክቸሪንግ ኃ.የተ.የ.ማ",
       "description_en": "Specialized beverage distillation and industrial alcohol processing plant situated in Chacha, producing quality spirits including Double Dutch Vodka and food-grade industrial alcohol derivatives.",
-      "description_am": "በጫቻ ኢንዱስትሪ ዞን የሚገኝ የአልኮል ማጣሪያና መጠጥ ማምረቻ ድርጅት። ዳብል ደች ቮድካ (Double Dutch Vodka) እና ሌሎች ጥራት ያላቸው መጠጦችን በማምረት ይታወቃል።",
+      "description_am": "በጫጫ ኢንዱስትሪ ዞን የሚገኝ የአልኮል ማጣሪያና መጠጥ ማምረቻ ድርጅት። ዳብል ደች ቮድካ (Double Dutch Vodka) እና ሌሎች ጥራት ያላቸው መጠጦችን በማምረት ይታወቃል።",
       "sector": "MANUFACTURING",
       "address": "Chacha Industrial Zone, Angolela Tera Woreda",
       "phone": "+251 (0) 11 661 9922",
@@ -1074,7 +1074,7 @@
     {
       "id": "biz-4",
       "name_en": "Chacha Honey & Bee Products Enterprise",
-      "name_am": "ጫቻ ማር እና የንብ ምርቶች ድርጅት",
+      "name_am": "ጫጫ ማር እና የንብ ምርቶች ድርጅት",
       "description_en": "A traditional and organic honey producer tapping into the rich highland flora of Angolela Tera. The enterprise exports bulk and packaged Ethiopian highland honey to Addis Ababa and has recently entered international market channels.",
       "description_am": "ወደ አዲስ አበባ ጅምላ እና ፓኬጅ ያደረገ ኢትዮጵያዊ ደጋ ማር ይልካል። ወደ ዓለም አቀፍ ገበያ ለመግባት ዝግጅቱን አጠናቋል።",
       "sector": "AGRO_PROCESSING",
@@ -1095,7 +1095,7 @@
       "name_en": "JERR PLC",
       "name_am": "ጄር ኃ.የተ.የ.ማ",
       "description_en": "A premier industrial conglomerate and key development partner operating an integrated agro-industrial park in the Chacha corridor. Partners with the Woreda on local farmer grain aggregation, fortified vegetable oil distribution, commercial animal feed processing, and large-scale youth employment generation.",
-      "description_am": "በጫቻ የኢንዱስትሪ ኮሪደር ውስጥ ግዙፍ የተቀናጀ የምግብና አግሮ-ኢንዱስትሪ ማዕከል ያለው ቁልፍ የልማት አጋር ድርጅት። ከወረዳው ጋር በአርሶ አደሮች የሰብል ገበያ ትስስር፣ በምግብ ዘይት አቅርቦት፣ በእንስሳት መኖና በስራ እድል ፈጠራ በስትራቴጂካዊ አጋርነት ይሰራል::",
+      "description_am": "በጫጫ የኢንዱስትሪ ኮሪደር ውስጥ ግዙፍ የተቀናጀ የምግብና አግሮ-ኢንዱስትሪ ማዕከል ያለው ቁልፍ የልማት አጋር ድርጅት። ከወረዳው ጋር በአርሶ አደሮች የሰብል ገበያ ትስስር፣ በምግብ ዘይት አቅርቦት፣ በእንስሳት መኖና በስራ እድል ፈጠራ በስትራቴጂካዊ አጋርነት ይሰራል::",
       "partnerType": "PRIVATE_SECTOR",
       "country": "Ethiopia",
       "website": "https://www.jerrplc.com",
@@ -1145,7 +1145,7 @@
       "summary_en": "Prime investment opportunity leveraging high milk yield in Angolela Tera highlands with dedicated municipal land allocation.",
       "summary_am": "በአንጎለላ ጠራ ደጋማ ስነ-ምህዳር ያለውን የተትረፈረፈ የወተት አቅርቦት ወደ ውድ እሴት ለመቀየር የተመደበ የኢንቨስትመንት መሬት።",
       "description_en": "The Woreda produces over 45,000 liters of milk daily from local smallholder cooperatives. An investor is sought to establish an integrated pasteurization, packaging, and cheese processing facility in the Chacha Industrial Corridor with direct highway access to Addis Ababa (110 km).",
-      "description_am": "ወረዳው በቀን ከ45 ሺህ ሊትር በላይ ወተት የሚያመነጭ ሲሆን ባለሀብቶች በጫቻ የኢንዱስትሪ ኮሪደር ውስጥ ዘመናዊ የወተት ማጣሪያ እና ማሸጊያ እንዲያቋቁሙ አስፈላጊው ድጋፍ ይደረጋል።",
+      "description_am": "ወረዳው በቀን ከ45 ሺህ ሊትር በላይ ወተት የሚያመነጭ ሲሆን ባለሀብቶች በጫጫ የኢንዱስትሪ ኮሪደር ውስጥ ዘመናዊ የወተት ማጣሪያ እና ማሸጊያ እንዲያቋቁሙ አስፈላጊው ድጋፍ ይደረጋል።",
       "availableLandHa": 4.5,
       "incentives_en": "5-year income tax exemption, duty-free machinery import, pre-serviced water connection, 20-day expedited land lease certificate.",
       "incentives_am": "የ5 ዓመት የገቢ ግብር ነፃ መብት፣ ከቀረጥ ነፃ የፋብሪካ ማሽነሪ ማስገባት፣ የውሃ መስመር ዝርጋታ ድጋፍ።",
@@ -1463,7 +1463,7 @@
     "government_name_en": "Angolela Tera Woreda Administration",
     "government_name_am": "የአንጎለላ ጠራ ወረዳ አስተዳደር",
     "capital_city_en": "Chacha",
-    "capital_city_am": "ጫቻ",
+    "capital_city_am": "ጫጫ",
     "zone_name_en": "North Shewa Zone, Amhara Region, Ethiopia",
     "zone_name_am": "ሰሜን ሸዋ ዞን፣ አማራ ክልል፣ ኢትዮጵያ",
     "contact_phone": "+251 (0) 58 661 0100",
@@ -1550,10 +1550,10 @@
       "id": "tour-chacha-falls",
       "slug": "chacha-river-waterfalls",
       "name_en": "Chacha River Gorge & Waterfalls",
-      "name_am": "የጫቻ ወንዝ ፏፏቴ",
+      "name_am": "የጫጫ ወንዝ ፏፏቴ",
       "category": "Natural Landscape",
       "description_en": "The Chacha River carves dramatic gorges through basalt formations before cascading in a spectacular multi-tiered waterfall system. The surrounding gallery forest is home to Gelada baboons, Colobus monkeys, and rare highland birds. A popular destination for eco-tourism and adventure hiking groups.",
-      "description_am": "የጫቻ ወንዝ በቤዛልት ቋጥኞች ውስጥ ልዩ ሸለቆ ፈጥሮ ወደ ብዙ ደረጃ ፏፏቴ ይፈሳል። ዙሪያው ጀሌዳ ዝንጀሮዎች፣ ቆሎቡስ ዝንጀሮዎችና ልዩ ደጋ ወፎች ያሉበት ጫካ ይዞ ይገኛል።",
+      "description_am": "የጫጫ ወንዝ በቤዛልት ቋጥኞች ውስጥ ልዩ ሸለቆ ፈጥሮ ወደ ብዙ ደረጃ ፏፏቴ ይፈሳል። ዙሪያው ጀሌዳ ዝንጀሮዎች፣ ቆሎቡስ ዝንጀሮዎችና ልዩ ደጋ ወፎች ያሉበት ጫካ ይዞ ይገኛል።",
       "location_en": "14 km west of Chacha town along the lower Chacha basin.",
       "mapCoordinates": "9.6890° N, 39.6721° E",
       "activities_en": [
@@ -1658,7 +1658,7 @@
       "title_am": "ሁለት የመጀመሪያ ደረጃ ት/ቤቶች ግንባታ",
       "sector": "Education",
       "description_en": "Construction of two new 8-classroom primary school buildings in underserved kebeles, plus expansion of existing Chacha Primary School with a modern science laboratory and library facility.",
-      "description_am": "ለሁለት ቀበሌዎች ሁለት አዳዲስ የ8 ክፍል የመጀመሪያ ደረጃ ት/ቤቶች ግንባታ፣ ምናምን የጫቻ ት/ቤት ሳይንስ ላቦራቶሪ ማስፋፊያ።",
+      "description_am": "ለሁለት ቀበሌዎች ሁለት አዳዲስ የ8 ክፍል የመጀመሪያ ደረጃ ት/ቤቶች ግንባታ፣ ምናምን የጫጫ ት/ቤት ሳይንስ ላቦራቶሪ ማስፋፊያ።",
       "location_en": "Geyet Kebele, Kotu Kebele, and Chacha Town",
       "budget_etb": 18500000,
       "fundingSource": "Amhara Education Bureau + Community Contribution",
@@ -1677,10 +1677,10 @@
       "id": "proj-health-1",
       "slug": "chacha-health-center-upgrade",
       "title_en": "Chacha Health Center Capacity Expansion",
-      "title_am": "የጫቻ ጤና ጣቢያ አቅም ማጎልበቻ ፕሮጀክት",
+      "title_am": "የጫጫ ጤና ጣቢያ አቅም ማጎልበቻ ፕሮጀክት",
       "sector": "Health",
       "description_en": "Expansion of Chacha Health Center to a primary hospital level with addition of maternity ward (20 beds), surgical theatre, and modern diagnostic laboratory. Targets reducing referrals to Debre Berhan Regional Hospital by 40%.",
-      "description_am": "የጫቻ ጤና ጣቢያን ወደ ዋና ሆስፒታል ደረጃ ማሳደግ፤ 20 አልጋ ያለው የወሊድ ክፍል፣ ቀዶ ጥገና ቤትና ዘመናዊ ምርመራ ቤት ማካተት። ወደ ደብረ ብርሃን ሆስፒታል የሚደረጉ ሪፈራሎችን በ40% ለመቀነስ ያለመ።",
+      "description_am": "የጫጫ ጤና ጣቢያን ወደ ዋና ሆስፒታል ደረጃ ማሳደግ፤ 20 አልጋ ያለው የወሊድ ክፍል፣ ቀዶ ጥገና ቤትና ዘመናዊ ምርመራ ቤት ማካተት። ወደ ደብረ ብርሃን ሆስፒታል የሚደረጉ ሪፈራሎችን በ40% ለመቀነስ ያለመ።",
       "location_en": "Chacha Town, Angolela Tera Woreda",
       "budget_etb": 62000000,
       "fundingSource": "Federal Ministry of Health + PEPFAR",
@@ -1775,7 +1775,7 @@
     {
       "id": "slider-2",
       "title_en": "Chacha Strategic Agro-Industrial & Manufacturing Corridor",
-      "title_am": "የጫቻ ስትራቴጂካዊ የአግሮ-ኢንዱስትሪና የማኑፋክቸሪንግ ኮሪደር",
+      "title_am": "የጫጫ ስትራቴጂካዊ የአግሮ-ኢንዱስትሪና የማኑፋክቸሪንግ ኮሪደር",
       "subtitle_en": "110 km from Addis Ababa on the main trunk highway, offering serviced industrial land, reliable spring water, and dedicated investor facilitation.",
       "subtitle_am": "ከአዲስ አበባ 110 ኪ.ሜ ብቻ ርቀት ላይ የሚገኝ፣ የተሟላ መሰረተ ልማትና ለባለሀብቶች ምቹ ድጋፍ የሚሰጥበት የኢንቨስትመንት ቀጠና።",
       "imageUrl": "/images/hero-slider-2.jpg",
@@ -1790,7 +1790,7 @@
       "title_en": "Historic Royal Shewa Heritage & Highland Ecotourism",
       "title_am": "የቀዳማዊ ሸዋ ታሪካዊ ቅርስና የደጋ የተፈጥሮ ቱሪዝም",
       "subtitle_en": "Discover King Sahle Selassie historic palace grounds, scenic Chacha river waterfalls, and ancient highland monasteries.",
-      "subtitle_am": "የንጉሥ ሳህለ ሥላሴ ታሪካዊ መቀመጫን፣ አስደናቂውን የጫቻ ወንዝ ፏፏቴና ጥንታዊ ገዳማትን ይጎብኙ።",
+      "subtitle_am": "የንጉሥ ሳህለ ሥላሴ ታሪካዊ መቀመጫን፣ አስደናቂውን የጫጫ ወንዝ ፏፏቴና ጥንታዊ ገዳማትን ይጎብኙ።",
       "imageUrl": "/images/hero-slider-3.jpg",
       "buttonText_en": "Discover Tourism Destinations",
       "buttonText_am": "የቱሪዝም መስህቦችን ይጎብኙ",
@@ -1825,7 +1825,7 @@
       "mimeType": "image/jpeg",
       "fileSize": 1845000,
       "altText_en": "Panoramic view of Chacha municipal administrative center",
-      "altText_am": "የጫቻ ከተማ ማዘጋጃ ቤታዊ ማዕከል ገጽታ",
+      "altText_am": "የጫጫ ከተማ ማዘጋጃ ቤታዊ ማዕከል ገጽታ",
       "caption": "Chacha town administrative center along the Addis Ababa - Debre Berhan highway corridor",
       "uploadedBy": "admin@angolelatera.gov.et",
       "createdAt": "2025-01-10T08:30:00.000Z"

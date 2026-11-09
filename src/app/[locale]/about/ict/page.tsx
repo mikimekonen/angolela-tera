@@ -111,7 +111,7 @@ export default async function ICTTeamPage({
         'የወረዳው የቴክኖሎጂ ቡድን አባላት ቀጥተኛ አድራሻዎች። ለሲስተም፣ ለኔትወርክና ለቴክኒክ ድጋፍ ከታች የተዘረዘሩትን ባለሙያዎች ማነጋገር ይችላሉ።',
       skillsLabel: 'የሙያ መስኮችና ልዩ ችሎታዎች',
       helpdeskTitle: 'የወረዳው አይሲቲ ድጋፍና ሄልፕዴስክ ቢሮ',
-      locationLabel: 'አድራሻ፡ ዋናው የአስተዳደር ቅጥር ጊቢ፣ ጫቻ ከተማ',
+      locationLabel: 'አድራሻ፡ ዋናው የአስተዳደር ቅጥር ጊቢ፣ ጫጫ ከተማ',
       hoursLabel: 'የስራ ሰዓት፡ ከሰኞ – አርብ፡ ከጠዋቱ 2:30 – 11:30',
       callBtn: 'ይደውሉ',
       emailBtn: 'ኢሜይል ይላኩ',

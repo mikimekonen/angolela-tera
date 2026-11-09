@@ -115,7 +115,7 @@ export const OFFICIAL_LEADERS: LeaderData[] = [
     bio_en:
       'Directs the healthcare network across Chacha Primary Hospital, health centers, and kebele health posts, expanding Community-Based Health Insurance (CBHI) coverage and primary healthcare access.',
     bio_am:
-      'በጫቻ የመጀመሪያ ደረጃ ሆስፒታል፣ በጤና ጣቢያዎችና በ19ኙም የቀበሌ ጤና ኬላዎች የሚሰጡትን የህክምና አገልግሎቶች፣ የወረርሽኝ መከላከልና የማህበረሰብ አቀፍ ጤና መድህን (CBHI) ሽፋን በበላይነት ይመራሉ።',
+      'በጫጫ የመጀመሪያ ደረጃ ሆስፒታል፣ በጤና ጣቢያዎችና በ19ኙም የቀበሌ ጤና ኬላዎች የሚሰጡትን የህክምና አገልግሎቶች፣ የወረርሽኝ መከላከልና የማህበረሰብ አቀፍ ጤና መድህን (CBHI) ሽፋን በበላይነት ይመራሉ።',
     photo: '',
     icon: '🏥',
     displayOrder: 3,
@@ -151,7 +151,7 @@ export const OFFICIAL_LEADERS: LeaderData[] = [
     bio_en:
       'Directs youth and women employment creation, technical and vocational skills training, micro-enterprise incubation, and workforce linkage to manufacturing hubs along the Chacha economic corridor.',
     bio_am:
-      'የወጣቶችና የሴቶች የስራ እድል ፈጠራን፣ የቴክኒክና ሙያ ክህሎት ስልጠናዎችን፣ የጥቃቅንና አነስተኛ ኢንተርፕራይዞች ምስረታንና በጫቻ የኢንዱስትሪ ኮሪደር የስራ ትስስርን ይመራሉ።',
+      'የወጣቶችና የሴቶች የስራ እድል ፈጠራን፣ የቴክኒክና ሙያ ክህሎት ስልጠናዎችን፣ የጥቃቅንና አነስተኛ ኢንተርፕራይዞች ምስረታንና በጫጫ የኢንዱስትሪ ኮሪደር የስራ ትስስርን ይመራሉ።',
     photo: '',
     icon: '💼',
     displayOrder: 4,
@@ -691,7 +691,7 @@ export const OFFICIAL_LEADERS: LeaderData[] = [
     bio_en:
       'Directs master plan execution for Chacha municipality, cobblestone and all-weather road infrastructure, municipal utility services, building permitting, and urban sanitation systems.',
     bio_am:
-      'የጫቻ ከተማ ማስተር ፕላን አፈጻጸምን፣ የከተማ የኮብልስቶንና የአስፋልት መንገዶች ግንባታን፣ የማዘጋጃ ቤት አገልግሎቶችንና የመሰረተ ልማት ማስፋፊያ ስራዎችን በበላይነት ይመራሉ።',
+      'የጫጫ ከተማ ማስተር ፕላን አፈጻጸምን፣ የከተማ የኮብልስቶንና የአስፋልት መንገዶች ግንባታን፣ የማዘጋጃ ቤት አገልግሎቶችንና የመሰረተ ልማት ማስፋፊያ ስራዎችን በበላይነት ይመራሉ።',
     photo: '',
     icon: '🛣️',
     displayOrder: 19,
@@ -703,7 +703,7 @@ export const OFFICIAL_LEADERS: LeaderData[] = [
       'Solid Waste Management & Environmental Urban Sanitation',
     ],
     portfolios_am: [
-      'የጫቻ ከተማ መዋቅራዊ ፕላን ተገዢነትና የዞኒንግ ቁጥጥር',
+      'የጫጫ ከተማ መዋቅራዊ ፕላን ተገዢነትና የዞኒንግ ቁጥጥር',
       'የከተማ ኮብልስቶን መንገዶችና የፍሳሽ ማስወገጃ ግንባታ',
       'የማዘጋጃ ቤት የህዝብ አገልግሎቶችና የከተማ ጽዳትና ውበት',
       'የደረቅ ቆሻሻ አወጋገድና የከተማ ንጽህና መሰረተ ልማት',
