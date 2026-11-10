@@ -10,6 +10,7 @@ import {
   getNews,
 } from '@/lib/dataStore'
 import { HeroSection } from '@/components/home/HeroSection'
+import { EmergencyBanner } from '@/components/home/EmergencyBanner'
 import { CitizenActionFinder } from '@/components/home/CitizenActionFinder'
 import { AtAGlance } from '@/components/home/AtAGlance'
 import { ServicesSection } from '@/components/home/ServicesSection'
@@ -50,6 +51,9 @@ export default async function HomePage({
 
   return (
     <div className="flex flex-col w-full">
+      {/* 0. Official Public Safety & Civic Notice Banner */}
+      <EmergencyBanner locale={locale as Locale} />
+
       {/* 1. Official Governmental Hero Section with Topographic Graphics & Animated Stats */}
       {isEnabled('hero') && <HeroSection locale={locale as Locale} sliders={sliders} />}
 

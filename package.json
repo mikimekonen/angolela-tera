@@ -10,7 +10,9 @@
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "prisma:seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
-    "db:sync": "ts-node --compiler-options {\"module\":\"CommonJS\"} scripts/sync-database.ts"
+    "db:sync": "ts-node --compiler-options {\"module\":\"CommonJS\"} scripts/sync-database.ts",
+    "backup": "node scripts/backup-restore.js --backup",
+    "backup:test": "node scripts/backup-restore.js --test"
   },
   "dependencies": {
     "@prisma/client": "^6.4.1",

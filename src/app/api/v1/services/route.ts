@@ -57,12 +57,16 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    const requestedStatus = body.status || 'PUBLISHED'
+    const canPublish = hasPermission(session.role, 'canPublish')
+    const finalStatus = (requestedStatus === 'PUBLISHED' && !canPublish) ? 'REVIEW' : requestedStatus
+
     const newService = {
       id: `srv_${Date.now()}`,
       slug: body.slug,
       title_en: body.title_en,
       title_am: body.title_am || body.title_en,
-      officeSlug: body.officeSlug || 'administration',
+      officeSlug: body.officeSlug || (session.officeId ? session.officeId : 'administration'),
       officeName_en: body.officeName_en || 'Woreda Administration',
       officeName_am: body.officeName_am || 'የወረዳ አስተዳደር',
       category_en: body.category_en || 'General Public Service',
@@ -77,7 +81,7 @@ export async function POST(req: NextRequest) {
       requirements_am: Array.isArray(body.requirements_am) ? body.requirements_am : [],
       steps_en: Array.isArray(body.steps_en) ? body.steps_en : [],
       steps_am: Array.isArray(body.steps_am) ? body.steps_am : [],
-      status: 'PUBLISHED',
+      status: finalStatus,
       createdAt: new Date().toISOString(),
     }
 
@@ -114,6 +118,13 @@ export async function PUT(req: NextRequest) {
     const body = await req.json()
     if (!body.slug) {
       return NextResponse.json({ success: false, error: 'slug is required' }, { status: 400 })
+    }
+
+    if (body.status === 'PUBLISHED' && !hasPermission(session.role, 'canPublish')) {
+      return NextResponse.json(
+        { success: false, error: 'Forbidden: Insufficient privileges to publish service specifications directly. Status must be set to REVIEW.' },
+        { status: 403 }
+      )
     }
 
     const updated = updateService(body.slug, body, session.name)

@@ -108,6 +108,16 @@ export function Footer({ locale, settings }: FooterProps) {
                 </Link>
               </li>
               <li>
+                <Link href={`/${locale}/track`} className="hover:text-[#FED100] transition-colors flex items-center gap-1.5 text-amber-300 font-semibold">
+                  <span className="text-[#c8931a]">›</span> {locale === 'am' ? 'የጉዳይ ወይም የአቤቱታ ደረጃ መከታተያ' : 'Track Request / Grievance'}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${locale}/offices`} className="hover:text-[#FED100] transition-colors flex items-center gap-1.5">
+                  <span className="text-[#c8931a]">›</span> {locale === 'am' ? 'የሴክተር መሥሪያ ቤቶች ማውጫ' : 'Government Offices Directory'}
+                </Link>
+              </li>
+              <li>
                 <Link href={`/${locale}/resources/forms`} className="hover:text-[#FED100] transition-colors flex items-center gap-1.5">
                   <span className="text-[#c8931a]">›</span> {locale === 'am' ? 'የዜጎች አገልግሎት መጠየቂያ ቅጾች' : 'Citizen Service Request Forms'}
                 </Link>

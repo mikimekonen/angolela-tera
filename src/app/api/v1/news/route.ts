@@ -63,6 +63,11 @@ export async function POST(req: NextRequest) {
 
     const today = new Date().toISOString().split('T')[0]
 
+    // Editorial Workflow Enforcement: Only users with canPublish permission can set PUBLISHED status
+    const requestedStatus = body.status || 'PUBLISHED'
+    const canPublish = hasPermission(session.role, 'canPublish')
+    const finalStatus = (requestedStatus === 'PUBLISHED' && !canPublish) ? 'REVIEW' : requestedStatus
+
     const newArticle = {
       id: `news_${Date.now()}`,
       slug: body.slug,
@@ -88,7 +93,10 @@ export async function POST(req: NextRequest) {
       documentTitle: body.documentTitle || '',
       referenceNumber: body.referenceNumber || '',
       isFeatured: Boolean(body.isFeatured),
-      status: body.status || 'PUBLISHED',
+      status: finalStatus,
+      reviewerNotes: body.reviewerNotes || null,
+      scheduledPublishAt: body.scheduledPublishAt || null,
+      expiryDate: body.expiryDate || null,
       createdAt: new Date().toISOString(),
     }
 
@@ -125,6 +133,14 @@ export async function PUT(req: NextRequest) {
     const body = await req.json()
     if (!body.slug) {
       return NextResponse.json({ success: false, error: 'slug is required' }, { status: 400 })
+    }
+
+    // Workflow guard: Non-publishers cannot transition articles to PUBLISHED
+    if (body.status === 'PUBLISHED' && !hasPermission(session.role, 'canPublish')) {
+      return NextResponse.json(
+        { success: false, error: 'Forbidden: Insufficient privileges to publish articles directly. Status must be set to REVIEW.' },
+        { status: 403 }
+      )
     }
 
     const updated = updateNews(body.slug, body, session.name)

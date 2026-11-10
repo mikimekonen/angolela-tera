@@ -34,6 +34,7 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         children: [
           { title: 'About the Woreda', href: `/${locale}/about`, description: 'Overview, demographics, vision and mission' },
           { title: 'Administration & Cabinet', href: `/${locale}/about/leadership`, description: 'Executive leadership and office holders' },
+          { title: 'Government Offices Directory', href: `/${locale}/offices`, description: 'Directory of 20 sector directorates, mandates and contacts' },
           { title: 'Historical Background', href: `/${locale}/about/history`, description: 'Heritage and founding of Angolela Tera' },
           { title: 'Geography & Climate', href: `/${locale}/about/geography`, description: 'Topography, weather, agro-ecological zones' },
           { title: 'ICT & Digital Team', href: `/${locale}/about/ict`, description: 'Systems, network infrastructure, cybersecurity & portal administration' },
@@ -44,6 +45,8 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         label: 'Services',
         href: `/${locale}/services`,
         children: [
+          { title: 'All Citizen Services', href: `/${locale}/services`, description: 'Comprehensive directory of public and commercial services' },
+          { title: 'Track Request / Grievance', href: `/${locale}/track`, description: 'Track status of your application with reference code' },
           { title: 'Civil Registration', href: `/${locale}/services/civil-registration`, description: 'Birth, marriage, and death certificates' },
           { title: 'Land Administration & Holding', href: `/${locale}/services/land-certificate`, description: 'Cadastral certificates and land tenure' },
           { title: 'Agriculture Extension & Inputs', href: `/${locale}/services/agriculture`, description: 'Farmer training, seeds, fertilizers' },
@@ -117,6 +120,7 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         children: [
           { title: 'የወረዳው አጠቃላይ መረጃ', href: `/${locale}/about`, description: 'ራዕይ፣ ተልዕኮ እና የስነ-ህዝብ መረጃ' },
           { title: 'አመራርና ካቢኔ', href: `/${locale}/about/leadership`, description: 'የስራ አስፈጻሚ አካላት ዝርዝር' },
+          { title: 'የሴክተር መሥሪያ ቤቶች ማውጫ', href: `/${locale}/offices`, description: 'የ20ዎቹም ሴክተር መሥሪያ ቤቶች፣ ኃላፊዎችና አድራሻ' },
           { title: 'ታሪካዊ አመጣጥ', href: `/${locale}/about/history`, description: 'የአንጎለላ ጠራ ታሪክና ቅርስ' },
           { title: 'መልክአ ምድርና የአየር ንብረት', href: `/${locale}/about/geography`, description: 'የመሬት አቀማመጥና ስነ-ምህዳር' },
           { title: 'የአይሲቲ (ICT) ቡድን', href: `/${locale}/about/ict`, description: 'የሲስተም፣ ኔትወርክ፣ ሳይበር ደህንነትና ፖርታል ባለሙያዎች' },
@@ -127,6 +131,8 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         label: 'አገልግሎቶች',
         href: `/${locale}/services`,
         children: [
+          { title: 'ሁሉንም አገልግሎቶች', href: `/${locale}/services`, description: 'የወረዳው አገልግሎቶች ዝርዝርና ቅድመ ሁኔታዎች' },
+          { title: 'የጉዳይ ደረጃ መከታተያ', href: `/${locale}/track`, description: 'የአቤቱታ ወይም የአገልግሎት ደረጃን በኮድ መከታተል' },
           { title: 'የወሳኝ ኩነት ምዝገባ', href: `/${locale}/services/civil-registration`, description: 'የልደት፣ ጋብቻና የሞት ምስክር ወረቀት' },
           { title: 'የመሬት አስተዳደር', href: `/${locale}/services/land-certificate`, description: 'የገጠርና የከተማ መሬት ይዞታ ማረጋገጫ' },
           { title: 'የግብርና ኤክስቴንሽን', href: `/${locale}/services/agriculture`, description: 'የአርሶ አደር ስልጠናና የግብአት አቅርቦት' },

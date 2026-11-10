@@ -21,6 +21,14 @@ export function PublicShell({ children, locale, settings }: PublicShellProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 antialiased selection:bg-[#1a4f8b] selection:text-white">
+      {/* WCAG 2.2 AA Bypass Block: Skip to Main Content Link for Keyboard and Screen-Reader Users */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-[#1a4f8b] focus:text-white focus:font-bold focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
+      >
+        {locale === 'am' ? 'ወደ ዋናው ይዘት ይዝለሉ' : 'Skip to main content'}
+      </a>
+
       {/* Official Government Top Bar with Ethiopian Calendar Date */}
       <TopStrip currentLocale={locale} />
 
@@ -42,7 +50,7 @@ export function PublicShell({ children, locale, settings }: PublicShellProps) {
       <AnnouncementBanner locale={locale} announcements={MOCK_ANNOUNCEMENTS} />
 
       {/* Main Page Content */}
-      <main className="flex-1 w-full">
+      <main id="main-content" tabIndex={-1} className="flex-1 w-full focus:outline-none">
         {children}
       </main>
 
