@@ -123,7 +123,7 @@ export default async function ICTTeamPage({
     {
       id: 'tirualem-tegenaw',
       name_en: 'Tirualem Tegenaw',
-      name_am: 'ጥሩዓለም ተገናው',
+      name_am: 'ጥሩአለም ጠገናው',
       role_en: 'Team Leader of ICT Team',
       role_am: 'የአይሲቲ (ICT) ቡድን መሪ',
       icon: Terminal,
@@ -148,7 +148,7 @@ export default async function ICTTeamPage({
     {
       id: 'micheal-mekonen',
       name_en: 'Micheal Mekonen',
-      name_am: 'ሚካኤል መኮንን',
+      name_am: 'ሚካኤል መኮነን',
       role_en: 'System Administrator',
       role_am: 'የሲስተም አስተዳዳሪ',
       icon: Code2,
@@ -173,7 +173,7 @@ export default async function ICTTeamPage({
     {
       id: 'tekilye-negash',
       name_en: 'Tekilye Negash',
-      name_am: 'ተክለየ ነጋሽ',
+      name_am: 'ተክልዬ ነጋሽ',
       role_en: 'Network Administrator & Network Specialist',
       role_am: 'የኔትወርክ አስተዳዳሪና ኔትወርክ ስፔሻሊስት',
       icon: Network,
@@ -198,7 +198,7 @@ export default async function ICTTeamPage({
     {
       id: 'chane-fiseha',
       name_en: 'Chane Fiseha',
-      name_am: 'ጫኔ ፍስሐ',
+      name_am: 'ጫኔ ፍስሃ',
       role_en: 'Information Communication Technologist — ICT Training Specialist',
       role_am: 'የኢንፎርሜሽን ኮሚዩኒኬሽን ቴክኖሎጂ ባለሙያ — የአይሲቲ ስልጠና ስፔሻሊስት',
       icon: Laptop,
