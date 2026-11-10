@@ -356,6 +356,9 @@ function getInitialStore(): StoreData {
       emergency_health: '907 / +251 58 661 0112',
       working_hours_en: 'Monday – Friday: 8:30 AM – 5:30 PM (Closed 12:30 – 1:30 PM)',
       working_hours_am: 'ከሰኞ – አርብ፡ ከጠዋቱ 2:30 – 11:30 (የምሳ እረፍት 6:30 – 7:30)',
+      social_facebook: 'https://www.facebook.com/share/1F8hTSPLaN/',
+      social_youtube: 'https://youtube.com/@angolelateraworedaprosperitypa?si=MgfK74L7pLCiwKLw',
+      social_x: 'https://x.com/angolela79256',
     },
     auditLogs: [
       {

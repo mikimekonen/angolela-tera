@@ -470,22 +470,12 @@ export default function AdminSettingsPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Official Telegram Channel</label>
-                  <input
-                    type="url"
-                    value={settings.social_telegram || 'https://t.me/angolelateraworeda'}
-                    onChange={(e) => handleChange('social_telegram', e.target.value)}
-                    placeholder="https://t.me/yourchannel"
-                    className="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#1a4f8b]"
-                  />
-                </div>
-                <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">Official Facebook Page</label>
                   <input
                     type="url"
-                    value={settings.social_facebook || 'https://facebook.com/angolelatera'}
+                    value={settings.social_facebook || 'https://www.facebook.com/share/1F8hTSPLaN/'}
                     onChange={(e) => handleChange('social_facebook', e.target.value)}
-                    placeholder="https://facebook.com/page"
+                    placeholder="https://www.facebook.com/share/..."
                     className="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#1a4f8b]"
                   />
                 </div>
@@ -493,9 +483,19 @@ export default function AdminSettingsPage() {
                   <label className="block text-xs font-bold text-gray-700 mb-1">Official YouTube Channel</label>
                   <input
                     type="url"
-                    value={settings.social_youtube || 'https://youtube.com/@angolelateraworeda'}
+                    value={settings.social_youtube || 'https://youtube.com/@angolelateraworedaprosperitypa?si=MgfK74L7pLCiwKLw'}
                     onChange={(e) => handleChange('social_youtube', e.target.value)}
                     placeholder="https://youtube.com/@channel"
+                    className="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#1a4f8b]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Official X (Twitter) Account</label>
+                  <input
+                    type="url"
+                    value={settings.social_x || 'https://x.com/angolela79256'}
+                    onChange={(e) => handleChange('social_x', e.target.value)}
+                    placeholder="https://x.com/angolela79256"
                     className="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#1a4f8b]"
                   />
                 </div>
