@@ -2,10 +2,14 @@ import { NextRequest, NextResponse } from 'next/server'
 import { contactFormSchema } from '@/lib/validations'
 import { createAuditLog, getClientIp } from '@/lib/audit'
 import { prisma } from '@/lib/db'
-import { createInquiry } from '@/lib/dataStore'
+import { createInquiry, updateInquiryEmailStatus } from '@/lib/dataStore'
 import { rateLimiter } from '@/lib/rateLimit'
-import { sendCitizenSMSNotification } from '@/lib/notifications'
-import { sendGovernmentEmail, isValidEmail } from '@/lib/email'
+import {
+  sendAdminInquiryNotification,
+  sendCitizenConfirmationNotification,
+  isValidEmail,
+  sanitizeHeader,
+} from '@/lib/email'
 
 export async function POST(req: NextRequest) {
   try {
@@ -90,26 +94,38 @@ export async function POST(req: NextRequest) {
       userAgent,
     })
 
-    // Dispatch official email notification to Woreda admin mailbox (angolelatera1@gmail.com)
-    if (isValidEmail(email)) {
-      sendGovernmentEmail({
-        to: process.env.CONTACT_TO_EMAIL || 'angolelatera1@gmail.com',
-        replyTo: email,
-        subject: `[Citizen Portal Inquiry #${inquiryItem.trackingCode}] ${subject}`,
-        text: `Official Citizen Inquiry Details:
-Tracking Code: ${inquiryItem.trackingCode}
-Citizen Name: ${name}
-Email Address: ${email}
-Telephone: ${phone || 'Not provided'}
-Subject: ${subject}
-Date Submitted: ${new Date().toLocaleString()}
-IP Address: ${ipAddress}
+    // Dispatch official email notification to Woreda admin & citizen
+    let adminSent = false
+    let citizenSent = false
+    const emailErrors: string[] = []
 
-Message Statement:
-${message}
-`,
-      }).catch((err) => console.error('[Email Dispatch Error]:', err))
+    try {
+      const [adminResult, citizenResult] = await Promise.allSettled([
+        sendAdminInquiryNotification(inquiryItem),
+        sendCitizenConfirmationNotification(inquiryItem),
+      ])
+
+      if (adminResult.status === 'fulfilled' && adminResult.value.success) {
+        adminSent = true
+      } else if (adminResult.status === 'fulfilled' && !adminResult.value.success) {
+        emailErrors.push(`Admin notice failed: ${adminResult.value.error}`)
+      }
+
+      if (citizenResult.status === 'fulfilled' && citizenResult.value.success) {
+        citizenSent = true
+      } else if (citizenResult.status === 'fulfilled' && !citizenResult.value.success) {
+        emailErrors.push(`Citizen notice failed: ${citizenResult.value.error}`)
+      }
+    } catch (err: any) {
+      emailErrors.push(`Email dispatcher error: ${err.message}`)
     }
+
+    updateInquiryEmailStatus(inquiryItem.trackingCode, {
+      adminNotificationSent: adminSent,
+      citizenConfirmationSent: citizenSent,
+      emailError: emailErrors.length > 0 ? emailErrors.join(' | ') : null,
+      incrementAttempts: true,
+    })
 
     return NextResponse.json(
       {
@@ -118,6 +134,8 @@ ${message}
           'Your inquiry/grievance has been officially received and logged into the Woreda tracking system.',
         trackingNumber: inquiryItem.trackingCode,
         trackingCode: inquiryItem.trackingCode,
+        adminNotified: adminSent,
+        citizenNotified: citizenSent,
         submittedAt: inquiryItem.createdAt,
       },
       { status: 201 }

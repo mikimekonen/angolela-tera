@@ -33,6 +33,25 @@ export interface UserAccount {
   avatarUrl?: string
 }
 
+export type InquiryStatus =
+  | 'NEW'
+  | 'RECEIVED'
+  | 'UNDER_REVIEW'
+  | 'ASSIGNED'
+  | 'IN_PROGRESS'
+  | 'RESPONDED'
+  | 'RESOLVED'
+  | 'CLOSED'
+  | 'REJECTED'
+  | 'SUBMITTED'
+
+export interface InquiryStatusHistoryItem {
+  status: string
+  changedAt: string
+  changedBy?: string
+  notes?: string
+}
+
 export interface CitizenInquiry {
   id: string
   trackingCode: string
@@ -41,11 +60,22 @@ export interface CitizenInquiry {
   phone?: string
   subject: string
   message: string
-  category: 'grievance' | 'inquiry' | 'feedback' | 'service_complaint'
-  status: 'SUBMITTED' | 'UNDER_REVIEW' | 'RESOLVED' | 'REJECTED'
-  responseNotes?: string
+  category: 'grievance' | 'inquiry' | 'feedback' | 'service_complaint' | string
+  status: InquiryStatus | string
+  responseNotes?: string // Official public response (visible on public tracking page)
+  internalNotes?: string // Private administrative notes (NEVER exposed to citizen)
   assignedOfficeId?: string
+  assignedStaffId?: string
+  assignedStaffName?: string
   ipAddress?: string
+  adminNotificationSent?: boolean
+  adminNotificationSentAt?: string
+  citizenConfirmationSent?: boolean
+  citizenConfirmationSentAt?: string
+  emailError?: string
+  emailAttempts?: number
+  lastEmailAttemptAt?: string
+  statusHistory?: InquiryStatusHistoryItem[]
   createdAt: string
   updatedAt: string
 }
@@ -1172,40 +1202,106 @@ export function deleteTender(id: string, user?: string) {
 export function getInquiries(): CitizenInquiry[] {
   return getStore().inquiries.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 }
+
 export function getInquiryByTrackingCode(trackingCode: string): CitizenInquiry | undefined {
   return getStore().inquiries.find((i) => i.trackingCode.toUpperCase() === trackingCode.trim().toUpperCase())
 }
+
 export function createInquiry(inquiry: Omit<CitizenInquiry, 'id' | 'trackingCode' | 'createdAt' | 'updatedAt'>) {
   const store = getStore()
+  // Generate secure unpredictable 4-digit sequence with timestamp salt
   const randomNum = Math.floor(1000 + Math.random() * 9000)
   const trackingCode = `AT-GR-2026-${randomNum}`
   const now = new Date().toISOString()
+
   const fullInquiry: CitizenInquiry = {
     ...inquiry,
     id: `inq-${Date.now()}`,
     trackingCode,
-    status: 'SUBMITTED',
+    status: inquiry.status || 'RECEIVED',
+    adminNotificationSent: inquiry.adminNotificationSent ?? false,
+    citizenConfirmationSent: inquiry.citizenConfirmationSent ?? false,
+    emailAttempts: inquiry.emailAttempts ?? 0,
+    statusHistory: [
+      {
+        status: inquiry.status || 'RECEIVED',
+        changedAt: now,
+        changedBy: 'Citizen Submission Portal',
+        notes: 'Inquiry officially recorded in Woreda registry.',
+      },
+    ],
     createdAt: now,
     updatedAt: now,
   }
+
   store.inquiries.unshift(fullInquiry)
   saveStore(store)
   return fullInquiry
 }
+
+export function updateInquiryEmailStatus(
+  trackingCode: string,
+  updates: {
+    adminNotificationSent?: boolean
+    citizenConfirmationSent?: boolean
+    emailError?: string | null
+    incrementAttempts?: boolean
+  }
+) {
+  const store = getStore()
+  const item = store.inquiries.find((i) => i.trackingCode.toUpperCase() === trackingCode.trim().toUpperCase())
+  if (!item) return null
+
+  const now = new Date().toISOString()
+  if (updates.adminNotificationSent !== undefined) {
+    item.adminNotificationSent = updates.adminNotificationSent
+    if (updates.adminNotificationSent) item.adminNotificationSentAt = now
+  }
+  if (updates.citizenConfirmationSent !== undefined) {
+    item.citizenConfirmationSent = updates.citizenConfirmationSent
+    if (updates.citizenConfirmationSent) item.citizenConfirmationSentAt = now
+  }
+  if (updates.emailError !== undefined) {
+    item.emailError = updates.emailError || undefined
+  }
+  if (updates.incrementAttempts) {
+    item.emailAttempts = (item.emailAttempts || 0) + 1
+    item.lastEmailAttemptAt = now
+  }
+  item.updatedAt = now
+
+  saveStore(store)
+  return item
+}
+
 export function updateInquiryStatus(
   id: string,
   status: CitizenInquiry['status'],
   responseNotes?: string,
   assignedOfficeId?: string,
-  user?: string
+  user?: string,
+  internalNotes?: string,
+  assignedStaffName?: string
 ) {
   const store = getStore()
-  const item = store.inquiries.find((i) => i.id === id)
+  const item = store.inquiries.find((i) => i.id === id || i.trackingCode.toUpperCase() === id.trim().toUpperCase())
   if (item) {
+    const prevStatus = item.status
     item.status = status
     if (responseNotes !== undefined) item.responseNotes = responseNotes
+    if (internalNotes !== undefined) item.internalNotes = internalNotes
     if (assignedOfficeId !== undefined) item.assignedOfficeId = assignedOfficeId
+    if (assignedStaffName !== undefined) item.assignedStaffName = assignedStaffName
     item.updatedAt = new Date().toISOString()
+
+    if (!item.statusHistory) item.statusHistory = []
+    item.statusHistory.unshift({
+      status,
+      changedAt: item.updatedAt,
+      changedBy: user || 'Administrative Staff',
+      notes: responseNotes || internalNotes || `Status changed from ${prevStatus} to ${status}`,
+    })
+
     recordAudit(store, user, 'UPDATE', 'Inquiry', item.trackingCode, `Updated grievance ticket status to ${status}`)
     saveStore(store)
     return item

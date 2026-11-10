@@ -5,37 +5,54 @@ import {
   createInquiry,
   updateInquiryStatus,
   getInquiryByTrackingCode,
+  updateInquiryEmailStatus,
 } from '@/lib/dataStore'
-import { sendGovernmentEmail, isValidEmail } from '@/lib/email'
+import {
+  sendAdminInquiryNotification,
+  sendCitizenConfirmationNotification,
+  isValidEmail,
+  sanitizeHeader,
+} from '@/lib/email'
+import { rateLimiter } from '@/lib/rateLimit'
+import { getClientIp } from '@/lib/audit'
 
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url)
     const trackingCode = searchParams.get('trackingCode')
 
-    // If tracking code is requested, anyone with the code can check status (citizen lookup)
+    // 1. Public Citizen Tracking Lookup
+    // Security & Privacy: Never leak citizen email, phone, full message, or internal admin notes to public lookup!
     if (trackingCode) {
       const inquiry = getInquiryByTrackingCode(trackingCode)
       if (!inquiry) {
-        return NextResponse.json({ success: false, error: 'Tracking code not found' }, { status: 404 })
+        return NextResponse.json(
+          { success: false, error: 'Tracking reference code not found. Please verify the code.' },
+          { status: 404 }
+        )
       }
+
       return NextResponse.json({
         success: true,
         data: {
           trackingCode: inquiry.trackingCode,
           subject: inquiry.subject,
+          category: inquiry.category,
           status: inquiry.status,
-          responseNotes: inquiry.responseNotes,
+          responseNotes: inquiry.responseNotes || null, // Official public response only
           createdAt: inquiry.createdAt,
           updatedAt: inquiry.updatedAt,
         },
       })
     }
 
-    // Otherwise, must be logged in as admin to view all grievances
+    // 2. Administrative Console Access (requires authenticated staff session)
     const session = await getSession()
     if (!session) {
-      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized: Staff authentication required' },
+        { status: 401 }
+      )
     }
 
     const inquiries = getInquiries()
@@ -48,57 +65,110 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    const ipAddress = getClientIp(req.headers)
+
+    // Rate Limiting: 10 inquiries per 15 minutes per IP
+    const rateCheck = rateLimiter.check(`inquiry:${ipAddress}`, 10, 15 * 60 * 1000)
+    if (!rateCheck.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Too many submissions. Please wait ${rateCheck.reset} seconds before submitting again.`,
+        },
+        { status: 429 }
+      )
+    }
+
     const body = await req.json()
     const { name, email, phone, subject, message, category } = body
 
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
-        { success: false, error: 'Name, email, subject, and message are required' },
+        { success: false, error: 'Full name, email address, subject, and message are required.' },
         { status: 400 }
       )
     }
 
-    if (!isValidEmail(email)) {
+    const cleanEmail = email.trim()
+    if (!isValidEmail(cleanEmail)) {
       return NextResponse.json(
-        { success: false, error: 'Please provide a valid email address.' },
+        { success: false, error: 'Please provide a valid, well-formed email address.' },
         { status: 400 }
       )
     }
 
+    // Clean inputs and guard against header injection
+    const cleanName = sanitizeHeader(name)
+    const cleanSubject = sanitizeHeader(subject)
+    const cleanPhone = phone ? sanitizeHeader(phone) : undefined
+    const cleanCategory = category ? sanitizeHeader(category) : 'grievance'
+
+    // STEP 1: Persist inquiry to database first (Fail-safe: submission never lost even if email fails)
     const created = createInquiry({
-      name,
-      email,
-      phone,
-      subject,
-      message,
-      category: category || 'grievance',
-      status: 'SUBMITTED',
+      name: cleanName,
+      email: cleanEmail,
+      phone: cleanPhone,
+      subject: cleanSubject,
+      message: message.trim(),
+      category: cleanCategory,
+      status: 'RECEIVED',
+      ipAddress,
     })
 
-    // Dispatch official email notification to Woreda admin mailbox (angolelatera1@gmail.com)
-    sendGovernmentEmail({
-      to: process.env.CONTACT_TO_EMAIL || 'angolelatera1@gmail.com',
-      replyTo: email,
-      subject: `[Citizen Portal Inquiry #${created.trackingCode}] ${subject}`,
-      text: `Citizen Inquiry Details:
-Tracking Code: ${created.trackingCode}
-Citizen Full Name: ${name}
-Email Address: ${email}
-Telephone: ${phone || 'Not provided'}
-Category: ${category || 'Grievance / Inquiry'}
-Date Submitted: ${new Date().toLocaleString()}
+    // STEP 2: Dispatch notifications to Admin and Citizen
+    let adminSent = false
+    let citizenSent = false
+    const emailErrors: string[] = []
 
-Message:
-${message}
-`,
-    }).catch((err) => console.error('[Email Dispatch Error]:', err))
+    try {
+      const [adminResult, citizenResult] = await Promise.allSettled([
+        sendAdminInquiryNotification(created),
+        sendCitizenConfirmationNotification(created),
+      ])
 
-    return NextResponse.json({
-      success: true,
-      message: 'Your inquiry has been submitted to the Woreda administration.',
-      trackingCode: created.trackingCode,
-      data: created,
-    }, { status: 201 })
+      if (adminResult.status === 'fulfilled' && adminResult.value.success) {
+        adminSent = true
+      } else if (adminResult.status === 'fulfilled' && !adminResult.value.success) {
+        emailErrors.push(`Admin notice failed: ${adminResult.value.error}`)
+      } else if (adminResult.status === 'rejected') {
+        emailErrors.push(`Admin notice exception: ${adminResult.reason?.message || 'Unknown'}`)
+      }
+
+      if (citizenResult.status === 'fulfilled' && citizenResult.value.success) {
+        citizenSent = true
+      } else if (citizenResult.status === 'fulfilled' && !citizenResult.value.success) {
+        emailErrors.push(`Citizen notice failed: ${citizenResult.value.error}`)
+      } else if (citizenResult.status === 'rejected') {
+        emailErrors.push(`Citizen notice exception: ${citizenResult.reason?.message || 'Unknown'}`)
+      }
+    } catch (dispatchErr: any) {
+      emailErrors.push(`Email dispatcher exception: ${dispatchErr.message}`)
+    }
+
+    // STEP 3: Record exact notification delivery status on the inquiry
+    updateInquiryEmailStatus(created.trackingCode, {
+      adminNotificationSent: adminSent,
+      citizenConfirmationSent: citizenSent,
+      emailError: emailErrors.length > 0 ? emailErrors.join(' | ') : null,
+      incrementAttempts: true,
+    })
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Your inquiry has been officially recorded in the Woreda registry.',
+        trackingCode: created.trackingCode,
+        adminNotified: adminSent,
+        citizenNotified: citizenSent,
+        emailStatus: emailErrors.length === 0 ? 'DELIVERED' : 'PARTIALLY_DELIVERED_OR_QUEUED',
+        data: {
+          trackingCode: created.trackingCode,
+          status: 'RECEIVED',
+          createdAt: created.createdAt,
+        },
+      },
+      { status: 201 }
+    )
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Internal Server Error'
     return NextResponse.json({ success: false, error: message }, { status: 500 })
@@ -114,19 +184,28 @@ export async function PUT(req: NextRequest) {
 
     if (session.role === 'VIEWER') {
       return NextResponse.json(
-        { success: false, error: 'Forbidden: Insufficient privileges to update inquiries' },
+        { success: false, error: 'Forbidden: Viewers have read-only administrative inspection rights' },
         { status: 403 }
       )
     }
 
     const body = await req.json()
-    const { id, status, responseNotes, assignedOfficeId } = body
+    const { id, status, responseNotes, internalNotes, assignedOfficeId, assignedStaffName } = body
 
     if (!id || !status) {
       return NextResponse.json({ success: false, error: 'id and status are required' }, { status: 400 })
     }
 
-    const updated = updateInquiryStatus(id, status, responseNotes, assignedOfficeId, session.name)
+    const updated = updateInquiryStatus(
+      id,
+      status,
+      responseNotes,
+      assignedOfficeId,
+      session.name,
+      internalNotes,
+      assignedStaffName
+    )
+
     if (!updated) {
       return NextResponse.json({ success: false, error: 'Inquiry record not found' }, { status: 404 })
     }

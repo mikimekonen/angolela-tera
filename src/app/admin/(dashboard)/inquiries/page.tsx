@@ -2,6 +2,13 @@
 
 import React, { useState, useEffect, useMemo } from 'react'
 
+interface StatusHistoryItem {
+  status: string
+  changedAt: string
+  changedBy?: string
+  notes?: string
+}
+
 interface Inquiry {
   id: string
   trackingCode: string
@@ -11,9 +18,19 @@ interface Inquiry {
   subject: string
   message: string
   category: 'grievance' | 'inquiry' | 'feedback' | 'service_complaint' | string
-  status: 'SUBMITTED' | 'UNDER_REVIEW' | 'RESOLVED' | 'REJECTED'
+  status: 'RECEIVED' | 'SUBMITTED' | 'UNDER_REVIEW' | 'ASSIGNED' | 'IN_PROGRESS' | 'RESOLVED' | 'REJECTED' | string
   responseNotes?: string
+  internalNotes?: string
   assignedOfficeId?: string
+  assignedStaffName?: string
+  adminNotificationSent?: boolean
+  adminNotificationSentAt?: string
+  citizenConfirmationSent?: boolean
+  citizenConfirmationSentAt?: string
+  emailError?: string
+  emailAttempts?: number
+  lastEmailAttemptAt?: string
+  statusHistory?: StatusHistoryItem[]
   createdAt: string
   updatedAt: string
 }
@@ -56,8 +73,11 @@ export default function AdminInquiriesPage() {
   const [selectedInquiry, setSelectedInquiry] = useState<Inquiry | null>(null)
   const [loading, setLoading] = useState(true)
   const [notes, setNotes] = useState('')
+  const [internalNotes, setInternalNotes] = useState('')
   const [assignedOffice, setAssignedOffice] = useState('')
+  const [assignedStaff, setAssignedStaff] = useState('')
   const [saving, setSaving] = useState(false)
+  const [retryingEmail, setRetryingEmail] = useState(false)
   const [msg, setMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
 
   // Filtering states
@@ -91,7 +111,9 @@ export default function AdminInquiriesPage() {
   const selectTicket = (inq: Inquiry) => {
     setSelectedInquiry(inq)
     setNotes(inq.responseNotes || '')
+    setInternalNotes(inq.internalNotes || '')
     setAssignedOffice(inq.assignedOfficeId || '')
+    setAssignedStaff(inq.assignedStaffName || '')
   }
 
   // Calculate SLA status for a ticket
@@ -144,25 +166,20 @@ export default function AdminInquiriesPage() {
           id: selectedInquiry.id,
           status: newStatus,
           responseNotes: notes,
+          internalNotes: internalNotes,
           assignedOfficeId: assignedOffice || null,
+          assignedStaffName: assignedStaff || null,
         }),
       })
       const data = await res.json()
 
-      if (data.success) {
-        setInquiries((prev) =>
-          prev.map((i) =>
-            i.id === selectedInquiry.id
-              ? { ...i, status: newStatus, responseNotes: notes, assignedOfficeId: assignedOffice }
-              : i
-          )
-        )
-        setSelectedInquiry((prev) =>
-          prev ? { ...prev, status: newStatus, responseNotes: notes, assignedOfficeId: assignedOffice } : null
-        )
+      if (data.success && data.data) {
+        const updated = data.data as Inquiry
+        setInquiries((prev) => prev.map((i) => (i.id === updated.id ? updated : i)))
+        setSelectedInquiry(updated)
         setMsg({
           type: 'success',
-          text: `Ticket [${selectedInquiry.trackingCode}] successfully updated to status: ${newStatus}.`,
+          text: `Ticket [${updated.trackingCode}] successfully updated to status: ${newStatus}.`,
         })
       } else {
         setMsg({ type: 'error', text: data.error || 'Failed to update ticket.' })
@@ -174,10 +191,60 @@ export default function AdminInquiriesPage() {
     }
   }
 
+  const handleRetryEmail = async () => {
+    if (!selectedInquiry) return
+    try {
+      setRetryingEmail(true)
+      setMsg(null)
+      const res = await fetch('/api/v1/inquiries/retry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          trackingCode: selectedInquiry.trackingCode,
+          target: 'both',
+        }),
+      })
+      const data = await res.json()
+
+      if (data.success || data.data) {
+        const updated = data.data as Inquiry
+        setInquiries((prev) => prev.map((i) => (i.id === updated.id ? updated : i)))
+        setSelectedInquiry(updated)
+        if (data.adminNotificationSent && data.citizenConfirmationSent) {
+          setMsg({
+            type: 'success',
+            text: `Both Admin notification and Citizen confirmation delivered successfully for [${updated.trackingCode}].`,
+          })
+        } else if (data.adminNotificationSent || data.citizenConfirmationSent) {
+          setMsg({
+            type: 'success',
+            text: `Partial delivery completed for [${updated.trackingCode}]. Admin: ${data.adminNotificationSent ? 'Sent' : 'Failed'}, Citizen: ${data.citizenConfirmationSent ? 'Sent' : 'Failed'}.`,
+          })
+        } else {
+          setMsg({
+            type: 'error',
+            text: `Email retry failed: ${data.emailError || 'Please check RESEND_API_KEY or SMTP credentials in your environment settings.'}`,
+          })
+        }
+      } else {
+        setMsg({
+          type: 'error',
+          text: data.error || 'Email retry failed. Check SMTP or Resend API key in environment.',
+        })
+      }
+    } catch {
+      setMsg({ type: 'error', text: 'Network error occurred while retrying email delivery.' })
+    } finally {
+      setRetryingEmail(false)
+    }
+  }
+
   // Calculate Metrics
   const metrics = useMemo(() => {
     const total = inquiries.length
-    const review = inquiries.filter((i) => i.status === 'UNDER_REVIEW' || i.status === 'SUBMITTED').length
+    const review = inquiries.filter(
+      (i) => i.status === 'UNDER_REVIEW' || i.status === 'SUBMITTED' || i.status === 'RECEIVED' || i.status === 'ASSIGNED'
+    ).length
     const resolved = inquiries.filter((i) => i.status === 'RESOLVED').length
     const overdue = inquiries.filter((i) => {
       const sla = getSlaStatus(i.createdAt, i.status)
@@ -198,7 +265,10 @@ export default function AdminInquiriesPage() {
         inq.email.toLowerCase().includes(q)
 
       const matchesCategory = categoryFilter === 'ALL' || inq.category === categoryFilter
-      const matchesStatus = statusFilter === 'ALL' || inq.status === statusFilter
+      const matchesStatus =
+        statusFilter === 'ALL' ||
+        inq.status === statusFilter ||
+        (statusFilter === 'RECEIVED' && (inq.status === 'RECEIVED' || inq.status === 'SUBMITTED'))
 
       const sla = getSlaStatus(inq.createdAt, inq.status)
       const matchesSla =
@@ -222,7 +292,7 @@ export default function AdminInquiriesPage() {
             <span className="text-xs text-gray-400">• Statutory 48h SLA</span>
           </div>
           <h1 className="text-2xl font-black text-[#0d2340]">
-            Citizen Grievance & Service SLA Management
+            Citizen Grievance &amp; Service SLA Management
           </h1>
           <p className="text-xs text-gray-500 mt-1">
             Track citizen petitions, service complaints, water/road disruption reports, and issue official resolution dispatches.
@@ -230,7 +300,7 @@ export default function AdminInquiriesPage() {
         </div>
 
         <button
-          onClick={fetchNewsList}
+          onClick={fetchInquiries}
           className="px-4 py-2 bg-white border border-gray-200 text-xs font-bold text-gray-700 rounded-xl hover:bg-gray-50 shadow-2xs cursor-pointer flex items-center gap-2 self-start sm:self-auto"
         >
           <span>🔄</span>
@@ -317,7 +387,7 @@ export default function AdminInquiriesPage() {
             className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-[#1a4f8b]"
           >
             <option value="ALL">All Statuses</option>
-            <option value="SUBMITTED">Submitted (New)</option>
+            <option value="RECEIVED">Received / New</option>
             <option value="UNDER_REVIEW">Under Review</option>
             <option value="RESOLVED">Resolved</option>
             <option value="REJECTED">Rejected / Ineligible</option>
@@ -346,7 +416,7 @@ export default function AdminInquiriesPage() {
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Left Column: Tickets Roster (5 cols) */}
-          <div className="lg:col-span-5 bg-white border border-gray-200 rounded-2xl shadow-xs overflow-hidden flex flex-col max-h-[800px]">
+          <div className="lg:col-span-5 bg-white border border-gray-200 rounded-2xl shadow-xs overflow-hidden flex flex-col max-h-[850px]">
             <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/80">
               <span className="text-xs font-bold text-gray-700 uppercase tracking-wider">
                 Submissions Roster ({filteredInquiries.length})
@@ -386,9 +456,31 @@ export default function AdminInquiriesPage() {
                       <h4 className="text-xs font-bold text-[#0d2340] line-clamp-1">{inq.subject}</h4>
                       <p className="text-[11px] text-gray-500 line-clamp-2 mt-0.5">{inq.message}</p>
 
-                      <div className="mt-2.5 flex items-center justify-between text-[10px] text-gray-400 border-t border-gray-100/60 pt-2">
+                      {/* Mini Email Flags */}
+                      <div className="mt-2 flex items-center gap-1.5 text-[9px]">
+                        <span
+                          className={`px-1.5 py-0.5 rounded font-mono font-medium ${
+                            inq.adminNotificationSent
+                              ? 'bg-emerald-100 text-emerald-800'
+                              : 'bg-amber-100 text-amber-800'
+                          }`}
+                        >
+                          {inq.adminNotificationSent ? 'Admin ✓' : 'Admin ⚠️'}
+                        </span>
+                        <span
+                          className={`px-1.5 py-0.5 rounded font-mono font-medium ${
+                            inq.citizenConfirmationSent
+                              ? 'bg-emerald-100 text-emerald-800'
+                              : 'bg-amber-100 text-amber-800'
+                          }`}
+                        >
+                          {inq.citizenConfirmationSent ? 'Citizen ✓' : 'Citizen ⚠️'}
+                        </span>
+                      </div>
+
+                      <div className="mt-2 flex items-center justify-between text-[10px] text-gray-400 border-t border-gray-100/60 pt-2">
                         <span className="font-semibold text-gray-600 truncate max-w-[140px]">{inq.name}</span>
-                        <span className="capitalize px-1.5 py-0.2 rounded bg-gray-100 text-gray-600 font-bold">
+                        <span className="capitalize px-1.5 py-0.5 rounded bg-gray-100 text-gray-600 font-bold">
                           {inq.status.replace('_', ' ')}
                         </span>
                       </div>
@@ -437,6 +529,81 @@ export default function AdminInquiriesPage() {
                   </p>
                 </div>
 
+                {/* EMAIL NOTIFICATION & DELIVERY AUDIT BOX */}
+                <div className="p-4 bg-gray-50 border border-gray-200 rounded-xl space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-gray-700 uppercase tracking-wider flex items-center gap-1.5">
+                      <span>📬</span> Email Delivery Status &amp; Notifications
+                    </span>
+
+                    <button
+                      type="button"
+                      disabled={retryingEmail}
+                      onClick={handleRetryEmail}
+                      className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-gray-300 hover:bg-gray-100 rounded-lg text-xs font-bold text-gray-700 shadow-2xs cursor-pointer disabled:opacity-50 transition-colors"
+                    >
+                      <span>{retryingEmail ? '⏳ Retrying...' : '🔄 Retry Delivery'}</span>
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    {/* Admin Status */}
+                    <div
+                      className={`p-2.5 rounded-lg border flex items-center justify-between ${
+                        selectedInquiry.adminNotificationSent
+                          ? 'bg-emerald-50/70 border-emerald-200 text-emerald-800'
+                          : 'bg-amber-50/70 border-amber-200 text-amber-900'
+                      }`}
+                    >
+                      <div>
+                        <span className="font-bold block text-[11px]">Woreda Admin Email</span>
+                        <span className="text-[10px] text-gray-600">angolelatera1@gmail.com</span>
+                      </div>
+                      <span className="text-xs font-bold">
+                        {selectedInquiry.adminNotificationSent ? '✓ Sent' : '⚠️ Pending / Failed'}
+                      </span>
+                    </div>
+
+                    {/* Citizen Status */}
+                    <div
+                      className={`p-2.5 rounded-lg border flex items-center justify-between ${
+                        selectedInquiry.citizenConfirmationSent
+                          ? 'bg-emerald-50/70 border-emerald-200 text-emerald-800'
+                          : 'bg-amber-50/70 border-amber-200 text-amber-900'
+                      }`}
+                    >
+                      <div>
+                        <span className="font-bold block text-[11px]">Citizen Receipt Email</span>
+                        <span className="text-[10px] text-gray-600 truncate max-w-[130px] block">
+                          {selectedInquiry.email}
+                        </span>
+                      </div>
+                      <span className="text-xs font-bold">
+                        {selectedInquiry.citizenConfirmationSent ? '✓ Sent' : '⚠️ Pending / Failed'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {selectedInquiry.emailError && (
+                    <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-800 space-y-1">
+                      <span className="font-bold block">Delivery Notice:</span>
+                      <p className="font-mono text-[11px] leading-relaxed break-words">
+                        {selectedInquiry.emailError}
+                      </p>
+                      <p className="text-[10px] text-rose-700 italic mt-1">
+                        Configure <code className="bg-rose-100 px-1 py-0.5 rounded font-mono">RESEND_API_KEY</code> or Gmail SMTP in your deployment environment variables, then click &ldquo;Retry Delivery&rdquo;.
+                      </p>
+                    </div>
+                  )}
+
+                  {selectedInquiry.emailAttempts !== undefined && selectedInquiry.emailAttempts > 0 && (
+                    <p className="text-[10px] text-gray-400">
+                      Total delivery attempts: {selectedInquiry.emailAttempts}
+                      {selectedInquiry.lastEmailAttemptAt && ` • Last attempt: ${new Date(selectedInquiry.lastEmailAttemptAt).toLocaleString()}`}
+                    </p>
+                  )}
+                </div>
+
                 {/* Citizen Contact Profile Card */}
                 <div className="p-4 bg-gray-50/80 rounded-xl border border-gray-200 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                   <div>
@@ -472,35 +639,50 @@ export default function AdminInquiriesPage() {
                   </div>
                 </div>
 
-                {/* Sector Directorate Assignment */}
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider block">
-                    Assign to Sector Directorate / Office:
-                  </label>
-                  <select
-                    value={assignedOffice}
-                    onChange={(e) => setAssignedOffice(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs font-semibold focus:bg-white focus:ring-2 focus:ring-[#1a4f8b]"
-                  >
-                    <option value="">-- General Administration & Cabinet Oversight --</option>
-                    {SECTOR_OFFICES.map((off) => (
-                      <option key={off.id} value={off.id}>
-                        {off.name} ({off.am})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Response Composer & Template Inserter */}
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <h4 className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                      Official Government Response Notes:
-                    </h4>
-                    <span className="text-[10px] text-gray-400">Publicly visible on tracking lookup</span>
+                {/* Sector Directorate & Caseworker Assignment */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-gray-700 uppercase tracking-wider block">
+                      Sector Directorate:
+                    </label>
+                    <select
+                      value={assignedOffice}
+                      onChange={(e) => setAssignedOffice(e.target.value)}
+                      className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-xs font-semibold focus:bg-white focus:ring-2 focus:ring-[#1a4f8b]"
+                    >
+                      <option value="">-- Cabinet Grievance Committee --</option>
+                      {SECTOR_OFFICES.map((off) => (
+                        <option key={off.id} value={off.id}>
+                          {off.name} ({off.am})
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
-                  {/* Pre-set GovTech Templates */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-gray-700 uppercase tracking-wider block">
+                      Assigned Officer / Desk Lead:
+                    </label>
+                    <input
+                      type="text"
+                      value={assignedStaff}
+                      onChange={(e) => setAssignedStaff(e.target.value)}
+                      placeholder="e.g. Ato Solomon Gizaw (Desk Lead)"
+                      className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-xs focus:bg-white focus:ring-2 focus:ring-[#1a4f8b]"
+                    />
+                  </div>
+                </div>
+
+                {/* SECTION 1: OFFICIAL PUBLIC CITIZEN RESPONSE */}
+                <div className="space-y-3 pt-2 border-t border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-xs font-bold text-[#1a4f8b] uppercase tracking-wider flex items-center gap-1.5">
+                      <span>🌐</span> Official Citizen Response (Public on Tracking Portal)
+                    </h4>
+                    <span className="text-[10px] text-gray-400">Visible to citizen</span>
+                  </div>
+
+                  {/* GovTech Resolution Templates */}
                   <div className="space-y-1.5">
                     <span className="text-[10px] font-bold text-gray-500">Insert Standard GovTech Resolution Template:</span>
                     <div className="flex flex-wrap gap-1.5">
@@ -518,13 +700,54 @@ export default function AdminInquiriesPage() {
                   </div>
 
                   <textarea
-                    rows={4}
+                    rows={3}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Type official findings, Kebele appointment instructions, or grievance resolution details..."
+                    placeholder="Type official findings, Kebele appointment instructions, or grievance resolution details visible to the citizen..."
                     className="w-full px-3.5 py-2.5 border border-gray-300 rounded-xl text-xs leading-relaxed focus:ring-2 focus:ring-[#1a4f8b]"
                   />
                 </div>
+
+                {/* SECTION 2: INTERNAL ADMINISTRATIVE NOTES (STRICTLY CONFIDENTIAL) */}
+                <div className="space-y-2 pt-2 border-t border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-xs font-bold text-amber-800 uppercase tracking-wider flex items-center gap-1.5">
+                      <span>🔒</span> Internal Staff Casework Notes (Strictly Confidential)
+                    </h4>
+                    <span className="text-[10px] text-rose-600 font-bold">NEVER visible to citizen</span>
+                  </div>
+
+                  <textarea
+                    rows={2}
+                    value={internalNotes}
+                    onChange={(e) => setInternalNotes(e.target.value)}
+                    placeholder="Private notes for Woreda administration, background check results, legal counsel feedback, or committee deliberations..."
+                    className="w-full px-3.5 py-2 bg-amber-50/50 border border-amber-200 rounded-xl text-xs leading-relaxed focus:ring-2 focus:ring-amber-500"
+                  />
+                </div>
+
+                {/* SECTION 3: AUDIT & STATUS TIMELINE */}
+                {selectedInquiry.statusHistory && selectedInquiry.statusHistory.length > 0 && (
+                  <div className="space-y-2 pt-2 border-t border-gray-100">
+                    <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider block">
+                      Case Progression History:
+                    </span>
+                    <div className="space-y-1.5 max-h-36 overflow-y-auto">
+                      {selectedInquiry.statusHistory.map((item, idx) => (
+                        <div key={idx} className="p-2 bg-gray-50 rounded-lg border border-gray-200 text-[11px] flex items-start justify-between">
+                          <div>
+                            <span className="font-bold text-gray-800 capitalize">{item.status.replace('_', ' ')}</span>
+                            {item.changedBy && <span className="text-gray-500"> • by {item.changedBy}</span>}
+                            {item.notes && <p className="text-gray-600 text-[10px] mt-0.5">{item.notes}</p>}
+                          </div>
+                          <span className="text-gray-400 text-[10px] shrink-0 ml-2">
+                            {new Date(item.changedAt).toLocaleString()}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Action Workflow Buttons */}
                 <div className="pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-3">
@@ -534,7 +757,7 @@ export default function AdminInquiriesPage() {
                     onClick={() => updateTicket(selectedInquiry.status)}
                     className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-xl text-xs font-bold cursor-pointer disabled:opacity-50"
                   >
-                    {saving ? 'Saving...' : '💾 Save Response Notes'}
+                    {saving ? 'Saving...' : '💾 Save Notes & Assignment'}
                   </button>
 
                   <div className="flex items-center gap-2">
@@ -583,8 +806,4 @@ export default function AdminInquiriesPage() {
       )}
     </div>
   )
-
-  function fetchNewsList() {
-    fetchInquiries()
-  }
 }
