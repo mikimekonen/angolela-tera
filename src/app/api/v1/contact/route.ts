@@ -5,6 +5,7 @@ import { prisma } from '@/lib/db'
 import { createInquiry } from '@/lib/dataStore'
 import { rateLimiter } from '@/lib/rateLimit'
 import { sendCitizenSMSNotification } from '@/lib/notifications'
+import { sendGovernmentEmail, isValidEmail } from '@/lib/email'
 
 export async function POST(req: NextRequest) {
   try {
@@ -89,16 +90,25 @@ export async function POST(req: NextRequest) {
       userAgent,
     })
 
-    // Dispatch official citizen SMS confirmation if phone number is provided
-    if (phone) {
-      sendCitizenSMSNotification({
-        trackingCode: inquiryItem.trackingCode,
-        fullName: name,
-        phone,
-        email,
-        subject,
-        category: 'grievance',
-      }).catch((err) => console.error('[SMS Dispatch Error]:', err))
+    // Dispatch official email notification to Woreda admin mailbox (angolelatera1@gmail.com)
+    if (isValidEmail(email)) {
+      sendGovernmentEmail({
+        to: process.env.CONTACT_TO_EMAIL || 'angolelatera1@gmail.com',
+        replyTo: email,
+        subject: `[Citizen Portal Inquiry #${inquiryItem.trackingCode}] ${subject}`,
+        text: `Official Citizen Inquiry Details:
+Tracking Code: ${inquiryItem.trackingCode}
+Citizen Name: ${name}
+Email Address: ${email}
+Telephone: ${phone || 'Not provided'}
+Subject: ${subject}
+Date Submitted: ${new Date().toLocaleString()}
+IP Address: ${ipAddress}
+
+Message Statement:
+${message}
+`,
+      }).catch((err) => console.error('[Email Dispatch Error]:', err))
     }
 
     return NextResponse.json(

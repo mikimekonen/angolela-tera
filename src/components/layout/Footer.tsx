@@ -84,32 +84,32 @@ export function Footer({ locale, settings }: FooterProps) {
             <ul className="space-y-2 text-xs">
               <li>
                 <Link href={`/${locale}/services/civil-registration`} className="hover:text-[#FED100] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#c8931a]">›</span> Civil Status & Vital Certificates
+                  <span className="text-[#c8931a]">›</span> {locale === 'am' ? 'የወሳኝ ኩነት ምዝገባና ሰርተፊኬት' : 'Civil Status & Vital Certificates'}
                 </Link>
               </li>
               <li>
                 <Link href={`/${locale}/services/land-certificate`} className="hover:text-[#FED100] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#c8931a]">›</span> Rural Land Holding Registration
+                  <span className="text-[#c8931a]">›</span> {locale === 'am' ? 'የገጠር መሬት ይዞታ ምዝገባ' : 'Rural Land Holding Registration'}
                 </Link>
               </li>
               <li>
                 <Link href={`/${locale}/services/agriculture`} className="hover:text-[#FED100] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#c8931a]">›</span> Agricultural Input & Extension
+                  <span className="text-[#c8931a]">›</span> {locale === 'am' ? 'የግብርና ግብዓትና ኤክስቴንሽን' : 'Agricultural Input & Extension'}
                 </Link>
               </li>
               <li>
                 <Link href={`/${locale}/services/business-license`} className="hover:text-[#FED100] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#c8931a]">›</span> Trade Licensing & Tax Advisory
+                  <span className="text-[#c8931a]">›</span> {locale === 'am' ? 'የንግድ ፈቃድና የግብር አገልግሎት' : 'Trade Licensing & Tax Advisory'}
                 </Link>
               </li>
               <li>
                 <Link href={`/${locale}/investment/land-bank`} className="hover:text-[#FED100] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#c8931a]">›</span> Investment Land Application
+                  <span className="text-[#c8931a]">›</span> {locale === 'am' ? 'የኢንቨስትመንት መሬት ማመልከቻ' : 'Investment Land Application'}
                 </Link>
               </li>
               <li>
                 <Link href={`/${locale}/resources/forms`} className="hover:text-[#FED100] transition-colors flex items-center gap-1.5">
-                  <span className="text-[#c8931a]">›</span> Citizen Service Request Forms
+                  <span className="text-[#c8931a]">›</span> {locale === 'am' ? 'የዜጎች አገልግሎት መጠየቂያ ቅጾች' : 'Citizen Service Request Forms'}
                 </Link>
               </li>
             </ul>
@@ -201,19 +201,15 @@ export function Footer({ locale, settings }: FooterProps) {
               rel="noopener noreferrer"
               className="hover:text-[#FED100] transition-colors"
             >
-              Amhara Regional State
+              {locale === 'am' ? 'የአማራ ብሔራዊ ክልላዊ መንግሥት' : 'Amhara Regional State'}
             </a>
             <span>•</span>
             <Link href={`/${locale}/privacy`} className="hover:text-[#FED100] transition-colors">
-              Privacy Policy
+              {locale === 'am' ? 'የግላዊነት ፖሊሲ' : 'Privacy Policy'}
             </Link>
             <span>•</span>
             <Link href={`/${locale}/accessibility`} className="hover:text-[#FED100] transition-colors">
-              Accessibility
-            </Link>
-            <span>•</span>
-            <Link href="/admin/login" className="text-gray-500 hover:text-gray-300 transition-colors">
-              Staff Portal (CMS)
+              {locale === 'am' ? 'ተደራሽነት (Accessibility)' : 'Accessibility'}
             </Link>
           </div>
         </div>

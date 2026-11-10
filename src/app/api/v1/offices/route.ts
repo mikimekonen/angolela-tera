@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
       headTitle_en: body.headTitle_en || 'Sector Bureau Head',
       headTitle_am: body.headTitle_am || 'የዘርፍ ቢሮ ሃላፊ',
       phone: body.phone || '+251 58 661 0100',
-      email: body.email || `info@angolela-tera.gov.et`,
+      email: body.email || `angolelatera1@gmail.com`,
       location_en: body.location_en || 'Woreda Main Administration Complex, Chacha',
       location_am: body.location_am || 'የወረዳው ዋና አስተዳደር ግቢ፣ ጫጫ',
       about_en: body.about_en || '',

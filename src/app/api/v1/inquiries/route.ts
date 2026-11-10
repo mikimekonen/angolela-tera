@@ -6,6 +6,7 @@ import {
   updateInquiryStatus,
   getInquiryByTrackingCode,
 } from '@/lib/dataStore'
+import { sendGovernmentEmail, isValidEmail } from '@/lib/email'
 
 export async function GET(req: NextRequest) {
   try {
@@ -57,6 +58,13 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    if (!isValidEmail(email)) {
+      return NextResponse.json(
+        { success: false, error: 'Please provide a valid email address.' },
+        { status: 400 }
+      )
+    }
+
     const created = createInquiry({
       name,
       email,
@@ -66,6 +74,24 @@ export async function POST(req: NextRequest) {
       category: category || 'grievance',
       status: 'SUBMITTED',
     })
+
+    // Dispatch official email notification to Woreda admin mailbox (angolelatera1@gmail.com)
+    sendGovernmentEmail({
+      to: process.env.CONTACT_TO_EMAIL || 'angolelatera1@gmail.com',
+      replyTo: email,
+      subject: `[Citizen Portal Inquiry #${created.trackingCode}] ${subject}`,
+      text: `Citizen Inquiry Details:
+Tracking Code: ${created.trackingCode}
+Citizen Full Name: ${name}
+Email Address: ${email}
+Telephone: ${phone || 'Not provided'}
+Category: ${category || 'Grievance / Inquiry'}
+Date Submitted: ${new Date().toLocaleString()}
+
+Message:
+${message}
+`,
+    }).catch((err) => console.error('[Email Dispatch Error]:', err))
 
     return NextResponse.json({
       success: true,

@@ -67,10 +67,12 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         href: `/${locale}/investment`,
         children: [
           { title: 'Investment Potential', href: `/${locale}/investment`, description: 'Agro-processing, manufacturing, renewable energy' },
-          { title: 'Land Bank & Site Access', href: `/${locale}/investment/land-bank`, description: 'Available industrial and commercial parcels' },
+          { title: 'Land Bank', href: `/${locale}/investment/land-bank`, description: 'Available industrial and commercial parcels' },
+          { title: 'Site Access & Infrastructure', href: `/${locale}/investment/site-access`, description: 'Highways, power grid, and water utilities' },
+          { title: 'Investment Incentives', href: `/${locale}/investment/incentives`, description: 'Tax holidays, duty-free exemptions, and leases' },
+          { title: 'One-Stop Investor Desk', href: `/${locale}/investment/one-stop-desk`, description: 'Fast-track permits, registration, and liaison' },
           { title: 'Private Enterprises & Companies', href: `/${locale}/companies`, description: 'Directory of registered local commercial firms' },
           { title: 'Partner Organizations', href: `/${locale}/partners`, description: 'Development partners and academic allies' },
-          { title: 'Incentives & One-Stop Desk', href: `/${locale}/investment/incentives`, description: 'Permits, duty-free exemptions, support' },
         ],
       },
       {
@@ -78,9 +80,9 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         label: 'Tourism',
         href: `/${locale}/tourism`,
         children: [
-          { title: 'Historical & Religious Sites', href: `/${locale}/tourism/history`, description: 'Historic churches, ancient settlements' },
-          { title: 'Scenic Landscapes & Trekking', href: `/${locale}/tourism/nature`, description: 'Highland vistas, waterfalls, ecotourism' },
-          { title: 'Culture & Festivals', href: `/${locale}/tourism/culture`, description: 'Traditional craftsmanship and celebrations' },
+          { title: 'Historical & Religious Sites', href: `/${locale}/tourism/historical-religious-sites`, description: 'Historic churches, 19th-century royal capital' },
+          { title: 'Scenic Landscapes & Trekking', href: `/${locale}/tourism/scenic-landscapes`, description: 'Chacha river gorge, Ajima dam lake, trekking' },
+          { title: 'Culture & Festivals', href: `/${locale}/tourism/culture-festivals`, description: 'Timket, Shewan horse traditions, wool weaving' },
         ],
       },
       {
@@ -99,9 +101,9 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         label: 'Resources',
         href: `/${locale}/resources`,
         children: [
-          { title: 'Directives & Regulations', href: `/${locale}/resources/regulations`, description: 'Regional and woreda legal enactments' },
+          { title: 'Directives & Regulations', href: `/${locale}/resources/directives`, description: 'Regional and woreda legal enactments' },
           { title: 'Downloadable Forms', href: `/${locale}/resources/forms`, description: 'Application forms for citizen services' },
-          { title: 'Annual Performance Reports', href: `/${locale}/resources/reports`, description: 'Public expenditure and audit summaries' },
+          { title: 'Annual Performance Reports', href: `/${locale}/resources/annual-reports`, description: 'Public expenditure and audit summaries' },
         ],
       },
       { id: 'contact', label: 'Contact', href: `/${locale}/contact` },
@@ -148,6 +150,9 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         children: [
           { title: 'የኢንቨስትመንት አማራጮች', href: `/${locale}/investment`, description: 'ግብርና፣ አግሮ ፕሮሰሲንግና ኢንዱስትሪ' },
           { title: 'የመሬት ባንክ', href: `/${locale}/investment/land-bank`, description: 'ለኢንቨስትመንት የተዘጋጁ ይዞታዎች' },
+          { title: 'መሰረተ ልማትና መንገድ', href: `/${locale}/investment/site-access`, description: 'የአውራ ጎዳና፣ የመብራትና የውሃ አቅርቦት' },
+          { title: 'የኢንቨስትመንት ማበረታቻዎች', href: `/${locale}/investment/incentives`, description: 'የግብርና የቀረጥ ነፃ መብቶች' },
+          { title: 'የአንድ ማዕከል አገልግሎት', href: `/${locale}/investment/one-stop-desk`, description: 'ፈጣን የንግድ ፈቃድና የይዞታ ርክክብ' },
           { title: 'የግል ድርጅቶችና ፋብሪካዎች', href: `/${locale}/companies`, description: 'የተመዘገቡ የወረዳው ድርጅቶች ዝርዝር' },
           { title: 'አጋር ድርጅቶች', href: `/${locale}/partners`, description: 'ስትራቴጂካዊና የልማት አጋር ተቋማት' },
         ],
@@ -157,8 +162,9 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         label: 'ቱሪዝም',
         href: `/${locale}/tourism`,
         children: [
-          { title: 'ታሪካዊና ሃይማኖታዊ ስፍራዎች', href: `/${locale}/tourism/history`, description: 'ጥንታዊ ገዳማትና የታሪክ ቅርሶች' },
-          { title: 'የተፈጥሮ መስህቦች', href: `/${locale}/tourism/nature`, description: 'ተራሮች፣ ፏፏቴዎችና የተፈጥሮ ውበት' },
+          { title: 'ታሪካዊና ሃይማኖታዊ ስፍራዎች', href: `/${locale}/tourism/historical-religious-sites`, description: 'የንጉሥ ሣህለ ሥላሴ መቀመጫና ጥንታዊ ገዳማት' },
+          { title: 'የተፈጥሮ መስህቦችና ተራራ', href: `/${locale}/tourism/scenic-landscapes`, description: 'የጫጫ ወንዝ ሸለቆና የአጂማ ግድብ ሀይቅ' },
+          { title: 'ባህላዊ በዓላትና እሴቶች', href: `/${locale}/tourism/culture-festivals`, description: 'የጥምቀት በዓል፣ የፈረስ ጉግስና የበግ ፀጉር ጥበብ' },
         ],
       },
       {
@@ -169,6 +175,7 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
           { title: 'ወቅታዊ ዜናዎች', href: `/${locale}/news`, description: 'ይፋዊ መግለጫዎችና ዜናዎች' },
           { title: 'ማስታወቂያዎች', href: `/${locale}/news/announcements`, description: 'የጨረታና የስራ ቅጥር ማስታወቂያዎች' },
           { title: 'ጨረታዎችና ግዥ', href: `/${locale}/tenders`, description: 'ክፍት ጨረታዎች እና የግዥ ማስታወቂያዎች' },
+          { title: 'የፎቶና ቪዲዮ ጋለሪ', href: `/${locale}/news/gallery`, description: 'የማህበረሰብና የልማት ስራዎች ምስሎች' },
         ],
       },
       {
@@ -176,8 +183,9 @@ export function Navigation({ locale, isMobileOpen = false, onCloseMobile }: Navi
         label: 'ሰነዶች',
         href: `/${locale}/resources`,
         children: [
-          { title: 'ህጎችና መመሪያዎች', href: `/${locale}/resources/regulations`, description: 'የወረዳው ደንቦችና አሰራሮች' },
+          { title: 'ህጎችና መመሪያዎች', href: `/${locale}/resources/directives`, description: 'የወረዳው ደንቦችና አሰራሮች' },
           { title: 'የአገልግሎት ቅጾች', href: `/${locale}/resources/forms`, description: 'ለማውረድ የተዘጋጁ ማመልከቻዎች' },
+          { title: 'ዓመታዊ ሪፖርቶች', href: `/${locale}/resources/annual-reports`, description: 'የፋይናንስና የስራ አፈጻጸም ሪፖርቶች' },
         ],
       },
       { id: 'contact', label: 'ያግኙን', href: `/${locale}/contact` },
