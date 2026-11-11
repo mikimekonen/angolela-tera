@@ -10,6 +10,7 @@ const NAV_GROUPS = [
     label: 'Overview',
     items: [
       { href: '/admin/dashboard', label: 'Dashboard', icon: '◈' },
+      { href: '/admin/super-admin', label: 'System Control Center', icon: '⚡' },
     ],
   },
   {
@@ -98,7 +99,7 @@ export default function AdminSidebar({ user }: { user: SessionPayload }) {
 
   const visibleGroups = NAV_GROUPS.map((group) => {
     const visibleItems = group.items.filter((item) => {
-      if (item.href === '/admin/users' || item.href === '/admin/settings') {
+      if (item.href === '/admin/super-admin' || item.href === '/admin/users' || item.href === '/admin/settings') {
         return isSuperAdmin
       }
       if (

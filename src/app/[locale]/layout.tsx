@@ -1,11 +1,14 @@
 import React from 'react'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { locales, type Locale } from '@/i18n/config'
 import { PublicShell } from '@/components/layout/PublicShell'
-import { getSiteSettings } from '@/lib/dataStore'
+import { getSiteSettings, getMaintenanceStatus } from '@/lib/dataStore'
+import { getSession } from '@/lib/auth'
+import { MaintenanceScreen } from '@/components/maintenance/MaintenanceScreen'
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -67,9 +70,36 @@ export default async function LocaleLayout({
   setRequestLocale(locale)
   const messages = await getMessages()
   const settings = getSiteSettings()
+  const maint = getMaintenanceStatus()
+  const session = await getSession()
+
+  // If maintenance mode is active, block public visitors unless authorized as Super Admin
+  if (maint.isActive && session?.role !== 'SUPER_ADMIN') {
+    return (
+      <MaintenanceScreen
+        locale={locale}
+        maintenanceEvent={maint.currentEvent}
+        settings={settings}
+      />
+    )
+  }
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
+      {maint.isActive && session?.role === 'SUPER_ADMIN' && (
+        <div className="bg-amber-500 text-slate-950 font-bold px-4 py-2 text-xs flex items-center justify-between sticky top-0 z-[100] shadow-md">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-red-600 animate-ping" />
+            <span>⚠️ EMERGENCY MAINTENANCE MODE ACTIVE: Public traffic is currently blocked. You are viewing in Super Admin bypass mode.</span>
+          </div>
+          <Link
+            href="/admin/super-admin"
+            className="bg-slate-950 text-white px-2.5 py-1 rounded text-xs hover:bg-slate-800 transition"
+          >
+            System Control Center →
+          </Link>
+        </div>
+      )}
       <PublicShell locale={locale as Locale} settings={settings}>
         {children}
       </PublicShell>

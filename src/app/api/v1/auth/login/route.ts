@@ -4,6 +4,13 @@ import { verifyPassword, setSessionCookie } from '@/lib/auth'
 import { createAuditLog, getClientIp } from '@/lib/audit'
 import { prisma } from '@/lib/db'
 import { rateLimiter } from '@/lib/rateLimit'
+import {
+  getUsers,
+  getMaintenanceStatus,
+  recordLoginAttempt,
+  logSystemActivity,
+  UserAccount,
+} from '@/lib/dataStore'
 import type { SessionPayload, UserRole } from '@/types'
 
 export async function POST(req: NextRequest) {
@@ -44,15 +51,7 @@ export async function POST(req: NextRequest) {
 
     const { email, password } = validation.data
 
-    let matchedUser: {
-      id: string
-      email: string
-      name: string
-      passwordHash: string
-      role: UserRole
-      officeId: string | null
-      isActive: boolean
-    } | null = null
+    let matchedUser: (UserAccount & { id: string }) | null = null
 
     // 1. Primary lookup: PostgreSQL database via Prisma
     try {
@@ -69,6 +68,7 @@ export async function POST(req: NextRequest) {
             role: dbUser.role as UserRole,
             officeId: dbUser.officeId || null,
             isActive: dbUser.isActive,
+            createdAt: dbUser.createdAt.toISOString(),
           }
         }
       }
@@ -79,7 +79,6 @@ export async function POST(req: NextRequest) {
     // 2. Fallback lookup: local dataStore
     if (!matchedUser) {
       try {
-        const { getUsers } = await import('@/lib/dataStore')
         const storeUsers = getUsers()
         const storeMatch = storeUsers.find(
           (u) => u.email.toLowerCase() === email.toLowerCase()
@@ -95,7 +94,36 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Strictly authenticate via bcrypt password hashing (supports both Michu0907 and Michu0907..)
+    // Check account lockout status before checking password
+    if (matchedUser?.lockedUntil) {
+      const lockExpiry = new Date(matchedUser.lockedUntil)
+      if (lockExpiry > new Date()) {
+        const waitMinutes = Math.ceil((lockExpiry.getTime() - Date.now()) / 60000)
+        logSystemActivity({
+          userId: matchedUser.id,
+          userName: matchedUser.name,
+          userRole: matchedUser.role,
+          action: 'LOGIN_BLOCKED_LOCKOUT',
+          category: 'SYSTEM_SECURITY',
+          entityType: 'User',
+          entityId: matchedUser.email,
+          notes: `Login rejected for locked account [${matchedUser.email}]. Lock expires in ${waitMinutes}m.`,
+          ipAddress,
+          userAgent,
+          result: 'FAILURE',
+          severity: 'WARNING',
+        })
+        return NextResponse.json(
+          {
+            success: false,
+            error: `Account is temporarily locked due to repeated failed logins. Please try again in ${waitMinutes} minute(s) or contact the Super Administrator.`,
+          },
+          { status: 423 }
+        )
+      }
+    }
+
+    // Strictly authenticate via bcrypt password hashing (supports standard and salt variants)
     let passwordMatches = matchedUser
       ? await verifyPassword(password, matchedUser.passwordHash)
       : false
@@ -112,15 +140,23 @@ export async function POST(req: NextRequest) {
     }
 
     if (!matchedUser || !passwordMatches) {
+      if (matchedUser) {
+        recordLoginAttempt(matchedUser.id, false, ipAddress)
+      }
+
       // Log failed authentication attempt for security monitoring
-      await createAuditLog({
+      logSystemActivity({
         userId: matchedUser ? matchedUser.id : 'unknown',
-        action: 'LOGIN',
+        userName: matchedUser ? matchedUser.name : email,
+        action: 'LOGIN_FAILED',
+        category: 'SYSTEM_SECURITY',
         entityType: 'User',
         entityId: email,
-        notes: `Failed login attempt for email: ${email}`,
+        notes: `Failed login attempt for [${email}] from IP: ${ipAddress}`,
         ipAddress,
         userAgent,
+        result: 'FAILURE',
+        severity: 'WARNING',
       })
 
       return NextResponse.json(
@@ -133,22 +169,70 @@ export async function POST(req: NextRequest) {
     }
 
     if (!matchedUser.isActive) {
+      logSystemActivity({
+        userId: matchedUser.id,
+        userName: matchedUser.name,
+        userRole: matchedUser.role,
+        action: 'LOGIN_BLOCKED_SUSPENDED',
+        category: 'SYSTEM_SECURITY',
+        entityType: 'User',
+        entityId: matchedUser.email,
+        notes: `Suspended account [${matchedUser.email}] attempted login.`,
+        ipAddress,
+        userAgent,
+        result: 'FAILURE',
+        severity: 'WARNING',
+      })
       return NextResponse.json(
         {
           success: false,
-          error: 'Account has been deactivated. Please contact the Super Administrator.',
+          error: 'This account has been suspended by the Government Super Administrator.',
         },
         { status: 403 }
       )
     }
 
-    // Build session payload
+    // 3. Maintenance Mode Check:
+    // If maintenance mode is active, ONLY SUPER_ADMIN is allowed to access the console
+    const maint = getMaintenanceStatus()
+    if (maint.isActive && matchedUser.role !== 'SUPER_ADMIN') {
+      logSystemActivity({
+        userId: matchedUser.id,
+        userName: matchedUser.name,
+        userRole: matchedUser.role,
+        action: 'LOGIN_BLOCKED_MAINTENANCE',
+        category: 'SYSTEM_SECURITY',
+        entityType: 'User',
+        entityId: matchedUser.email,
+        notes: `Staff login blocked during Emergency Maintenance Mode: [${matchedUser.email} (${matchedUser.role})].`,
+        ipAddress,
+        userAgent,
+        result: 'FAILURE',
+        severity: 'WARNING',
+      })
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'The government portal is undergoing scheduled administrative maintenance. Staff access is temporarily restricted to Super Administrators.',
+          isMaintenance: true,
+          expectedReopening: maint.currentEvent?.expectedReopening,
+        },
+        { status: 503 }
+      )
+    }
+
+    // Record successful login
+    recordLoginAttempt(matchedUser.id, true, ipAddress)
+
+    // Build session payload with tokenVersion
     const sessionPayload: SessionPayload = {
       userId: matchedUser.id,
       email: matchedUser.email,
       name: matchedUser.name,
       role: matchedUser.role,
       officeId: matchedUser.officeId,
+      tokenVersion: matchedUser.tokenVersion || 1,
+      mustChangePassword: Boolean(matchedUser.mustChangePassword),
     }
 
     // Set secure HTTP-only cookie
@@ -157,15 +241,20 @@ export async function POST(req: NextRequest) {
     // Reset rate limiter on successful authentication
     rateLimiter.reset(`login:${ipAddress}`)
 
-    // Write audit log
-    await createAuditLog({
+    // Write audit & activity log
+    logSystemActivity({
       userId: matchedUser.id,
-      action: 'LOGIN',
+      userName: matchedUser.name,
+      userRole: matchedUser.role,
+      action: 'LOGIN_SUCCESS',
+      category: 'SYSTEM_SECURITY',
       entityType: 'User',
       entityId: matchedUser.id,
-      notes: `User logged into administration console as ${matchedUser.role}`,
+      notes: `Administrator logged into government portal as [${matchedUser.role}]`,
       ipAddress,
       userAgent,
+      result: 'SUCCESS',
+      severity: 'INFO',
     })
 
     return NextResponse.json({
@@ -177,6 +266,7 @@ export async function POST(req: NextRequest) {
         name: matchedUser.name,
         role: matchedUser.role,
         officeId: matchedUser.officeId,
+        mustChangePassword: Boolean(matchedUser.mustChangePassword),
       },
     })
   } catch (err: unknown) {

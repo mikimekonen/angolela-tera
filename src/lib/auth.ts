@@ -121,6 +121,8 @@ export async function verifySessionToken(token: string): Promise<SessionPayload 
       name: payload.name,
       role: payload.role as UserRole,
       officeId: payload.officeId || null,
+      tokenVersion: typeof payload.tokenVersion === 'number' ? payload.tokenVersion : 1,
+      mustChangePassword: Boolean(payload.mustChangePassword),
     }
   } catch {
     return null
@@ -133,7 +135,28 @@ export async function getSession(): Promise<SessionPayload | null> {
     const cookieStore = await cookies()
     const token = cookieStore.get(COOKIE_NAME)?.value
     if (!token) return null
-    return await verifySessionToken(token)
+    const payload = await verifySessionToken(token)
+    if (!payload) return null
+
+    // Real-time revocation check against data store
+    try {
+      const { getUserById } = await import('@/lib/dataStore')
+      const user = getUserById(payload.userId)
+      if (!user || !user.isActive) {
+        return null
+      }
+      if ((user.tokenVersion || 1) > (payload.tokenVersion || 1)) {
+        return null
+      }
+      return {
+        ...payload,
+        tokenVersion: user.tokenVersion || 1,
+        mustChangePassword: Boolean(user.mustChangePassword),
+      }
+    } catch {
+      // Fallback if dataStore cannot be imported dynamically in edge
+      return payload
+    }
   } catch {
     return null
   }

@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import bcrypt from 'bcryptjs'
 import { mockOffices, mockServices, mockNews } from '@/data/mockData'
 import { MOCK_BUSINESSES, MOCK_PARTNERS, MOCK_LEADERSHIP } from '@/data/entityData'
 import type {
@@ -28,9 +29,68 @@ export interface UserAccount {
   isActive: boolean
   createdAt: string
   lastLoginAt?: string
+  lastLoginIp?: string
   phone?: string
   designation?: string
   avatarUrl?: string
+  tokenVersion?: number
+  mustChangePassword?: boolean
+  suspendedAt?: string
+  suspendedBy?: string
+  passwordResetAt?: string
+  failedLoginAttempts?: number
+  lockedUntil?: string
+}
+
+export interface MaintenanceEvent {
+  id: string
+  isActive: boolean
+  activatedAt: string
+  activatedBy: string
+  deactivatedAt?: string
+  deactivatedBy?: string
+  reason: string
+  announcement_en: string
+  announcement_am: string
+  expectedReopening?: string
+  durationMinutes?: number
+}
+
+export type NotificationSeverity = 'INFO' | 'WARNING' | 'CRITICAL'
+export type NotificationCategory = 'USER_MGMT' | 'SECURITY' | 'CONTENT' | 'GOV_SERVICES' | 'SYSTEM'
+
+export interface SystemNotification {
+  id: string
+  title: string
+  message: string
+  severity: NotificationSeverity
+  category: NotificationCategory
+  isRead: boolean
+  createdAt: string
+  link?: string
+  metadata?: Record<string, any>
+}
+
+export type ActivityCategory =
+  | 'USER_MANAGEMENT'
+  | 'CONTENT_MANAGEMENT'
+  | 'GOVERNMENT_SERVICES'
+  | 'SYSTEM_SECURITY'
+
+export interface SystemActivityLog {
+  id: string
+  userId?: string
+  userName?: string
+  userRole?: string
+  action: string
+  category: ActivityCategory
+  entityType?: string
+  entityId?: string
+  notes?: string
+  ipAddress?: string
+  userAgent?: string
+  result: 'SUCCESS' | 'FAILURE'
+  createdAt: string
 }
 
 export type InquiryStatus =
@@ -102,6 +162,8 @@ export interface StoreData {
   documents: any[]
   sliders: any[]
   mediaAssets: MediaAssetItem[]
+  maintenanceHistory?: MaintenanceEvent[]
+  notifications?: SystemNotification[]
 }
 
 // Generate default store structure
@@ -734,9 +796,18 @@ export function getStore(): StoreData {
     const raw = fs.readFileSync(STORE_PATH, 'utf8')
     const parsed = JSON.parse(raw)
     const initial = getInitialStore()
+    const rawUsers = Array.isArray(parsed.users) ? parsed.users : initial.users
+    const users = rawUsers.map((u: any) => ({
+      ...u,
+      tokenVersion: typeof u.tokenVersion === 'number' ? u.tokenVersion : 1,
+      mustChangePassword: Boolean(u.mustChangePassword),
+    }))
     return {
       ...initial,
       ...parsed,
+      users,
+      maintenanceHistory: Array.isArray(parsed.maintenanceHistory) ? parsed.maintenanceHistory : [],
+      notifications: Array.isArray(parsed.notifications) ? parsed.notifications : initial.notifications || [],
       companies:
         Array.isArray(parsed.companies) && parsed.companies.length > 0
           ? parsed.companies
@@ -1092,13 +1163,32 @@ export function deleteNavigationItem(id: string, user?: string) {
 export function getUsers(): UserAccount[] {
   return getStore().users
 }
+
 export function getUserById(id: string): UserAccount | undefined {
   return getStore().users.find((u) => u.id === id)
 }
+
+export function isLastSuperAdmin(userId: string): boolean {
+  const store = getStore()
+  const targetUser = store.users.find((u) => u.id === userId)
+  if (!targetUser || targetUser.role !== 'SUPER_ADMIN') return false
+  const activeSuperAdmins = store.users.filter((u) => u.role === 'SUPER_ADMIN' && u.isActive)
+  return activeSuperAdmins.length <= 1 && activeSuperAdmins[0]?.id === userId
+}
+
 export function updateUser(userId: string, updates: Partial<UserAccount>, actor?: string): UserAccount | null {
   const store = getStore()
   const idx = store.users.findIndex((u) => u.id === userId)
   if (idx !== -1) {
+    // Safety guard: prevent demoting the last active Super Admin
+    if (
+      updates.role &&
+      updates.role !== 'SUPER_ADMIN' &&
+      isLastSuperAdmin(userId)
+    ) {
+      throw new Error('Safety Guard: Cannot demote the last active Super Admin account. Maintain at least one active Super Admin.')
+    }
+
     store.users[idx] = { ...store.users[idx], ...updates }
     recordAudit(store, actor || store.users[idx].email, 'UPDATE', 'User', userId, `Updated user profile/credentials for [${store.users[idx].email}]`)
     saveStore(store)
@@ -1106,26 +1196,217 @@ export function updateUser(userId: string, updates: Partial<UserAccount>, actor?
   }
   return null
 }
+
 export function createUser(user: UserAccount, permissions: AdminPermissionItem[] = [], actor?: string) {
   const store = getStore()
-  store.users.push(user)
+  const fullUser: UserAccount = {
+    ...user,
+    tokenVersion: user.tokenVersion || 1,
+    mustChangePassword: Boolean(user.mustChangePassword),
+    failedLoginAttempts: 0,
+  }
+  store.users.push(fullUser)
   if (permissions.length > 0) {
     store.permissions.push(...permissions)
   }
   recordAudit(store, actor, 'CREATE', 'User', user.id, `Created admin account [${user.email}] with role: ${user.role}`)
   saveStore(store)
-  return user
+  return fullUser
 }
+
 export function toggleUserStatus(userId: string, isActive: boolean, actor?: string) {
   const store = getStore()
   const u = store.users.find((user) => user.id === userId)
-  if (u) {
-    u.isActive = isActive
-    recordAudit(store, actor, 'UPDATE', 'User', userId, `Changed account active status to: ${isActive}`)
-    saveStore(store)
-    return u
+  if (!u) return null
+
+  // Safety guard: prevent suspending or deactivating the last active Super Admin
+  if (!isActive && isLastSuperAdmin(userId)) {
+    throw new Error('Safety Guard: Cannot suspend or deactivate the last remaining Super Admin account.')
   }
-  return null
+
+  u.isActive = isActive
+  if (!isActive) {
+    u.suspendedAt = new Date().toISOString()
+    u.suspendedBy = actor || 'Super Admin'
+    // Immediately invalidate active sessions on suspension
+    u.tokenVersion = (u.tokenVersion || 1) + 1
+  } else {
+    u.suspendedAt = undefined
+    u.suspendedBy = undefined
+  }
+
+  logSystemActivity({
+    userId: actor,
+    userName: actor,
+    action: isActive ? 'USER_REACTIVATED' : 'USER_SUSPENDED',
+    category: 'USER_MANAGEMENT',
+    entityType: 'User',
+    entityId: u.email,
+    notes: `Account [${u.email}] status changed to ${isActive ? 'ACTIVE' : 'SUSPENDED'} by ${actor || 'Super Admin'}`,
+    severity: isActive ? 'INFO' : 'WARNING',
+  })
+
+  saveStore(store)
+  return u
+}
+
+export function deleteUser(userId: string, actor: string): { success: boolean; error?: string } {
+  const store = getStore()
+  const target = store.users.find((u) => u.id === userId)
+  if (!target) return { success: false, error: 'User not found' }
+
+  if (isLastSuperAdmin(userId)) {
+    return {
+      success: false,
+      error: 'Protection Guard: Cannot delete the last active Super Admin account. Ensure another Super Admin is active first.',
+    }
+  }
+
+  store.users = store.users.filter((u) => u.id !== userId)
+  store.permissions = store.permissions.filter((p) => p.userId !== userId)
+
+  logSystemActivity({
+    userId: actor,
+    userName: actor,
+    action: 'USER_DELETED',
+    category: 'USER_MANAGEMENT',
+    entityType: 'User',
+    entityId: userId,
+    notes: `Permanently deleted user account [${target.email} (${target.name})] by ${actor}`,
+    severity: 'WARNING',
+  })
+
+  saveStore(store)
+  return { success: true }
+}
+
+export async function resetUserPasswordSecurely(userId: string, actor: string) {
+  const store = getStore()
+  const user = store.users.find((u) => u.id === userId)
+  if (!user) throw new Error('User not found')
+
+  // Generate 14-character high-entropy temporary password
+  const upper = 'ABCDEFGHJKLMNPQRSTUVWXYZ'
+  const lower = 'abcdefghijkmnopqrstuvwxyz'
+  const digits = '23456789'
+  const symbols = '!@#$%^&*='
+
+  let tempPass = ''
+  tempPass += upper.charAt(Math.floor(Math.random() * upper.length))
+  tempPass += lower.charAt(Math.floor(Math.random() * lower.length))
+  tempPass += digits.charAt(Math.floor(Math.random() * digits.length))
+  tempPass += symbols.charAt(Math.floor(Math.random() * symbols.length))
+
+  const allChars = upper + lower + digits + symbols
+  for (let i = 0; i < 10; i++) {
+    tempPass += allChars.charAt(Math.floor(Math.random() * allChars.length))
+  }
+  tempPass = tempPass.split('').sort(() => 0.5 - Math.random()).join('')
+
+  const salt = await bcrypt.genSalt(10)
+  const passwordHash = await bcrypt.hash(tempPass, salt)
+
+  user.passwordHash = passwordHash
+  user.mustChangePassword = true
+  user.tokenVersion = (user.tokenVersion || 1) + 1 // Revoke any existing active sessions!
+  user.passwordResetAt = new Date().toISOString()
+  user.failedLoginAttempts = 0
+  user.lockedUntil = undefined
+
+  logSystemActivity({
+    userId: actor,
+    userName: actor,
+    action: 'PASSWORD_RESET_INITIATED',
+    category: 'USER_MANAGEMENT',
+    entityType: 'User',
+    entityId: user.email,
+    notes: `Administrative password reset executed by ${actor} for [${user.email}]. One-time temporary password issued. Mandatory password change flagged on next login. Prior sessions terminated.`,
+    severity: 'WARNING',
+  })
+
+  saveStore(store)
+
+  return {
+    success: true,
+    temporaryPassword: tempPass,
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    },
+  }
+}
+
+export function revokeUserSessions(userId: string, actor: string) {
+  const store = getStore()
+  const user = store.users.find((u) => u.id === userId)
+  if (!user) throw new Error('User not found')
+
+  user.tokenVersion = (user.tokenVersion || 1) + 1
+
+  logSystemActivity({
+    userId: actor,
+    userName: actor,
+    action: 'USER_SESSIONS_REVOKED',
+    category: 'USER_MANAGEMENT',
+    entityType: 'User',
+    entityId: user.email,
+    notes: `Active sessions terminated for ${user.email} by ${actor}. Token version advanced to ${user.tokenVersion}.`,
+    severity: 'INFO',
+  })
+
+  saveStore(store)
+  return user
+}
+
+export function revokeAllSessionsExcept(exemptUserId: string, actor: string) {
+  const store = getStore()
+  let count = 0
+  store.users.forEach((u) => {
+    if (u.id !== exemptUserId) {
+      u.tokenVersion = (u.tokenVersion || 1) + 1
+      count++
+    }
+  })
+
+  logSystemActivity({
+    userId: actor,
+    userName: actor,
+    action: 'GLOBAL_SESSIONS_REVOKED',
+    category: 'SYSTEM_SECURITY',
+    entityType: 'Security',
+    notes: `Emergency bulk session revocation: ${count} administrator sessions terminated by ${actor}. Exempt user: ${exemptUserId}.`,
+    severity: 'CRITICAL',
+  })
+
+  saveStore(store)
+  return { revokedCount: count }
+}
+
+export function recordLoginAttempt(
+  userId: string,
+  success: boolean,
+  ipAddress?: string
+) {
+  const store = getStore()
+  const user = store.users.find((u) => u.id === userId)
+  if (!user) return null
+
+  if (success) {
+    user.failedLoginAttempts = 0
+    user.lockedUntil = undefined
+    user.lastLoginAt = new Date().toISOString()
+    user.lastLoginIp = ipAddress || '127.0.0.1'
+  } else {
+    user.failedLoginAttempts = (user.failedLoginAttempts || 0) + 1
+    if (user.failedLoginAttempts >= 5) {
+      // Lock account for 15 minutes
+      user.lockedUntil = new Date(Date.now() + 15 * 60 * 1000).toISOString()
+    }
+  }
+  saveStore(store)
+  return user
 }
 export function getUserPermissions(userId: string): AdminPermissionItem[] {
   return getStore().permissions.filter((p) => p.userId === userId)
@@ -1675,5 +1956,330 @@ function recordAudit(store: StoreData, user: string | undefined, action: string,
   store.auditLogs.unshift(newLog)
   if (store.auditLogs.length > 500) {
     store.auditLogs = store.auditLogs.slice(0, 500)
+  }
+}
+
+// --- SYSTEM ACTIVITY & NOTIFICATIONS (SUPER ADMIN) ---
+export function logSystemActivity(entry: {
+  userId?: string
+  userName?: string
+  userRole?: string
+  action: string
+  category: ActivityCategory
+  entityType?: string
+  entityId?: string
+  notes?: string
+  ipAddress?: string
+  userAgent?: string
+  result?: 'SUCCESS' | 'FAILURE'
+  severity?: NotificationSeverity
+}) {
+  const store = getStore()
+  const log: SystemActivityLog = {
+    id: `act-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+    userId: entry.userId || 'system',
+    userName: entry.userName || 'System Service',
+    userRole: entry.userRole,
+    action: entry.action,
+    category: entry.category,
+    entityType: entry.entityType,
+    entityId: entry.entityId,
+    notes: entry.notes,
+    ipAddress: entry.ipAddress || '127.0.0.1',
+    userAgent: entry.userAgent,
+    result: entry.result || 'SUCCESS',
+    createdAt: new Date().toISOString(),
+  }
+
+  // Add to store auditLogs in compatible shape
+  store.auditLogs.unshift({
+    id: log.id,
+    userId: log.userId,
+    userName: log.userName,
+    userRole: log.userRole,
+    action: log.action,
+    category: log.category,
+    entityType: log.entityType || 'System',
+    entityId: log.entityId || 'root',
+    notes: log.notes,
+    ipAddress: log.ipAddress,
+    result: log.result,
+    createdAt: log.createdAt,
+  })
+  if (store.auditLogs.length > 1000) {
+    store.auditLogs = store.auditLogs.slice(0, 1000)
+  }
+
+  // If severity is WARNING or CRITICAL, automatically raise a notification!
+  if (entry.severity === 'WARNING' || entry.severity === 'CRITICAL') {
+    if (!store.notifications) store.notifications = []
+    const notif: SystemNotification = {
+      id: `notif-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      title: `${entry.severity === 'CRITICAL' ? '🚨 [CRITICAL]' : '⚠️ [ALERT]'} ${entry.action.replace(/_/g, ' ')}`,
+      message: entry.notes || `System event ${entry.action} triggered.`,
+      severity: entry.severity,
+      category: entry.category === 'SYSTEM_SECURITY' ? 'SECURITY' : entry.category === 'USER_MANAGEMENT' ? 'USER_MGMT' : 'SYSTEM',
+      isRead: false,
+      createdAt: new Date().toISOString(),
+      metadata: {
+        actor: entry.userName,
+        entityId: entry.entityId,
+        category: entry.category,
+      },
+    }
+    store.notifications.unshift(notif)
+    if (store.notifications.length > 200) {
+      store.notifications = store.notifications.slice(0, 200)
+    }
+  }
+
+  saveStore(store)
+  return log
+}
+
+export function getSystemActivityLogs(filter?: {
+  category?: ActivityCategory | 'ALL'
+  result?: 'SUCCESS' | 'FAILURE' | 'ALL'
+  search?: string
+  limit?: number
+}): SystemActivityLog[] {
+  const store = getStore()
+  let list: SystemActivityLog[] = store.auditLogs.map((l: any) => ({
+    id: l.id,
+    userId: l.userId || 'system',
+    userName: l.userName || 'Administrator',
+    userRole: l.userRole || 'ADMIN',
+    action: l.action,
+    category: (l.category as ActivityCategory) || 'SYSTEM_SECURITY',
+    entityType: l.entityType,
+    entityId: l.entityId,
+    notes: l.notes,
+    ipAddress: l.ipAddress || '127.0.0.1',
+    userAgent: l.userAgent,
+    result: (l.result as 'SUCCESS' | 'FAILURE') || 'SUCCESS',
+    createdAt: l.createdAt,
+  }))
+
+  if (filter?.category && filter.category !== 'ALL') {
+    list = list.filter((l) => l.category === filter.category)
+  }
+  if (filter?.result && filter.result !== 'ALL') {
+    list = list.filter((l) => l.result === filter.result)
+  }
+  if (filter?.search && filter.search.trim()) {
+    const q = filter.search.toLowerCase()
+    list = list.filter(
+      (l) =>
+        l.action.toLowerCase().includes(q) ||
+        (l.userName && l.userName.toLowerCase().includes(q)) ||
+        (l.notes && l.notes.toLowerCase().includes(q)) ||
+        (l.ipAddress && l.ipAddress.toLowerCase().includes(q)) ||
+        (l.entityId && l.entityId.toLowerCase().includes(q))
+    )
+  }
+  if (filter?.limit) {
+    list = list.slice(0, filter.limit)
+  }
+  return list
+}
+
+export function getSystemNotifications(unreadOnly = false): SystemNotification[] {
+  const store = getStore()
+  let list = store.notifications || []
+  if (unreadOnly) {
+    list = list.filter((n) => !n.isRead)
+  }
+  return list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+}
+
+export function createSystemNotification(notification: Omit<SystemNotification, 'id' | 'createdAt' | 'isRead'>) {
+  const store = getStore()
+  if (!store.notifications) store.notifications = []
+  const newNotif: SystemNotification = {
+    ...notification,
+    id: `notif-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+    isRead: false,
+    createdAt: new Date().toISOString(),
+  }
+  store.notifications.unshift(newNotif)
+  if (store.notifications.length > 200) {
+    store.notifications = store.notifications.slice(0, 200)
+  }
+  saveStore(store)
+  return newNotif
+}
+
+export function markNotificationRead(id: string) {
+  const store = getStore()
+  if (!store.notifications) return false
+  const target = store.notifications.find((n) => n.id === id)
+  if (target) {
+    target.isRead = true
+    saveStore(store)
+    return true
+  }
+  return false
+}
+
+export function markAllNotificationsRead() {
+  const store = getStore()
+  if (!store.notifications) return 0
+  let count = 0
+  store.notifications.forEach((n) => {
+    if (!n.isRead) {
+      n.isRead = true
+      count++
+    }
+  })
+  saveStore(store)
+  return count
+}
+
+// --- EMERGENCY MAINTENANCE MODE CONTROL ---
+export function getMaintenanceStatus(): {
+  isActive: boolean
+  currentEvent?: MaintenanceEvent
+  settings: Record<string, string>
+} {
+  const store = getStore()
+  const history = store.maintenanceHistory || []
+  const currentEvent = history.find((h) => h.isActive)
+  const isSettingActive = store.siteSettings?.maintenance_mode === 'true'
+
+  return {
+    isActive: Boolean(currentEvent || isSettingActive),
+    currentEvent,
+    settings: store.siteSettings || {},
+  }
+}
+
+export function setMaintenanceMode(params: {
+  enable: boolean
+  actor: string
+  reason?: string
+  announcement_en?: string
+  announcement_am?: string
+  expectedReopening?: string
+}): { success: boolean; event?: MaintenanceEvent; message?: string } {
+  const store = getStore()
+  if (!store.maintenanceHistory) store.maintenanceHistory = []
+  if (!store.siteSettings) store.siteSettings = {}
+
+  const now = new Date().toISOString()
+
+  if (params.enable) {
+    const active = store.maintenanceHistory.find((h) => h.isActive)
+    if (active) {
+      return { success: false, message: 'Maintenance mode is already active.' }
+    }
+
+    const newEvent: MaintenanceEvent = {
+      id: `maint-${Date.now()}`,
+      isActive: true,
+      activatedAt: now,
+      activatedBy: params.actor,
+      reason: params.reason || 'Scheduled Government Infrastructure Maintenance',
+      announcement_en: params.announcement_en || 'The Angolela Tera Woreda official portal is undergoing scheduled administrative maintenance. Public services will be restored shortly.',
+      announcement_am: params.announcement_am || 'የአንጎለላ ጠራ ወረዳ አስተዳደር ይፋዊ ፖርታል በታቀደ የጥገናና ማሻሻያ ስራ ላይ ይገኛል። የህዝብ አገልግሎቶች በቅርቡ ይመለሳሉ።',
+      expectedReopening: params.expectedReopening || new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString(),
+    }
+
+    store.maintenanceHistory.unshift(newEvent)
+    store.siteSettings.maintenance_mode = 'true'
+    store.siteSettings.maintenance_reason = newEvent.reason
+    if (newEvent.expectedReopening) {
+      store.siteSettings.maintenance_reopening = newEvent.expectedReopening
+    }
+
+    logSystemActivity({
+      userId: params.actor,
+      userName: params.actor,
+      action: 'MAINTENANCE_MODE_ACTIVATED',
+      category: 'SYSTEM_SECURITY',
+      entityType: 'SystemControl',
+      notes: `EMERGENCY / SCHEDULED MAINTENANCE ACTIVATED by ${params.actor}. Reason: "${newEvent.reason}". Expected reopening: ${newEvent.expectedReopening}. Ordinary administrators and public visitors locked out.`,
+      severity: 'CRITICAL',
+    })
+
+    saveStore(store)
+    return { success: true, event: newEvent }
+  } else {
+    const active = store.maintenanceHistory.find((h) => h.isActive)
+    if (active) {
+      active.isActive = false
+      active.deactivatedAt = now
+      active.deactivatedBy = params.actor
+      const durationMs = new Date(now).getTime() - new Date(active.activatedAt).getTime()
+      active.durationMinutes = Math.round(durationMs / 60000)
+    }
+
+    store.siteSettings.maintenance_mode = 'false'
+    delete store.siteSettings.maintenance_reason
+    delete store.siteSettings.maintenance_reopening
+
+    logSystemActivity({
+      userId: params.actor,
+      userName: params.actor,
+      action: 'MAINTENANCE_MODE_DEACTIVATED',
+      category: 'SYSTEM_SECURITY',
+      entityType: 'SystemControl',
+      notes: `Maintenance mode terminated by ${params.actor}. Public services and standard staff access fully restored.`,
+      severity: 'INFO',
+    })
+
+    saveStore(store)
+    return { success: true, event: active }
+  }
+}
+
+export function getMaintenanceHistory(): MaintenanceEvent[] {
+  const store = getStore()
+  return (store.maintenanceHistory || []).sort(
+    (a, b) => new Date(b.activatedAt).getTime() - new Date(a.activatedAt).getTime()
+  )
+}
+
+export function getSuperAdminDashboardMetrics() {
+  const store = getStore()
+  const users = store.users || []
+  const totalUsers = users.length
+  const activeUsers = users.filter((u) => u.isActive).length
+  const suspendedUsers = users.filter((u) => !u.isActive).length
+  const superAdmins = users.filter((u) => u.role === 'SUPER_ADMIN').length
+  const officeAdmins = users.filter((u) => u.role === 'ADMIN').length
+  const editors = users.filter((u) => u.role === 'OFFICE_EDITOR').length
+
+  const notifications = store.notifications || []
+  const unreadNotifications = notifications.filter((n) => !n.isRead).length
+  const criticalNotifications = notifications.filter((n) => n.severity === 'CRITICAL' && !n.isRead).length
+
+  const maint = getMaintenanceStatus()
+  const recentActivities = getSystemActivityLogs({ limit: 8 })
+
+  const lockedUsers = users.filter((u) => u.lockedUntil && new Date(u.lockedUntil) > new Date()).length
+
+  return {
+    users: {
+      total: totalUsers,
+      active: activeUsers,
+      suspended: suspendedUsers,
+      superAdmins,
+      officeAdmins,
+      editors,
+      lockedUsers,
+    },
+    notifications: {
+      total: notifications.length,
+      unread: unreadNotifications,
+      critical: criticalNotifications,
+    },
+    maintenance: {
+      isActive: maint.isActive,
+      currentEvent: maint.currentEvent,
+      totalEvents: (store.maintenanceHistory || []).length,
+    },
+    recentActivities,
+    systemUptime: process.uptime ? Math.floor(process.uptime()) : 86400,
+    nodeEnv: process.env.NODE_ENV || 'production',
   }
 }

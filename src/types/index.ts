@@ -41,6 +41,8 @@ export interface SessionPayload {
   name: string
   role: UserRole
   officeId?: string | null
+  tokenVersion?: number
+  mustChangePassword?: boolean
 }
 
 export type MediaType =
