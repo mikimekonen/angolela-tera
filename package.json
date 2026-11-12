@@ -12,7 +12,9 @@
     "prisma:seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
     "db:sync": "ts-node --compiler-options {\"module\":\"CommonJS\"} scripts/sync-database.ts",
     "backup": "node scripts/backup-restore.js --backup",
-    "backup:test": "node scripts/backup-restore.js --test"
+    "backup:test": "node scripts/backup-restore.js --test",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@prisma/client": "^6.4.1",
@@ -35,6 +37,8 @@
     "eslint-config-next": "16.3.7",
     "prisma": "^6.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
   }
 }

@@ -41,6 +41,7 @@ import {
   ChevronRight,
   ShieldCheck,
   ShieldAlert,
+  Download,
 } from 'lucide-react'
 import type { UserRole } from '@/types'
 
@@ -1344,13 +1345,24 @@ function ControlCenterInner({ defaultTab }: { defaultTab?: ControlCenterTab }) {
               </select>
             </div>
 
-            <button
-              onClick={fetchActivities}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition"
-            >
-              <RefreshCw className="w-3.5 h-3.5" />
-              <span>Refresh Log</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <a
+                href={`/api/v1/super-admin/activity/export?category=${activityCategory}&result=${activityResult}&search=${encodeURIComponent(activitySearch)}`}
+                download
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-semibold transition"
+              >
+                <Download className="w-3.5 h-3.5 text-amber-700" />
+                <span>Export CSV</span>
+              </a>
+
+              <button
+                onClick={fetchActivities}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition"
+              >
+                <RefreshCw className="w-3.5 h-3.5" />
+                <span>Refresh Log</span>
+              </button>
+            </div>
           </div>
 
           {/* Activity Log List */}

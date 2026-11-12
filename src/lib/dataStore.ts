@@ -1235,6 +1235,8 @@ export function toggleUserStatus(userId: string, isActive: boolean, actor?: stri
     u.suspendedBy = undefined
   }
 
+  saveStore(store)
+
   logSystemActivity({
     userId: actor,
     userName: actor,
@@ -1246,7 +1248,6 @@ export function toggleUserStatus(userId: string, isActive: boolean, actor?: stri
     severity: isActive ? 'INFO' : 'WARNING',
   })
 
-  saveStore(store)
   return u
 }
 
@@ -1264,6 +1265,7 @@ export function deleteUser(userId: string, actor: string): { success: boolean; e
 
   store.users = store.users.filter((u) => u.id !== userId)
   store.permissions = store.permissions.filter((p) => p.userId !== userId)
+  saveStore(store)
 
   logSystemActivity({
     userId: actor,
@@ -1276,7 +1278,6 @@ export function deleteUser(userId: string, actor: string): { success: boolean; e
     severity: 'WARNING',
   })
 
-  saveStore(store)
   return { success: true }
 }
 
@@ -1312,6 +1313,7 @@ export async function resetUserPasswordSecurely(userId: string, actor: string) {
   user.passwordResetAt = new Date().toISOString()
   user.failedLoginAttempts = 0
   user.lockedUntil = undefined
+  saveStore(store)
 
   logSystemActivity({
     userId: actor,
@@ -1323,8 +1325,6 @@ export async function resetUserPasswordSecurely(userId: string, actor: string) {
     notes: `Administrative password reset executed by ${actor} for [${user.email}]. One-time temporary password issued. Mandatory password change flagged on next login. Prior sessions terminated.`,
     severity: 'WARNING',
   })
-
-  saveStore(store)
 
   return {
     success: true,
