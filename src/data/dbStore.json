@@ -1342,14 +1342,18 @@
       "id": "user-miki-superadmin",
       "name": "Micheal Mekonen",
       "email": "mikimekonen9@gmail.com",
-      "passwordHash": "$2b$10$/KNa4SBizfP.PvRMFGZOFunvdnhFh57J4EGGSjajxtmEG6egs9abW",
+      "passwordHash": "$2b$12$pCUoxk//NJiv/n2Sm0JFzeDk42QCf27tafilLkJDBIJCJUk9cqw7W",
       "role": "SUPER_ADMIN",
       "officeId": null,
       "isActive": true,
       "createdAt": "2026-10-30T13:00:00.000Z",
       "phone": "+251907253401",
       "designation": "System Administrator",
-      "avatarUrl": ""
+      "avatarUrl": "",
+      "tokenVersion": 2,
+      "mustChangePassword": false,
+      "failedLoginAttempts": 0,
+      "passwordResetAt": "2026-11-16T11:06:11.425Z"
     },
     {
       "id": "user-superadmin",
@@ -1359,7 +1363,9 @@
       "role": "SUPER_ADMIN",
       "officeId": null,
       "isActive": true,
-      "createdAt": "2026-10-05T18:54:05.554Z"
+      "createdAt": "2026-10-05T18:54:05.554Z",
+      "tokenVersion": 1,
+      "mustChangePassword": false
     },
     {
       "id": "user-education-editor",
@@ -1369,7 +1375,9 @@
       "role": "OFFICE_EDITOR",
       "officeId": "education-office",
       "isActive": true,
-      "createdAt": "2026-10-05T18:54:05.554Z"
+      "createdAt": "2026-10-05T18:54:05.554Z",
+      "tokenVersion": 1,
+      "mustChangePassword": false
     }
   ],
   "permissions": [
@@ -1893,5 +1901,7 @@
       "uploadedBy": "admin@angolelatera.gov.et",
       "createdAt": "2025-02-10T16:45:00.000Z"
     }
-  ]
+  ],
+  "maintenanceHistory": [],
+  "notifications": []
 }

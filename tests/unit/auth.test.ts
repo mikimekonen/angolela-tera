@@ -25,6 +25,21 @@ describe('Auth Utilities - Unit Tests', () => {
       const isInvalid = await verifyPassword('WrongPassword123', hash)
       expect(isInvalid).toBe(false)
     })
+
+    it('should reject suffix variations, extra characters, and ensure exactly one password matches', async () => {
+      const canonicalPass = 'SecureGov2026!'
+      const hash = await hashPassword(canonicalPass)
+
+      // Exact match passes
+      expect(await verifyPassword(canonicalPass, hash)).toBe(true)
+
+      // Suffix tampering / variation rejected
+      expect(await verifyPassword(canonicalPass + '..', hash)).toBe(false)
+      expect(await verifyPassword(canonicalPass + '.', hash)).toBe(false)
+      expect(await verifyPassword(canonicalPass.toLowerCase(), hash)).toBe(false)
+      expect(await verifyPassword(canonicalPass.slice(0, -1), hash)).toBe(false)
+      expect(await verifyPassword(' ' + canonicalPass, hash)).toBe(false)
+    })
   })
 
   describe('JWT Session Tokens', () => {

@@ -321,7 +321,7 @@ function getInitialStore(): StoreData {
         id: 'user-miki-superadmin',
         name: 'Miki Mekonen',
         email: 'mikimekonen9@gmail.com',
-        passwordHash: '$2b$10$/KNa4SBizfP.PvRMFGZOFunvdnhFh57J4EGGSjajxtmEG6egs9abW',
+        passwordHash: '$2b$12$pCUoxk//NJiv/n2Sm0JFzeDk42QCf27tafilLkJDBIJCJUk9cqw7W',
         role: 'SUPER_ADMIN',
         officeId: null,
         isActive: true,

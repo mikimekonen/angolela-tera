@@ -123,21 +123,10 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Strictly authenticate via bcrypt password hashing (supports standard and salt variants)
-    let passwordMatches = matchedUser
+    // Strictly authenticate via standard bcrypt password hashing: one account, exactly one valid password
+    const passwordMatches = matchedUser
       ? await verifyPassword(password, matchedUser.passwordHash)
       : false
-
-    if (!passwordMatches && matchedUser) {
-      const cleanPass = password.trim()
-      if (await verifyPassword(cleanPass, matchedUser.passwordHash)) {
-        passwordMatches = true
-      } else if (cleanPass.endsWith('..') && await verifyPassword(cleanPass.slice(0, -2), matchedUser.passwordHash)) {
-        passwordMatches = true
-      } else if (!cleanPass.endsWith('..') && await verifyPassword(cleanPass + '..', matchedUser.passwordHash)) {
-        passwordMatches = true
-      }
-    }
 
     if (!matchedUser || !passwordMatches) {
       if (matchedUser) {
