@@ -3,7 +3,8 @@
  * ─────────────────────────────────────────────────────────
  * Converts Gregorian dates to Ethiopian Calendar (Ge'ez).
  * Ethiopian calendar has 13 months (12×30 + 1 Pagume 5/6 days).
- * Epoch: 29 August 8 CE (Julian) = 1 Meskerem 1, 1 E.C.
+ * Epoch: 29 August 8 CE (Julian) = 27 August 8 CE (Gregorian) = 1 Meskerem 1, 1 E.C.
+ * JDN Ethiopic Epoch: 1724221
  * ─────────────────────────────────────────────────────────
  */
 
@@ -22,7 +23,7 @@ export const ET_DAYS_EN = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday
 
 export interface EthiopianDate {
   day: number
-  month: number     // 1-indexed (1=Meskerem)
+  month: number     // 1-indexed (1=Meskerem ... 13=Pagume)
   year: number
   dayOfWeek: number // 0=Monday … 6=Sunday
   monthName_en: string
@@ -32,36 +33,77 @@ export interface EthiopianDate {
 }
 
 /**
+ * Julian Day Number (JDN) of Ethiopian Epoch: 1 Meskerem 1 E.C.
+ * Corresponds to August 29, 8 CE (Julian) / August 27, 8 CE (Gregorian).
+ */
+export const ET_EPOCH_JDN = 1724221
+
+/**
+ * Check if a given Ethiopian year is a leap year (Year of Luke / ዘመነ ሉቃስ).
+ * In the Ethiopian calendar, leap years occur every 4 years when year % 4 === 3,
+ * where Pagume has 6 days instead of 5.
+ */
+export function isEthiopianLeapYear(year: number): boolean {
+  return (year % 4 === 3) || (year % 4 === -1)
+}
+
+/**
+ * Convert Gregorian year, month (1-12), and day to Julian Day Number (JDN).
+ */
+export function gregorianToJulianDay(year: number, month: number, day: number): number {
+  const a = Math.floor((14 - month) / 12)
+  const yr = year + 4800 - a
+  const mo = month + 12 * a - 3
+  return (
+    day +
+    Math.floor((153 * mo + 2) / 5) +
+    365 * yr +
+    Math.floor(yr / 4) -
+    Math.floor(yr / 100) +
+    Math.floor(yr / 400) -
+    32045
+  )
+}
+
+/**
  * Converts a JavaScript Date to an Ethiopian date object.
  */
 export function toEthiopian(date: Date): EthiopianDate {
-  // Julian Day Number helper
-  function toJulianDay(y: number, m: number, d: number): number {
-    const a = Math.floor((14 - m) / 12)
-    const yr = y + 4800 - a
-    const mo = m + 12 * a - 3
-    return d + Math.floor((153 * mo + 2) / 5) + 365 * yr + Math.floor(yr / 4) - Math.floor(yr / 100) + Math.floor(yr / 400) - 32045
+  const gJdn = gregorianToJulianDay(date.getFullYear(), date.getMonth() + 1, date.getDate())
+  const daysSinceEpoch = gJdn - ET_EPOCH_JDN
+
+  // 4-year cycle = 1461 days:
+  // Year 1: 365 days (days 0..364)
+  // Year 2: 365 days (days 365..729)
+  // Year 3: 366 days (days 730..1095, leap year: Pagume has 6 days)
+  // Year 4: 365 days (days 1096..1460)
+  const cycle = Math.floor(daysSinceEpoch / 1461)
+  const remainder = ((daysSinceEpoch % 1461) + 1461) % 1461
+
+  let yearInCycle: number
+  let dayOfYear: number
+
+  if (remainder < 365) {
+    yearInCycle = 1
+    dayOfYear = remainder
+  } else if (remainder < 730) {
+    yearInCycle = 2
+    dayOfYear = remainder - 365
+  } else if (remainder < 1096) {
+    yearInCycle = 3
+    dayOfYear = remainder - 730
+  } else {
+    yearInCycle = 4
+    dayOfYear = remainder - 1096
   }
 
-  const gJdn = toJulianDay(date.getFullYear(), date.getMonth() + 1, date.getDate())
-
-  // Ethiopian epoch JDN = 1723856 (29 August 8 CE Julian = 1 Meskerem 1 EC)
-  const etEpoch = 1723856
-  const daysSinceEpoch = gJdn - etEpoch
-
-  const etYear4 = Math.floor(daysSinceEpoch / 1461)  // 4-year cycles (3×365 + 366)
-  const remainder4 = daysSinceEpoch % 1461
-
-  const etYear1 = Math.min(Math.floor(remainder4 / 365), 3)
-  const remainderDays = remainder4 - etYear1 * 365
-
-  const etYear = etYear4 * 4 + etYear1 + 1
-  const etMonth = Math.floor(remainderDays / 30) + 1
-  const etDay = remainderDays % 30 + 1
+  const etYear = cycle * 4 + yearInCycle
+  const etMonth = Math.floor(dayOfYear / 30) + 1
+  const etDay = (dayOfYear % 30) + 1
 
   // Day of week (JS getDay: 0=Sun…6=Sat → remap to 0=Mon…6=Sun)
   const jsDow = date.getDay()
-  const dow = jsDow === 0 ? 6 : jsDow - 1 // 0=Mon, 6=Sun
+  const dow = jsDow === 0 ? 6 : jsDow - 1
 
   const monthIdx = Math.max(0, Math.min(12, etMonth - 1))
 
@@ -79,8 +121,8 @@ export function toEthiopian(date: Date): EthiopianDate {
 
 /**
  * Format a short Ethiopian date string like:
- *   EN: "Meskerem 20, 2018 E.C."
- *   AM: "መስከረም 20 ቀን 2018 ዓ.ም"
+ *   EN: "Tuesday, Hidar 8, 2019 E.C."
+ *   AM: "ማክሰኞ፣ ህዳር 8 ቀን 2019 ዓ.ም"
  */
 export function formatEthiopianDate(etd: EthiopianDate, locale: 'en' | 'am'): string {
   if (locale === 'am') {
