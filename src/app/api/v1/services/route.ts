@@ -120,6 +120,21 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'slug is required' }, { status: 400 })
     }
 
+    // Office-scope guard for OFFICE_EDITOR
+    if (session.role === 'OFFICE_EDITOR' && session.officeId) {
+      const existing = getServices().find((s: any) => s.slug === body.slug)
+      if (existing?.officeSlug && existing.officeSlug !== session.officeId) {
+        return NextResponse.json(
+          {
+            success: false,
+            error:
+              'Forbidden: You can only edit citizen services belonging to your assigned woreda office.',
+          },
+          { status: 403 }
+        )
+      }
+    }
+
     if (body.status === 'PUBLISHED' && !hasPermission(session.role, 'canPublish')) {
       return NextResponse.json(
         { success: false, error: 'Forbidden: Insufficient privileges to publish service specifications directly. Status must be set to REVIEW.' },

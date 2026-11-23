@@ -42,7 +42,12 @@ export default async function HomePage({
   const sliders = getSliders()
   const leaders = getLeadership()
   const services = getServices()
-  const news = getNews()
+  const now = new Date()
+  const news = getNews().filter((n: any) => {
+    if (n.status && n.status !== 'PUBLISHED') return false
+    if (n.scheduledPublishAt && new Date(n.scheduledPublishAt) > now) return false
+    return true
+  })
 
   const isEnabled = (key: string) => {
     const sec = sections.find((s) => s.sectionKey === key)

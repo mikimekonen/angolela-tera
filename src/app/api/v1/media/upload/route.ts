@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile, mkdir, unlink } from 'fs/promises'
-import { existsSync } from 'fs'
 import path from 'path'
+import { existsSync } from 'fs'
+import { unlink } from 'fs/promises'
 import { getSession } from '@/lib/auth'
 import { validateFileBuffer, sanitizeFileName } from '@/lib/fileSecurity'
+import { saveFile } from '@/lib/storage'
 import {
   getMediaAssets,
   createMediaAsset,
@@ -94,31 +95,33 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // 5. Secure random file naming and storage
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', subdir)
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true })
-    }
-
-    const filename = sanitizeFileName(file.name)
-    await writeFile(path.join(uploadDir, filename), buffer)
-
-    const publicUrl = `/uploads/${subdir}/${filename}`
-
-    // 6. Register into Centralized Media Library Asset Store
+    // 5. Categorize and store using Persistent Storage Subsystem
     const mediaType = isVideo ? 'VIDEO' : subdir === 'documents' ? 'DOCUMENT' : 'IMAGE'
     const categoryRaw = formData.get('category') as string | null
-    const category: MediaCategory = (categoryRaw as MediaCategory) || (isVideo ? 'VIDEOS' : subdir === 'documents' ? 'DOCUMENTS' : 'GENERAL')
-    const title = (formData.get('title') as string) || file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ')
+    const category: MediaCategory =
+      (categoryRaw as MediaCategory) ||
+      (isVideo ? 'VIDEOS' : subdir === 'documents' ? 'DOCUMENTS' : 'GENERAL')
+    const title =
+      (formData.get('title') as string) ||
+      file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ')
     const altText_en = (formData.get('altText_en') as string) || title
     const altText_am = (formData.get('altText_am') as string) || undefined
     const caption = (formData.get('caption') as string) || undefined
 
+    const storageResult = await saveFile(
+      buffer,
+      file.name,
+      validation.detectedMime || declaredMime,
+      category,
+      false
+    )
+
+    // 6. Register into Centralized Media Library Asset Store
     const asset = createMediaAsset(
       {
         title,
-        filename,
-        url: publicUrl,
+        filename: storageResult.storedName,
+        url: storageResult.url,
         category,
         mediaType,
         mimeType: validation.detectedMime || declaredMime,
@@ -134,8 +137,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       success: true,
       asset,
-      filename,
-      url: publicUrl,
+      filename: storageResult.storedName,
+      url: storageResult.url,
       size: buffer.byteLength,
       mimeType: validation.detectedMime || declaredMime,
       uploadedBy: session.email,

@@ -1,21 +1,25 @@
 import bcrypt from 'bcryptjs'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
-import type { UserRole, SessionPayload } from '@/types'
+import type { UserRole, SessionPayload, AdminResource } from '@/types'
 
 function getJwtSecret(): string {
   const secret = process.env.JWT_SECRET
-  if (
-    process.env.NODE_ENV === 'production' &&
-    (!secret ||
-      secret === 'angolela-tera-woreda-gov-portal-secret-key-2026' ||
-      secret.includes('change-in-production'))
-  ) {
-    console.error(
-      '🚨 CRITICAL SECURITY WARNING: Weak or default JWT_SECRET detected in production! Please generate a strong 64+ char random secret.'
-    )
+  const isProduction = process.env.NODE_ENV === 'production'
+  const isBuildPhase =
+    process.env.NEXT_PHASE === 'phase-production-build' ||
+    process.env.npm_lifecycle_event === 'build'
+
+  if (isProduction && !isBuildPhase) {
+    if (!secret || secret.length < 32 || secret.includes('change-in-production')) {
+      throw new Error(
+        '🚨 FATAL SECURITY ERROR: JWT_SECRET must be configured with at least 32 cryptographically secure characters in production!'
+      )
+    }
+    return secret
   }
-  return secret || 'angolela-tera-woreda-gov-portal-secret-key-2026'
+
+  return secret || 'dev-only-secret-key-angolela-tera-local-testing-environment-2026'
 }
 
 const JWT_SECRET = getJwtSecret()
@@ -292,6 +296,96 @@ export async function requirePermission(action: keyof (typeof ROLE_PERMISSIONS)[
           success: false,
           error: `Forbidden: Insufficient privileges for action '${action}'. Current role: ${session.role}.`,
         },
+        { status: 403 }
+      ),
+    }
+  }
+
+  return { session, errorResponse: null }
+}
+
+/**
+ * Verifies that the current request has an active session and is authorized for a specific resource,
+ * action, and optional office scope. Enforces strict RBAC on the server/API layer.
+ */
+export async function requireResourcePermission(
+  resource: AdminResource,
+  action: 'canView' | 'canCreate' | 'canEdit' | 'canDelete' | 'canPublish' | 'canApprove' | 'canExport',
+  targetOfficeId?: string | null
+) {
+  const session = await getSession()
+  if (!session) {
+    return {
+      session: null,
+      errorResponse: NextResponse.json(
+        { success: false, error: 'Unauthorized: Administrative authentication required' },
+        { status: 401 }
+      ),
+    }
+  }
+
+  // 1. SUPER_ADMIN has unrestricted platform-wide privileges
+  if (session.role === 'SUPER_ADMIN') {
+    return { session, errorResponse: null }
+  }
+
+  // 2. ADMIN has content-wide privileges across all sectors (except user administration and settings)
+  if (session.role === 'ADMIN') {
+    if ((resource === 'USERS' || resource === 'SETTINGS') && action !== 'canView') {
+      return {
+        session: null,
+        errorResponse: NextResponse.json(
+          { success: false, error: 'Forbidden: Super Admin authority required for system configuration and user accounts.' },
+          { status: 403 }
+        ),
+      }
+    }
+    return { session, errorResponse: null }
+  }
+
+  // 3. OFFICE_EDITOR is strictly scoped to their assigned office
+  if (session.role === 'OFFICE_EDITOR') {
+    if (action === 'canDelete' || action === 'canPublish') {
+      return {
+        session: null,
+        errorResponse: NextResponse.json(
+          { success: false, error: `Forbidden: Office editors cannot execute action '${action}'. Editorial approval required.` },
+          { status: 403 }
+        ),
+      }
+    }
+    if (targetOfficeId && session.officeId && targetOfficeId !== session.officeId) {
+      return {
+        session: null,
+        errorResponse: NextResponse.json(
+          { success: false, error: 'Forbidden: You can only create or modify records belonging to your assigned woreda office.' },
+          { status: 403 }
+        ),
+      }
+    }
+    return { session, errorResponse: null }
+  }
+
+  // 4. REVIEWER can view and approve, but cannot publish directly to live site or delete
+  if (session.role === 'REVIEWER') {
+    if (action === 'canView' || action === 'canApprove') {
+      return { session, errorResponse: null }
+    }
+    return {
+      session: null,
+      errorResponse: NextResponse.json(
+        { success: false, error: `Forbidden: Reviewer role cannot execute mutation '${action}'.` },
+        { status: 403 }
+      ),
+    }
+  }
+
+  // 5. VIEWER has read-only access
+  if (action !== 'canView') {
+    return {
+      session: null,
+      errorResponse: NextResponse.json(
+        { success: false, error: 'Forbidden: Read-only viewer accounts cannot perform modifications.' },
         { status: 403 }
       ),
     }

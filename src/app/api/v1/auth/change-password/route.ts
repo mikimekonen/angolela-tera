@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSession, verifyPassword, hashPassword } from '@/lib/auth'
+import { getSession, verifyPassword, hashPassword, setSessionCookie } from '@/lib/auth'
 import { getUserById, updateUser } from '@/lib/dataStore'
 
 export async function POST(req: NextRequest) {
@@ -70,17 +70,34 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Hash and store new password
+    // Hash and store new password, invalidate existing sessions from other devices
     const newHash = await hashPassword(newPassword)
-    const updated = updateUser(user.id, { passwordHash: newHash }, session.email)
+    const nextTokenVersion = (user.tokenVersion || 1) + 1
+    const updated = updateUser(
+      user.id,
+      {
+        passwordHash: newHash,
+        tokenVersion: nextTokenVersion,
+        mustChangePassword: false,
+        passwordResetAt: new Date().toISOString(),
+      },
+      session.email
+    )
 
     if (!updated) {
       return NextResponse.json({ success: false, error: 'Failed to update password.' }, { status: 500 })
     }
 
+    // Refresh current user's session cookie with the new tokenVersion
+    await setSessionCookie({
+      ...session,
+      tokenVersion: nextTokenVersion,
+      mustChangePassword: false,
+    })
+
     return NextResponse.json({
       success: true,
-      message: 'Password successfully changed. Please use your new password next time you sign in.',
+      message: 'Password successfully changed. Other active sessions have been invalidated for security.',
     })
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Internal Server Error'

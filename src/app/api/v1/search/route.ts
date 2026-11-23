@@ -35,9 +35,11 @@ export async function GET(req: NextRequest) {
       badge?: string
     }> = []
 
-    // 1. Services
+    const now = new Date()
+
+    // 1. Services (Only published)
     if (category === 'all' || category === 'services') {
-      const services = getServices()
+      const services = getServices().filter((s: any) => !s.status || s.status === 'PUBLISHED')
       for (const s of services) {
         if (
           s.title_en?.toLowerCase().includes(q) ||
@@ -59,9 +61,37 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // 3. News & Announcements
+    // 2. Sector Offices (Only published)
+    if (category === 'all' || category === 'offices') {
+      const offices = getOffices().filter((o: any) => !o.status || o.status === 'PUBLISHED')
+      for (const o of offices) {
+        if (
+          o.name_en?.toLowerCase().includes(q) ||
+          o.name_am?.includes(q) ||
+          o.about_en?.toLowerCase().includes(q) ||
+          o.slug?.toLowerCase().includes(q)
+        ) {
+          results.push({
+            id: `office-${o.id}`,
+            type: 'offices',
+            categoryLabel: 'Sector Office',
+            title: o.name_en,
+            title_am: o.name_am,
+            description: o.about_en || o.mission_en,
+            url: `/offices/${o.slug || o.id}`,
+            badge: 'Government Office',
+          })
+        }
+      }
+    }
+
+    // 3. News & Announcements (Strictly PUBLISHED and not future-scheduled)
     if (category === 'all' || category === 'news') {
-      const news = getNews()
+      const news = getNews().filter((n: any) => {
+        if (n.status && n.status !== 'PUBLISHED') return false
+        if (n.scheduledPublishAt && new Date(n.scheduledPublishAt) > now) return false
+        return true
+      })
       for (const n of news) {
         if (
           n.title_en?.toLowerCase().includes(q) ||
@@ -83,9 +113,9 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // 4. Tourism Destinations
+    // 4. Tourism Destinations (Only published)
     if (category === 'all' || category === 'tourism') {
-      const tourism = getTourism()
+      const tourism = getTourism().filter((t: any) => !t.status || t.status === 'PUBLISHED')
       for (const t of tourism) {
         if (
           t.name_en?.toLowerCase().includes(q) ||
@@ -107,9 +137,9 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // 5. Development Projects
+    // 5. Development Projects (Only published)
     if (category === 'all' || category === 'projects') {
-      const projects = getDevelopmentProjects()
+      const projects = getDevelopmentProjects().filter((p: any) => !p.status || p.status === 'PUBLISHED')
       for (const p of projects) {
         if (
           p.title_en?.toLowerCase().includes(q) ||
@@ -131,9 +161,9 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // 6. Investments
+    // 6. Investments (Only published)
     if (category === 'all' || category === 'investment') {
-      const investments = getInvestments()
+      const investments = getInvestments().filter((inv: any) => !inv.status || inv.status === 'PUBLISHED')
       for (const inv of investments) {
         if (
           inv.title_en?.toLowerCase().includes(q) ||
@@ -155,9 +185,9 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // 7. Documents & Forms
+    // 7. Documents & Forms (Only published)
     if (category === 'all' || category === 'documents') {
-      const documents = getDocuments()
+      const documents = getDocuments().filter((doc: any) => !doc.status || doc.status === 'PUBLISHED')
       for (const doc of documents) {
         if (
           doc.title_en?.toLowerCase().includes(q) ||
@@ -179,9 +209,9 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // 8. Kebeles & Towns
+    // 8. Kebeles & Towns (Only published)
     if (category === 'all' || category === 'kebeles') {
-      const kebeles = getKebeles()
+      const kebeles = getKebeles().filter((k: any) => !k.status || k.status === 'PUBLISHED')
       for (const k of kebeles) {
         if (
           k.name_en?.toLowerCase().includes(q) ||
@@ -202,9 +232,9 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // 9. Businesses / Companies
+    // 9. Businesses / Companies (Only published)
     if (category === 'all' || category === 'companies') {
-      const companies = getCompanies()
+      const companies = getCompanies().filter((c: any) => !c.status || c.status === 'PUBLISHED')
       for (const c of companies) {
         if (
           c.name_en?.toLowerCase().includes(q) ||
@@ -225,9 +255,9 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // 10. Strategic Partners
+    // 10. Strategic Partners (Only published)
     if (category === 'all' || category === 'partners') {
-      const partners = getPartners()
+      const partners = getPartners().filter((pt: any) => !pt.status || pt.status === 'PUBLISHED')
       for (const pt of partners) {
         if (
           pt.name_en?.toLowerCase().includes(q) ||
@@ -248,9 +278,9 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // 11. Tenders
+    // 11. Tenders (Only published/active)
     if (category === 'all' || category === 'tenders') {
-      const tenders = getTenders()
+      const tenders = getTenders().filter((td: any) => !td.status || td.status === 'PUBLISHED')
       for (const td of tenders) {
         if (
           td.title_en?.toLowerCase().includes(q) ||

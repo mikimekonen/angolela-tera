@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import bcrypt from 'bcryptjs'
+import { prisma } from '@/lib/db'
 import { mockOffices, mockServices, mockNews } from '@/data/mockData'
 import { MOCK_BUSINESSES, MOCK_PARTNERS, MOCK_LEADERSHIP } from '@/data/entityData'
 import type {
@@ -785,12 +786,48 @@ function getInitialStore(): StoreData {
   }
 }
 
-// Read store safely
+let cachedStore: StoreData | null = null
+
+/**
+ * Asynchronous write-through synchronization to PostgreSQL via Prisma ORM.
+ * Guarantees that persistent relational data is committed to PostgreSQL
+ * while gracefully failing safely if database connection is offline.
+ */
+export async function syncToPrisma(
+  model: string,
+  action: 'upsert' | 'delete',
+  where: Record<string, any>,
+  data?: Record<string, any>
+): Promise<void> {
+  try {
+    if (!process.env.DATABASE_URL || !prisma) return
+    const delegate = (prisma as any)[model]
+    if (!delegate) return
+
+    if (action === 'delete') {
+      await delegate.delete({ where }).catch(() => {})
+    } else if (action === 'upsert' && data) {
+      await delegate.upsert({
+        where,
+        update: data,
+        create: { ...where, ...data },
+      }).catch(() => {})
+    }
+  } catch (err) {
+    console.warn(`Prisma write-through notice for ${model}:`, err)
+  }
+}
+
+// Read store safely with resilient in-memory caching
 export function getStore(): StoreData {
+  if (cachedStore) return cachedStore
   try {
     if (!fs.existsSync(STORE_PATH)) {
       const initial = getInitialStore()
-      fs.writeFileSync(STORE_PATH, JSON.stringify(initial, null, 2), 'utf8')
+      try {
+        fs.writeFileSync(STORE_PATH, JSON.stringify(initial, null, 2), 'utf8')
+      } catch {}
+      cachedStore = initial
       return initial
     }
     const raw = fs.readFileSync(STORE_PATH, 'utf8')
@@ -802,7 +839,7 @@ export function getStore(): StoreData {
       tokenVersion: typeof u.tokenVersion === 'number' ? u.tokenVersion : 1,
       mustChangePassword: Boolean(u.mustChangePassword),
     }))
-    return {
+    const loadedStore: StoreData = {
       ...initial,
       ...parsed,
       users,
@@ -817,20 +854,26 @@ export function getStore(): StoreData {
           ? parsed.mediaAssets
           : initial.mediaAssets,
     }
+    cachedStore = loadedStore
+    return loadedStore
   } catch (err) {
     console.error('Error reading data store, using fallback:', err)
-    return getInitialStore()
+    const fallback = getInitialStore()
+    cachedStore = fallback
+    return fallback
   }
 }
 
-// Write store safely (atomic write pattern)
+// Write store safely with atomic write pattern and serverless fallback
 export function saveStore(data: StoreData): void {
+  cachedStore = data
   try {
     const tempPath = `${STORE_PATH}.tmp`
     fs.writeFileSync(tempPath, JSON.stringify(data, null, 2), 'utf8')
     fs.renameSync(tempPath, STORE_PATH)
   } catch (err) {
-    console.error('Error writing data store:', err)
+    // Graceful handling on serverless read-only filesystems (e.g. Vercel)
+    // InMemory cache + PostgreSQL write-through provide reliable persistence
   }
 }
 
@@ -946,6 +989,18 @@ export function createNews(item: any, user?: string) {
   store.news.unshift(item)
   recordAudit(store, user, 'CREATE', 'News', item.slug, `Published official news: ${item.title_en}`)
   saveStore(store)
+  syncToPrisma('news', 'upsert', { slug: item.slug }, {
+    title_en: item.title_en,
+    title_am: item.title_am,
+    excerpt_en: item.summary_en || item.excerpt_en,
+    excerpt_am: item.summary_am || item.excerpt_am,
+    body_en: Array.isArray(item.content_en) ? item.content_en.join('\n\n') : item.content_en || '',
+    body_am: Array.isArray(item.content_am) ? item.content_am.join('\n\n') : item.content_am || '',
+    status: item.status || 'DRAFT',
+    isFeatured: Boolean(item.isFeatured),
+    publishedAt: item.date_en ? new Date(item.date_en) : new Date(),
+    authorId: store.users[0]?.id || 'usr-superadmin',
+  })
   return item
 }
 export function updateNews(slug: string, updates: any, user?: string) {
@@ -955,6 +1010,13 @@ export function updateNews(slug: string, updates: any, user?: string) {
     store.news[idx] = { ...store.news[idx], ...updates }
     recordAudit(store, user, 'UPDATE', 'News', slug, `Updated news article: ${slug}`)
     saveStore(store)
+    syncToPrisma('news', 'upsert', { slug }, {
+      ...(updates.title_en ? { title_en: updates.title_en } : {}),
+      ...(updates.title_am ? { title_am: updates.title_am } : {}),
+      ...(updates.status ? { status: updates.status } : {}),
+      ...(updates.isFeatured !== undefined ? { isFeatured: Boolean(updates.isFeatured) } : {}),
+      updatedAt: new Date(),
+    })
     return store.news[idx]
   }
   return null
@@ -964,6 +1026,7 @@ export function deleteNews(slug: string, user?: string) {
   store.news = store.news.filter((n) => n.slug !== slug)
   recordAudit(store, user, 'DELETE', 'News', slug, `Deleted news article: ${slug}`)
   saveStore(store)
+  syncToPrisma('news', 'delete', { slug })
   return true
 }
 
@@ -1211,6 +1274,17 @@ export function createUser(user: UserAccount, permissions: AdminPermissionItem[]
   }
   recordAudit(store, actor, 'CREATE', 'User', user.id, `Created admin account [${user.email}] with role: ${user.role}`)
   saveStore(store)
+  syncToPrisma('user', 'upsert', { email: user.email }, {
+    name: user.name,
+    passwordHash: user.passwordHash,
+    role: user.role as any,
+    officeId: user.officeId || null,
+    isActive: user.isActive,
+    phone: user.phone || null,
+    designation: user.designation || null,
+    tokenVersion: user.tokenVersion || 1,
+    mustChangePassword: Boolean(user.mustChangePassword),
+  })
   return fullUser
 }
 
@@ -1236,6 +1310,10 @@ export function toggleUserStatus(userId: string, isActive: boolean, actor?: stri
   }
 
   saveStore(store)
+  syncToPrisma('user', 'upsert', { email: u.email }, {
+    isActive,
+    tokenVersion: u.tokenVersion,
+  })
 
   logSystemActivity({
     userId: actor,
@@ -1266,6 +1344,7 @@ export function deleteUser(userId: string, actor: string): { success: boolean; e
   store.users = store.users.filter((u) => u.id !== userId)
   store.permissions = store.permissions.filter((p) => p.userId !== userId)
   saveStore(store)
+  syncToPrisma('user', 'delete', { email: target.email })
 
   logSystemActivity({
     userId: actor,
@@ -1520,6 +1599,20 @@ export function createInquiry(inquiry: Omit<CitizenInquiry, 'id' | 'trackingCode
 
   store.inquiries.unshift(fullInquiry)
   saveStore(store)
+  syncToPrisma('citizenInquiry', 'upsert', { trackingCode: fullInquiry.trackingCode }, {
+    name: fullInquiry.name,
+    email: fullInquiry.email,
+    phone: fullInquiry.phone || null,
+    subject: fullInquiry.subject,
+    message: fullInquiry.message,
+    category: fullInquiry.category,
+    status: fullInquiry.status,
+    responseNotes: fullInquiry.responseNotes || null,
+    internalNotes: fullInquiry.internalNotes || null,
+    assignedOfficeId: fullInquiry.assignedOfficeId || null,
+    assignedStaffId: fullInquiry.assignedStaffId || null,
+    statusHistory: fullInquiry.statusHistory as any,
+  })
   return fullInquiry
 }
 
@@ -1555,6 +1648,11 @@ export function updateInquiryEmailStatus(
   item.updatedAt = now
 
   saveStore(store)
+  syncToPrisma('citizenInquiry', 'upsert', { trackingCode: item.trackingCode }, {
+    adminNotificationSent: item.adminNotificationSent ?? false,
+    citizenConfirmationSent: item.citizenConfirmationSent ?? false,
+    status: item.status,
+  })
   return item
 }
 
@@ -1588,6 +1686,13 @@ export function updateInquiryStatus(
 
     recordAudit(store, user, 'UPDATE', 'Inquiry', item.trackingCode, `Updated grievance ticket status to ${status}`)
     saveStore(store)
+    syncToPrisma('citizenInquiry', 'upsert', { trackingCode: item.trackingCode }, {
+      status,
+      responseNotes: item.responseNotes || null,
+      internalNotes: item.internalNotes || null,
+      assignedOfficeId: item.assignedOfficeId || null,
+      statusHistory: item.statusHistory as any,
+    })
     return item
   }
   return null

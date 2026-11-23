@@ -75,30 +75,41 @@ enum AuditAction {
 // =============================================================
 
 model User {
-  id              String    @id @default(cuid())
-  email           String    @unique
-  name            String
-  passwordHash    String
-  role            UserRole  @default(VIEWER)
-  officeId        String?   // Only for OFFICE_EDITOR — restricts their scope
-  isActive        Boolean   @default(true)
-  lastLoginAt     DateTime?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  deletedAt       DateTime?
+  id                  String    @id @default(cuid())
+  email               String    @unique
+  name                String
+  passwordHash        String
+  role                UserRole  @default(VIEWER)
+  officeId            String?   // Only for OFFICE_EDITOR — restricts their scope
+  isActive            Boolean   @default(true)
+  phone               String?
+  designation         String?
+  avatarUrl           String?
+  tokenVersion        Int       @default(1)
+  mustChangePassword  Boolean   @default(false)
+  failedLoginAttempts Int       @default(0)
+  lockedUntil         DateTime?
+  suspendedAt         DateTime?
+  suspendedBy         String?
+  lastLoginAt         DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  deletedAt           DateTime?
 
   // Relations
-  office          Office?   @relation("OfficeEditors", fields: [officeId], references: [id])
-  sessions        Session[]
-  auditLogs       AuditLog[]
-  createdNews     News[]    @relation("NewsAuthor")
+  office              Office?   @relation("OfficeEditors", fields: [officeId], references: [id])
+  sessions            Session[]
+  auditLogs           AuditLog[]
+  createdNews         News[]    @relation("NewsAuthor")
+  reviewedNews        News[]    @relation("NewsReviewer")
   createdAnnouncements Announcement[] @relation("AnnouncementAuthor")
-  createdServices Service[] @relation("ServiceAuthor")
-  createdDocuments Document[] @relation("DocumentAuthor")
-  createdProjects Project[] @relation("ProjectAuthor")
-  createdPages    Page[]    @relation("PageAuthor")
-  mediaUploads    Media[]   @relation("MediaUploader")
-  permissions     AdminPermission[]
+  createdServices     Service[] @relation("ServiceAuthor")
+  createdDocuments    Document[] @relation("DocumentAuthor")
+  createdProjects     Project[] @relation("ProjectAuthor")
+  createdPages        Page[]    @relation("PageAuthor")
+  mediaUploads        Media[]   @relation("MediaUploader")
+  permissions         AdminPermission[]
+  assignedInquiries   CitizenInquiry[] @relation("AssignedInquiries")
 
   @@map("users")
 }
@@ -245,6 +256,7 @@ model Office {
   responsibilities OfficeResponsibility[]
   services        Service[]
   documents       Document[]    @relation("OfficeDocuments")
+  inquiries       CitizenInquiry[] @relation("OfficeInquiries")
 
   @@map("offices")
 }
@@ -337,33 +349,47 @@ model NewsCategory {
 }
 
 model News {
-  id              String        @id @default(cuid())
-  slug            String        @unique
-  title_en        String
-  title_am        String?
-  excerpt_en      String?       @db.Text
-  excerpt_am      String?       @db.Text
-  body_en         String?       @db.Text  // Rich text / Markdown
-  body_am         String?       @db.Text
-  coverImageId    String?
-  categoryId      String?
-  authorId        String
-  status          ContentStatus @default(DRAFT)
-  isFeatured      Boolean       @default(false)
-  publishedAt     DateTime?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  deletedAt       DateTime?
+  id                 String        @id @default(cuid())
+  slug               String        @unique
+  title_en           String
+  title_am           String?
+  excerpt_en         String?       @db.Text
+  excerpt_am         String?       @db.Text
+  body_en            String?       @db.Text  // Rich text / Markdown
+  body_am            String?       @db.Text
+  coverImageId       String?
+  imageCaption_en    String?
+  imageCaption_am    String?
+  videoUrl           String?
+  videoType          String?       @default("embed")
+  gallery            Json?         // Array of { url, caption_en, caption_am }
+  documentUrl        String?
+  documentTitle      String?
+  referenceNumber    String?
+  categoryId         String?
+  authorId           String
+  reviewerId         String?
+  reviewerNotes      String?       @db.Text
+  rejectionReason    String?       @db.Text
+  status             ContentStatus @default(DRAFT)
+  isFeatured         Boolean       @default(false)
+  scheduledPublishAt DateTime?
+  publishedAt        DateTime?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  deletedAt          DateTime?
 
   // SEO
-  metaTitle_en    String?
-  metaDesc_en     String?
+  metaTitle_en       String?
+  metaDesc_en        String?
 
-  coverImage      Media?        @relation("NewsCoverImage", fields: [coverImageId], references: [id])
-  category        NewsCategory? @relation(fields: [categoryId], references: [id])
-  author          User          @relation("NewsAuthor", fields: [authorId], references: [id])
+  coverImage         Media?        @relation("NewsCoverImage", fields: [coverImageId], references: [id])
+  category           NewsCategory? @relation(fields: [categoryId], references: [id])
+  author             User          @relation("NewsAuthor", fields: [authorId], references: [id])
+  reviewer           User?         @relation("NewsReviewer", fields: [reviewerId], references: [id])
 
   @@index([status, publishedAt])
+  @@index([status, scheduledPublishAt])
   @@map("news")
 }
 
@@ -746,12 +772,14 @@ model NavigationItem {
 model AdminPermission {
   id            String   @id @default(cuid())
   userId        String
-  resource      String   // "NEWS", "OFFICES", "SERVICES", "DOCUMENTS", "PROJECTS", "COMPANIES", "PARTNERS", "INVESTMENTS", "KEBELES", "LEADERSHIP", "SETTINGS", "USERS"
+  resource      String   // "NEWS", "OFFICES", "SERVICES", "DOCUMENTS", "PROJECTS", "COMPANIES", "PARTNERS", "INVESTMENTS", "KEBELES", "LEADERSHIP", "SETTINGS", "USERS", "INQUIRIES"
   canView       Boolean  @default(true)
   canCreate     Boolean  @default(false)
   canEdit       Boolean  @default(false)
   canDelete     Boolean  @default(false)
   canPublish    Boolean  @default(false)
+  canApprove    Boolean  @default(false)
+  canExport     Boolean  @default(false)
   officeScopeId String?  // Optional office ID restriction (e.g., Education Office only)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -789,5 +817,82 @@ model Tender {
 
   @@index([tenderStatus, closingDate])
   @@map("tenders")
+}
+
+// =============================================================
+// CITIZEN INQUIRIES & GRIEVANCE REDRESSAL (Prompt #11 & Audit)
+// =============================================================
+
+model CitizenInquiry {
+  id                      String    @id @default(cuid())
+  trackingCode            String    @unique // e.g. "ATW-2026-XXXX"
+  name                    String
+  email                   String
+  phone                   String?
+  subject                 String
+  message                 String    @db.Text
+  category                String    @default("inquiry") // "grievance", "inquiry", "feedback", "service_complaint"
+  status                  String    @default("SUBMITTED") // "NEW", "RECEIVED", "UNDER_REVIEW", "ASSIGNED", "IN_PROGRESS", "RESPONDED", "RESOLVED", "CLOSED", "REJECTED"
+  responseNotes           String?   @db.Text // Citizen-facing official response
+  internalNotes           String?   @db.Text // Private internal administrative notes (NEVER exposed to citizen)
+  assignedOfficeId        String?
+  assignedStaffId         String?
+  ipAddress               String?
+  adminNotificationSent   Boolean   @default(false)
+  citizenConfirmationSent Boolean   @default(false)
+  statusHistory           Json?     // Array of { status, changedAt, changedBy, notes }
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+
+  assignedStaff           User?     @relation("AssignedInquiries", fields: [assignedStaffId], references: [id])
+  assignedOffice          Office?   @relation("OfficeInquiries", fields: [assignedOfficeId], references: [id])
+
+  @@index([trackingCode])
+  @@index([status])
+  @@index([category])
+  @@index([createdAt])
+  @@map("citizen_inquiries")
+}
+
+// =============================================================
+// PORTAL MAINTENANCE & ANNOUNCEMENTS
+// =============================================================
+
+model MaintenanceEvent {
+  id                String    @id @default(cuid())
+  isActive          Boolean   @default(false)
+  activatedAt       DateTime  @default(now())
+  activatedBy       String
+  deactivatedAt     DateTime?
+  deactivatedBy     String?
+  reason            String
+  announcement_en   String    @db.Text
+  announcement_am   String    @db.Text
+  expectedReopening DateTime?
+  durationMinutes   Int?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@map("maintenance_events")
+}
+
+// =============================================================
+// ADMINISTRATIVE SYSTEM NOTIFICATIONS
+// =============================================================
+
+model SystemNotification {
+  id        String   @id @default(cuid())
+  title     String
+  message   String   @db.Text
+  severity  String   @default("INFO") // "INFO", "WARNING", "CRITICAL"
+  category  String   @default("SYSTEM") // "USER_MGMT", "SECURITY", "CONTENT", "GOV_SERVICES", "SYSTEM"
+  isRead    Boolean  @default(false)
+  link      String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isRead, createdAt])
+  @@map("system_notifications")
 }
 

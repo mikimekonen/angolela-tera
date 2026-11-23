@@ -108,6 +108,14 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'slug is required' }, { status: 400 })
     }
 
+    // Office-scope guard for OFFICE_EDITOR
+    if (session.role === 'OFFICE_EDITOR' && session.officeId && session.officeId !== body.slug) {
+      return NextResponse.json(
+        { success: false, error: 'Forbidden: You can only edit the sector office assigned to your account.' },
+        { status: 403 }
+      )
+    }
+
     const updated = updateOffice(body.slug, body, session.name)
     if (!updated) {
       return NextResponse.json({ success: false, error: 'Office not found' }, { status: 404 })

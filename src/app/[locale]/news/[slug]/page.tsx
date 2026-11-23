@@ -8,7 +8,7 @@ import { NEWS_ARTICLES } from '@/data/mockData'
 
 export function generateStaticParams() {
   const params: { locale: string; slug: string }[] = []
-  const newsList = getNews()
+  const newsList = getNews().filter((n: any) => !n.status || n.status === 'PUBLISHED')
   for (const locale of locales) {
     for (const news of newsList) {
       params.push({ locale, slug: news.slug })
@@ -35,8 +35,13 @@ export default async function NewsDetailPage({
   if (!locales.includes(locale as Locale)) notFound()
   setRequestLocale(locale)
 
-  const allNews = getNews()
-  const article: any = allNews.find((n: any) => n.slug === slug) || NEWS_ARTICLES.find((n: any) => n.slug === slug)
+  const now = new Date()
+  const allNews = getNews().filter((n: any) => {
+    if (n.status && n.status !== 'PUBLISHED') return false
+    if (n.scheduledPublishAt && new Date(n.scheduledPublishAt) > now) return false
+    return true
+  })
+  const article: any = allNews.find((n: any) => n.slug === slug)
   if (!article) notFound()
 
   const related = allNews.filter((n: any) => n.slug !== slug).slice(0, 3)

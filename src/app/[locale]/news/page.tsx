@@ -47,7 +47,12 @@ export default async function NewsPage({
   }
   const content = (contentDict as any)[locale] || contentDict.en
 
-  const allNews = getNews().filter((n: any) => n.status === 'PUBLISHED' || !n.status)
+  const now = new Date()
+  const allNews = getNews().filter((n: any) => {
+    if (n.status && n.status !== 'PUBLISHED') return false
+    if (n.scheduledPublishAt && new Date(n.scheduledPublishAt) > now) return false
+    return true
+  })
   const featured = allNews.find((n: any) => n.isFeatured) || allNews[0]
   const otherNews = featured ? allNews.filter((n: any) => n.slug !== featured.slug) : allNews
 

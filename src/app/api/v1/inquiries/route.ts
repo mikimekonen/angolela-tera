@@ -196,6 +196,23 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'id and status are required' }, { status: 400 })
     }
 
+    // Office-scope guard for OFFICE_EDITOR
+    if (session.role === 'OFFICE_EDITOR' && session.officeId) {
+      const existing = getInquiries().find(
+        (i) => i.id === id || i.trackingCode.toUpperCase() === id.trim().toUpperCase()
+      )
+      if (existing?.assignedOfficeId && existing.assignedOfficeId !== session.officeId) {
+        return NextResponse.json(
+          {
+            success: false,
+            error:
+              'Forbidden: You can only respond to inquiries assigned to your designated woreda office.',
+          },
+          { status: 403 }
+        )
+      }
+    }
+
     const updated = updateInquiryStatus(
       id,
       status,

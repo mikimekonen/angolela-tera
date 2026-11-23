@@ -1,15 +1,43 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSession, hasPermission } from '@/lib/auth'
+import { getSession, hasPermission, requireResourcePermission } from '@/lib/auth'
 import { getNews, createNews, updateNews, deleteNews } from '@/lib/dataStore'
 
 export async function GET(req: NextRequest) {
   try {
+    const session = await getSession()
+    const isAdmin = Boolean(
+      session &&
+        session.role &&
+        ['SUPER_ADMIN', 'ADMIN', 'OFFICE_EDITOR', 'REVIEWER', 'VIEWER'].includes(session.role)
+    )
+
     const { searchParams } = new URL(req.url)
     const q = searchParams.get('q')?.toLowerCase()
     const category = searchParams.get('category')?.toLowerCase()
     const featured = searchParams.get('featured')
+    const requestedStatus = searchParams.get('status')
 
     let news = getNews()
+
+    // 1. PUBLIC VISITOR FILTERING:
+    // If not authenticated as an authorized administrator, strictly expose PUBLISHED articles
+    // whose scheduled publication date (if set) is not in the future.
+    if (!isAdmin) {
+      const now = new Date()
+      news = news
+        .filter((n: any) => {
+          if (n.status && n.status !== 'PUBLISHED') return false
+          if (n.scheduledPublishAt && new Date(n.scheduledPublishAt) > now) return false
+          return true
+        })
+        .map((n: any) => {
+          // Data minimization: Never expose internal editorial notes or rejection reasons to the public
+          const { reviewerNotes, rejectionReason, ...safeNews } = n
+          return safeNews
+        })
+    } else if (requestedStatus) {
+      news = news.filter((n: any) => n.status === requestedStatus)
+    }
 
     if (category) {
       news = news.filter((n: any) => n.category_en?.toLowerCase().includes(category))
@@ -41,17 +69,8 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await getSession()
-    if (!session) {
-      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
-    }
-
-    if (!hasPermission(session.role, 'canCreate')) {
-      return NextResponse.json(
-        { success: false, error: 'Forbidden: Insufficient permissions to publish news' },
-        { status: 403 }
-      )
-    }
+    const { session, errorResponse } = await requireResourcePermission('NEWS', 'canCreate')
+    if (errorResponse || !session) return errorResponse
 
     const body = await req.json()
     if (!body.slug || !body.title_en) {
@@ -64,9 +83,10 @@ export async function POST(req: NextRequest) {
     const today = new Date().toISOString().split('T')[0]
 
     // Editorial Workflow Enforcement: Only users with canPublish permission can set PUBLISHED status
-    const requestedStatus = body.status || 'PUBLISHED'
+    const requestedStatus = body.status || 'DRAFT'
     const canPublish = hasPermission(session.role, 'canPublish')
-    const finalStatus = (requestedStatus === 'PUBLISHED' && !canPublish) ? 'REVIEW' : requestedStatus
+    const finalStatus =
+      requestedStatus === 'PUBLISHED' && !canPublish ? 'REVIEW' : requestedStatus
 
     const newArticle = {
       id: `news_${Date.now()}`,
@@ -81,8 +101,12 @@ export async function POST(req: NextRequest) {
       author_am: 'የወረዳው ኮሙኒኬሽን ዳይሬክቶሬት',
       summary_en: body.summary_en || body.excerpt_en || '',
       summary_am: body.summary_am || body.excerpt_am || '',
-      content_en: Array.isArray(body.content_en) ? body.content_en : [body.content_en || body.body_en || ''],
-      content_am: Array.isArray(body.content_am) ? body.content_am : [body.content_am || body.body_am || ''],
+      content_en: Array.isArray(body.content_en)
+        ? body.content_en
+        : [body.content_en || body.body_en || ''],
+      content_am: Array.isArray(body.content_am)
+        ? body.content_am
+        : [body.content_am || body.body_am || ''],
       imageUrl: body.imageUrl || body.coverImage || null,
       imageCaption_en: body.imageCaption_en || '',
       imageCaption_am: body.imageCaption_am || '',
@@ -105,7 +129,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: 'News article published successfully',
+        message: 'News article created successfully',
         data: created,
       },
       { status: 201 }
@@ -118,17 +142,8 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   try {
-    const session = await getSession()
-    if (!session) {
-      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
-    }
-
-    if (!hasPermission(session.role, 'canEditAll') && session.role !== 'OFFICE_EDITOR') {
-      return NextResponse.json(
-        { success: false, error: 'Forbidden: Insufficient permissions to edit news' },
-        { status: 403 }
-      )
-    }
+    const { session, errorResponse } = await requireResourcePermission('NEWS', 'canEdit')
+    if (errorResponse || !session) return errorResponse
 
     const body = await req.json()
     if (!body.slug) {
@@ -138,7 +153,22 @@ export async function PUT(req: NextRequest) {
     // Workflow guard: Non-publishers cannot transition articles to PUBLISHED
     if (body.status === 'PUBLISHED' && !hasPermission(session.role, 'canPublish')) {
       return NextResponse.json(
-        { success: false, error: 'Forbidden: Insufficient privileges to publish articles directly. Status must be set to REVIEW.' },
+        {
+          success: false,
+          error:
+            'Forbidden: Insufficient privileges to publish articles directly. Status must be submitted as REVIEW for editorial approval.',
+        },
+        { status: 403 }
+      )
+    }
+
+    // Reviewer approval workflow
+    if (body.status === 'APPROVED' && !hasPermission(session.role, 'canApprove')) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Forbidden: Editorial reviewer or supervisor credentials required to approve drafts.',
+        },
         { status: 403 }
       )
     }
@@ -157,10 +187,8 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
-    const session = await getSession()
-    if (!session || (session.role !== 'SUPER_ADMIN' && session.role !== 'ADMIN')) {
-      return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 })
-    }
+    const { session, errorResponse } = await requireResourcePermission('NEWS', 'canDelete')
+    if (errorResponse || !session) return errorResponse
 
     const { searchParams } = new URL(req.url)
     const slug = searchParams.get('slug')
@@ -169,7 +197,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     deleteNews(slug, session.name)
-    return NextResponse.json({ success: true, message: `News ${slug} deleted` })
+    return NextResponse.json({ success: true, message: `News ${slug} deleted successfully` })
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Internal Server Error'
     return NextResponse.json({ success: false, error: message }, { status: 500 })

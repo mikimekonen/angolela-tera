@@ -583,6 +583,7 @@ export type AdminResource =
   | 'USERS'
   | 'HOMEPAGE'
   | 'MENUS'
+  | 'INQUIRIES'
 
 export interface AdminPermissionItem {
   id: string
@@ -593,6 +594,8 @@ export interface AdminPermissionItem {
   canEdit: boolean
   canDelete: boolean
   canPublish: boolean
+  canApprove?: boolean
+  canExport?: boolean
   officeScopeId?: string | null
 }
 
