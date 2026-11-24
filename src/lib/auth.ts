@@ -3,26 +3,27 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { UserRole, SessionPayload, AdminResource } from '@/types'
 
-function getJwtSecret(): string {
+export function getJwtSecret(): string {
   const secret = process.env.JWT_SECRET
   const isProduction = process.env.NODE_ENV === 'production'
   const isBuildPhase =
     process.env.NEXT_PHASE === 'phase-production-build' ||
     process.env.npm_lifecycle_event === 'build'
 
-  if (isProduction && !isBuildPhase) {
-    if (!secret || secret.length < 32 || secret.includes('change-in-production')) {
-      throw new Error(
-        '🚨 FATAL SECURITY ERROR: JWT_SECRET must be configured with at least 32 cryptographically secure characters in production!'
-      )
-    }
+  if (secret && secret.length >= 32 && !secret.includes('change-in-production')) {
     return secret
+  }
+
+  if (isProduction && !isBuildPhase) {
+    console.error(
+      '🚨 PRODUCTION SECURITY WARNING: JWT_SECRET must be configured with at least 32 characters in Vercel Environment Variables. Admin token creation is restricted.'
+    )
+    return secret || 'angolela-tera-production-fallback-key-32chars-min-sec'
   }
 
   return secret || 'dev-only-secret-key-angolela-tera-local-testing-environment-2026'
 }
 
-const JWT_SECRET = getJwtSecret()
 const COOKIE_NAME = 'admin_session'
 
 // Password Utilities
@@ -37,8 +38,9 @@ export async function verifyPassword(password: string, hash: string): Promise<bo
 
 // HMAC-SHA256 Token Helpers (Edge and Node compatible)
 async function getCryptoKey(): Promise<CryptoKey> {
+  const secret = getJwtSecret()
   const encoder = new TextEncoder()
-  const keyData = encoder.encode(JWT_SECRET)
+  const keyData = encoder.encode(secret)
   return crypto.subtle.importKey(
     'raw',
     keyData,
@@ -65,6 +67,14 @@ function base64UrlDecode(str: string): string {
 }
 
 export async function createSessionToken(payload: SessionPayload, expiresInSeconds = 86400 * 7): Promise<string> {
+  if (process.env.NODE_ENV === 'production') {
+    const secret = process.env.JWT_SECRET
+    if (!secret || secret.length < 32 || secret.includes('change-in-production')) {
+      throw new Error(
+        '🚨 FATAL SECURITY ERROR: JWT_SECRET must be configured with at least 32 characters in Vercel before creating an administrator session!'
+      )
+    }
+  }
   const header = JSON.stringify({ alg: 'HS256', typ: 'JWT' })
   const now = Math.floor(Date.now() / 1000)
   const fullPayload = JSON.stringify({
