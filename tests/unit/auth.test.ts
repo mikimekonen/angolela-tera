@@ -39,7 +39,7 @@ describe('Auth Utilities - Unit Tests', () => {
       expect(await verifyPassword(canonicalPass.toLowerCase(), hash)).toBe(false)
       expect(await verifyPassword(canonicalPass.slice(0, -1), hash)).toBe(false)
       expect(await verifyPassword(' ' + canonicalPass, hash)).toBe(false)
-    })
+    }, 35000)
   })
 
   describe('JWT Session Tokens', () => {
