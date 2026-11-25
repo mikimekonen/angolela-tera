@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSession, verifyPassword, hashPassword, setSessionCookie } from '@/lib/auth'
-import { getUserById, updateUser } from '@/lib/dataStore'
+import { prisma } from '@/lib/db'
+import { getUserById, getUsers, updateUser } from '@/lib/dataStore'
 
 export async function POST(req: NextRequest) {
   try {
@@ -9,8 +10,24 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Unauthorized. Please sign in.' }, { status: 401 })
     }
 
-    const user = getUserById(session.userId)
-    if (!user) {
+    const storeUser =
+      getUserById(session.userId) ??
+      getUsers().find((u) => u.email.toLowerCase() === session.email.toLowerCase())
+
+    let dbUser: {
+      id: string
+      passwordHash: string
+      tokenVersion: number
+      mustChangePassword: boolean
+    } | null = null
+    if (process.env.DATABASE_URL && prisma?.user?.findUnique) {
+      dbUser = await prisma.user.findUnique({ where: { id: session.userId } }).catch(() => null)
+    }
+
+    const currentPasswordHash = dbUser?.passwordHash ?? storeUser?.passwordHash
+    const currentTokenVersion = dbUser?.tokenVersion ?? storeUser?.tokenVersion ?? 1
+
+    if (!currentPasswordHash) {
       return NextResponse.json({ success: false, error: 'User account not found.' }, { status: 404 })
     }
 
@@ -54,7 +71,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Verify current password
-    const isCurrentValid = await verifyPassword(currentPassword, user.passwordHash)
+    const isCurrentValid = await verifyPassword(currentPassword, currentPasswordHash)
     if (!isCurrentValid) {
       return NextResponse.json(
         { success: false, error: 'Incorrect current password. Please try again.' },
@@ -72,17 +89,38 @@ export async function POST(req: NextRequest) {
 
     // Hash and store new password, invalidate existing sessions from other devices
     const newHash = await hashPassword(newPassword)
-    const nextTokenVersion = (user.tokenVersion || 1) + 1
-    const updated = updateUser(
-      user.id,
-      {
-        passwordHash: newHash,
-        tokenVersion: nextTokenVersion,
-        mustChangePassword: false,
-        passwordResetAt: new Date().toISOString(),
-      },
-      session.email
-    )
+    const nextTokenVersion = currentTokenVersion + 1
+
+    let updated = false
+    if (storeUser) {
+      const storeResult = updateUser(
+        storeUser.id,
+        {
+          passwordHash: newHash,
+          tokenVersion: nextTokenVersion,
+          mustChangePassword: false,
+          passwordResetAt: new Date().toISOString(),
+        },
+        session.email
+      )
+      updated = Boolean(storeResult)
+    }
+
+    if (dbUser && process.env.DATABASE_URL && prisma?.user?.update) {
+      await prisma.user
+        .update({
+          where: { id: dbUser.id },
+          data: {
+            passwordHash: newHash,
+            tokenVersion: nextTokenVersion,
+            mustChangePassword: false,
+          },
+        })
+        .then(() => {
+          updated = true
+        })
+        .catch(() => {})
+    }
 
     if (!updated) {
       return NextResponse.json({ success: false, error: 'Failed to update password.' }, { status: 500 })

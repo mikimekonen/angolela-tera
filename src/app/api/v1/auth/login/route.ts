@@ -52,14 +52,16 @@ export async function POST(req: NextRequest) {
     const { email, password } = validation.data
 
     let matchedUser: (UserAccount & { id: string }) | null = null
+    let authenticatedViaPrisma = false
 
     // 1. Primary lookup: PostgreSQL database via Prisma
     try {
-      if (prisma?.user?.findUnique) {
+      if (process.env.DATABASE_URL && prisma?.user?.findUnique) {
         const dbUser = await prisma.user.findUnique({
           where: { email: email.toLowerCase() },
         })
-        if (dbUser) {
+        if (dbUser && !dbUser.deletedAt) {
+          authenticatedViaPrisma = true
           matchedUser = {
             id: dbUser.id,
             email: dbUser.email,
@@ -69,6 +71,14 @@ export async function POST(req: NextRequest) {
             officeId: dbUser.officeId || null,
             isActive: dbUser.isActive,
             createdAt: dbUser.createdAt.toISOString(),
+            tokenVersion: typeof dbUser.tokenVersion === 'number' ? dbUser.tokenVersion : 1,
+            mustChangePassword: Boolean(dbUser.mustChangePassword),
+            failedLoginAttempts:
+              typeof dbUser.failedLoginAttempts === 'number' ? dbUser.failedLoginAttempts : 0,
+            lockedUntil: dbUser.lockedUntil ? dbUser.lockedUntil.toISOString() : undefined,
+            phone: dbUser.phone ?? undefined,
+            designation: dbUser.designation ?? undefined,
+            avatarUrl: dbUser.avatarUrl ?? undefined,
           }
         }
       }
@@ -131,6 +141,19 @@ export async function POST(req: NextRequest) {
     if (!matchedUser || !passwordMatches) {
       if (matchedUser) {
         recordLoginAttempt(matchedUser.id, false, ipAddress)
+        if (authenticatedViaPrisma && process.env.DATABASE_URL && prisma?.user?.update) {
+          const nextAttempts = (matchedUser.failedLoginAttempts || 0) + 1
+          await prisma.user
+            .update({
+              where: { id: matchedUser.id },
+              data: {
+                failedLoginAttempts: nextAttempts,
+                lockedUntil:
+                  nextAttempts >= 5 ? new Date(Date.now() + 15 * 60 * 1000) : undefined,
+              },
+            })
+            .catch(() => {})
+        }
       }
 
       // Log failed authentication attempt for security monitoring
@@ -212,6 +235,18 @@ export async function POST(req: NextRequest) {
 
     // Record successful login
     recordLoginAttempt(matchedUser.id, true, ipAddress)
+    if (authenticatedViaPrisma && process.env.DATABASE_URL && prisma?.user?.update) {
+      await prisma.user
+        .update({
+          where: { id: matchedUser.id },
+          data: {
+            failedLoginAttempts: 0,
+            lockedUntil: null,
+            lastLoginAt: new Date(),
+          },
+        })
+        .catch(() => {})
+    }
 
     // Build session payload with tokenVersion
     const sessionPayload: SessionPayload = {
@@ -245,6 +280,17 @@ export async function POST(req: NextRequest) {
       result: 'SUCCESS',
       severity: 'INFO',
     })
+    if (authenticatedViaPrisma) {
+      await createAuditLog({
+        userId: matchedUser.id,
+        action: 'LOGIN',
+        entityType: 'User',
+        entityId: matchedUser.id,
+        notes: `Administrator logged into government portal as [${matchedUser.role}]`,
+        ipAddress,
+        userAgent,
+      })
+    }
 
     return NextResponse.json({
       success: true,
@@ -260,6 +306,7 @@ export async function POST(req: NextRequest) {
     })
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Internal Server Error'
+    console.error('🚨 [AUTH_LOGIN_ERROR]:', message)
     return NextResponse.json(
       {
         success: false,

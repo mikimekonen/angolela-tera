@@ -30,7 +30,7 @@ interface AuditOptions {
 
 export async function createAuditLog(opts: AuditOptions): Promise<void> {
   try {
-    if (prisma?.auditLog?.create) {
+    if (process.env.DATABASE_URL && prisma?.auditLog?.create) {
       await prisma.auditLog.create({
         data: {
           userId:     opts.userId,

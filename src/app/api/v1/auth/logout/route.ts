@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { clearSessionCookie, getSession } from '@/lib/auth'
 import { createAuditLog, getClientIp } from '@/lib/audit'
+import { logSystemActivity } from '@/lib/dataStore'
 
 export async function POST(req: NextRequest) {
   try {
@@ -18,9 +19,30 @@ export async function POST(req: NextRequest) {
         ipAddress,
         userAgent,
       })
+
+      logSystemActivity({
+        userId: session.userId,
+        userName: session.name,
+        userRole: session.role,
+        action: 'LOGOUT',
+        category: 'SYSTEM_SECURITY',
+        entityType: 'User',
+        entityId: session.email,
+        notes: `Administrator [${session.email}] signed out of government portal`,
+        ipAddress,
+        userAgent,
+        result: 'SUCCESS',
+        severity: 'INFO',
+      })
     }
 
     await clearSessionCookie()
+
+    // Support both browser HTML form submission (e.g., maintenance lockout screen) and fetch JSON calls
+    const accept = req.headers.get('accept') || ''
+    if (accept.includes('text/html') && !accept.includes('application/json')) {
+      return NextResponse.redirect(new URL('/admin/login', req.url), { status: 303 })
+    }
 
     return NextResponse.json({
       success: true,

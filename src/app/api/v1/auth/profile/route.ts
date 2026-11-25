@@ -1,6 +1,49 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSession, setSessionCookie } from '@/lib/auth'
-import { getUserById, updateUser, getUserPermissions, getAuditLogs, getOffices } from '@/lib/dataStore'
+import { prisma } from '@/lib/db'
+import {
+  getUserById,
+  getUsers,
+  updateUser,
+  getUserPermissions,
+  getAuditLogs,
+  getOffices,
+  type UserAccount,
+} from '@/lib/dataStore'
+import type { UserRole } from '@/types'
+
+async function resolveProfileUser(userId: string, email: string): Promise<UserAccount | null> {
+  const storeUser =
+    getUserById(userId) ?? getUsers().find((u) => u.email.toLowerCase() === email.toLowerCase())
+  if (storeUser) return storeUser
+
+  if (process.env.DATABASE_URL && prisma?.user?.findUnique) {
+    try {
+      const dbUser = await prisma.user.findUnique({ where: { id: userId } })
+      if (dbUser && !dbUser.deletedAt) {
+        return {
+          id: dbUser.id,
+          name: dbUser.name,
+          email: dbUser.email,
+          passwordHash: dbUser.passwordHash,
+          role: dbUser.role as UserRole,
+          officeId: dbUser.officeId || null,
+          isActive: dbUser.isActive,
+          createdAt: dbUser.createdAt.toISOString(),
+          phone: dbUser.phone ?? undefined,
+          designation: dbUser.designation ?? undefined,
+          avatarUrl: dbUser.avatarUrl ?? undefined,
+          tokenVersion: dbUser.tokenVersion ?? 1,
+          mustChangePassword: Boolean(dbUser.mustChangePassword),
+        }
+      }
+    } catch {
+      // DB unavailable
+    }
+  }
+
+  return null
+}
 
 export async function GET() {
   try {
@@ -9,7 +52,7 @@ export async function GET() {
       return NextResponse.json({ success: false, error: 'Unauthorized. Please sign in.' }, { status: 401 })
     }
 
-    const user = getUserById(session.userId)
+    const user = await resolveProfileUser(session.userId, session.email)
     if (!user) {
       return NextResponse.json({ success: false, error: 'User account not found.' }, { status: 404 })
     }
@@ -31,7 +74,8 @@ export async function GET() {
       .slice(0, 15)
 
     // Exclude passwordHash from response
-    const { passwordHash: _, ...safeUser } = user
+    const safeUser = { ...user } as Partial<UserAccount>
+    delete safeUser.passwordHash
 
     return NextResponse.json({
       success: true,
@@ -55,7 +99,7 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Unauthorized. Please sign in.' }, { status: 401 })
     }
 
-    const user = getUserById(session.userId)
+    const user = await resolveProfileUser(session.userId, session.email)
     if (!user) {
       return NextResponse.json({ success: false, error: 'User account not found.' }, { status: 404 })
     }
@@ -63,7 +107,7 @@ export async function PATCH(req: NextRequest) {
     const body = await req.json()
     const { name, phone, designation, avatarUrl, email } = body
 
-    const updates: Record<string, any> = {}
+    const updates: Record<string, string> = {}
 
     if (name && typeof name === 'string' && name.trim()) {
       updates.name = name.trim()
@@ -83,12 +127,28 @@ export async function PATCH(req: NextRequest) {
       updates.email = email.trim().toLowerCase()
     }
 
-    const updatedUser = updateUser(user.id, updates, session.email)
+    let updatedUser = updateUser(user.id, updates, session.email)
+
+    if (process.env.DATABASE_URL && prisma?.user?.update) {
+      const dbUpdated = await prisma.user
+        .update({
+          where: { id: user.id },
+          data: updates,
+        })
+        .catch(() => null)
+      if (!updatedUser && dbUpdated) {
+        updatedUser = {
+          ...user,
+          ...updates,
+        }
+      }
+    }
+
     if (!updatedUser) {
       return NextResponse.json({ success: false, error: 'Failed to update profile.' }, { status: 500 })
     }
 
-    // Refresh session cookie if name or email changed
+    // Refresh session cookie if name or email changed, preserving tokenVersion and mustChangePassword
     if (updates.name || updates.email) {
       await setSessionCookie({
         userId: updatedUser.id,
@@ -96,10 +156,13 @@ export async function PATCH(req: NextRequest) {
         name: updatedUser.name,
         role: updatedUser.role,
         officeId: updatedUser.officeId || null,
+        tokenVersion: updatedUser.tokenVersion || 1,
+        mustChangePassword: Boolean(updatedUser.mustChangePassword),
       })
     }
 
-    const { passwordHash: _, ...safeUser } = updatedUser
+    const safeUser = { ...updatedUser } as Partial<UserAccount>
+    delete safeUser.passwordHash
 
     return NextResponse.json({
       success: true,

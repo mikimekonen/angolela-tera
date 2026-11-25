@@ -3,25 +3,47 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { UserRole, SessionPayload, AdminResource } from '@/types'
 
+/**
+ * Retrieves and validates the JWT_SECRET from environment variables.
+ * Enforces a strict minimum of 32 characters and forbids known insecure placeholders.
+ *
+ * - In production: strictly requires `process.env.JWT_SECRET` (>= 32 chars).
+ *   Never falls back to any hardcoded or insecure secret.
+ * - During static site build phase (`next build` / `prisma generate`): allows a build-time
+ *   safe placeholder so static analysis / prerendering succeeds without crashing.
+ * - In development / testing: allows a local testing fallback if process.env.JWT_SECRET is not set.
+ */
 export function getJwtSecret(): string {
-  const secret = process.env.JWT_SECRET
+  const secret = process.env.JWT_SECRET?.trim()
   const isProduction = process.env.NODE_ENV === 'production'
   const isBuildPhase =
     process.env.NEXT_PHASE === 'phase-production-build' ||
     process.env.npm_lifecycle_event === 'build'
 
-  if (secret && secret.length >= 32 && !secret.includes('change-in-production')) {
+  // During next build / prerendering, allow a build-safe key if not configured in the build environment
+  if (isBuildPhase) {
+    if (secret && secret.length >= 32 && !secret.includes('change-in-production') && !secret.includes('REPLACE_WITH_STRONG')) {
+      return secret
+    }
+    return 'build-time-prerender-safe-key-angolela-tera-minimum-32-chars-ok'
+  }
+
+  // In production runtime:
+  if (isProduction) {
+    if (!secret || secret.length < 32 || secret.includes('change-in-production') || secret.includes('REPLACE_WITH_STRONG') || secret.includes('YOUR_')) {
+      throw new Error(
+        'Server configuration error: JWT_SECRET environment variable is missing or insecure in Vercel production environment. Configure JWT_SECRET (minimum 32 characters) in Vercel Project Settings > Environment Variables and redeploy.'
+      )
+    }
     return secret
   }
 
-  if (isProduction && !isBuildPhase) {
-    console.error(
-      '🚨 PRODUCTION SECURITY WARNING: JWT_SECRET must be configured with at least 32 characters in Vercel Environment Variables. Admin token creation is restricted.'
-    )
-    return secret || 'angolela-tera-production-fallback-key-32chars-min-sec'
+  // Development and test environments:
+  if (secret && secret.length >= 32) {
+    return secret
   }
 
-  return secret || 'dev-only-secret-key-angolela-tera-local-testing-environment-2026'
+  return 'dev-only-secret-key-angolela-tera-local-testing-environment-2026'
 }
 
 const COOKIE_NAME = 'admin_session'
@@ -67,14 +89,6 @@ function base64UrlDecode(str: string): string {
 }
 
 export async function createSessionToken(payload: SessionPayload, expiresInSeconds = 86400 * 7): Promise<string> {
-  if (process.env.NODE_ENV === 'production') {
-    const secret = process.env.JWT_SECRET
-    if (!secret || secret.length < 32 || secret.includes('change-in-production')) {
-      throw new Error(
-        '🚨 FATAL SECURITY ERROR: JWT_SECRET must be configured with at least 32 characters in Vercel before creating an administrator session!'
-      )
-    }
-  }
   const header = JSON.stringify({ alg: 'HS256', typ: 'JWT' })
   const now = Math.floor(Date.now() / 1000)
   const fullPayload = JSON.stringify({
@@ -107,6 +121,13 @@ export async function verifySessionToken(token: string): Promise<SessionPayload 
     const [encodedHeader, encodedPayload, signature] = parts
     const dataToSign = `${encodedHeader}.${encodedPayload}`
 
+    // Parse and validate header structure & algorithm
+    const headerJson = base64UrlDecode(encodedHeader)
+    const header = JSON.parse(headerJson)
+    if (header.alg !== 'HS256' || header.typ !== 'JWT') {
+      return null
+    }
+
     const key = await getCryptoKey()
 
     // Reconstruct signature buffer
@@ -126,6 +147,16 @@ export async function verifySessionToken(token: string): Promise<SessionPayload 
     // Check expiration
     const now = Math.floor(Date.now() / 1000)
     if (payload.exp && payload.exp < now) {
+      return null
+    }
+
+    // Validate payload fields
+    const validRoles: UserRole[] = ['SUPER_ADMIN', 'ADMIN', 'OFFICE_EDITOR', 'REVIEWER', 'VIEWER']
+    if (!validRoles.includes(payload.role)) {
+      return null
+    }
+
+    if (!payload.userId || typeof payload.userId !== 'string') {
       return null
     }
 
@@ -152,8 +183,36 @@ export async function getSession(): Promise<SessionPayload | null> {
     const payload = await verifySessionToken(token)
     if (!payload) return null
 
-    // Real-time revocation check against data store
+    // Real-time revocation & active status check against PostgreSQL (primary) or dataStore (fallback)
     try {
+      if (process.env.DATABASE_URL) {
+        try {
+          const { prisma } = await import('@/lib/db')
+          if (prisma?.user?.findUnique) {
+            const dbUser = await prisma.user.findUnique({
+              where: { id: payload.userId },
+            })
+            if (dbUser) {
+              if (!dbUser.isActive || dbUser.deletedAt) {
+                return null
+              }
+              if ((dbUser.tokenVersion || 1) > (payload.tokenVersion || 1)) {
+                return null
+              }
+              return {
+                ...payload,
+                role: dbUser.role as UserRole,
+                officeId: dbUser.officeId || null,
+                tokenVersion: dbUser.tokenVersion || 1,
+                mustChangePassword: Boolean(dbUser.mustChangePassword),
+              }
+            }
+          }
+        } catch {
+          // Database offline or unreachable — fall back to local dataStore
+        }
+      }
+
       const { getUserById } = await import('@/lib/dataStore')
       const user = getUserById(payload.userId)
       if (!user || !user.isActive) {
@@ -164,6 +223,8 @@ export async function getSession(): Promise<SessionPayload | null> {
       }
       return {
         ...payload,
+        role: user.role,
+        officeId: user.officeId || null,
         tokenVersion: user.tokenVersion || 1,
         mustChangePassword: Boolean(user.mustChangePassword),
       }
@@ -190,7 +251,13 @@ export async function setSessionCookie(payload: SessionPayload): Promise<void> {
 
 export async function clearSessionCookie(): Promise<void> {
   const cookieStore = await cookies()
-  cookieStore.delete(COOKIE_NAME)
+  cookieStore.set(COOKIE_NAME, '', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 0,
+  })
 }
 
 // Role-Based Access Control (RBAC) Permissions Matrix
